@@ -43,22 +43,20 @@ vnoremap > >gv
 " Visual模式能使用repeat
 vnoremap . :normal .<CR>
 
-" 使用ALT+[jk]上下移动当前行
+" 使用ALT+[jk]上下移动当前行 {{{
 " FIXME: vim终端下无效
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+" }}}
 
-" 使用Ctrl+h/j/k/l在窗口间移动
+" 使用Ctrl+h/j/k/l在窗口间移动 {{{
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" 进入当前文件目录
-" "cmap cwd lcd %:p:h
-" "cmap cd. lcd %:p:h
+" }}}
 
 " 操作tab页快捷键 {{{
 nmap <TAB>n :tabnew<cr>
@@ -78,7 +76,9 @@ nmap <TAB>9 9gt
 nmap <TAB>0 10gt
 " 上一个/下一个tab
 nnoremap <TAB>h :tabprevious<cr>
+nnoremap [t :tabprevious<cr>
 nnoremap <TAB>l :tabnext<cr>
+nnoremap ]t :tabprevious<cr>
 " 返回上一次的tab
 let g:lasttab = 1
 nmap <Tab><Tab> :exe "tabn ".g:lasttab<CR>
@@ -93,18 +93,11 @@ map <leader>bd :bd<cr>
 " 下一个/上一个buffer
 nnoremap ]b :bnext!<cr>
 nnoremap [b :bprevious!<cr>
-" 切换至指定buffer
-nnoremap <leader>1 :b1<CR>
-nnoremap <leader>2 :b2<CR>
-nnoremap <leader>3 :b3<CR>
-nnoremap <leader>4 :b4<CR>
-nnoremap <leader>5 :b5<CR>
-nnoremap <leader>6 :b6<CR>
-nnoremap <leader>7 :b7<CR>
-nnoremap <leader>8 :b8<CR>
-nnoremap <leader>9 :b9<CR>
-nnoremap <leader>0 :b10<CR>
 " }}}
+
+" 进入当前文件目录
+" "cmap cwd lcd %:p:h
+" "cmap cd. lcd %:p:h
 
 " TODO: z+数字查看man手册页
 " source $VIMRUNTIME/ftplugin/man.vim

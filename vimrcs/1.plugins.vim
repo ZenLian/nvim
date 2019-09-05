@@ -1,14 +1,19 @@
-" vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=1 :
+" vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=0 :
 
 let mapleader = "\<Space>"
 
+if !exists('g:zl_plugins')
+    let g:zl_plugins=['basics', 'colorscheme', 'airline']
+endif
+
 if has('nvim')
-    call plug#begin('~/.local/share/nvim/plug')
+    let s:plug = expand('~/.local/share/nvim/plug')
 else
-    call plug#begin('~/.vim/bundle')
+    let s:plug = expand('~/.vim/bundle')
 endif
 
 " load plugins {{{
+call plug#begin(s:plug)
 
 " 编辑辅助 {{{
     " basics
@@ -75,7 +80,8 @@ Plug 'Yggdroot/LeaderF'
     else
         let g:Lf_CacheDirectory = expand('~/.vim/tmp')
     endif
-    let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+    "let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+    let g:Lf_StlSeparator = { 'left': '', 'right': '' }
     let g:Lf_StlColorscheme = 'powerline'
     let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git', '.hg']
     let g:Lf_WorkingDirectoryMode = 'Ac'
@@ -143,10 +149,52 @@ Plug 'Yggdroot/LeaderF'
     "Plug 'sbdchd/neoformat'
 " }}}
 
-" }}}
+" UI {{{
+if count(g:zl_plugins, 'colorscheme')
+    Plug 'lifepillar/vim-solarized8'
+endif
+if count(g:zl_plugins, 'airline')
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+endif
+" }}} UI
 
 call plug#end()
+" }}}
 
-" neomake
-call neomake#configure#automake('nw', 750)
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" neomake {{{
+if isdirectory(s:plug.'/neomake')
+    call neomake#configure#automake('nw', 750)
+endif
+" }}}
+
+" UI {{{
+
+" colorscheme {{{
+if count(g:zl_plugins, 'colorscheme')
+    if filereadable(s:plug.'/vim-solarized8/colors/solarized8.vim')
+        set termguicolors
+        colorscheme solarized8
+    endif
+endif
+" }}}
+
+" vim-airline {{{
+if count(g:zl_plugins, 'airline')
+    let g:airline_theme='solarized'
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#show_splits = 0
+    let g:airline#extensions#tabline#show_buffers = 0
+    let g:airline#extensions#tabline#show_tab_count = 0
+    let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+    let g:airline#extensions#tabline#show_tab_type = 0
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
+    let g:airline#extensions#tabline#show_close_button = 0
+endif
+" }}}
+
+" }}}
