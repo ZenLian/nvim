@@ -9,7 +9,7 @@ set autochdir " 自动切换工作目录
 set mousehide " 隐藏鼠标
 " set foldcolumn " 左侧留一列空白
 set scrolloff=5 " 滚动时光标离上下边界的距离
-"set scrolljump=3 " 一次滚动的行数
+"set scrolljump=3 " 上下边界一次滚动的行数
 set cursorline " 高亮当前行
 set colorcolumn=81 " 单行长度警戒线
 "set termguicolors " 终端也显示gui颜色
@@ -79,6 +79,11 @@ set hlsearch " 高亮搜索结果
 set incsearch " 实时高亮
 set ignorecase " 忽略大小写
 set smartcase " 检测到大写时切换为大小写敏感
+" }}}
+
+" 分割窗口位置 {{{
+set splitbelow
+set splitright
 " }}}
 
 " autocmd {{{

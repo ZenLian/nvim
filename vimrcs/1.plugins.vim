@@ -3,7 +3,7 @@
 let mapleader = "\<Space>"
 
 if !exists('g:zl_plugins')
-    let g:zl_plugins=['basics', 'colorscheme', 'airline']
+    let g:zl_plugins=['basics']
 endif
 
 if has('nvim')
@@ -161,10 +161,6 @@ endif
 
 call plug#end()
 " }}}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " neomake {{{
 if isdirectory(s:plug.'/neomake')

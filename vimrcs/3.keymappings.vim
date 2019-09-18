@@ -59,33 +59,34 @@ map <C-l> <C-W>l
 " }}}
 
 " 操作tab页快捷键 {{{
-nmap <TAB>n :tabnew<cr>
-nmap <TAB>o :tabonly<cr>
-nmap <TAB>c :tabclose<cr>
-nmap <TAB>m :tabmove
+
+"nmap <TAB>n :tabnew<cr>
+"nmap <TAB>o :tabonly<cr>
+"nmap <TAB>c :tabclose<cr>
+"nmap <TAB>m :tabmove<space>
 " 切换tab页
-nmap <TAB>1 1gt
-nmap <TAB>2 2gt
-nmap <TAB>3 3gt
-nmap <TAB>4 4gt
-nmap <TAB>5 5gt
-nmap <TAB>6 6gt
-nmap <TAB>7 7gt
-nmap <TAB>8 8gt
-nmap <TAB>9 9gt
-nmap <TAB>0 10gt
+nmap <leader>1 1gt
+nmap <leader>2 2gt
+nmap <leader>3 3gt
+nmap <leader>4 4gt
+nmap <leader>5 5gt
+nmap <leader>6 6gt
+nmap <leader>7 7gt
+nmap <leader>8 8gt
+nmap <leader>9 9gt
+nmap <leader>0 10gt
 " 上一个/下一个tab
-nnoremap <TAB>h :tabprevious<cr>
 nnoremap [t :tabprevious<cr>
-nnoremap <TAB>l :tabnext<cr>
-nnoremap ]t :tabprevious<cr>
+nnoremap ]t :tabnext<cr>
 " 返回上一次的tab
 let g:lasttab = 1
-nmap <Tab><Tab> :exe "tabn ".g:lasttab<CR>
+nmap <leader><Tab> :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
 " }}}
 
 " 操作buffer快捷键 {{{
+
 " 列出所有buffer
 nnoremap <leader>bb :buffers<cr>
 " 关闭当前buffer
@@ -93,6 +94,7 @@ map <leader>bd :bd<cr>
 " 下一个/上一个buffer
 nnoremap ]b :bnext!<cr>
 nnoremap [b :bprevious!<cr>
+
 " }}}
 
 " 进入当前文件目录
