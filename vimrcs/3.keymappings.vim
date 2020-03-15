@@ -35,6 +35,9 @@ nnoremap Y y$
 " 屏幕左右移动
 nnoremap zh zH
 nnoremap zl zL
+" 上下移动
+nnoremap <C-y> 5<C-y>
+nnoremap <C-e> 5<C-e>
 
 " Visual模式缩进不退出
 vnoremap < <gv

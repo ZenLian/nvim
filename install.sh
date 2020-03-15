@@ -1,7 +1,7 @@
 #!/bin/bash
 
-
 basepath=$(cd `dirname $0`; pwd)
+mkdir -p ~/.config
 targetpath=~/.config/nvim
 
 if [ -e ${targetpath} ]; then

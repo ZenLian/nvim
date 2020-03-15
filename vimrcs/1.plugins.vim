@@ -17,13 +17,13 @@ call plug#begin(s:plug)
 
 " 编辑辅助 {{{
     " basics
-    Plug 'jiangmiao/auto-pairs'
-        let g:AutoPairsShortcutToggle = '<M-a>'
+    "Plug 'jiangmiao/auto-pairs'
+    "    let g:AutoPairsShortcutToggle = '<M-a>'
     Plug 'tpope/vim-surround'
     Plug 'justinmk/vim-sneak'
     "Plug 'easymotion/vim-easymotion'
 
-    " textobj {{{
+    " textobj
     Plug 'kana/vim-textobj-user'
     Plug 'kana/vim-textobj-indent'
     Plug 'kana/vim-textobj-syntax'
@@ -31,91 +31,36 @@ call plug#begin(s:plug)
     Plug 'sgur/vim-textobj-parameter'
     Plug 'bps/vim-textobj-python', {'for': 'python'}
     Plug 'jceb/vim-textobj-uri'
-    " }}}
 " }}}
 
-" ctags {{{
+" taglists {{{
 if executable('ctags')
-    set tags=./.tags;,.tags
-
-    " vim-gutentags {{{
+    " 自动生成 tags 文件
     if has('nvim') || v:version >= 800
         Plug 'ludovicchabant/vim-gutentags'
-            let g:gutentags_project_root = ['.root', '.git', '.svn', '.project']
-            let g:gutentags_ctags_tagfile = '.tags'
-            if has('nvim')
-                let g:gutentags_cache_dir = expand('~/.local/share/nvim/tags')
-            else
-                let g:gutentags_cache_dir = expand('~/.vim/tmp/tags')
-            endif
-            if !isdirectory(g:gutentags_cache_dir)
-                silent! call mkdir(g:gutentags_cache_dir, 'p')
-            endif
-            let g:gutentags_ctags_extra_args = ['--fields=+niazS']
-            let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-            let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-            let g:gutentags_ctags_extra_args += ['--extra=+q']
     endif
-    " }}}
-
+    " tagbar
     " 性能不好，可以用fuzzy find插件替代
-    " tagbar {{{
-    Plug 'majutsushi/tagbar'
-        map <F3> :TagbarToggle<CR>
-        let g:tagbar_autofocus=1
-    " }}}
+    "Plug 'majutsushi/tagbar'
+    "    map <F3> :TagbarToggle<CR>
+    "    let g:tagbar_autofocus=1
+    Plug 'liuchengxu/vista.vim'
 endif
 " }}}
 
 " fuzzy find {{{
-Plug 'Yggdroot/LeaderF'
-    noremap <c-n> :LeaderfMru<CR>
-    noremap <c-f> :LeaderfFunction<CR>
-    noremap <m-p> :LeaderfTag<CR>
-    noremap <m-m> :LeaderfBufTag<CR>
-    let g:Lf_ShortcutF = '<C-P>'
-    let g:Lf_ShortcutB = '<C-B>'
-    if has('nvim')
-        let g:Lf_CacheDirectory = expand('~/.local/share/nvim/cache')
-    else
-        let g:Lf_CacheDirectory = expand('~/.vim/tmp')
-    endif
-    "let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-    let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-    let g:Lf_StlColorscheme = 'powerline'
-    let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git', '.hg']
-    let g:Lf_WorkingDirectoryMode = 'Ac'
-    let g:Lf_WindowHeight = 0.30
-    let g:Lf_ShowRelativePath = 0
-    let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-    let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-            \}
-
+    Plug 'Yggdroot/LeaderF'
 "Plug 'Shougo/denite.nvim' " 功能强大，配置复杂
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 "Plug 'junegunn/fzf.vim'
 " }}}
 
-    " NERDTree {{{
+" NERDTree {{{
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-        " NERDTree窗口显示在左边
-        let g:NERDTreeWinPos="left"
-        " 打开文件后关闭NERDTree
-        let g:NERDTreeQuitOnOpen=1
-        " 显示隐藏文件，I 切换
-        let g:NERDTreeShowHidden=1
-        let g:NERDTreeKeepTreeInNewTab=1
-        let g:NERDTreeIgnore=['\.o$', '\~$', '\.tags$']
-        " 打开/关闭NERDTree
-        map <F2> :NERDTreeToggle<CR>
-        map <leader>nb :NERDTreeFromBookMark<CR>
-        " 定位当前文件
-        map <leader>nf :NERDTreeFind<CR>
-    "}}}
+"}}}
 
 " 代码补全 {{{
+if 0
     if has('nvim')
         Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     else
@@ -138,10 +83,16 @@ Plug 'Yggdroot/LeaderF'
         let g:neopairs#enable = 1
     Plug 'Shougo/deoplete-clangx', { 'for': ['c', 'cpp'] }
     Plug 'python-mode/python-mode', { 'for': ['python'] }
+else
+" coc {{{
+    " 需要 nodejs 支持
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" }}}
+endif
 " }}}
 
 " 语法检查 {{{
-    Plug 'neomake/neomake'
+    "Plug 'neomake/neomake'
     "Plug 'w0rp/ale'
 " }}}
 
@@ -151,37 +102,103 @@ Plug 'Yggdroot/LeaderF'
 
 " UI {{{
 if count(g:zl_plugins, 'colorscheme')
-    Plug 'lifepillar/vim-solarized8'
+    "Plug 'lifepillar/vim-solarized8'
+    Plug 'tomasiser/vim-code-dark'
 endif
-if count(g:zl_plugins, 'airline')
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+if count(g:zl_plugins, 'powerline')
+    "Plug 'vim-airline/vim-airline'
+    "Plug 'vim-airline/vim-airline-themes'
+    "Plug 'liuchengxu/eleline.vim'
+    Plug 'itchyny/lightline.vim'
 endif
 " }}} UI
 
 call plug#end()
-" }}}
+" }}} load plugins
 
-" neomake {{{
-if isdirectory(s:plug.'/neomake')
-    call neomake#configure#automake('nw', 750)
+" config plugins {{{
+
+" gutentags
+set tags=./.tags;,.tags
+let g:gutentags_project_root = ['.root', '.git', '.svn', '.project']
+let g:gutentags_ctags_tagfile = '.tags'
+if has('nvim')
+    let g:gutentags_cache_dir = expand('~/.local/share/nvim/tags')
+else
+    let g:gutentags_cache_dir = expand('~/.vim/tmp/tags')
 endif
-" }}}
+if !isdirectory(g:gutentags_cache_dir)
+    silent! call mkdir(g:gutentags_cache_dir, 'p')
+endif
+let g:gutentags_ctags_extra_args = ['--fields=+niazS']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--extra=+q']
 
-" UI {{{
+" vista
+let g:vista_default_executive = 'coc'
+noremap <silent><leader>v :Vista<cr>
+
+" Leaderf
+noremap <c-n> :LeaderfMru<CR>
+noremap <c-f> :LeaderfFunction<CR>
+noremap <m-p> :LeaderfTag<CR>
+noremap <m-m> :LeaderfBufTag<CR>
+let g:Lf_ShortcutF = '<C-P>'
+let g:Lf_ShortcutB = '<C-B>'
+if has('nvim')
+    let g:Lf_CacheDirectory = expand('~/.local/share/nvim/cache')
+else
+    let g:Lf_CacheDirectory = expand('~/.vim/tmp')
+endif
+"let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_StlColorscheme = 'powerline'
+let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git', '.hg']
+let g:Lf_WorkingDirectoryMode = 'Ac'
+let g:Lf_WindowHeight = 0.30
+let g:Lf_ShowRelativePath = 0
+let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+let g:Lf_WildIgnore = {
+            \ 'dir': ['.svn','.git','.hg'],
+            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+            \}
+
+" nerdtree
+let g:NERDTreeWinPos="left"
+let g:NERDTreeQuitOnOpen=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeKeepTreeInNewTab=1
+let g:NERDTreeIgnore=['\.o$', '\~$', '\.tags$']
+" 打开/关闭NERDTree
+map <leader>t :NERDTreeToggle<CR>
+map <leader>nb :NERDTreeFromBookMark<CR>
+" 定位当前文件
+map <leader>nf :NERDTreeFind<CR>
+
+" neomake
+"if isdirectory(s:plug.'/neomake')
+"    call neomake#configure#automake('nw', 750)
+"endif
+
+" coc
+source ~/.config/nvim/vimrcs/coc.vim
 
 " colorscheme {{{
 if count(g:zl_plugins, 'colorscheme')
-    if filereadable(s:plug.'/vim-solarized8/colors/solarized8.vim')
-        set termguicolors
-        colorscheme solarized8
-    endif
+    set termguicolors
+    "if filereadable(s:plug.'/vim-solarized8/colors/solarized8.vim')
+    "    colorscheme solarized8
+    "endif
+    colorscheme codedark
 endif
 " }}}
 
-" vim-airline {{{
-if count(g:zl_plugins, 'airline')
-    let g:airline_theme='solarized'
+" powerline {{{
+if count(g:zl_plugins, 'powerline')
+if 0
+    "let g:airline_theme='solarized'
+    let g:airline_theme='codedark'
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#show_splits = 0
     let g:airline#extensions#tabline#show_buffers = 0
@@ -190,7 +207,27 @@ if count(g:zl_plugins, 'airline')
     let g:airline#extensions#tabline#show_tab_type = 0
     let g:airline#extensions#tabline#formatter = 'unique_tail'
     let g:airline#extensions#tabline#show_close_button = 0
+else
+    set noshowmode
+    set showtabline=2
+    let g:lightline = {
+        \ 'colorscheme': 'codedark',
+        \ 'mode_map': {
+          \ 'n' : 'N',
+          \ 'i' : 'I',
+          \ 'R' : 'R',
+          \ 'v' : 'V',
+          \ 'V' : 'VL',
+          \ "\<C-v>": 'VB',
+          \ 'c' : 'C',
+          \ 's' : 'S',
+          \ 'S' : 'SL',
+          \ "\<C-s>": 'SB',
+          \ 't': 'T',
+          \ },
+        \ }
+endif
 endif
 " }}}
 
-" }}}
+" }}} config plugins

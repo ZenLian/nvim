@@ -2,8 +2,8 @@
 "   'screen' : GUI or SCREEN
 "   'xterm' : TERMINAL
 let g:zl_termtype='xterm'
-"let g:zl_plugins=['basics', 'colorscheme', 'airline']
-let g:zl_plugins=['basics']
+let g:zl_plugins=['basics', 'colorscheme', 'powerline']
+"let g:zl_plugins=['basics']
 
 " source local config, take python-virtualenv as an example
 "let g:python3_host_prog = expand('~/anaconda3/envs/py3-nvim/bin/python')
