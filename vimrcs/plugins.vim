@@ -22,6 +22,7 @@ call plug#begin(s:plug)
     Plug 'tpope/vim-surround'
     Plug 'justinmk/vim-sneak'
     "Plug 'easymotion/vim-easymotion'
+    Plug 'godlygeek/tabular'
 
     " textobj
     Plug 'kana/vim-textobj-user'
@@ -39,20 +40,17 @@ if executable('ctags')
     if has('nvim') || v:version >= 800
         Plug 'ludovicchabant/vim-gutentags'
     endif
-    " tagbar
-    " 性能不好，可以用fuzzy find插件替代
-    "Plug 'majutsushi/tagbar'
-    "    map <F3> :TagbarToggle<CR>
-    "    let g:tagbar_autofocus=1
     Plug 'liuchengxu/vista.vim'
 endif
-Plug 'junegunn/vim-peekaboo'
+    " yank历史
+    Plug 'junegunn/vim-peekaboo'
 " }}}
 
+" provided by CocList
 " fuzzy find {{{
-    Plug 'Yggdroot/LeaderF'
+    "Plug 'Yggdroot/LeaderF'
 "Plug 'Shougo/denite.nvim' " 功能强大，配置复杂
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
 " }}}
 
@@ -119,8 +117,25 @@ call plug#end()
 
 " config plugins {{{
 
+" tabular
+nnoremap <leader>== :Tabularize /=<CR>
+vnoremap <leader>== :Tabularize /=<CR>
+nnoremap <leader>=: :Tabularize /:\zs<CR>
+vnoremap <leader>=: :Tabularize /:\zs<CR>
+" 自动对齐 `|` 标识的表格
+inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+function! s:align()
+    let p = '^\s*|\s.*\s|\s*$'
+    if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+        let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+        let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+        Tabularize/|/l1
+        normal! 0
+        call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+    endif
+endfunction
+
 " gutentags
-set tags=./.tags;,.tags
 let g:gutentags_project_root = ['.root', '.git', '.svn', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
 if has('nvim')
@@ -137,33 +152,38 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--extra=+q']
 
 " vista
-let g:vista_default_executive = 'coc'
-noremap <silent><leader>v :Vista<cr>
+"let g:vista_default_executive = 'coc'
+noremap <silent><leader>v :Vista!!<cr>
 
 " Leaderf
-noremap <c-n> :LeaderfMru<CR>
-noremap <c-f> :LeaderfFunction<CR>
-noremap <m-p> :LeaderfTag<CR>
-noremap <m-m> :LeaderfBufTag<CR>
-let g:Lf_ShortcutF = '<C-P>'
-let g:Lf_ShortcutB = '<C-B>'
-if has('nvim')
-    let g:Lf_CacheDirectory = expand('~/.local/share/nvim/cache')
-else
-    let g:Lf_CacheDirectory = expand('~/.vim/tmp')
-endif
-"let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-let g:Lf_StlColorscheme = 'powerline'
-let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git', '.hg']
-let g:Lf_WorkingDirectoryMode = 'Ac'
-let g:Lf_WindowHeight = 0.30
-let g:Lf_ShowRelativePath = 0
-let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-let g:Lf_WildIgnore = {
-            \ 'dir': ['.svn','.git','.hg'],
-            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-            \}
+"noremap <c-n> :LeaderfMru<CR>
+"noremap <c-f> :LeaderfFunction<CR>
+"noremap <m-p> :LeaderfTag<CR>
+"noremap <m-m> :LeaderfBufTag<CR>
+"let g:Lf_ShortcutF = '<C-P>'
+"let g:Lf_ShortcutB = '<C-B>'
+"if has('nvim')
+"    let g:Lf_CacheDirectory = expand('~/.local/share/nvim/cache')
+"else
+"    let g:Lf_CacheDirectory = expand('~/.vim/tmp')
+"endif
+""let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+"let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+"let g:Lf_StlColorscheme = 'powerline'
+"let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git', '.hg']
+"let g:Lf_WorkingDirectoryMode = 'Ac'
+"let g:Lf_WindowHeight = 0.30
+"let g:Lf_ShowRelativePath = 0
+"let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
+"let g:Lf_WildIgnore = {
+"            \ 'dir': ['.svn','.git','.hg'],
+"            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
+"            \}
+
+"fzf
+"noremap <C-p> :FZF
+"noremap <C-f> :Mru
+"noremap <M-p> :Mru
 
 " nerdtree
 let g:NERDTreeWinPos="left"
@@ -211,6 +231,7 @@ if 0
 else
     set noshowmode
     set showtabline=2
+
     let g:lightline = {
         \ 'colorscheme': 'codedark',
         \ 'mode_map': {
@@ -226,7 +247,15 @@ else
           \ "\<C-s>": 'SB',
           \ 't': 'T',
           \ },
+          \ 'active': {
+          \   'left': [ [ 'mode', 'paste' ],
+          \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+          \ },
+          \ 'component_function': {
+          \   'cocstatus': 'coc#status'
+          \ },
         \ }
+    autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 endif
 endif
 " }}}

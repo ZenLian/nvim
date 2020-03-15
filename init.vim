@@ -12,8 +12,8 @@ if filereadable(expand('~/.config/nvim/vimrcs/local.vim'))
     source ~/.config/nvim/vimrcs/local.vim
 endif
 
-source ~/.config/nvim/vimrcs/1.plugins.vim
-source ~/.config/nvim/vimrcs/2.general.vim
-source ~/.config/nvim/vimrcs/3.keymappings.vim
-source ~/.config/nvim/vimrcs/4.ui.vim
+source ~/.config/nvim/vimrcs/plugins.vim
+source ~/.config/nvim/vimrcs/general.vim
+source ~/.config/nvim/vimrcs/keymappings.vim
+source ~/.config/nvim/vimrcs/ui.vim
 

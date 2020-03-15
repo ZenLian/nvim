@@ -30,7 +30,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 if has('patch8.1.1068')
   " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  "inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
@@ -94,8 +95,8 @@ omap af <Plug>(coc-funcobj-a)
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.
 " coc-tsserver, coc-python are the examples of servers that support it.
-nmap <silent> <TAB> <Plug>(coc-range-select)
-xmap <silent> <TAB> <Plug>(coc-range-select)
+nmap <silent> <C-j> <Plug>(coc-range-select)
+xmap <silent> <C-j> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
@@ -122,9 +123,48 @@ nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
 nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>ly  :<C-u>CocList -A yank<cr>
+nnoremap <silent> <leader>lf  :<C-u>CocList -A files<cr>
+nnoremap <silent> <leader>lm  :<C-u>CocList -A mru<cr>
+nnoremap <silent> <leader>lg  :<C-u>CocList -A grep<cr>
 " Do default action for next item.
 nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <leader>p  :<C-u>CocListResume<CR>
+nnoremap <silent> <leader>ll  :<C-u>CocListResume<CR>
+
+"
+" coc-grep
+"
+" grep word under cursor
+command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
+function! s:GrepArgs(...)
+  let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
+        \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
+  return join(list, "\n")
+endfunction
+nnoremap <silent> <leader>- :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
+
+" grep from selected
+vnoremap <leader>- :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
+nnoremap <leader>- :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
+function! s:GrepFromSelected(type)
+  let saved_unnamed_register = @@
+  if a:type ==# 'v'
+    normal! `<v`>y
+  elseif a:type ==# 'char'
+    normal! `[v`]y
+  else
+    return
+  endif
+  let word = substitute(@@, '\n$', '', 'g')
+  let word = escape(word, '| ')
+  let @@ = saved_unnamed_register
+  execute 'CocList grep '.word
+endfunction
+
+" grep current word in current buffer
+nnoremap <silent> <leader>l-  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+
+autocmd FileType tex let b:coc_pairs = [["$", "$"]]

@@ -21,6 +21,7 @@ set signcolumn=yes " 总是显示左侧栏
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 "set clipboard+=unnamedplus
+set tags=./.tags;,.tags
 
 
 " 文本和缩进 {{{
