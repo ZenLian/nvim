@@ -14,6 +14,14 @@ set cursorline " 高亮当前行
 set colorcolumn=81 " 单行长度警戒线
 "set termguicolors " 终端也显示gui颜色
 set hidden " 允许未保存的 buffer 隐藏
+set updatetime=300
+set shortmess+=c
+set cmdheight=2
+set signcolumn=yes " 总是显示左侧栏
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+"set clipboard+=unnamedplus
+
 
 " 文本和缩进 {{{
 "set whichwrap+=h,l,<,> " 方向键跨行，不推荐

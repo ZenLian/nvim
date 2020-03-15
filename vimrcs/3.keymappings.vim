@@ -11,19 +11,14 @@ function! ToggleBG()
 endfunction
 noremap <leader>bg :call ToggleBG()<CR>
 
-" 重载vimrc配置
-if has('nvim')
-    map <leader>sv :source ~/.config/nvim/init.vim<CR>
-else
-    map <leader>sv :source ~/.vimrc<CR>
-endif
-" TODO: 编辑vimrc配置
-"map <leader>ev :call EditVimrc()<CR>
+" 编辑/重载vimrc配置
+map <leader>rc :edit $MYVIMRC<cr>
+map <leader>sc :source $MYVIMRC<cr>
 
 " 快速保存
 nmap <leader>w :w!<cr>
 " 快速退出
-nmap <leader>q :q<cr>
+nmap Q :q<cr>
 " 以root权限保存
 command! W w !sudo tee % >/dev/null
 
@@ -32,6 +27,8 @@ map <silent><leader><enter> :noh<cr>
 
 " Y从当前位置复制到行尾, 与D, C一致
 nnoremap Y y$
+" visual 模式下 Y 复制到系统剪切板
+vnoremap Y "+y
 " 屏幕左右移动
 nnoremap zh zH
 nnoremap zl zL
@@ -42,6 +39,10 @@ nnoremap <C-e> 5<C-e>
 " Visual模式缩进不退出
 vnoremap < <gv
 vnoremap > >gv
+
+" Visual模式上下移动多行
+vnoremap J 5j
+vnoremap K 5k
 
 " Visual模式能使用repeat
 vnoremap . :normal .<CR>

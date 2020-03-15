@@ -33,7 +33,7 @@ call plug#begin(s:plug)
     Plug 'jceb/vim-textobj-uri'
 " }}}
 
-" taglists {{{
+" lists(tags/yanks) {{{
 if executable('ctags')
     " 自动生成 tags 文件
     if has('nvim') || v:version >= 800
@@ -46,6 +46,7 @@ if executable('ctags')
     "    let g:tagbar_autofocus=1
     Plug 'liuchengxu/vista.vim'
 endif
+Plug 'junegunn/vim-peekaboo'
 " }}}
 
 " fuzzy find {{{
