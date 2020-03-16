@@ -170,8 +170,11 @@ ccc, c  , cc
 
 ### coc
 
-| 快捷键 | 描述 |
-| ---    | ---  |
-| `<C-p>`
+| 快捷键      | 描述                                                       |
+| ---         | ---                                                        |
+| `<C-p>`     | 搜索文件                                                   |
+| `<C-f>`     | 全局搜索字符串(visual 模式下非 regex, normal 模式下 regex) |
+| `-`         | 当前buffer搜索当前字符串                                   |
+| `<leader>-` | 当前buffer搜索(regex)                                      |
 
 

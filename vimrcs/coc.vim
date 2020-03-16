@@ -113,20 +113,13 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
-" Show all diagnostics.
 nnoremap <silent> <leader>ld  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
 nnoremap <silent> <leader>le  :<C-u>CocList extensions<cr>
-" Show commands.
 nnoremap <silent> <leader>lc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
-nnoremap <silent> <leader>ly  :<C-u>CocList -A yank<cr>
-nnoremap <silent> <leader>lf  :<C-u>CocList -A files<cr>
-nnoremap <silent> <leader>lm  :<C-u>CocList -A mru<cr>
-nnoremap <silent> <leader>lg  :<C-u>CocList -A grep<cr>
 " Do default action for next item.
 nnoremap <silent> <leader>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -134,37 +127,52 @@ nnoremap <silent> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <leader>ll  :<C-u>CocListResume<CR>
 
+" coc-yank
+nnoremap <silent> <leader>ly  :<C-u>CocList -A yank<cr>
+" coc-files
+nnoremap <silent> <C-p>  :<C-u>CocList -A files<cr>
+nnoremap <silent> <leader>lm  :<C-u>CocList -A mru<cr>
 "
 " coc-grep
 "
-" grep word under cursor
+" grep any
+nnoremap <silent> <C-f>  :<C-u>CocList grep<cr>
+" grep from selected globally
+vnoremap <C-f>  :<C-u>call <SID>GrepFromSelected(visualmode(), 'global')<CR>
+" search current word in current buffer
+nnoremap <silent> -  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+vnoremap <silent> - :<C-u>call <SID>GrepFromSelected(visualmode(), 'buffer')<CR>
+"nnoremap <leader>- :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
+" grep in current buffer
+nnoremap <leader>- :<C-u>CocList lines<CR>
+
 command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
 function! s:GrepArgs(...)
   let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
         \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
   return join(list, "\n")
 endfunction
-nnoremap <silent> <leader>- :exe 'CocList -I --input='.expand('<cword>').' grep'<CR>
 
-" grep from selected
-vnoremap <leader>- :<C-u>call <SID>GrepFromSelected(visualmode())<CR>
-nnoremap <leader>- :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
-function! s:GrepFromSelected(type)
-  let saved_unnamed_register = @@
+function! s:GrepFromSelected(type, range)
   if a:type ==# 'v'
+    let saved_unnamed_register = @@
     normal! `<v`>y
+    let word = substitute(@@, '\n$', '', 'g')
+    let word = escape(word, '| ')
+    let @@ = saved_unnamed_register
   elseif a:type ==# 'char'
-    normal! `[v`]y
+    let word = expand('<cword>')
+  "  normal! `[v`]y
   else
     return
   endif
-  let word = substitute(@@, '\n$', '', 'g')
-  let word = escape(word, '| ')
-  let @@ = saved_unnamed_register
-  execute 'CocList grep '.word
+  if a:range ==# 'global'
+      execute 'CocList grep -F -S '.word
+  elseif a:range ==# 'buffer'
+      execute 'CocList -I --normal --input='.word.' words'
+  else
+      return
+  endif
 endfunction
-
-" grep current word in current buffer
-nnoremap <silent> <leader>l-  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
 
 autocmd FileType tex let b:coc_pairs = [["$", "$"]]

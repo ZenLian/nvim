@@ -35,14 +35,12 @@ nnoremap zl zL
 " 上下移动
 nnoremap <C-y> 5<C-y>
 nnoremap <C-e> 5<C-e>
+noremap  <C-k> 5k
+noremap  <C-j> 5j
 
 " Visual模式缩进不退出
 vnoremap < <gv
 vnoremap > >gv
-
-" Visual模式上下移动多行
-vnoremap J 5j
-vnoremap K 5k
 
 " Visual模式能使用repeat
 vnoremap . :normal .<CR>
@@ -56,10 +54,10 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " }}}
 
 " 使用Ctrl+h/j/k/l在窗口间移动 {{{
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+"map <C-j> <C-W>j
+"map <C-k> <C-W>k
+"map <C-h> <C-W>h
+"map <C-l> <C-W>l
 " }}}
 
 " 操作tab页快捷键 {{{
