@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=0 :
+" vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=99 :
 
 let mapleader = "\<Space>"
 
@@ -25,6 +25,7 @@ call plug#begin(s:plug)
     Plug 'godlygeek/tabular'
 
     " textobj
+    " TODO: 用 coc-textobj 替代
     Plug 'kana/vim-textobj-user'
     Plug 'kana/vim-textobj-indent'
     Plug 'kana/vim-textobj-syntax'
@@ -46,7 +47,11 @@ endif
     Plug 'junegunn/vim-peekaboo'
 " }}}
 
-" provided by CocList
+" NERDTree {{{
+    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"}}}
+
+" 用 coc-list 代替
 " fuzzy find {{{
     "Plug 'Yggdroot/LeaderF'
 "Plug 'Shougo/denite.nvim' " 功能强大，配置复杂
@@ -54,9 +59,19 @@ endif
 "Plug 'junegunn/fzf.vim'
 " }}}
 
-" NERDTree {{{
-    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"}}}
+" 用 coc 代替
+" 语法 {{{
+    " 语法检查
+    "Plug 'neomake/neomake'
+    "Plug 'w0rp/ale'
+    " 代码格式化
+    "Plug 'sbdchd/neoformat'
+" }}}
+
+" TODO: coc-git 功能完善后删除
+" git {{{
+" git-gutter
+" }}}
 
 " 代码补全 {{{
 if 0
@@ -90,14 +105,6 @@ else
 endif
 " }}}
 
-" 语法检查 {{{
-    "Plug 'neomake/neomake'
-    "Plug 'w0rp/ale'
-" }}}
-
-" 代码格式化 {{{
-    "Plug 'sbdchd/neoformat'
-" }}}
 
 " UI {{{
 if count(g:zl_plugins, 'colorscheme')
@@ -154,31 +161,6 @@ let g:gutentags_ctags_extra_args += ['--extra=+q']
 " vista
 "let g:vista_default_executive = 'coc'
 noremap <silent><leader>v :Vista!!<cr>
-
-" Leaderf
-"noremap <c-n> :LeaderfMru<CR>
-"noremap <c-f> :LeaderfFunction<CR>
-"noremap <m-p> :LeaderfTag<CR>
-"noremap <m-m> :LeaderfBufTag<CR>
-"let g:Lf_ShortcutF = '<C-P>'
-"let g:Lf_ShortcutB = '<C-B>'
-"if has('nvim')
-"    let g:Lf_CacheDirectory = expand('~/.local/share/nvim/cache')
-"else
-"    let g:Lf_CacheDirectory = expand('~/.vim/tmp')
-"endif
-""let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-"let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-"let g:Lf_StlColorscheme = 'powerline'
-"let g:Lf_RootMarkers = ['.project', '.root', '.svn', '.git', '.hg']
-"let g:Lf_WorkingDirectoryMode = 'Ac'
-"let g:Lf_WindowHeight = 0.30
-"let g:Lf_ShowRelativePath = 0
-"let g:Lf_PreviewResult = {'Function':0, 'BufTag':0}
-"let g:Lf_WildIgnore = {
-"            \ 'dir': ['.svn','.git','.hg'],
-"            \ 'file': ['*.sw?','~$*','*.bak','*.exe','*.o','*.so','*.py[co]']
-"            \}
 
 "fzf
 "noremap <C-p> :FZF
@@ -246,16 +228,40 @@ else
           \ 'S' : 'SL',
           \ "\<C-s>": 'SB',
           \ 't': 'T',
-          \ },
-          \ 'active': {
-          \   'left': [ [ 'mode', 'paste' ],
-          \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-          \ },
-          \ 'component_function': {
-          \   'cocstatus': 'coc#status'
-          \ },
-        \ }
-    autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+        \ },
+        \ 'active': {
+          \ 'left': [
+            \ [ 'mode', 'paste' ],
+            \ [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ],
+          \ ],
+          \ 'right': [
+            \ [ 'lineinfo' ],
+            \ [ 'percent' ],
+            \ [ 'fileformat', 'fileencoding', 'filetype' ],
+            \ [ 'blame' ]
+          \ ]
+        \ },
+        \ 'component_function': {
+          \ 'gitbranch': 'LightLineGitBranch',
+          \ 'gitstatus': 'LightLineGitStatus',
+          \ 'cocstatus': 'coc#status',
+          \ 'blame': 'LightlineGitBlame'
+        \ },
+    \ }
+    function! LightLineGitBranch() abort
+        let status = get(g:, 'coc_git_status', '')
+        return status
+    endfunction
+    function! LightLineGitStatus() abort
+        let status = get(b:, 'coc_git_status', '')
+        return status
+    endfunction
+    function! LightlineGitBlame() abort
+        let blame = get(b:, 'coc_git_blame', '')
+        " return blame
+        return winwidth(0) > 120 ? blame : ''
+    endfunction
+    autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
 endif
 endif
 " }}}

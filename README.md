@@ -2,16 +2,17 @@
 
 ## TODO
 
-- [ ] taglist 快捷键
 - [ ] fork code-dark-theme 并修改
 - [ ] switch 插件：快速替换单词(`true->false`)
 - [ ] nerd-commenter: 注释、解注释
 - [ ] markdown 插件(vim-markdown, coc-markdownlint)
+- [ ] coc tab 补全方式改为 vscode 方式: 直接选择第一项然后关闭列表, 如果是 snippets 就展开
+- [ ] coc-git blame 不显示???
 
 准备使用的键位:
 
 - [ ] nmap <CR>
-- [ ] nmap -,+,_
+- [ ] nmap +,_
 
 ## 助记
 
@@ -85,12 +86,12 @@ text-obj 系列插件，提供了比原生更丰富的 text objects。
 
 | 快捷键          | 效果                           | 描述                                   |
 | --------------- | ------------------------------ | -------------------------------------- |
-|Normal Mode|||
+| Normal Mode     |                                |                                        |
 | `cs"'`          | `"hello"`->`'hello'`           | 修改括号对                             |
 | `ds"`           | `"hello"`->`hello`             | 删除括号对                             |
 | `ys{text-obj}(` | `{text-obj}`->`( {text-obj} )` | 添加括号对（左括号有空格，右括号没有） |
-|Visual Mode|||
-|`S)`|`{some-text}`->`({some-text})`|添加括号对|
+| Visual Mode     |                                |                                        |
+| `S)`            | `{some-text}`->`({some-text})` | 添加括号对                             |
 
 ### vim-sneak
 
@@ -170,11 +171,28 @@ ccc, c  , cc
 
 ### coc
 
-| 快捷键      | 描述                                                       |
-| ---         | ---                                                        |
-| `<C-p>`     | 搜索文件                                                   |
-| `<C-f>`     | 全局搜索字符串(visual 模式下非 regex, normal 模式下 regex) |
-| `-`         | 当前buffer搜索当前字符串                                   |
-| `<leader>-` | 当前buffer搜索(regex)                                      |
+| 快捷键       | 描述                                                       |
+| ---          | ---                                                        |
+| `[d`/`]d`    | next/prev 语法错误                                         |
+| 文字搜索     |                                                            |
+| `<C-f>`      | 全局搜索字符串(visual 模式下非 regex, normal 模式下 regex) |
+| `-`          | 当前buffer搜索当前字符串                                   |
+| `<leader>-`  | 当前buffer搜索(regex)                                      |
+| 列表         |                                                            |
+| `<C-p>`      | 搜索文件                                                   |
+| `<leader>lm` | 最近使用文件列表                                           |
+| `<leader>ly` | yank历史                                                   |
+| `<leader>ld` | diagnostic 列表                                            |
+| `<leader>lo` | 当前文件 outline                                           |
+| `<leader>ls` | 所有工程文件 symbol                                        |
+| `<leader>le` | coc 插件列表                                               |
+| `<leader>lb` | buffers 列表                                               |
+| ...          | ...                                                        |
 
+#### coc-git
 
+| 快捷键     | 描述             |
+| ---------- | ---------------- |
+| `[g`/`]g`  | prev/next diff   |
+| `gs`       | 查看此处 diff    |
+| `gc`       | 查看 commit      |

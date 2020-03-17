@@ -1,3 +1,4 @@
+set verbosefile=/tmp/vim.log
 " termtype
 "   'screen' : GUI or SCREEN
 "   'xterm' : TERMINAL
