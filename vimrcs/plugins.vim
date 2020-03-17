@@ -73,38 +73,16 @@ endif
 " git-gutter
 " }}}
 
-" 代码补全 {{{
-if 0
-    if has('nvim')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    else
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'roxma/nvim-yarp'
-        Plug 'roxma/vim-hug-neovim-rpc'
-    endif
-        let g:deoplete#enable_at_startup=1
-    Plug 'Shougo/neosnippet'
-        inoremap <expr><TAB> pumvisible() ? "\<C-n>" :
-            \(neosnippet#expandable_or_jumpable() ?
-            \"\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>")
-        inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-        imap <expr><CR> pumvisible() ? deoplete#close_popup() : "\<CR>"
-        imap <C-k> <Plug>(neosnippet_expand_or_jump)
-        smap <C-k> <Plug>(neosnippet_expand_or_jump)
-        xmap <C-k> <Plug>(neosnippet_expand_target)
-    Plug 'Shougo/neosnippet-snippets'
-    Plug 'Shougo/neopairs.vim'
-        let g:neopairs#enable = 1
-    Plug 'Shougo/deoplete-clangx', { 'for': ['c', 'cpp'] }
-    Plug 'python-mode/python-mode', { 'for': ['python'] }
-else
-" coc {{{
-    " 需要 nodejs 支持
+" auto complete {{{
+    " coc, 需要 nodejs 支持
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" }}}
-endif
+    Plug 'honza/vim-snippets'
 " }}}
 
+
+" language specific {{{
+"Plug 'python-mode/python-mode', { 'for': ['python'] }
+" }}}
 
 " UI {{{
 if count(g:zl_plugins, 'colorscheme')
