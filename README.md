@@ -191,11 +191,11 @@ ccc, c  , cc
 
 #### coc-snippets
 
-| 快捷键          | 描述                                    |
-| ---             | ---                                     |
-| `<tab>`         | 类似于 VSCode，补全、展开、跳转 snippet |
-| `<C-j>`/`<C-k>` | 跳转 snippet                            |
-| `<C-l>`         | 展开 snippet                            |
+| 快捷键          | 描述         |
+| ---             | ---          |
+| `<tab>`         | 补全、展开   |
+| `<C-j>`/`<C-k>` | 跳转 snippet |
+| `<C-l>`         | 展开 snippet |
 
 #### coc-git
 
