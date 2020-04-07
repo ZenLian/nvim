@@ -1,52 +1,60 @@
 {
-  "coc.preferences.formatOnType": true,
-  "coc.preferences.rootPatterns": [".git", ".root", ".project"],
-  "list.insertMappings": {
-    "<C-t>": "action:tabe",
-    "<C-v>": "action:vsplit"
-  },
-  "list.source.files.command":"rg",
-  "list.source.files.args": ["--files", "--hidden", "--follow"],
-  "list.source.files.excludePatterns": [".git"],
-  "list.source.files.defaultArgs": ["-F"],
-  "list.source.grep.defaultArgs": ["-F", "-S", "-e"],
-  "suggest.enablePreview": true,
-  "languageserver": {
-    "vimls": {
-      "command": "vim-language-server",
-      "args": ["--stdio"],
-      "initializationOptions": {
-        "iskeyword": "@,48-57,_,192-255,-#", // vim iskeyword option
-        "vimruntime": "",                    // $VIMRUNTIME option
-        "runtimepath": "",                   // vim runtime path separate by `,`
-        "diagnostic": {
-          "enable": true
-        },
-        "indexes": {
-          "runtimepath": true,      // if index runtimepath's vim files this will effect the suggest
-          "gap": 100,               // index time gap between next file
-          "count": 3,               // count of files index at the same time
-          "projectRootPatterns" : ["strange-root-pattern", ".git", "autoload", "plugin"] // Names of files used as the mark of project root. If empty, the default value [".git", "autoload", "plugin"] will be used
-        },
-        "suggest": {
-          "fromVimruntime": true,   // completionItems from vimruntime's vim files
-          "fromRuntimepath": false  // completionItems from runtimepath's vim files, if this is true that fromVimruntime is true
-        }
-      },
-      "filetypes": [ "vim" ]
+    "coc.preferences.formatOnType": true,
+    "coc.preferences.rootPatterns": [".git", ".root", ".project"],
+    "list.insertMappings": {
+        "<C-t>": "action:tabe",
+        "<C-v>": "action:vsplit"
     },
-    "ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
-      "initializationOptions": {
-        "cache": {
-          "directory": ".ccls-cache"
+    "list.source.files.command":"rg",
+    "list.source.files.args": ["--files", "--hidden", "--follow"],
+    "list.source.files.excludePatterns": [".git"],
+    "list.source.files.defaultArgs": ["-F"],
+    "list.source.grep.defaultArgs": ["-F", "-S", "-e"],
+    "suggest.enablePreview": true,
+    "languageserver": {
+        "vimls": {
+            "command": "vim-language-server",
+            "args": ["--stdio"],
+            "initializationOptions": {
+                "iskeyword": "@,48-57,_,192-255,-#", // vim iskeyword option
+                "vimruntime": "",                    // $VIMRUNTIME option
+                "runtimepath": "",                   // vim runtime path separate by `,`
+                "diagnostic": {
+                    "enable": true
+                },
+                "indexes": {
+                    "runtimepath": true,      // if index runtimepath's vim files this will effect the suggest
+                    "gap": 100,               // index time gap between next file
+                    "count": 3,               // count of files index at the same time
+                    "projectRootPatterns" : ["strange-root-pattern", ".git", "autoload", "plugin"] // Names of files used as the mark of project root. If empty, the default value [".git", "autoload", "plugin"] will be used
+                },
+                "suggest": {
+                    "fromVimruntime": true,   // completionItems from vimruntime's vim files
+                    "fromRuntimepath": false  // completionItems from runtimepath's vim files, if this is true that fromVimruntime is true
+                }
+            },
+            "filetypes": [ "vim" ]
         },
-        "client": {
-          "snippetSupport": true
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+            "rootPatterns": [".ccls-root", "compile_commands.json"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": ".ccls-cache"
+                },
+                "client": {
+                    "snippetSupport": true
+                }
+            }
+        },
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["go"],
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
         }
-      }
     }
-  }
 }
