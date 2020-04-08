@@ -7,7 +7,7 @@
     },
     "list.source.files.command":"rg",
     "list.source.files.args": ["--files", "--hidden", "--follow"],
-    "list.source.files.excludePatterns": [".git"],
+    "list.source.files.excludePatterns": ["**/.git/*", "**/.ccls-cache/*"],
     "list.source.files.defaultArgs": ["-F"],
     "list.source.grep.defaultArgs": ["-F", "-S", "-e"],
     "suggest.enablePreview": true,
