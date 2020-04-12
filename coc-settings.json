@@ -1,8 +1,9 @@
 {
     "coc.preferences.formatOnType": true,
     "coc.preferences.rootPatterns": [".git", ".root", ".project"],
+    "coc.preferences.jumpCommand": "tabedit",
     "list.insertMappings": {
-        "<C-t>": "action:tabe",
+        "<C-s>": "action:split",
         "<C-v>": "action:vsplit"
     },
     "list.source.files.command":"rg",
