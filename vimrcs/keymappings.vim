@@ -1,4 +1,4 @@
-" vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=0 :
+" vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=99 :
 
 " 背景色反转
 function! ToggleBG()
@@ -41,6 +41,8 @@ noremap  <C-j> 5j
 " Visual模式缩进不退出
 vnoremap < <gv
 vnoremap > >gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
 
 " Visual模式能使用repeat
 vnoremap . :normal .<CR>
@@ -53,7 +55,8 @@ vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " }}}
 
-" 使用Ctrl+h/j/k/l在窗口间移动 {{{
+" 窗口间移动 {{{
+nnoremap <Tab> <C-w>w
 "map <C-j> <C-W>j
 "map <C-k> <C-W>k
 "map <C-h> <C-W>h
