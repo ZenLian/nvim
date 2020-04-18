@@ -2,6 +2,7 @@
 
 ## TODO
 
+- [ ] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢
 - [x] defx 代替 NERDTree
 - [ ] 多光标插件
 - [ ] 调整窗口大小快捷键
