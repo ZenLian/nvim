@@ -1,5 +1,6 @@
 let g:coc_global_extensions = [
     \ 'coc-emmet', 'coc-highlight', 'coc-lists', 'coc-pairs', 'coc-snippets', 'coc-yank', 'coc-git',
+    \ 'coc-dictionary', 'coc-syntax',
     \ 'coc-json', 'coc-vimlsp'
     \ ]
 
