@@ -1,5 +1,6 @@
 {
     "coc.preferences.formatOnType": true,
+    "coc.preferences.formatOnSaveFiletypes": ["c", "cpp", "go"],
     "coc.preferences.rootPatterns": [".git", ".root", ".project"],
     "coc.preferences.jumpCommand": "tabedit",
     "list.insertMappings": {
