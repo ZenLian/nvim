@@ -4,7 +4,7 @@
 
 - [ ] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢
 - [x] defx 代替 NERDTree
-- ~~[ ] 多光标插件~~
+- [ ] ~~多光标插件~~
 - [ ] 调整窗口大小快捷键
 - [ ] fork code-dark-theme 并修改
 - [ ] switch 插件：快速替换单词(`true->false`)

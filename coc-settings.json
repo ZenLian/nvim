@@ -2,10 +2,13 @@
     "coc.preferences.formatOnType": true,
     "coc.preferences.formatOnSaveFiletypes": ["c", "cpp", "go"],
     "coc.preferences.rootPatterns": [".git", ".root", ".project"],
-    "coc.preferences.jumpCommand": "tabedit",
+    //"coc.preferences.jumpCommand": "tabedit",
+    //"git.addGBlameToBufferVar": true,
+    "git.addGBlameToVirtualText": true,
     "list.insertMappings": {
-        "<C-s>": "action:split",
-        "<C-v>": "action:vsplit"
+        "<C-x>": "action:split",
+        "<C-v>": "action:vsplit",
+        "<C-t>": "action:tabe"
     },
     "list.source.files.command":"rg",
     "list.source.files.args": ["--files", "--hidden", "--follow"],
