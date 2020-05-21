@@ -2,20 +2,18 @@
 
 ## TODO
 
-- [ ] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢
-- [x] defx 代替 NERDTree
-- [ ] ~~多光标插件~~
+- [x] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢(ssh禁用X11 forward)
+- [ ] coc-explorer 代替 defx
 - [ ] 调整窗口大小快捷键
 - [ ] fork code-dark-theme 并修改
 - [ ] switch 插件：快速替换单词(`true->false`)
 - [ ] nerd-commenter: 注释、解注释
-- [ ] markdown 插件(vim-markdown, coc-markdownlint)
+- [x] markdown 插件(vim-markdown, coc-markdownlint)
 - [x] coc tab 补全方式改为 vscode 方式: 直接选择第一项然后关闭列表, 如果是 snippets 就展开
-- [ ] coc-git blame 不显示???
 
 准备使用的键位:
 
-- [ ] nmap <CR>
+- [ ] nmap \<CR\>
 - [ ] nmap +,_
 
 ## 助记
@@ -42,6 +40,7 @@
 `gO` 打开大纲
 
 ### 寄存器
+
 剪切板和宏录制使用的是一样的寄存器
 如 `"ay` 复制到 `a` 寄存器，宏录制(`qa{macros}q`录制，`@a`执行)也是录制到 `a`。
 
@@ -53,14 +52,15 @@
 
 ### 多光标编辑
 
-[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors) 插件提供了仿造 sublime-text 的多光标编辑功能，但用起来很别扭，和自动补全很难配合。实际上 vim 原生的支持比插件要强大得多。
+[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors) 插件提供
+了仿造 sublime-text 的多光标编辑功能，但用起来很别扭，和自动补全很难配合。实际上
+vim 原生的支持比插件要强大得多。
 
 **[Vim 不需要多光标编辑功能](https://macplay.github.io/posts/vim-bu-xu-yao-duo-guang-biao-bian-ji-gong-neng)** 这篇文章讲得很全，概括一下：
 
 - 修改多个相同单词：用 `/` 搜索，用 `cgn` 修改下一处，再用 `.` 命令重复
 - 修改多行的同一列：用 `<C-V>` 选中块，用 `I` 或 `A` 修改块的首尾
 - 多行复杂修改：用宏录制
-
 
 ## 普通按键映射
 
@@ -128,7 +128,7 @@ text-obj 系列插件，提供了比原生更丰富的 text objects。
 | `<leader>==` | 对齐`=` |
 | `<leader>=:` | 对齐`:` |
 
-```
+```plaintext
 a,aa,aaa
 bb,bbb,b
 ccc,c,cc
@@ -136,13 +136,13 @@ ccc,c,cc
 
 执行命令
 
-```
+```plaintext
 :Tabularize /,/l0c1
 ```
 
 变为
 
-```
+```plaintext
 a  , aa , aaa
 bb , bbb, b
 ccc, c  , cc
@@ -178,7 +178,6 @@ ccc, c  , cc
 | `yy`     | 复制路径名           |
 | `\`      | 选中                 |
 | `*`      | 全选                 |
-
 
 ### leaderF
 

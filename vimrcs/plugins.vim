@@ -82,6 +82,7 @@ endif
 
 " language specific {{{
 "Plug 'python-mode/python-mode', { 'for': ['python'] }
+Plug 'plasticboy/vim-markdown', {'for':['markdown']}
 " }}}
 
 " UI {{{
