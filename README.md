@@ -3,7 +3,7 @@
 ## TODO
 
 - [x] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢(ssh禁用X11 forward)
-- [ ] coc-explorer 代替 defx
+- [x] coc-explorer 代替 defx
 - [ ] 调整窗口大小快捷键
 - [ ] fork code-dark-theme 并修改
 - [ ] switch 插件：快速替换单词(`true->false`)
@@ -150,35 +150,6 @@ ccc, c  , cc
 
 分隔符可以使用正则表达式实现更强大的匹配，详见帮助
 
-### defx
-
-文件浏览器
-
-| 快捷键   | 描述                 |
-| ---      | ---                  |
-| 打开defx |                      |
-| `<F3>`   | 打开defx             |
-| `<C-e>`  | 打开当前文件所在目录 |
-| 打开     |                      |
-| `o`      | 展开目录             |
-| `h`/`l`  | 上一级/下一级目录    |
-| `t`      | tab页中打开          |
-| `i`      | 水平分割窗口打开     |
-| `v`      | 垂直分割窗口打开     |
-| 操作     |                      |
-| `c`      | copy                 |
-| `m`      | move                 |
-| `p`      | paste                |
-| `d`      | 删除                 |
-| `r`      | 重命名               |
-| 显示     |                      |
-| `.`      | 显示隐藏文件         |
-| `<`/`>`  | 调整窗口大小         |
-| 其他     |                      |
-| `yy`     | 复制路径名           |
-| `\`      | 选中                 |
-| `*`      | 全选                 |
-
 ### leaderF
 
 模糊搜索
@@ -224,3 +195,16 @@ ccc, c  , cc
 | `[g`/`]g`  | prev/next diff   |
 | `gs`       | 查看此处 diff    |
 | `gc`       | 查看 commit      |
+
+#### coc-explorer
+
+| 快捷键          | 描述                      |
+| ----------      | ----------                |
+| `<leader>ef`    | 悬浮窗打开                |
+| `<leader>ee`    | 左侧打开                  |
+| `<leader>ev`    | 打开 vim 配置目录         |
+| `<leader>el`    | 列出可用的浏览器窗口布局  |
+| `<CR>`/`<BS>`   | cd 到下一级/上一级目录    |
+| `h`/`l`         | 目录展开/折叠, 打开文件   |
+| `e`/`s`/`E`/`t` | open/split/vsplit/tabedit |
+| `<Tab>`         | 菜单                      |

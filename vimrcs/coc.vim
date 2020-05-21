@@ -2,7 +2,8 @@ let g:coc_global_extensions = [
     \ 'coc-emmet', 'coc-highlight', 'coc-lists', 'coc-pairs', 'coc-snippets', 'coc-yank', 'coc-git',
     \ 'coc-dictionary', 'coc-syntax',
     \ 'coc-json', 'coc-vimlsp',
-    \ 'coc-markdownlint'
+    \ 'coc-markdownlint',
+    \ 'coc-explorer'
     \ ]
 
 " vimlsp
@@ -205,3 +206,35 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 "imap <C-j> <Plug>(coc-snippets-expand-jump)
 " }}} coc-snippets
+
+" coc-explorer {{{
+let g:coc_explorer_global_presets = {
+\   'vim': {
+\      'root-uri': '~/.config/nvim',
+\   },
+\   'floating': {
+\      'position': 'floating',
+\   },
+\   'floatingLeftside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\   },
+\   'floatingRightside': {
+\      'position': 'floating',
+\      'floating-position': 'left-center',
+\      'floating-width': 50,
+\   },
+\   'simplify': {
+\     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   }
+\ }
+
+nmap <space>ev :CocCommand explorer --preset vim<CR>
+nmap <space>ef :CocCommand explorer --preset floating<CR>
+nmap <space>ee :CocCommand explorer --preset simplify<CR>
+
+" List all presets
+nmap <space>el :CocList explPresets<CR>
+
+" }}}
