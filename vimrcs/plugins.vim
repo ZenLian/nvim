@@ -24,6 +24,8 @@ call plug#begin(s:plug)
     "Plug 'easymotion/vim-easymotion'
     Plug 'godlygeek/tabular'
 
+    Plug 'terryma/vim-multiple-cursors'
+
     " textobj
     " TODO: 用 coc-textobj 替代
     Plug 'kana/vim-textobj-user'
@@ -270,18 +272,6 @@ endif
 
 " powerline {{{
 if count(g:zl_plugins, 'powerline')
-if 0
-    "let g:airline_theme='solarized'
-    let g:airline_theme='codedark'
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#show_splits = 0
-    let g:airline#extensions#tabline#show_buffers = 0
-    let g:airline#extensions#tabline#show_tab_count = 0
-    let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-    let g:airline#extensions#tabline#show_tab_type = 0
-    let g:airline#extensions#tabline#formatter = 'unique_tail'
-    let g:airline#extensions#tabline#show_close_button = 0
-else
     set noshowmode
     set showtabline=2
 
@@ -333,7 +323,6 @@ else
         return winwidth(0) > 120 ? blame : ''
     endfunction
     autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
-endif
 endif
 " }}}
 
