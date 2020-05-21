@@ -24,8 +24,6 @@ call plug#begin(s:plug)
     "Plug 'easymotion/vim-easymotion'
     Plug 'godlygeek/tabular'
 
-    Plug 'terryma/vim-multiple-cursors'
-
     " textobj
     " TODO: 用 coc-textobj 替代
     Plug 'kana/vim-textobj-user'

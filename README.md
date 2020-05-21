@@ -4,7 +4,7 @@
 
 - [ ] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢
 - [x] defx 代替 NERDTree
-- [ ] 多光标插件
+- ~~[ ] 多光标插件~~
 - [ ] 调整窗口大小快捷键
 - [ ] fork code-dark-theme 并修改
 - [ ] switch 插件：快速替换单词(`true->false`)
@@ -50,6 +50,17 @@
 - `+`/`*` 系统剪切板
 - `"Ay` 可以将复制内容追加到 `a` 寄存器
 - Insert 模式下 `<Ctrl-R>` 也可以插入寄存器内容
+
+### 多光标编辑
+
+[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors) 插件提供了仿造 sublime-text 的多光标编辑功能，但用起来很别扭，和自动补全很难配合。实际上 vim 原生的支持比插件要强大得多。
+
+**[Vim 不需要多光标编辑功能](https://macplay.github.io/posts/vim-bu-xu-yao-duo-guang-biao-bian-ji-gong-neng)** 这篇文章讲得很全，概括一下：
+
+- 修改多个相同单词：用 `/` 搜索，用 `cgn` 修改下一处，再用 `.` 命令重复
+- 修改多行的同一列：用 `<C-V>` 选中块，用 `I` 或 `A` 修改块的首尾
+- 多行复杂修改：用宏录制
+
 
 ## 普通按键映射
 
