@@ -147,6 +147,9 @@ noremap <silent><leader>v :Vista!!<cr>
 "    call neomake#configure#automake('nw', 750)
 "endif
 
+" vim-markdown
+let g:vim_markdown_folding_style_pythonic = 1
+
 " coc
 source ~/.config/nvim/vimrcs/coc.vim
 
