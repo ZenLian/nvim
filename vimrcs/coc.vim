@@ -3,7 +3,8 @@ let g:coc_global_extensions = [
     \ 'coc-dictionary', 'coc-syntax',
     \ 'coc-json', 'coc-vimlsp',
     \ 'coc-markdownlint',
-    \ 'coc-explorer'
+    \ 'coc-explorer',
+    \ 'coc-tabnine'
     \ ]
 
 " vimlsp
