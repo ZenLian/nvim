@@ -4,6 +4,8 @@
 
 - [x] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢(ssh禁用X11 forward)
 - [x] coc-explorer 代替 defx
+- [ ] vim-clap 作 fuzzy finder(配置)
+- [ ] spaceVim 的菜单插件
 - [ ] 调整窗口大小快捷键
 - [ ] fork code-dark-theme 并修改
 - [ ] switch 插件：快速替换单词(`true->false`)
@@ -150,15 +152,9 @@ ccc, c  , cc
 
 分隔符可以使用正则表达式实现更强大的匹配，详见帮助
 
-### leaderF
+### vim-clap
 
-模糊搜索
-
-| 快捷键     | 描述             |
-| ---------- | ---------------- |
-| `<ctrl-p>` | 工作目录文件列表 |
-| `<ctrl-n>` | 最近使用文件列表 |
-| `<ctrl-f>` | 函数列表         |
+支持悬浮窗的 fuzzy finder
 
 ### markdown
 
@@ -214,6 +210,7 @@ ccc, c  , cc
 | `<leader>ee`    | 左侧打开                  |
 | `<leader>ev`    | 打开 vim 配置目录         |
 | `<leader>el`    | 列出可用的浏览器窗口布局  |
+| *in explorer*   |                           |
 | `<CR>`/`<BS>`   | cd 到下一级/上一级目录    |
 | `h`/`l`         | 目录展开/折叠, 打开文件   |
 | `e`/`s`/`E`/`t` | open/split/vsplit/tabedit |

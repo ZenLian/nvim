@@ -53,6 +53,7 @@ endif
 "Plug 'Shougo/denite.nvim' " 功能强大，配置复杂
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "Plug 'junegunn/fzf.vim'
+    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
 " }}}
 
 " 用 coc 代替
@@ -141,6 +142,16 @@ noremap <silent><leader>v :Vista!!<cr>
 "noremap <C-p> :FZF
 "noremap <C-f> :Mru
 "noremap <M-p> :Mru
+
+" vim-clap
+let g:clap_theme = 'material_design_dark'
+noremap <silent><leader>pp :Clap providers<cr>
+noremap <silent><leader>pf :Clap files<cr>
+noremap <silent><leader>ph :Clap history<cr>
+noremap <silent><leader>pb :Clap buffers<cr>
+noremap <silent><leader>py :Clap yanks<cr>
+noremap <silent><leader>pc :Clap hist:<cr>
+noremap <silent><leader>pl :Clap lines<cr>
 
 " neomake
 "if isdirectory(s:plug.'/neomake')
