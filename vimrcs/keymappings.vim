@@ -56,7 +56,7 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " }}}
 
 " 窗口间移动 {{{
-nnoremap <Tab> <C-w>w
+"nnoremap <Tab> <C-w>w
 "map <C-j> <C-W>j
 "map <C-k> <C-W>k
 "map <C-h> <C-W>h
