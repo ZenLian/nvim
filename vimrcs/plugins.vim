@@ -76,13 +76,13 @@ endif
     Plug 'honza/vim-snippets'
 " }}}
 
-
 " language specific {{{
 "Plug 'python-mode/python-mode', { 'for': ['python'] }
 Plug 'plasticboy/vim-markdown', {'for':['markdown']}
 " }}}
 
 " UI {{{
+Plug 'mhinz/vim-startify'
 if count(g:zl_plugins, 'colorscheme')
     "Plug 'lifepillar/vim-solarized8'
     Plug 'tomasiser/vim-code-dark'
@@ -152,7 +152,12 @@ let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--extra=+q']
 
 " vista
-"let g:vista_default_executive = 'coc'
+let g:vista_default_executive = 'coc'
+let g:vista_executive_for = {
+    \ 'vimwiki': 'markdown',
+    \ 'pandoc': 'markdown',
+    \ 'markdown': 'toc',
+    \ }
 noremap <silent><leader>v :Vista!!<cr>
 
 "fzf
@@ -180,6 +185,10 @@ let g:vim_markdown_folding_style_pythonic = 1
 
 " coc
 source ~/.config/nvim/vimrcs/coc.vim
+
+" vim-startify {{{
+    autocmd User Startified setlocal cursorline
+" }}}
 
 " colorscheme {{{
 if count(g:zl_plugins, 'colorscheme')
