@@ -117,7 +117,7 @@ let g:sneak#use_ic_scs = 1
 let g:sneak#prompt = 'sneak> '
 "}}}
 
-" tabular
+" tabular {{{
 nnoremap <leader>== :Tabularize /=<CR>
 vnoremap <leader>== :Tabularize /=<CR>
 nnoremap <leader>=: :Tabularize /:\zs<CR>
@@ -134,8 +134,9 @@ function! s:align()
         call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
     endif
 endfunction
+" }}}
 
-" gutentags
+" gutentags {{{
 let g:gutentags_project_root = ['.root', '.git', '.svn', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
 if has('nvim')
@@ -150,8 +151,9 @@ let g:gutentags_ctags_extra_args = ['--fields=+niazS']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 let g:gutentags_ctags_extra_args += ['--extra=+q']
+" }}}
 
-" vista
+" vista {{{
 let g:vista_default_executive = 'coc'
 let g:vista_executive_for = {
     \ 'vimwiki': 'markdown',
@@ -159,13 +161,9 @@ let g:vista_executive_for = {
     \ 'markdown': 'toc',
     \ }
 noremap <silent><leader>v :Vista!!<cr>
+" }}}
 
-"fzf
-"noremap <C-p> :FZF
-"noremap <C-f> :Mru
-"noremap <M-p> :Mru
-
-" vim-clap
+" vim-clap {{{
 let g:clap_theme = 'material_design_dark'
 noremap <silent><leader>pp :Clap providers<cr>
 noremap <silent><leader>pf :Clap files<cr>
@@ -174,11 +172,8 @@ noremap <silent><leader>pb :Clap buffers<cr>
 noremap <silent><leader>py :Clap yanks<cr>
 noremap <silent><leader>pc :Clap hist:<cr>
 noremap <silent><leader>pl :Clap lines<cr>
-
-" neomake
-"if isdirectory(s:plug.'/neomake')
-"    call neomake#configure#automake('nw', 750)
-"endif
+let g:clap_layout = { 'relative': 'editor' }
+" }}}
 
 " vim-markdown
 let g:vim_markdown_folding_style_pythonic = 1

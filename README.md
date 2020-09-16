@@ -4,6 +4,7 @@
 
 - [x] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢(ssh禁用X11 forward)
 - [x] coc-explorer 代替 defx
+- [ ] vim-spector 代码调试
 - [ ] vim-clap 作 fuzzy finder(配置)
 - [ ] spaceVim 的菜单插件
 - [ ] 调整窗口大小快捷键
