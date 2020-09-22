@@ -17,6 +17,7 @@
     "list.source.grep.defaultArgs": ["-F", "-S", "-e"],
     "suggest.enablePreview": true,
     "explorer.quitOnOpen": true,
+    "explorer.width": 30,
     "languageserver": {
         "vimls": {
             "command": "vim-language-server",
