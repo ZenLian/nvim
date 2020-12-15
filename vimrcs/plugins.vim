@@ -76,7 +76,13 @@ endif
     Plug 'honza/vim-snippets'
 " }}}
 
+" debug {{{
+    let g:vimspector_enable_mappings = 'HUMAN'
+    Plug 'puremourning/vimspector', {'for': ['c', 'cpp']}
+" }}}
+
 " language specific {{{
+" use coc
 "Plug 'python-mode/python-mode', { 'for': ['python'] }
 Plug 'plasticboy/vim-markdown', {'for':['markdown']}
 " }}}

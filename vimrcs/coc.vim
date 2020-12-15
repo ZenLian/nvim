@@ -4,7 +4,8 @@ let g:coc_global_extensions = [
     \ 'coc-json', 'coc-vimlsp',
     \ 'coc-markdownlint',
     \ 'coc-explorer',
-    \ 'coc-tabnine'
+    \ 'coc-tabnine',
+    \ 'coc-jedi'
     \ ]
 
 " vimlsp
