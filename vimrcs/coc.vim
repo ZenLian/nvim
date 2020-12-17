@@ -5,7 +5,7 @@ let g:coc_global_extensions = [
     \ 'coc-markdownlint',
     \ 'coc-explorer',
     \ 'coc-tabnine',
-    \ 'coc-jedi'
+    \ 'coc-pyright'
     \ ]
 
 " vimlsp
