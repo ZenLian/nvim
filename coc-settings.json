@@ -31,14 +31,6 @@
                     "snippetSupport": true
                 }
             }
-        },
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
-            "filetypes": ["go"],
-            "initializationOptions": {
-                "usePlaceholders": true
-            }
         }
     },
     "python.linting.flake8Enabled": true,
