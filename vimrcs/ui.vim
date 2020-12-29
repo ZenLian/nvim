@@ -1,5 +1,7 @@
 " vim: set foldmethod=marker foldmarker={{{,}}} foldlevel=0 :
 
+if 0
+
 if exists('g:zl_plugins') && count(g:zl_plugins, 'powerline')
     let s:statusline_config = 0
     let s:tabline_config = 0
@@ -123,3 +125,4 @@ set listchars=tab:›\ ,trail:•,extends:›,nbsp:.
 set fillchars=fold:-
 " }}}
 
+endif

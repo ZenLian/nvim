@@ -41,8 +41,8 @@ if executable('ctags')
     if has('nvim') || v:version >= 800
         Plug 'ludovicchabant/vim-gutentags'
     endif
-    Plug 'liuchengxu/vista.vim'
 endif
+    Plug 'liuchengxu/vista.vim'
     " yank历史
     Plug 'junegunn/vim-peekaboo'
 " }}}
@@ -90,8 +90,10 @@ Plug 'plasticboy/vim-markdown', {'for':['markdown']}
 " UI {{{
 Plug 'mhinz/vim-startify'
 if count(g:zl_plugins, 'colorscheme')
-    "Plug 'lifepillar/vim-solarized8'
     Plug 'tomasiser/vim-code-dark'
+    Plug 'lifepillar/vim-solarized8'
+    Plug 'itchyny/landscape.vim'
+    Plug 'sainnhe/sonokai'
 endif
 if count(g:zl_plugins, 'powerline')
     "Plug 'vim-airline/vim-airline'
@@ -194,10 +196,7 @@ source ~/.config/nvim/vimrcs/coc.vim
 " colorscheme {{{
 if count(g:zl_plugins, 'colorscheme')
     set termguicolors
-    "if filereadable(s:plug.'/vim-solarized8/colors/solarized8.vim')
-    "    colorscheme solarized8
-    "endif
-    colorscheme codedark
+    colorscheme solarized8_flat
 endif
 " }}}
 
@@ -207,7 +206,7 @@ if count(g:zl_plugins, 'powerline')
     set showtabline=2
 
     let g:lightline = {
-        \ 'colorscheme': 'codedark',
+        \ 'colorscheme': 'solarized8',
         \ 'mode_map': {
           \ 'n' : 'N',
           \ 'i' : 'I',
