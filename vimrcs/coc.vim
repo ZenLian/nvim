@@ -140,43 +140,13 @@ nnoremap <silent> <leader>lm  :<C-u>CocList -A mru<cr>
 " coc-grep
 "
 " grep any
-nnoremap <silent> <C-f>  :<C-u>CocList grep<cr>
-" grep from selected globally
-vnoremap <C-f>  :<C-u>call <SID>GrepFromSelected(visualmode(), 'global')<CR>
-" search current word in current buffer
-nnoremap <silent> -  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
-vnoremap <silent> - :<C-u>call <SID>GrepFromSelected(visualmode(), 'buffer')<CR>
-"nnoremap <leader>- :<C-u>set operatorfunc=<SID>GrepFromSelected<CR>g@
-" grep in current buffer
-nnoremap <leader>- :<C-u>CocList lines<CR>
+"nnoremap <silent> <C-f>  :<C-u>CocList grep<cr>
 
 command! -nargs=+ -complete=custom,s:GrepArgs Rg exe 'CocList grep '.<q-args>
 function! s:GrepArgs(...)
   let list = ['-S', '-smartcase', '-i', '-ignorecase', '-w', '-word',
         \ '-e', '-regex', '-u', '-skip-vcs-ignores', '-t', '-extension']
   return join(list, "\n")
-endfunction
-
-function! s:GrepFromSelected(type, range)
-  if a:type ==# 'v'
-    let saved_unnamed_register = @@
-    normal! `<v`>y
-    let word = substitute(@@, '\n$', '', 'g')
-    let word = escape(word, '| ')
-    let @@ = saved_unnamed_register
-  elseif a:type ==# 'char'
-    let word = expand('<cword>')
-  "  normal! `[v`]y
-  else
-    return
-  endif
-  if a:range ==# 'global'
-      execute 'CocList grep -F -S '.word
-  elseif a:range ==# 'buffer'
-      execute 'CocList -I --normal --input='.word.' words'
-  else
-      return
-  endif
 endfunction
 
 " coc-git {{{

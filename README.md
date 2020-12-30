@@ -2,11 +2,9 @@
 
 ## TODO
 
-- [ ] expand-region: 快速扩展选区
 - [ ] incsearch.vim: 实时高亮增强
 - [ ] vim-clap 作 fuzzy finder(coc-list 的快捷键移到 clap)
 - [ ] vim-which-key: spaceVim 的菜单插件
-- [ ] switch 插件：快速替换单词(`true->false`)
 - [ ] nerd-commenter: 注释、解注释
 - [ ] vim-spector 代码调试
 - [ ] 调整窗口大小快捷键
@@ -74,6 +72,11 @@ vim 原生的支持比插件要强大得多。
 - 修改多个相同单词：用 `/` 搜索，用 `cgn` 修改下一处，再用 `.` 命令重复
 - 修改多行的同一列：用 `<C-V>` 选中块，用 `I` 或 `A` 修改块的首尾
 - 多行复杂修改：用宏录制
+
+### mark 标记
+
+- 用 `m` 标记，用 ` 或 ' 跳转
+- `''` 跳转到上一处
 
 ## 普通按键映射
 
@@ -167,6 +170,16 @@ ccc, c  , cc
 
 分隔符可以使用正则表达式实现更强大的匹配，详见帮助
 
+### switch.vim
+
+单词快捷切换，按 `-` 触发
+
+详细的切换列表见 https://github.com/AndrewRadev/switch.vim#builtins
+
+- `&&` <-> `||`
+- `true` <-> `false`
+- c++ 的 `.` <-> `->`
+
 ### vim-clap
 
 支持悬浮窗的 fuzzy finder
@@ -178,11 +191,12 @@ ccc, c  , cc
 - `h`: 历史文件
 - `c`: 历史命令
 - `b`: buffers
+- `o`: coc outline
+- `d`: coc diagnostic
 
-coc-clap 支持：
+其他：
 
-- `o`: outline
-- `d`: diagnostic
+- `<C-F>`: 查找当前词
 
 ### markdown
 
@@ -199,10 +213,6 @@ coc-clap 支持：
 | 快捷键       | 描述                                                       |
 | ---          | ---                                                        |
 | `[d`/`]d`    | next/prev 语法错误                                         |
-| 文字搜索     |                                                            |
-| `<C-f>`      | 全局搜索字符串(visual 模式下非 regex, normal 模式下 regex) |
-| `-`          | 当前buffer搜索当前字符串                                   |
-| `<leader>-`  | 当前buffer搜索(regex)                                      |
 | 列表         |                                                            |
 | `<C-p>`      | 搜索文件                                                   |
 | `<leader>lm` | 最近使用文件列表                                           |

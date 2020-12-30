@@ -23,6 +23,7 @@ call plug#begin(s:plug)
     Plug 'godlygeek/tabular'
     Plug 'luochen1990/rainbow'
     Plug 'terryma/vim-expand-region'
+    Plug 'AndrewRadev/switch.vim'
 
     " textobj
     " TODO: 用 coc-textobj 替代
@@ -160,6 +161,10 @@ call expand_region#custom_text_objects({
       \ })
 " }}}
 
+" switch.vim {{{
+let g:switch_mapping = "-"
+" }}}
+
 " gutentags {{{
 let g:gutentags_project_root = ['.root', '.git', '.svn', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
@@ -189,6 +194,7 @@ noremap <silent><leader>v :Vista!!<cr>
 
 " vim-clap {{{
 let g:clap_theme = 'solarized_dark'
+let g:clap_layout = { 'relative': 'editor', 'width': '67%', 'height': '50%', 'row': '20%', 'col': '17%' }
 noremap <silent><leader>pp :Clap providers<cr>
 noremap <silent><leader>pf :Clap files<cr>
 noremap <silent><leader>ph :Clap history<cr>
@@ -196,7 +202,8 @@ noremap <silent><leader>pb :Clap buffers<cr>
 noremap <silent><leader>py :Clap yanks<cr>
 noremap <silent><leader>pc :Clap hist:<cr>
 noremap <silent><leader>pl :Clap lines<cr>
-let g:clap_layout = { 'relative': 'editor', 'width': '67%', 'height': '50%', 'row': '20%', 'col': '17%' }
+nnoremap <silent><C-f> :Clap grep ++query=<cword><cr>
+vnoremap <silent><C-f> :Clap grep ++query=@visual<cr>
 
 noremap <silent><leader>pd :Clap coc_diagnostics<cr>
 noremap <silent><leader>po :Clap coc_outline<cr>
