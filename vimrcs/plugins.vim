@@ -17,8 +17,6 @@ call plug#begin(s:plug)
 
 " 编辑辅助 {{{
     " basics
-    "Plug 'jiangmiao/auto-pairs'
-    "    let g:AutoPairsShortcutToggle = '<M-a>'
     Plug 'tpope/vim-surround'
     Plug 'justinmk/vim-sneak'
     "Plug 'easymotion/vim-easymotion'
@@ -51,9 +49,11 @@ endif
 " fuzzy find {{{
     "Plug 'Yggdroot/LeaderF'
 "Plug 'Shougo/denite.nvim' " 功能强大，配置复杂
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
-    Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'antoinemadec/coc-fzf', {'branch': 'release'}
+  Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary' }
+  Plug 'vn-ki/coc-clap'
 " }}}
 
 " 用 coc 代替
@@ -96,9 +96,6 @@ if count(g:zl_plugins, 'colorscheme')
     Plug 'sainnhe/sonokai'
 endif
 if count(g:zl_plugins, 'powerline')
-    "Plug 'vim-airline/vim-airline'
-    "Plug 'vim-airline/vim-airline-themes'
-    "Plug 'liuchengxu/eleline.vim'
     Plug 'itchyny/lightline.vim'
 endif
 " }}} UI
@@ -172,7 +169,7 @@ noremap <silent><leader>v :Vista!!<cr>
 " }}}
 
 " vim-clap {{{
-let g:clap_theme = 'material_design_dark'
+let g:clap_theme = 'solarized_dark'
 noremap <silent><leader>pp :Clap providers<cr>
 noremap <silent><leader>pf :Clap files<cr>
 noremap <silent><leader>ph :Clap history<cr>
@@ -180,7 +177,11 @@ noremap <silent><leader>pb :Clap buffers<cr>
 noremap <silent><leader>py :Clap yanks<cr>
 noremap <silent><leader>pc :Clap hist:<cr>
 noremap <silent><leader>pl :Clap lines<cr>
-let g:clap_layout = { 'relative': 'editor' }
+let g:clap_layout = { 'relative': 'editor', 'width': '67%', 'height': '50%', 'row': '20%', 'col': '17%' }
+
+g:clap_provider_coc_blink = [0, 0]
+noremap <silent><leader>pd :Clap coc_diagnostics<cr>
+noremap <silent><leader>po :Clap coc_outline<cr>
 " }}}
 
 " vim-markdown
