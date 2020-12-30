@@ -21,6 +21,7 @@ call plug#begin(s:plug)
     Plug 'justinmk/vim-sneak'
     "Plug 'easymotion/vim-easymotion'
     Plug 'godlygeek/tabular'
+    Plug 'luochen1990/rainbow'
 
     " textobj
     " TODO: 用 coc-textobj 替代
@@ -41,7 +42,7 @@ if executable('ctags')
     endif
 endif
     Plug 'liuchengxu/vista.vim'
-    " yank历史
+    " 寄存器可视化
     Plug 'junegunn/vim-peekaboo'
 " }}}
 
@@ -141,6 +142,10 @@ function! s:align()
 endfunction
 " }}}
 
+" rainbow {{{
+let g:rainbow_active = 1
+" }}}
+
 " gutentags {{{
 let g:gutentags_project_root = ['.root', '.git', '.svn', '.project']
 let g:gutentags_ctags_tagfile = '.tags'
@@ -179,7 +184,6 @@ noremap <silent><leader>pc :Clap hist:<cr>
 noremap <silent><leader>pl :Clap lines<cr>
 let g:clap_layout = { 'relative': 'editor', 'width': '67%', 'height': '50%', 'row': '20%', 'col': '17%' }
 
-g:clap_provider_coc_blink = [0, 0]
 noremap <silent><leader>pd :Clap coc_diagnostics<cr>
 noremap <silent><leader>po :Clap coc_outline<cr>
 " }}}

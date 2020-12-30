@@ -2,17 +2,20 @@
 
 ## TODO
 
-- [x] ssh 使用 DISPLAY 导致 xclipboard 极其缓慢(ssh禁用X11 forward)
-- [x] coc-explorer 代替 defx
-- [ ] vim-spector 代码调试
-- [ ] vim-clap 作 fuzzy finder(配置)
-- [ ] spaceVim 的菜单插件
-- [ ] 调整窗口大小快捷键
-- [ ] fork code-dark-theme 并修改
+- [ ] expand-region: 快速扩展选区
+- [ ] incsearch.vim: 实时高亮增强
+- [ ] vim-clap 作 fuzzy finder(coc-list 的快捷键移到 clap)
+- [ ] vim-which-key: spaceVim 的菜单插件
 - [ ] switch 插件：快速替换单词(`true->false`)
 - [ ] nerd-commenter: 注释、解注释
-- [x] markdown 插件(vim-markdown, coc-markdownlint)
-- [x] coc tab 补全方式改为 vscode 方式: 直接选择第一项然后关闭列表, 如果是 snippets 就展开
+- [ ] vim-spector 代码调试
+- [ ] 调整窗口大小快捷键
+- [ ] deol.nvim: vim 终端插件(对比 coc-terminal 决定使用哪个)
+
+- [ ] 图标支持
+- [ ] ranger 配置和插件
+- [ ] tmux 主题和插件
+- [ ] lazygit 尝鲜和 lazygit.vim 集成
 
 准备使用的键位:
 
@@ -163,6 +166,19 @@ ccc, c  , cc
 ### vim-clap
 
 支持悬浮窗的 fuzzy finder
+
+全部用 `<leader>p` 开头:
+
+- `p`: 列出所有 provider
+- `f`: grep files
+- `h`: 历史文件
+- `c`: 历史命令
+- `b`: buffers
+
+coc-clap 支持：
+
+- `o`: outline
+- `d`: diagnostic
 
 ### markdown
 
