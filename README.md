@@ -108,6 +108,10 @@ text-obj 系列插件，提供了比原生更丰富的 text objects。
 | `[pf`/`]pf`       | 移动到上/下一个函数   |
 | `[pc`/`]pc`       | 移动到上/下一个类     |
 
+### vim-expand-region
+
+用 `+`/`_` 根据 textobj 扩展选区
+
 ### vim-surround
 
 提供了括号对(如 `""`,`''`,`()`,`[]` )的快捷操作

@@ -22,6 +22,7 @@ call plug#begin(s:plug)
     "Plug 'easymotion/vim-easymotion'
     Plug 'godlygeek/tabular'
     Plug 'luochen1990/rainbow'
+    Plug 'terryma/vim-expand-region'
 
     " textobj
     " TODO: 用 coc-textobj 替代
@@ -144,6 +145,19 @@ endfunction
 
 " rainbow {{{
 let g:rainbow_active = 1
+" }}}
+
+" vim-expand-region {{{
+call expand_region#custom_text_objects({
+      \ "\/\\n\\n\<CR>": 1,
+      \ 'ii' :1,
+      \ 'ai' :1,
+      \ 'iu' :0,
+      \ 'if' :1,
+      \ 'af' :1,
+      \ 'i,' :0,
+      \ 'a,' :0,
+      \ })
 " }}}
 
 " gutentags {{{
