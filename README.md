@@ -2,6 +2,9 @@
 
 ## TODO
 
+- [ ] lightline: 仿造 SpaceVim 用 winnr() 显示每个窗口的编号，用 `<leader>{num}` 切换
+  - 原来 `<leader>{num}` 切换的是 tab，现在用 `<leader>t{num}切换`
+
 - [ ] incsearch.vim: 实时高亮增强
 - [ ] vim-clap 作 fuzzy finder(coc-list 的快捷键移到 clap)
 - [ ] vim-which-key: spaceVim 的菜单插件

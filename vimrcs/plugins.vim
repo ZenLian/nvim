@@ -190,6 +190,9 @@ let g:vista_executive_for = {
     \ 'markdown': 'toc',
     \ }
 noremap <silent><leader>v :Vista!!<cr>
+let g:vista_update_on_text_changed = 1
+let g:vista_close_on_jump = 1
+let g:vista_disable_statusline = 1
 " }}}
 
 " vim-clap {{{
@@ -226,7 +229,7 @@ if count(g:zl_plugins, 'colorscheme')
 endif
 " }}}
 
-" powerline {{{
+" lightine {{{
 if count(g:zl_plugins, 'powerline')
     set noshowmode
     set showtabline=2
@@ -249,7 +252,7 @@ if count(g:zl_plugins, 'powerline')
         \ 'active': {
           \ 'left': [
             \ [ 'mode', 'paste' ],
-            \ [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ],
+            \ [ 'gitbranch', 'cocstatus', 'filename', 'modified' ],
           \ ],
           \ 'right': [
             \ [ 'lineinfo' ],
@@ -259,26 +262,69 @@ if count(g:zl_plugins, 'powerline')
           \ ]
         \ },
         \ 'component_function': {
-          \ 'gitbranch': 'LightLineGitBranch',
-          \ 'gitstatus': 'LightLineGitStatus',
+          \ 'mode': 'LightlineMode',
+          \ 'gitbranch': 'LightlineGitBranch',
+          \ 'gitstatus': 'LightlineGitStatus',
           \ 'cocstatus': 'coc#status',
-          \ 'blame': 'LightlineGitBlame'
+          \ 'filename': 'LightlineFilename',
+          \ 'modified': 'LightlineModified',
+          \ 'lineinfo': 'LightlineLineinfo',
+          \ 'percent': 'LightlinePercent',
+          \ 'fileformat': 'LightlineFileformat',
+          \ 'fileencoding': 'LightlineFileencoding',
+          \ 'filetype': 'LightlineFiletype',
+          \ 'blame': 'LightlineGitBlame',
         \ },
     \ }
-    function! LightLineGitBranch() abort
-        let status = get(g:, 'coc_git_status', '')
-        return status
+
+    function! LightlineMode() abort
+      return &filetype =~# 'vista' ? 'Vista' :
+            \ &filetype ==# 'coc-explorer' ? 'coc-explorer' :
+            \ lightline#mode()
     endfunction
-    function! LightLineGitStatus() abort
+    function! LightlineFilename() abort
+      return &filetype =~# '\v(vista|coc-explorer)' ? '' :
+            \ expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+    endfunction
+    function! LightlineModified() abort
+      return &filetype =~# '\v(vista|coc-explorer)' ? '' :
+            \ &readonly ? '-' :
+            \ &modified ? '+' : ''
+    endfunction
+    function! LightlineGitBranch() abort
+        let status = get(g:, 'coc_git_status', '')
+        return winwidth(0) > 70 ? status : ''
+    endfunction
+    function! LightlineGitStatus() abort
         let status = get(b:, 'coc_git_status', '')
         return status
     endfunction
     function! LightlineGitBlame() abort
         let blame = get(b:, 'coc_git_blame', '')
-        " return blame
         return winwidth(0) > 120 ? blame : ''
     endfunction
+    function! LightlineLineinfo() abort
+      return &filetype =~# '\v(vista|coc-explorer)' ? '' :
+            \ printf('%3d:%-2d', line('.'), col('.'))
+    endfunction
+    function! LightlinePercent() abort
+      return &filetype =~# '\v(vista|coc-explorer)' ? '' :
+            \ printf('%3d%%', line('$'))
+    endfunction
+    function! LightlineFileformat() abort
+      return winwidth(0) > 70  && &filetype !~# '\v(vista|coc-explorer)' ?
+            \ &fileformat : ''
+    endfunction
+    function! LightlineFileencoding() abort
+      return &filetype =~# '\v(vista|coc-explorer)' ? '' :
+            \ &fenc !=# '' ? &fenc:&enc
+    endfunction
+    function! LightlineFiletype() abort
+      return winwidth(0) > 70  && &filetype !~# '\v(vista|coc-explorer)' ?
+            \ (&filetype !=# '' ? &filetype : 'no ft') : ''
+    endfunction
     autocmd User CocStatusChange,CocDiagnosticChange,CocGitStatusChange call lightline#update()
+
 endif
 " }}}
 
