@@ -309,7 +309,7 @@ if count(g:zl_plugins, 'powerline')
     endfunction
     function! LightlinePercent() abort
       return &filetype =~# '\v(vista|coc-explorer)' ? '' :
-            \ printf('%3d%%', line('$'))
+            \ printf('%3d%%', line('.') * 100 / line('$'))
     endfunction
     function! LightlineFileformat() abort
       return winwidth(0) > 70  && &filetype !~# '\v(vista|coc-explorer)' ?
