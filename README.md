@@ -240,8 +240,9 @@ ccc, c  , cc
 | 快捷键     | 描述             |
 | ---------- | ---------------- |
 | `[g`/`]g`  | prev/next diff   |
-| `gs`       | 查看此处 diff    |
-| `gc`       | 查看 commit      |
+| `gs`       | 查看此处改动     |
+| `gu`       | 撤销此处改动     |
+| `gc`       | 查看改行 commit  |
 
 #### coc-explorer
 
