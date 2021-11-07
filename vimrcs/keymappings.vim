@@ -30,11 +30,14 @@ nnoremap Y y$
 " visual 模式下 Y 复制到系统剪切板
 vnoremap Y "+y
 " 屏幕左右移动
-nnoremap zh zH
-nnoremap zl zL
+noremap zh zH
+noremap zl zL
+" 行首/行尾
+noremap H ^
+noremap L $
 " 上下移动
-nnoremap <C-y> 5<C-y>
-nnoremap <C-e> 5<C-e>
+noremap <C-y> 5<C-y>
+noremap <C-e> 5<C-e>
 noremap  <C-k> 5k
 noremap  <C-j> 5j
 

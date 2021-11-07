@@ -1,11 +1,14 @@
 let g:coc_global_extensions = [
+    \ 'coc-marketplace',
     \ 'coc-emmet', 'coc-highlight', 'coc-lists', 'coc-pairs', 'coc-snippets',
     \ 'coc-yank', 'coc-dictionary', 'coc-syntax',
     \ 'coc-explorer',
     \ 'coc-git',
     \ 'coc-tabnine',
-    \ 'coc-json', 'coc-vimlsp', 'coc-sh', 'coc-markdownlint', 'coc-pyright', 'coc-go'
+    \ 'coc-json', 'coc-vimlsp', 'coc-sh', 'coc-markdownlint'
     \ ]
+" 'coc-go'
+" 'coc-pyright'
 
 " vimlsp
 let g:markdown_fenced_languages = [
