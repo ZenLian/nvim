@@ -100,7 +100,7 @@ local options = {
     signcolumn = "yes",
     conceallevel = 0,
     concealcursor = "niv",
-    colorcolumn = "81"
+    colorcolumn = "121"
 }
 
 local function load_options()

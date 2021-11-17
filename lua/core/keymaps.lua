@@ -22,10 +22,36 @@ keymap('v', '.', ':normal .<CR>', {noremap=true, nowait=true})
 -- 交换上下行
 keymap('n', '<M-j>', 'mz:m+<cr>`z', {noremap=true, nowait=true})
 keymap('n', '<M-k>', 'mz:m-2<cr>`z', {noremap=true, nowait=true})
-keymap('n', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", {noremap=true, nowait=true})
-keymap('n', '<M-j>', ":m'<-2<cr>`>my`<mzgv`yo`z", {noremap=true, nowait=true})
+keymap('v', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", {noremap=true, nowait=true})
+keymap('v', '<M-k>', ":m'<-2<cr>`>my`<mzgv`yo`z", {noremap=true, nowait=true})
 
 -- tab
-keymap('n', '[t', ":tabprevious", {noremap=true, nowait=true})
-keymap('n', ']t', ":tabnext", {noremap=true, nowait=true})
+keymap('n', '[t', ":tabprevious<CR>", {noremap=true, nowait=true})
+keymap('n', ']t', ":tabnext<CR>", {noremap=true, nowait=true})
 
+----------------------
+--- plugin keymaps ---
+----------------------
+
+------------------
+--- bufferline ---
+------------------
+--keymap('n', '[b', ':BufferLineNext<CR>', {noremap=true, silent=true})
+vim.cmd [[nnoremap <silent>[b :BufferLineCyclePrev<CR>]]
+vim.cmd [[nnoremap <silent>]b :BufferLineCycleNext<CR>]]
+vim.cmd [[nnoremap <silent><Leader>bb :BufferLinePick<CR>]]
+vim.cmd [[nnoremap <silent><Leader>bc :BufferLinePickClose<CR>]]
+vim.cmd [[nnoremap <silent><Leader>b[ :BufferLineCloseLeft<CR>]]
+vim.cmd [[nnoremap <silent><Leader>b] :BufferLineCloseRight<CR>]]
+
+-----------------
+--- nvim-tree ---
+-----------------
+keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap=true, silent=true})
+keymap('n', '<Leader>nf', ':NvimTreeFindFile<CR>', {noremap=true, silent=true})
+keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
+
+---------------
+--- zenmode ---
+---------------
+keymap('n', '<Leader>z', ':ZenMode<CR>', {noremap=true})
