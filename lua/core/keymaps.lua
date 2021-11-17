@@ -34,20 +34,29 @@ keymap('n', ']t', ":tabnext<CR>", {noremap=true, nowait=true})
 ----------------------
 
 -----------------
+--- packer ---
+-----------------
+vim.cmd [[nnoremap <leader>pp <cmd>lua require('core.globals'):reload() require('packer').sync()<CR>]]
+vim.cmd [[nnoremap <silent> <leader>ps :PackerSync<CR>]]
+
+-----------------
 --- telescope ---
 -----------------
+vim.cmd [[nnoremap <silent> <C-p> :Telescope git_files<cr>]]
 vim.cmd [[nnoremap <silent> <leader>ff :Telescope find_files<cr>]]
 vim.cmd [[nnoremap <silent> <leader>fg :Telescope live_grep<cr>]]
 vim.cmd [[nnoremap <silent> <leader>fb :Telescope buffers<cr>]]
-vim.cmd [[nnoremap <silent> <leader>fh :Telescope help_tags<cr>]]
+vim.cmd [[nnoremap <silent> <leader>ft :Telescope help_tags<cr>]]
+-- frecency
+vim.cmd [[nnoremap <silent> <leader>fh :Telescope frecency<cr>]]
 
 ------------------
 --- bufferline ---
 ------------------
 vim.cmd [[nnoremap <silent> [b :BufferLineCyclePrev<CR>]]
 vim.cmd [[nnoremap <silent> ]b :BufferLineCycleNext<CR>]]
-vim.cmd [[nnoremap <silent> <Leader>bb :BufferLinePick<CR>]]
-vim.cmd [[nnoremap <silent> <Leader>bc :BufferLinePickClose<CR>]]
+vim.cmd [[nnoremap <Leader>bb :BufferLinePick<CR>]]
+vim.cmd [[nnoremap <Leader>bc :BufferLinePickClose<CR>]]
 vim.cmd [[nnoremap <silent> <Leader>b[ :BufferLineCloseLeft<CR>]]
 vim.cmd [[nnoremap <silent> <Leader>b] :BufferLineCloseRight<CR>]]
 

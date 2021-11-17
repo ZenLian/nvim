@@ -9,8 +9,6 @@ function init()
     require('core.options')
     require('core.keymaps')
     require('core.pack')
-
-    vim.cmd('colorscheme edge')
 end
 
 init()
