@@ -33,16 +33,23 @@ keymap('n', ']t', ":tabnext<CR>", {noremap=true, nowait=true})
 --- plugin keymaps ---
 ----------------------
 
+-----------------
+--- telescope ---
+-----------------
+vim.cmd [[nnoremap <silent> <leader>ff :Telescope find_files<cr>]]
+vim.cmd [[nnoremap <silent> <leader>fg :Telescope live_grep<cr>]]
+vim.cmd [[nnoremap <silent> <leader>fb :Telescope buffers<cr>]]
+vim.cmd [[nnoremap <silent> <leader>fh :Telescope help_tags<cr>]]
+
 ------------------
 --- bufferline ---
 ------------------
---keymap('n', '[b', ':BufferLineNext<CR>', {noremap=true, silent=true})
-vim.cmd [[nnoremap <silent>[b :BufferLineCyclePrev<CR>]]
-vim.cmd [[nnoremap <silent>]b :BufferLineCycleNext<CR>]]
-vim.cmd [[nnoremap <silent><Leader>bb :BufferLinePick<CR>]]
-vim.cmd [[nnoremap <silent><Leader>bc :BufferLinePickClose<CR>]]
-vim.cmd [[nnoremap <silent><Leader>b[ :BufferLineCloseLeft<CR>]]
-vim.cmd [[nnoremap <silent><Leader>b] :BufferLineCloseRight<CR>]]
+vim.cmd [[nnoremap <silent> [b :BufferLineCyclePrev<CR>]]
+vim.cmd [[nnoremap <silent> ]b :BufferLineCycleNext<CR>]]
+vim.cmd [[nnoremap <silent> <Leader>bb :BufferLinePick<CR>]]
+vim.cmd [[nnoremap <silent> <Leader>bc :BufferLinePickClose<CR>]]
+vim.cmd [[nnoremap <silent> <Leader>b[ :BufferLineCloseLeft<CR>]]
+vim.cmd [[nnoremap <silent> <Leader>b] :BufferLineCloseRight<CR>]]
 
 -----------------
 --- nvim-tree ---
