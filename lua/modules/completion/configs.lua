@@ -4,37 +4,87 @@ local configs = {}
 
 configs["hrsh7th/nvim-cmp"] = function()
     local cmp = require('cmp')
-    cmp.setup({
+    cmp.setup {
+        mapping = {
+            ["<CR>"] = cmp.mapping.confirm({select = true}),
+            ["<C-p>"] = cmp.mapping.select_prev_item(),
+            ["<C-n>"] = cmp.mapping.select_next_item(),
+            ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-e>"] = cmp.mapping.close(),
+            ["<Tab>"] = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    elseif has_words_before() then
+                        cmp.complete()
+                    else
+                        fallback()
+                    end
+                end,
+                {"i", "s"}
+            ),
+            ["<S-Tab>"] = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    else
+                        fallback()
+                    end
+                end,
+                {"i", "s"}
+            ),
+            ["<C-h>"] = function(fallback)
+                if require("luasnip").jumpable(-1) then
+                    vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+                else
+                    fallback()
+                end
+            end,
+            ["<C-l>"] = function(fallback)
+                if require("luasnip").expand_or_jumpable() then
+                    vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+                else
+                    fallback()
+                end
+            end
+        },
         snippet = {
-            -- REQUIRED - you must specify a snippet engine
             expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-            -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-            -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
+                require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             end,
         },
-        mapping = {
-            ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-            ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-            ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-            ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-            ['<C-e>'] = cmp.mapping({
-                i = cmp.mapping.abort(),
-                c = cmp.mapping.close(),
-            }),
-            ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        },
-        sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'vsnip' }, -- For vsnip users.
-        -- { name = 'luasnip' }, -- For luasnip users.
-        -- { name = 'ultisnips' }, -- For ultisnips users.
-        -- { name = 'snippy' }, -- For snippy users.
-        }, {
-        { name = 'buffer' },
-        })
+        sources = {
+            { name = 'nvim_lsp' },
+            { name = 'nvim_lua'},
+            { name = 'luasnip' }, -- For luasnip users.
+            { name = 'buffer' },
+            { name = 'path'},
+            { name = 'cmdline'},
+            { name = 'calc'},
+        }
+    }
+
+    cmp.setup.cmdline('/', {
+        sources = {
+            { name = 'buffer'},
+        }
     })
+
+    cmp.setup.cmdline(':', {
+        sources = {
+            { name = 'path'},
+            { name = 'cmdline'},
+        }
+    })
+end
+
+configs["L3MON4D3/LuaSnip"] = function()
+    require("luasnip").config.set_config {
+        history = true,
+        updateevents = "TextChanged,TextChangedI"
+    }
+    require("luasnip/loaders/from_vscode").load()
 end
 
 configs["windwp/nvim-autopairs"] = function()

@@ -5,30 +5,29 @@ completion["neovim/nvim-lspconfig"] = {
     event = "BufReadPre",
 }
 
+
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
     event = "InsertEnter",
     requires = {
-        {"hrsh7th/cmp-nvim-lsp"},
-        {"hrsh7th/cmp-vsnip"}
+        {"saadparwaiz1/cmp_luasnip", after = "LuaSnip"},
+        {"hrsh7th/cmp-buffer", after = "cmp_luasnip"},
+        {"hrsh7th/cmp-nvim-lsp", after = "cmp-buffer"},
+        {"hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp"},
+        {"hrsh7th/cmp-path", after = "cmp-nvim-lua"},
+        {"hrsh7th/cmp-cmdline", after = "cmp-path"},
+        {"hrsh7th/cmp-calc", after = "cmp-cmdline"},
     }
 }
 
-completion["hrsh7th/vim-vsnip"] = {
+completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
+    requires = "rafamadriz/friendly-snippets"
 }
 
 completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
 }
 
---Plug 'hrsh7th/cmp-vsnip'
---Plug 'hrsh7th/vim-vsnip'
-
---Plug 'hrsh7th/cmp-nvim-lsp'
---Plug 'hrsh7th/cmp-buffer'
---Plug 'hrsh7th/cmp-path'
---Plug 'hrsh7th/cmp-cmdline'
---Plug 'hrsh7th/nvim-cmp'
 
 return completion
