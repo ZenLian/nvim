@@ -5,6 +5,10 @@ completion["neovim/nvim-lspconfig"] = {
     event = "BufReadPre",
 }
 
+completion["williamboman/nvim-lsp-installer"] = {
+    opt = true,
+    after = "nvim-lspconfig"
+}
 
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
