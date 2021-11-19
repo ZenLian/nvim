@@ -27,5 +27,9 @@ editor["terrortylor/nvim-comment"] = {
         require("nvim_comment").setup()
     end
 }
+editor["mfussenegger/nvim-treehopper"] = {
+    opt = true,
+    after = "nvim-treesitter"
+}
 
 return editor
