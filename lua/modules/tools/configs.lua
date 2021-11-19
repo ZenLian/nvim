@@ -1,4 +1,4 @@
-configs = {}
+local configs = {}
 
 configs['nvim-telescope/telescope.nvim'] = function()
     require('telescope').setup {

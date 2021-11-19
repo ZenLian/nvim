@@ -2,7 +2,7 @@ local completion = {}
 
 completion["neovim/nvim-lspconfig"] = {
     opt = true,
-    event = "BufReadPre",
+    event = "VimEnter",
 }
 
 completion["williamboman/nvim-lsp-installer"] = {

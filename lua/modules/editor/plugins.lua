@@ -1,9 +1,13 @@
-editor = {}
+local editor = {}
 
 editor["nvim-treesitter/nvim-treesitter"] = {
     opt = true,
     run = ":TSUpdate",
-    event = "BufRead"
+    event = "VimEnter"
+}
+editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
+    opt = true,
+    after = "nvim-treesitter"
 }
 
 return editor

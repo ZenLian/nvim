@@ -1,5 +1,5 @@
 local module_prefix = 'modules'
-local modules_list = {'ui', 'tools', 'completion'}
+local modules_list = {'ui', 'tools', 'editor','completion'}
 
 local repos = {}
 
