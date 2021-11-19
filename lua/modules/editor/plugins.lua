@@ -22,5 +22,10 @@ editor["p00f/nvim-ts-rainbow"] = {
     opt = true,
     after = "nvim-treesitter",
 }
+editor["terrortylor/nvim-comment"] = {
+    config = function()
+        require("nvim_comment").setup()
+    end
+}
 
 return editor

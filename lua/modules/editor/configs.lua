@@ -74,5 +74,4 @@ configs["nvim-treesitter/nvim-treesitter"] = function()
     }
 end
 
-
 return configs
