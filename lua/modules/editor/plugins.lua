@@ -9,6 +9,7 @@ editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
     opt = true,
     after = "nvim-treesitter"
 }
+-- 代码块高亮很碍眼，当前单词高亮还行，以后需要再配置
 --editor["nvim-treesitter/nvim-treesitter-refactor"] = {
 --    opt = true,
 --    after = "nvim-treesitter"

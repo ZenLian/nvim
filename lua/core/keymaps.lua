@@ -67,7 +67,8 @@ keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap=true, silent=true})
 keymap('n', '<Leader>nf', ':NvimTreeFindFile<CR>', {noremap=true, silent=true})
 keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
 
----------------
---- zenmode ---
----------------
-keymap('n', '<Leader>z', ':ZenMode<CR>', {noremap=true})
+---------------------------
+--- zenmode && twilight ---
+---------------------------
+keymap('n', '<Leader>zz', ':ZenMode<CR>', {noremap=true})
+keymap('n', '<Leader>zt', ':Twilight<CR>', {noremap=true})

@@ -37,6 +37,8 @@ configs['folke/zen-mode.nvim'] = function()
     }
 end
 
-
+configs['folke/twilight.nvim'] = function()
+    require('twilight').setup()
+end
 
 return configs

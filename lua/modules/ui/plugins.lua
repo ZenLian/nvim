@@ -18,9 +18,14 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
     event = 'BufRead'
 }
+
 ui['folke/zen-mode.nvim'] = {
     opt = true,
     cmd = {"ZenMode"}
+}
+ui['folke/twilight.nvim'] = {
+    opt = true,
+    cmd = {"Twilight"}
 }
 
 return ui
