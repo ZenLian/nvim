@@ -80,9 +80,4 @@ configs["mfussenegger/nvim-treehopper"] = function()
     require("tsht").config.hint_keys = { "j", "k", "l", "f", "d", "s", "h", "g", "m" }
 end
 
-configs["blackCauldron7/surround.nvim"] = function()
-    require("surround").setup {mappings_style = "surround"}
-end
-
-
 return configs

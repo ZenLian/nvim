@@ -72,3 +72,14 @@ keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
 ---------------------------
 keymap('n', '<Leader>zz', ':ZenMode<CR>', {noremap=true})
 keymap('n', '<Leader>zt', ':Twilight<CR>', {noremap=true})
+
+
+----------------
+--- hop.nvim ---
+----------------
+vim.cmd [[nnoremap <Leader><Leader>k <cmd>HopLine<CR>]]
+vim.cmd [[nnoremap <Leader><Leader>j <cmd>HopLine<CR>]]
+vim.cmd [[nnoremap <Leader><Leader>l <cmd>HopWord<CR>]]
+vim.cmd [[nnoremap <Leader><Leader>h <cmd>HopWord<CR>]]
+vim.cmd [[nnoremap <Leader><Leader>s <cmd>HopChar2<CR>]]
+
