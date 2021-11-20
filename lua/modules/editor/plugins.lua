@@ -54,4 +54,10 @@ editor["phaazon/hop.nvim"] = {
     end
 }
 
+editor["lewis6991/gitsigns.nvim"] = {
+    opt = true,
+    event = {"BufRead", "BufNewFile"},
+    requires = {"nvim-lua/plenary.nvim", opt = true}
+}
+
 return editor
