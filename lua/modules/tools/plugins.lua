@@ -39,9 +39,6 @@ tools["AckslD/nvim-neoclip.lua"] = {
     opt = true,
     after = "telescope.nvim",
     requires = {{"tami5/sqlite.lua", module='sqlite'}},
-    config = function()
-        require('neoclip').setup()
-    end
 }
 
 --tools["folke/which-key.nvim"] = {

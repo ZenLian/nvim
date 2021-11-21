@@ -23,6 +23,11 @@ configs['nvim-telescope/telescope.nvim'] = function()
     }
 end
 
+configs["AckslD/nvim-neoclip.lua"] = function()
+    require('neoclip').setup()
+    require('telescope').load_extension('neoclip')
+end
+
 configs['folke/which-key.nvim'] = function()
     require('which-key').setup()
 end

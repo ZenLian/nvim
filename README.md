@@ -2,18 +2,23 @@
 
 深度参考（~~Ctrl+C, Ctrl+V~~）[ayamir/nvimdots](https://github.com/ayamir/nvimdots) 的纯 lua neovim 配置。
 
+neovim 0.5.0 开始使用原生支持 lua 配置，并且内置 lsp 和 treesitter
+等特性，比 coc.nvim 要快，不需要大量的 node 依赖。准备将原来的 coc 配置一点点迁移过来了。
+
+- 使用 packer.nvim 替代 vim-plug
+- 使用 lspconfig 替代 coc.nvim
+
 ## 前置要求
 
 - neovim > 0.5.1
 - fzf
 - rg
 - fd
+- sqlite3(required by `sqlite.lua`)
 
-neovim 0.5.0 开始使用原生支持 lua 配置，并且内置 lsp 和 treesitter
-等特性，比 coc.nvim 要快，不需要大量的 node 依赖。准备将原来的 coc 配置一点点迁移过来了。
-
-- 使用 packer.nvim 替代 vim-plug
-- 使用 lspconfig 替代 coc.nvim
+```bash
+sudo apt-get install sqlite3 libsqlite3-dev
+```
 
 ## 插件
 
@@ -31,6 +36,23 @@ neovim 0.5.0 开始使用原生支持 lua 配置，并且内置 lsp 和 treesitt
 |[twilight.nvim](https://github.com/folke/twilight.nvim)|专注当前代码块，配合 zen-mode 使用|
 
 ### tools
+
+telescope 及其扩展：
+
+|插件|描述|
+|---|---|
+|[plenary.nvim](https://github.com/nvim-lua/plenary.nvim)|required by telescope|
+|[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)|模糊搜索神器|
+|[telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)|加速 telescope 搜索|
+|[telescope-project.nvim](https://github.com/nvim-telescope/telescope-project.nvim)|telescope project 管理|
+|[telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)|MRU 文件搜索|
+|[nvim-neoclip.lua](https://github.com/AckslD/nvim-neoclip.lua)|剪切板列表|
+
+其它：
+
+|插件|描述|
+|---|---|
+|[vim-startuptime.nvim](https://github.com/dstein64/vim-startuptime)|vim 启动时间查看|
 
 ### editor
 

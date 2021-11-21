@@ -48,6 +48,8 @@ vim.cmd [[nnoremap <silent> <leader>fn :Telescope file_browser<cr>]]
 vim.cmd [[nnoremap <silent> <leader>fh :Telescope frecency<cr>]]
 -- project
 vim.cmd [[nnoremap <silent> <leader>fp :Telescope project<cr>]]
+-- neoclip
+vim.cmd [[nnoremap <silent> <leader>fc :Telescope neoclip<cr>]]
 
 ------------------
 --- bufferline ---
@@ -71,7 +73,6 @@ keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
 ---------------------------
 keymap('n', '<Leader>zz', ':ZenMode<CR>', {noremap=true})
 keymap('n', '<Leader>zt', ':Twilight<CR>', {noremap=true})
-
 
 ----------------
 --- hop.nvim ---
