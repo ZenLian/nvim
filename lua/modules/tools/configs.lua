@@ -11,7 +11,7 @@ configs['nvim-telescope/telescope.nvim'] = function()
                     ["<C-k>"] = "move_selection_previous",
                     ["<C-j>"] = "move_selection_next"
                 }
-            }
+            },
         },
         extensions = {
             frecency = {

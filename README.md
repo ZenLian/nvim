@@ -106,6 +106,21 @@ telescope 及其扩展：
 
 ### telescope
 
+打开不同的 list：
+
+|key|action|
+|-|-|
+|`<C-p>`|git 文件|
+|`<Leader>ff`|files|
+|`<Leader>fn`|文件浏览器|
+|`<Leader>fg`|grep|
+|`<Leader>fb`|buffers|
+|`<Leader>ft`|help_tags|
+|`<Leader>fe`|历史文件|
+|`<Leader>fh`|frecency|
+|`<Leader>fp`|project|
+|`<Leader>fc`|neoclip 剪贴板|
+
 |key|action|
 |-|-|
 |C-k/C-j|上下移动|
@@ -121,3 +136,5 @@ telescope 及其扩展：
 ## TODO
 
 - [ ] telescope ui 改成一列的
+- [ ] telescope 文件浏览器改为 ranger 风格
+- [ ] is0n/fm-nvim 和 telescope 文件浏览器比较
