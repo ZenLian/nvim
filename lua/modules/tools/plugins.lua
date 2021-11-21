@@ -39,10 +39,10 @@ tools["AckslD/nvim-neoclip.lua"] = {
     requires = {{"tami5/sqlite.lua", module='sqlite'}},
 }
 
---tools["folke/which-key.nvim"] = {
---    opt = true,
---    keys = " ",
---}
+tools["folke/which-key.nvim"] = {
+   opt = true,
+   event = "BufRead"
+}
 
 tools["dstein64/vim-startuptime"] = {
     opt = false
