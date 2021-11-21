@@ -3,7 +3,7 @@ local editor = {}
 editor["nvim-treesitter/nvim-treesitter"] = {
     opt = true,
     run = ":TSUpdate",
-    event = "VimEnter"
+    event = "BufRead"
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
     opt = true,
@@ -57,7 +57,7 @@ editor["phaazon/hop.nvim"] = {
 editor["lewis6991/gitsigns.nvim"] = {
     opt = true,
     event = {"BufRead", "BufNewFile"},
-    requires = {"nvim-lua/plenary.nvim", opt = true}
+    requires = {"nvim-lua/plenary.nvim", opt = false}
 }
 
 return editor

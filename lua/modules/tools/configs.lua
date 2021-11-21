@@ -1,3 +1,5 @@
+local home = require('core.globals').home_dir
+
 local configs = {}
 
 configs['nvim-telescope/telescope.nvim'] = function()
@@ -10,16 +12,15 @@ configs['nvim-telescope/telescope.nvim'] = function()
                     ["<C-j>"] = "move_selection_next"
                 }
             }
+        },
+        extensions = {
+            frecency = {
+                show_scores = true,
+                show_unindexed = true,
+                ignore_patterns = {"*.git/*", "*/tmp/*"},
+            },
         }
     }
-end
-
-configs['nvim-telescope/telescope-fzf-native.nvim'] = function()
-    require('telescope').load_extension('fzf')
-end
-
-configs['nvim-telescope/telescope-frecency.nvim'] = function()
-    require('telescope').load_extension('frecency')
 end
 
 configs['folke/which-key.nvim'] = function()

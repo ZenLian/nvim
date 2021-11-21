@@ -47,8 +47,12 @@ vim.cmd [[nnoremap <silent> <leader>ff :Telescope find_files<cr>]]
 vim.cmd [[nnoremap <silent> <leader>fg :Telescope live_grep<cr>]]
 vim.cmd [[nnoremap <silent> <leader>fb :Telescope buffers<cr>]]
 vim.cmd [[nnoremap <silent> <leader>ft :Telescope help_tags<cr>]]
+vim.cmd [[nnoremap <silent> <leader>fe :Telescope oldfiles<cr>]]
+vim.cmd [[nnoremap <silent> <leader>fn :Telescope file_browser<cr>]]
 -- frecency
 vim.cmd [[nnoremap <silent> <leader>fh :Telescope frecency<cr>]]
+-- project
+vim.cmd [[nnoremap <silent> <leader>fp :Telescope project<cr>]]
 
 ------------------
 --- bufferline ---
