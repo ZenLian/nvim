@@ -25,10 +25,6 @@ keymap('n', '<M-k>', 'mz:m-2<cr>`z', {noremap=true, nowait=true})
 keymap('v', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", {noremap=true, nowait=true})
 keymap('v', '<M-k>', ":m'<-2<cr>`>my`<mzgv`yo`z", {noremap=true, nowait=true})
 
--- tab
-keymap('n', '[t', ":tabprevious<CR>", {noremap=true, nowait=true})
-keymap('n', ']t', ":tabnext<CR>", {noremap=true, nowait=true})
-
 ----------------------
 --- plugin keymaps ---
 ----------------------
@@ -36,7 +32,6 @@ keymap('n', ']t', ":tabnext<CR>", {noremap=true, nowait=true})
 -----------------
 --- packer ---
 -----------------
-vim.cmd [[nnoremap <leader>pp <cmd>lua require('core.globals'):reload() require('packer').sync()<CR>]]
 vim.cmd [[nnoremap <silent> <leader>ps :PackerSync<CR>]]
 
 -----------------
