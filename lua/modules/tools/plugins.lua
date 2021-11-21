@@ -36,8 +36,6 @@ tools["nvim-telescope/telescope-frecency.nvim"] = {
 }
 
 tools["AckslD/nvim-neoclip.lua"] = {
-    opt = true,
-    after = "telescope.nvim",
     requires = {{"tami5/sqlite.lua", module='sqlite'}},
 }
 

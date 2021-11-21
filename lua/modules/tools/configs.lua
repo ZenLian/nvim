@@ -3,6 +3,10 @@ local home = require('core.globals').home_dir
 local configs = {}
 
 configs['nvim-telescope/telescope.nvim'] = function()
+    if not packer_plugins["nvim-neoclip.lua"].loaded then
+        vim.cmd [[packadd nvim-neoclip.lua]]
+    end
+    require('telescope').load_extension('neoclip')
     require('telescope').setup {
         defaults = {
             mappings = {
@@ -27,7 +31,6 @@ configs["AckslD/nvim-neoclip.lua"] = function()
     require('neoclip').setup{
         enable_persistant_history = true,
     }
-    require('telescope').load_extension('neoclip')
 end
 
 configs['folke/which-key.nvim'] = function()
