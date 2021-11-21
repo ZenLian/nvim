@@ -24,7 +24,9 @@ configs['nvim-telescope/telescope.nvim'] = function()
 end
 
 configs["AckslD/nvim-neoclip.lua"] = function()
-    require('neoclip').setup()
+    require('neoclip').setup{
+        enable_persistant_history = true,
+    }
     require('telescope').load_extension('neoclip')
 end
 
