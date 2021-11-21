@@ -26,12 +26,13 @@ sudo apt-get install sqlite3 libsqlite3-dev
 
 |插件|描述|
 |---|---|
-|[sainnhe/edge](https://github.com/sainnhe/edge)|colorscheme|
-|[kyazdani42/nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)|图标显示|
-|[nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)|状态栏|
-|[akinsho/nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)|buffer tab 管理|
-|[kyazdani42/nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)|文件浏览器|
-|[lukas-reineke/indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)|显示缩进对齐辅助线|
+|[edge](https://github.com/sainnhe/edge)|colorscheme|
+|[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)|图标显示|
+|[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)|状态栏|
+|[nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)|buffer tab 管理|
+|[nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)|文件浏览器|
+|[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)|显示缩进对齐辅助线|
+|[nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)|显示缩进对齐辅助线|
 |[zen-mode.nvim](https://github.com/folke/zen-mode.nvim)|专注模式|
 |[twilight.nvim](https://github.com/folke/twilight.nvim)|专注当前代码块，配合 zen-mode 使用|
 

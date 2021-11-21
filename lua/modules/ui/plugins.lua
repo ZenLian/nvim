@@ -18,6 +18,11 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
     event = 'BufRead'
 }
+ui['norcalli/nvim-colorizer.lua'] = {
+    config = function()
+        require('colorizer').setup()
+    end
+}
 
 ui['folke/zen-mode.nvim'] = {
     opt = true,
