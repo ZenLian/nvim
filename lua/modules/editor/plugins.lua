@@ -38,21 +38,7 @@ editor["blackCauldron7/surround.nvim"] = {
     end
 }
 
-editor["phaazon/hop.nvim"] = {
-    'phaazon/hop.nvim',
-    branch = 'v1', -- optional but strongly recommended
-    cmd = {
-        "HopLine",
-        "HopLineStart",
-        "HopWord",
-        "HopPattern",
-        "HopChar1",
-        "HopChar2"
-    },
-    config = function()
-        require'hop'.setup {keys = 'jklfdsnhgmewtrvcxa;'}
-    end
-}
+editor["ggandor/lightspeed.nvim"] = {}
 
 editor["lewis6991/gitsigns.nvim"] = {
     opt = true,

@@ -57,6 +57,10 @@ telescope 及其扩展：
 
 ### editor
 
+|插件|描述|
+|---|---|
+|[lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
+
 ## Keymappings
 
 `<Leader>` 为空格键
