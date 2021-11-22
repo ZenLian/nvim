@@ -28,6 +28,9 @@ configs['nvim-telescope/telescope.nvim'] = function()
 end
 
 configs["AckslD/nvim-neoclip.lua"] = function()
+    if not packer_plugins["sqlite.lua"].loaded then
+        vim.cmd [[packadd sqlite.lua]]
+    end
     require('neoclip').setup{
         enable_persistant_history = true,
     }

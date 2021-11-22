@@ -109,4 +109,9 @@ configs["lewis6991/gitsigns.nvim"] = function ()
     }
 end
 
+configs["ggandor/lightspeed.nvim"] = function ()
+    vim.cmd [[nmap <silent>; <Plug>Lightspeed_;_ft]]
+    vim.cmd [[nmap <silent>, <Plug>Lightspeed_,_ft]]
+end
+
 return configs
