@@ -11,7 +11,18 @@ configs['sainnhe/edge'] = function()
 end
 
 configs['nvim-lualine/lualine.nvim'] = function()
-    require('lualine').setup()
+    require('lualine').setup {
+        options = {
+            icons_enabled = true,
+            component_separators = '',
+            section_separators = '',
+        },
+        sections = {
+            lualine_a = {
+                { 'mode', fmt = function(str) return str:sub(1,1) end }
+            }
+        }
+    }
 end
 
 configs['akinsho/nvim-bufferline.lua'] = function()
