@@ -7,6 +7,7 @@ configs['nvim-telescope/telescope.nvim'] = function()
         vim.cmd [[packadd nvim-neoclip.lua]]
     end
     require('telescope').load_extension('neoclip')
+
     require('telescope').setup {
         defaults = {
             mappings = {
@@ -82,6 +83,14 @@ configs["rmagatti/auto-session"] = function ()
         auto_restore_enabled = true,
         auto_session_suppress_dirs = nil
     }
+end
+
+configs["rmagatti/session-lens"] = function ()
+    require('session-lens').setup {
+        path_display = {'shorten'},
+        theme_conf = { border = false },
+        previewer = true
+      }
 end
 
 configs['folke/which-key.nvim'] = function()

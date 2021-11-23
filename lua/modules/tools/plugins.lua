@@ -51,6 +51,11 @@ tools["akinsho/toggleterm.nvim"] = {
 }
 
 tools["rmagatti/auto-session"] = { }
+tools["rmagatti/session-lens"] = {
+    opt = true,
+    after = "telescope.nvim",
+    requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+}
 
 tools["folke/which-key.nvim"] = {
    opt = true,
