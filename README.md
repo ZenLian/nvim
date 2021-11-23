@@ -59,6 +59,9 @@ telescope 及其扩展：
 
 |插件|描述|
 |---|---|
+|[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)|treesitter|
+|[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)|基于 treesitter 的 textobject|
+|[nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)|基于 treesitter 的快速选择 textobjects|
 |[lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
 
 ## Keymappings
@@ -130,6 +133,31 @@ telescope 及其扩展：
 |-|-|
 |C-k/C-j|上下移动|
 
+### treesitter 及其扩展
+
+|textobjects||
+|-|-|
+|**select(text objects)**||
+|`f`|function|
+|`c`|class|
+|`a`|parameter|
+|`b`|block|
+|**move**||
+|`]]`/`[[`|move to next/prev function|
+|`]c`/`[c`|move to next/prev class|
+|`]a`/`[a`|move to next/prev parameter|
+|**swap**||
+|`<Leader>]a`|swap with next parameter|
+|`<Leader>[a`|swap with previous parameter|
+|**lsp_interop**||
+|`<Leader>df`|peek function definition(Press twice to enter)|
+|`<Leader>dF`|peek class definition(Press twice to enter)|
+
+|treehopper||
+|-|-|
+|**visual 模式下**||
+|`m`|选区|
+
 ### lightspeed
 
 如果你以前是 vim-sneak 用户，那么 lightspeed 绝对是你的首选。（更喜欢 easymotion 的话，你应该选择 hop.nvim。）
@@ -137,6 +165,22 @@ telescope 及其扩展：
 按下 `s`/`S`，后面跟 1~2 个字符，就可以在屏幕任意字母中跳转了。
 
 同时高亮了 `f`/`t` 的目标，默认继续按 `f`/`t` 到下一个字母。我习惯于用 `;`/`,`，所以我还是映射到 `;`/`,` 上了。
+
+### gitsigns
+
+|treehopper||
+|-|-|
+|`]h`/`[h`|next/prev hunk|
+|`<Leader>hs`|stage hunk|
+|`<Leader>hS`|stage buffer|
+|`<Leader>hu`|undo stage hunk|
+|`<Leader>hU`|undo stage buffer|
+|`<Leader>hr`|reset hunk|
+|`<Leader>hR`|reset buffer|
+|`<Leader>hp`|preview hunk|
+|`<Leader>hb`|show blame|
+|**text objects**||
+|`ah`/`ih`|a hunk|
 
 ## 不为人知的 vim 原生操作
 

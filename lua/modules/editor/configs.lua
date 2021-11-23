@@ -1,6 +1,6 @@
 local configs = {}
 
-configs["nvim-treesitter/nvim-treesitter"] = function()
+configs["nvim-treesitter/nvim-treesitter"] = function(a, bbb, cccc)
     vim.cmd("set foldmethod=expr")
     vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
     require("nvim-treesitter.configs").setup {
@@ -19,8 +19,8 @@ configs["nvim-treesitter/nvim-treesitter"] = function()
                     ["if"] = "@function.inner",
                     ["ac"] = "@class.outer",
                     ["ic"] = "@class.inner",
-                    ["a,"] = "@parameter.outer",
-                    ["i,"] = "@parameter.inner",
+                    ["aa"] = "@parameter.outer",
+                    ["ia"] = "@parameter.inner",
                     ["ab"] = "@block.outer",
                     ["ib"] = "@block.inner",
                 },
@@ -30,28 +30,30 @@ configs["nvim-treesitter/nvim-treesitter"] = function()
                 set_jumps = true, -- whether to set jumps in the jumplist
                 goto_next_start = {
                     ["]]"] = "@function.outer",
-                    ["]m"] = "@class.outer",
+                    ["]c"] = "@class.outer",
+                    ["]a"] = "@parameter.inner",
                 },
                 goto_next_end = {
                     ["]["] = "@function.outer",
-                    ["]M"] = "@class.outer",
+                    ["]C"] = "@class.outer",
                 },
                 goto_previous_start = {
                     ["[["] = "@function.outer",
-                    ["[m"] = "@class.outer",
+                    ["[c"] = "@class.outer",
+                    ["[a"] = "@parameter.inner",
                 },
                 goto_previous_end = {
                     ["[]"] = "@function.outer",
-                    ["[M"] = "@class.outer",
+                    ["[C"] = "@class.outer",
                 },
             },
             swap = {
                 enable = true,
                 swap_next = {
-                    ["<Leader>s,"] = "@parameter.inner"
+                    ["<Leader>]a"] = "@parameter.inner"
                 },
                 swap_previous = {
-                    ["<Leader>s<"] = "@parameter.inner"
+                    ["<Leader>[a"] = "@parameter.inner"
                 }
             },
             lsp_interop = {
