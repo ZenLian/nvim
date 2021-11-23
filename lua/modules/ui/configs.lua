@@ -29,10 +29,6 @@ configs['akinsho/nvim-bufferline.lua'] = function()
     require('bufferline').setup()
 end
 
-configs['kyazdani42/nvim-tree.lua'] = function()
-    require('nvim-tree').setup()
-end
-
 configs['lukas-reineke/indent-blankline.nvim'] = function()
     vim.opt.listchars:append('space:⋅')
     require('indent_blankline').setup{

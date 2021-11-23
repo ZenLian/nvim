@@ -10,10 +10,6 @@ ui['akinsho/nvim-bufferline.lua'] = {
     event = "BufRead",
     requires = 'kyazdani42/nvim-web-devicons'
 }
-ui['kyazdani42/nvim-tree.lua'] = {
-    opt = true,
-    cmd = {"NvimTreeToggle", "NvimTreeOpen"}
-}
 ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
     event = 'BufRead'

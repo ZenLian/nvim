@@ -47,7 +47,7 @@ vim.cmd [[nnoremap <silent> <leader>fn :Telescope file_browser<cr>]]
 -- frecency
 vim.cmd [[nnoremap <silent> <leader>fh :Telescope frecency<cr>]]
 -- project
-vim.cmd [[nnoremap <silent> <leader>fp :Telescope project<cr>]]
+vim.cmd [[nnoremap <silent> <leader>fp :Telescope projects<cr>]]
 -- neoclip
 vim.cmd [[nnoremap <silent> <leader>fc :Telescope neoclip<cr>]]
 

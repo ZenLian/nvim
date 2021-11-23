@@ -15,11 +15,13 @@ tools["nvim-telescope/telescope-fzf-native.nvim"] = {
     end
 }
 
-tools["nvim-telescope/telescope-project.nvim"] = {
+-- tools["nvim-telescope/telescope-project.nvim"] = {
+tools["ahmedkhalf/project.nvim"] = {
     opt = true,
     after = "telescope.nvim",
     config = function()
-        require('telescope').load_extension('project')
+        require('project_nvim').setup()
+        require('telescope').load_extension('projects')
     end
 }
 
@@ -33,6 +35,11 @@ tools["nvim-telescope/telescope-frecency.nvim"] = {
         end
         require('telescope').load_extension('frecency')
     end
+}
+
+tools['kyazdani42/nvim-tree.lua'] = {
+    opt = true,
+    cmd = {"NvimTreeToggle", "NvimTreeOpen"}
 }
 
 tools["AckslD/nvim-neoclip.lua"] = {

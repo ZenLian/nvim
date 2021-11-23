@@ -45,9 +45,9 @@ telescope 及其扩展：
 |[plenary.nvim](https://github.com/nvim-lua/plenary.nvim)|required by telescope|
 |[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)|模糊搜索神器|
 |[telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)|加速 telescope 搜索|
-|[telescope-project.nvim](https://github.com/nvim-telescope/telescope-project.nvim)|telescope project 管理|
 |[telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)|MRU 文件搜索|
 |[nvim-neoclip.lua](https://github.com/AckslD/nvim-neoclip.lua)|剪切板列表|
+|[project.nvim](https://github.com/ahmedkhalf/project.nvim)|project ALL IN ONE|
 
 其它：
 
@@ -195,3 +195,9 @@ telescope 及其扩展：
 - [ ] telescope ui 改成一列的
 - [ ] telescope 文件浏览器改为 ranger 风格
 - [ ] is0n/fm-nvim 和 telescope 文件浏览器比较
+  - [ ] nvim-tree keymaps
+- [ ] terminal
+- [ ] dap
+- [ ] lsp
+  - [ ] nlsp-settings.nvim
+  - [ ] tab keymaps like vscode
