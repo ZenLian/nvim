@@ -60,7 +60,7 @@ telescope 及其扩展：
 |插件|描述|
 |---|---|
 |[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)|treesitter|
-|[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)|基于 treesitter 的 textobject|
+|[nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)|基于 treesitter 的 textobject|
 |[nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)|基于 treesitter 的快速选择 textobjects|
 |[lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
 
