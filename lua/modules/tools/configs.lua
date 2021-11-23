@@ -69,7 +69,18 @@ configs["akinsho/toggleterm.nvim"] = function()
         direction = "vertical",
         close_on_exit = true, -- close the terminal window when the process exits
         shell = vim.o.shell -- change the default shell
+    }
+end
 
+configs["rmagatti/auto-session"] = function ()
+    require('auto-session').setup {
+        log_level = 'info',
+        auto_session_enable_last_session = true,
+        auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
+        auto_session_enabled = true,
+        auto_save_enabled = true,
+        auto_restore_enabled = true,
+        auto_session_suppress_dirs = nil
     }
 end
 

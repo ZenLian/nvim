@@ -54,6 +54,7 @@ telescope 及其扩展：
 |---|---|
 |[nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)|文件浏览器|
 |[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)|terminal tools|
+|[auto-session](https://github.com/rmagatti/auto-session)|session 管理|
 |[which-key.nvim](https://github.com/folke/which-key.nvim)|keymaps 提示|
 |[vim-startuptime.nvim](https://github.com/dstein64/vim-startuptime)|vim 启动时间查看|
 

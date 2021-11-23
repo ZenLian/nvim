@@ -50,6 +50,8 @@ tools["akinsho/toggleterm.nvim"] = {
     event = "BufRead"
 }
 
+tools["rmagatti/auto-session"] = { }
+
 tools["folke/which-key.nvim"] = {
    opt = true,
    event = "BufRead"
