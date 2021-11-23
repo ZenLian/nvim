@@ -30,7 +30,6 @@ sudo apt-get install sqlite3 libsqlite3-dev
 |[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)|图标显示|
 |[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)|状态栏|
 |[nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)|buffer tab 管理|
-|[nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)|文件浏览器|
 |[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)|显示缩进对齐辅助线|
 |[nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)|显示缩进对齐辅助线|
 |[zen-mode.nvim](https://github.com/folke/zen-mode.nvim)|专注模式|
@@ -52,8 +51,10 @@ telescope 及其扩展：
 其它：
 
 |插件|描述|
-|[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)|terminal tools|
 |---|---|
+|[nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)|文件浏览器|
+|[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)|terminal tools|
+|[which-key.nvim](https://github.com/folke/which-key.nvim)|keymaps 提示|
 |[vim-startuptime.nvim](https://github.com/dstein64/vim-startuptime)|vim 启动时间查看|
 
 ### editor
@@ -127,7 +128,7 @@ telescope 及其扩展：
 |`<Leader>ft`|help_tags|
 |`<Leader>fe`|历史文件|
 |`<Leader>fh`|frecency|
-|`<Leader>fp`|project|
+|`<Leader>fp`|projects|
 |`<Leader>fc`|neoclip 剪贴板|
 
 |key|action|
