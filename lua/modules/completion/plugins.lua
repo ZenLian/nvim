@@ -33,5 +33,4 @@ completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
 }
 
-
 return completion

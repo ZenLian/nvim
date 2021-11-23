@@ -15,16 +15,6 @@ tools["nvim-telescope/telescope-fzf-native.nvim"] = {
     end
 }
 
--- tools["nvim-telescope/telescope-project.nvim"] = {
-tools["ahmedkhalf/project.nvim"] = {
-    opt = true,
-    after = "telescope.nvim",
-    config = function()
-        require('project_nvim').setup()
-        require('telescope').load_extension('projects')
-    end
-}
-
 tools["nvim-telescope/telescope-frecency.nvim"] = {
     opt = true,
     after = "telescope.nvim",
@@ -44,6 +34,20 @@ tools['kyazdani42/nvim-tree.lua'] = {
 
 tools["AckslD/nvim-neoclip.lua"] = {
     requires = {{"tami5/sqlite.lua", opt = true}},
+}
+
+tools["ahmedkhalf/project.nvim"] = {
+    opt = true,
+    after = "telescope.nvim",
+    config = function()
+        require('project_nvim').setup()
+        require('telescope').load_extension('projects')
+    end
+}
+
+tools["akinsho/toggleterm.nvim"] = {
+    opt = true,
+    event = "BufRead"
 }
 
 tools["folke/which-key.nvim"] = {

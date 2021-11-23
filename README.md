@@ -52,6 +52,7 @@ telescope 及其扩展：
 其它：
 
 |插件|描述|
+|[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)|terminal tools|
 |---|---|
 |[vim-startuptime.nvim](https://github.com/dstein64/vim-startuptime)|vim 启动时间查看|
 
@@ -133,6 +134,12 @@ telescope 及其扩展：
 |-|-|
 |C-k/C-j|上下移动|
 
+### toggleterm
+
+|key|action|
+|-|-|
+|`<C-\>`|toggle terminal|
+
 ### treesitter 及其扩展
 
 |textobjects||
@@ -196,8 +203,10 @@ telescope 及其扩展：
 - [ ] telescope 文件浏览器改为 ranger 风格
 - [ ] is0n/fm-nvim 和 telescope 文件浏览器比较
   - [ ] nvim-tree keymaps
-- [ ] terminal
+- [x] toggleterm
 - [ ] dap
 - [ ] lsp
   - [ ] nlsp-settings.nvim
   - [ ] tab keymaps like vscode
+- [ ] dashboard.nvim
+- [ ] lazygit
