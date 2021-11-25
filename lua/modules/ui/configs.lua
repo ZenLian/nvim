@@ -16,11 +16,16 @@ configs['nvim-lualine/lualine.nvim'] = function()
             icons_enabled = true,
             component_separators = '',
             section_separators = '',
+            disabled_filetypes = {'toggleterm'}
         },
         sections = {
             lualine_a = {
                 { 'mode', fmt = function(str) return str:sub(1,1) end }
-            }
+            },
+        },
+        extentions = {
+            'nvim-tree',
+            'toggleterm'
         }
     }
 end
