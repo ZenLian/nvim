@@ -26,7 +26,13 @@ configs['nvim-lualine/lualine.nvim'] = function()
 end
 
 configs['akinsho/nvim-bufferline.lua'] = function()
-    require('bufferline').setup()
+    require('bufferline').setup {
+        highlights = {
+            buffer_selected = {
+                gui = "bold"
+            },
+        }
+    }
 end
 
 configs['lukas-reineke/indent-blankline.nvim'] = function()
