@@ -141,6 +141,7 @@ telescope 及其扩展：
 |key|action|
 |-|-|
 |`<C-\>`|toggle terminal|
+|`<Leader>g`|open lazygit tui|
 
 ### treesitter 及其扩展
 
