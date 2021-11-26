@@ -9,6 +9,9 @@ configs['sainnhe/edge'] = function()
     vim.g.edge_better_performance = 1
     vim.cmd [[colorscheme edge]]
 end
+configs['tomasiser/vim-code-dark'] = function()
+    -- vim.cmd [[colorscheme codedark]]
+end
 
 configs['nvim-lualine/lualine.nvim'] = function()
     require('lualine').setup {
@@ -34,7 +37,7 @@ configs['akinsho/nvim-bufferline.lua'] = function()
     require('bufferline').setup {
         highlights = {
             buffer_selected = {
-                gui = "bold"
+                gui = "italic"
             },
         }
     }

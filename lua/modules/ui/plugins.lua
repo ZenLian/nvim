@@ -1,6 +1,8 @@
 local ui = {}
 
 ui['sainnhe/edge'] = {}
+ui['tomasiser/vim-code-dark'] = {}
+
 ui['kyazdani42/nvim-web-devicons'] = {}
 ui['nvim-lualine/lualine.nvim'] = {
     requires = 'kyazdani42/nvim-web-devicons'
