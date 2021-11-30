@@ -21,6 +21,7 @@ completion["hrsh7th/nvim-cmp"] = {
         {"hrsh7th/cmp-path", after = "cmp-nvim-lua"},
         {"hrsh7th/cmp-cmdline", after = "cmp-path"},
         {"hrsh7th/cmp-calc", after = "cmp-cmdline"},
+        {"uga-rosa/cmp-dictionary", after = "cmp-calc"},
     }
 }
 

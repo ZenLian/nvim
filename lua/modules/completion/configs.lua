@@ -106,6 +106,10 @@ configs["hrsh7th/nvim-cmp"] = function()
             { name = 'path'},
             { name = 'cmdline'},
             { name = 'calc'},
+            {
+                name = 'dictionary',
+                keyword_length = 1,
+            },
         },
         completion = {
             completeopt = 'menu,menuone,noinsert'
@@ -117,11 +121,13 @@ configs["hrsh7th/nvim-cmp"] = function()
                 vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
                 -- Source
                 vim_item.menu = ({
-                    buffer = "[Buffer]",
                     nvim_lsp = "[LSP]",
-                    luasnip = "[LuaSnip]",
                     nvim_lua = "[Lua]",
-                    latex_symbols = "[LaTeX]",
+                    luasnip = "[LuaSnip]",
+                    buffer = "[Buffer]",
+                    path = "[Path]",
+                    calc = "[Calc]",
+                    dictionary = "[Dict]"
                 })[entry.source.name]
                 return vim_item
             end
