@@ -44,9 +44,9 @@ configs['akinsho/nvim-bufferline.lua'] = function()
 end
 
 configs['lukas-reineke/indent-blankline.nvim'] = function()
-    vim.opt.listchars:append('space:⋅')
+    -- vim.opt.listchars:append('space:⋅')
     require('indent_blankline').setup{
-        space_char_blankline = " "
+        -- space_char_blankline = " "
     }
 end
 
