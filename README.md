@@ -202,14 +202,14 @@ telescope 及其扩展：
 
 ## TODO
 
-- [ ] telescope ui 改成一列的
+- [ ] ~~telescope ui 改成一列的~~
 - [ ] telescope 文件浏览器改为 ranger 风格
 - [ ] is0n/fm-nvim 和 telescope 文件浏览器比较
   - [ ] nvim-tree keymaps
 - [x] toggleterm
+- [x] lazygit(in toggleterm)
 - [ ] dap
 - [ ] lsp
   - [ ] nlsp-settings.nvim
   - [ ] tab keymaps like vscode
 - [ ] dashboard.nvim
-- [ ] lazygit
