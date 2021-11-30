@@ -12,7 +12,7 @@ completion["williamboman/nvim-lsp-installer"] = {
 
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
-    event = "InsertEnter",
+    event = {"InsertEnter", "CmdlineEnter"},
     requires = {
         {"saadparwaiz1/cmp_luasnip", after = "LuaSnip"},
         {"hrsh7th/cmp-buffer", after = "cmp_luasnip"},
