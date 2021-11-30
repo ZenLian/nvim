@@ -213,3 +213,4 @@ telescope 及其扩展：
   - [ ] nlsp-settings.nvim
   - [ ] tab keymaps like vscode
 - [ ] dashboard.nvim
+- [ ] keymaps for trouble.nvim
