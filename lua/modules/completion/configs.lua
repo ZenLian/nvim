@@ -117,8 +117,7 @@ configs["hrsh7th/nvim-cmp"] = function()
         formatting = {
             format = function(entry, vim_item)
                 -- Kind icons
-                -- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                vim_item.kind = string.format('%s', kind_icons[vim_item.kind])
+                vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
                 -- Source
                 vim_item.menu = ({
                     nvim_lsp = "[LSP]",
