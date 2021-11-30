@@ -115,11 +115,7 @@ configs["rmagatti/auto-session"] = function ()
 end
 
 configs["rmagatti/session-lens"] = function ()
-    require('session-lens').setup {
-        path_display = {'shorten'},
-        theme_conf = { border = false },
-        previewer = true
-      }
+    require('session-lens').setup { }
 end
 
 configs['folke/which-key.nvim'] = function()

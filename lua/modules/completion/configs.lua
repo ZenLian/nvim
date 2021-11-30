@@ -50,7 +50,7 @@ configs["hrsh7th/nvim-cmp"] = function()
             ["<C-n>"] = cmp.mapping.select_next_item(),
             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-e>"] = cmp.mapping.close(),
+            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), {"i", "c"}),
             ["<Tab>"] = cmp.mapping(
                 function(fallback)
                     if cmp.visible() then
@@ -64,7 +64,7 @@ configs["hrsh7th/nvim-cmp"] = function()
                         fallback()
                     end
                 end,
-                {"i", "s"}
+                {"i", "s", "c"}
             ),
             ["<S-Tab>"] = cmp.mapping(
                 function(fallback)
@@ -76,7 +76,7 @@ configs["hrsh7th/nvim-cmp"] = function()
                         fallback()
                     end
                 end,
-                {"i", "s"}
+                {"i", "s", "c"}
             ),
             ["<C-h>"] = function(fallback)
                 if require("luasnip").jumpable(-1) then
@@ -131,6 +131,9 @@ configs["hrsh7th/nvim-cmp"] = function()
                 return vim_item
             end
         },
+        experimental = {
+            ghost_text = true
+        }
     }
 
     cmp.setup.cmdline('/', {
