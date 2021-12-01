@@ -1,29 +1,30 @@
 local keymap = vim.api.nvim_set_keymap
+local opts = { noremap = true, nowait = true}
 
 -- 快速保存和关闭
-keymap('', '<leader>w', ':w!<CR>', {noremap=true, nowait=true})
-keymap('', '<leader>q', ':q!<CR>', {noremap=true, nowait=true})
+keymap('', '<leader>w', ':w!<CR>', opts)
+keymap('', '<leader>q', ':q!<CR>', opts)
 -- 关闭高亮
-keymap('', '<leader><enter>', ':noh<CR>', {noremap=true, nowait=true})
+keymap('', '<leader><enter>', ':noh<CR>', opts)
 -- Y 复制到行尾
-keymap('n', 'Y', 'y$', {noremap=true, nowait=true})
+keymap('n', 'Y', 'y$', opts)
 -- Y 复制到剪贴板（visual mode）
-keymap('v', 'Y', '"+y', {noremap=true, nowait=true})
+keymap('v', 'Y', '"+y', opts)
 -- 移动到行首/行尾
-keymap('n', 'H', '^', {noremap=true, nowait=true})
-keymap('n', 'L', '$', {noremap=true, nowait=true})
+keymap('n', 'H', '^', opts)
+keymap('n', 'L', '$', opts)
 -- 连续缩进
-keymap('v', '<', '<gv', {noremap=true, nowait=true})
-keymap('v', '>', '>gv', {noremap=true, nowait=true})
-keymap('v', '<Tab>', '<gv', {noremap=true, nowait=true})
-keymap('v', '<S-Tab>', '>gv', {noremap=true, nowait=true})
+keymap('v', '<', '<gv', opts)
+keymap('v', '>', '>gv', opts)
+keymap('v', '<Tab>', '<gv', opts)
+keymap('v', '<S-Tab>', '>gv', opts)
 -- repeat in visual mode
-keymap('v', '.', ':normal .<CR>', {noremap=true, nowait=true})
+keymap('v', '.', ':normal .<CR>', opts)
 -- 交换上下行
-keymap('n', '<M-j>', 'mz:m+<cr>`z', {noremap=true, nowait=true})
-keymap('n', '<M-k>', 'mz:m-2<cr>`z', {noremap=true, nowait=true})
-keymap('v', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", {noremap=true, nowait=true})
-keymap('v', '<M-k>', ":m'<-2<cr>`>my`<mzgv`yo`z", {noremap=true, nowait=true})
+keymap('n', '<M-j>', 'mz:m+<cr>`z', opts)
+keymap('n', '<M-k>', 'mz:m-2<cr>`z', opts)
+keymap('v', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", opts)
+keymap('v', '<M-k>', ":m'<-2<cr>`>my`<mzgv`yo`z", opts)
 
 ----------------------
 --- plugin keymaps ---
@@ -71,6 +72,6 @@ keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
 ---------------------------
 --- zenmode && twilight ---
 ---------------------------
-keymap('n', '<Leader>zz', ':ZenMode<CR>', {noremap=true})
-keymap('n', '<Leader>zt', ':Twilight<CR>', {noremap=true})
+-- keymap('n', '<Leader>zz', ':ZenMode<CR>', {noremap=true})
+-- keymap('n', '<Leader>zt', ':Twilight<CR>', {noremap=true})
 

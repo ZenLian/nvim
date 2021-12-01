@@ -200,6 +200,14 @@ telescope 及其扩展：
 - Visual 模式下：`g~`/`gu`/`gU` 分别可以切换大小写/切换为小写/切换为大写
 - `g~`/`gu`/`gU` 后还可以跟 textobject，如 `gUaw` 把当前单词切换为大写
 
+### 拼写检查
+
+- `:set spell` 开启拼写检查
+- `[s`/`]s`: 上一个/下一个拼写错误
+- `z=`: 显示拼写建议
+- `zg`: 单词添加到 `spellfile` 词典
+- `zG`: 单词添加到内置词典
+
 ## TODO
 
 - [ ] ~~telescope ui 改成一列的~~
@@ -214,3 +222,5 @@ telescope 及其扩展：
   - [ ] tab keymaps like vscode
 - [ ] dashboard.nvim
 - [ ] keymaps for trouble.nvim
+- [ ] folke/todo-comments.nvim
+- [ ] 使用 which-key 统一管理全局键位映射

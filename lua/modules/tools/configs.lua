@@ -98,7 +98,7 @@ configs["akinsho/toggleterm.nvim"] = function()
     function _lazygit_toggle()
       lazygit:toggle()
     end
-    
+
     vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
 end
 
@@ -119,7 +119,20 @@ configs["rmagatti/session-lens"] = function ()
 end
 
 configs['folke/which-key.nvim'] = function()
-    require('which-key').setup()
+    local wk = require('which-key')
+    wk.setup()
+    wk.register(
+    {
+        z = {
+            name = "zen",
+            z = {"<cmd>ZenMode<CR>", "ZenMode"},
+            t = {"<cmd>Twilight<CR>", "Twilight"},
+        }
+    },
+    {
+        prefix = "<Leader>"
+    }
+    )
 end
 
 return configs
