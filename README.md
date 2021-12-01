@@ -224,3 +224,6 @@ telescope 及其扩展：
 - [ ] keymaps for trouble.nvim
 - [ ] folke/todo-comments.nvim
 - [ ] 使用 which-key 统一管理全局键位映射
+- [ ] lsp_signature
+    - [ ] 按 tab 补全后闪一下就不显示了
+    - [ ] 会被 cmp 补全遮挡

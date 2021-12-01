@@ -6,8 +6,11 @@ completion["neovim/nvim-lspconfig"] = {
 }
 
 completion["williamboman/nvim-lsp-installer"] = {
-    opt = true,
     after = "nvim-lspconfig"
+}
+
+completion["ray-x/lsp_signature.nvim"] = {
+    after = "nvim-lspconfig",
 }
 
 completion["hrsh7th/nvim-cmp"] = {
@@ -44,5 +47,6 @@ completion["folke/trouble.nvim"] = {
         }
     end
 }
+
 
 return completion
