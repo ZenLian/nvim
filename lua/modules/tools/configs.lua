@@ -17,6 +17,10 @@ configs['nvim-telescope/telescope.nvim'] = function()
                     ["<C-j>"] = "move_selection_next"
                 }
             },
+            history = {
+                path = vim.fn.stdpath('data')..'/databases/telescope_history.sqlite3',
+                limit = 100,
+            }
         },
         extensions = {
             frecency = {
@@ -71,7 +75,7 @@ configs["akinsho/toggleterm.nvim"] = function()
         close_on_exit = true, -- close the terminal window when the process exits
         shell = vim.o.shell -- change the default shell
     }
-    
+
     local Terminal  = require('toggleterm.terminal').Terminal
 
     local lazygit = Terminal:new({

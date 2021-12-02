@@ -18,12 +18,18 @@ tools["nvim-telescope/telescope-fzf-native.nvim"] = {
 tools["nvim-telescope/telescope-frecency.nvim"] = {
     opt = true,
     after = "telescope.nvim",
-    requires = {{"tami5/sqlite.lua", opt = true}},
+    requires = {{"tami5/sqlite.lua", opt=true, module="sqlite"}},
     config = function()
-        if not packer_plugins["sqlite.lua"].loaded then
-            vim.cmd [[packadd sqlite.lua]]
-        end
         require('telescope').load_extension('frecency')
+    end
+}
+
+tools["nvim-telescope/telescope-smart-history.nvim"] = {
+    opt = true,
+    after = "telescope.nvim",
+    requires = {{"tami5/sqlite.lua", opt=true, module="sqlite"}},
+    config = function()
+        require('telescope').load_extension('smart_history')
     end
 }
 
@@ -33,7 +39,7 @@ tools['kyazdani42/nvim-tree.lua'] = {
 }
 
 tools["AckslD/nvim-neoclip.lua"] = {
-    requires = {{"tami5/sqlite.lua", opt = true}},
+    requires = {{"tami5/sqlite.lua", opt=true, module="sqlite"}}
 }
 
 tools["ahmedkhalf/project.nvim"] = {
