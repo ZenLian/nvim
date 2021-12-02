@@ -33,39 +33,23 @@ local on_attach = function(client, bufnr)
     require("lsp_signature").on_attach()
 end
 
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-        on_attach = on_attach,
-        flags = {
-            debounce_text_changes = 150
-        }
-    }
-    -- local ok, custom_opts = pcall(require, 'modules.completion.'..server.name)
-    -- if ok then
-    --     print('config '..server.name)
-    --     vim.tbl_deep_extend('force', opts, custom_opts)
-    -- else
-    --     print('custom config for '..server.name..' not found, use defaults')
-    -- end
-    if server.name == 'sumneko_lua' then
-        opts.settings = {
-            Lua = {
-                diagnostics = {
-                    -- Get the language server to recognize the `vim` global
-                    globals = {'vim'},
-                },
-                workspace = {
-                    -- Make the server aware of Neovim runtime files
-                    library = vim.api.nvim_get_runtime_file("", true),
-                },
-                -- Do not send telemetry data containing a randomized but unique identifier
-                telemetry = {
-                    enable = false,
-                },
+local setup = function()
+    local lsp_installer = require("nvim-lsp-installer")
+    lsp_installer.on_server_ready(function(server)
+        local opts = {
+            on_attach = on_attach,
+            flags = {
+                debounce_text_changes = 150
             }
         }
-    end
-    server:setup(opts)
-end)
+        local ok, custom_opts = pcall(require, 'modules.completion.lspconfig.'..server.name)
+        if ok then
+            opts = vim.tbl_deep_extend('force', opts, custom_opts)
+        end
+        server:setup(opts)
+    end)
+end
 
+return {
+    setup = setup
+}

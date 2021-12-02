@@ -113,7 +113,7 @@ configs["rmagatti/auto-session"] = function ()
         auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
         auto_session_enabled = true,
         auto_save_enabled = true,
-        auto_restore_enabled = true,
+        auto_restore_enabled = false,
         auto_session_suppress_dirs = nil
     }
 end
@@ -126,16 +126,16 @@ configs['folke/which-key.nvim'] = function()
     local wk = require('which-key')
     wk.setup()
     wk.register(
-    {
-        z = {
-            name = "zen",
-            z = {"<cmd>ZenMode<CR>", "ZenMode"},
-            t = {"<cmd>Twilight<CR>", "Twilight"},
+        {
+            z = {
+                name = "Zen",
+                z = {"<cmd>ZenMode<CR>", "ZenMode"},
+                t = {"<cmd>Twilight<CR>", "Twilight"},
+            }
+        },
+        {
+            prefix = "<Leader>"
         }
-    },
-    {
-        prefix = "<Leader>"
-    }
     )
 end
 

@@ -1,7 +1,7 @@
 local configs = {}
 
 configs["williamboman/nvim-lsp-installer"] = function()
-    require('modules.completion.lspconfig')
+    require('modules.completion.lspconfig').setup()
 end
 
 configs["hrsh7th/nvim-cmp"] = function()
