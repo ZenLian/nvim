@@ -1,4 +1,5 @@
 -- used for minimum vimrc debug
+
 local fn = vim.fn
 local packer_dir = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
@@ -9,7 +10,7 @@ end
 vim.cmd [[packadd packer.nvim]]
 packer = require('packer')
 packer.startup({
-    function()
+    function(use)
         use {'wbthomason/packer.nvim', opt = true}
 
         use {'neovim/nvim-lspconfig'}
@@ -143,7 +144,6 @@ require("luasnip.loaders.from_vscode").load()
 
 
 require('nvim-autopairs').setup()
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-local cmp = require('cmp')
-cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+--local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+--cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+--cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"

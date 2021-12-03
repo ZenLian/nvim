@@ -1,6 +1,7 @@
 local configs = {}
 
 configs["williamboman/nvim-lsp-installer"] = function()
+    require('modules.completion.lspserver').setup()
     require('modules.completion.lspconfig').setup()
 end
 

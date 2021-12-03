@@ -53,7 +53,7 @@ tools["ahmedkhalf/project.nvim"] = {
 
 tools["akinsho/toggleterm.nvim"] = {
     opt = true,
-    event = "BufRead"
+    event = {"BufRead", "BufNewFile"}
 }
 
 tools["rmagatti/auto-session"] = { }
