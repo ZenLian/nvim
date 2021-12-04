@@ -1,30 +1,34 @@
 local keymap = vim.api.nvim_set_keymap
 local opts = { noremap = true, nowait = true}
 
+------------------------
+-- TODO: 使用 which-key 管理
+------------------------
+
 -- 快速保存和关闭
-keymap('', '<leader>w', ':w!<CR>', opts)
-keymap('', '<leader>q', ':q!<CR>', opts)
+--keymap('', '<leader>w', ':w!<CR>', opts)
+--keymap('', '<leader>q', ':q!<CR>', opts)
 -- 关闭高亮
-keymap('', '<leader><enter>', ':noh<CR>', opts)
+--keymap('', '<leader><enter>', ':noh<CR>', opts)
 -- Y 复制到行尾
 keymap('n', 'Y', 'y$', opts)
 -- Y 复制到剪贴板（visual mode）
 keymap('v', 'Y', '"+y', opts)
 -- 移动到行首/行尾
-keymap('n', 'H', '^', opts)
-keymap('n', 'L', '$', opts)
+--keymap('n', 'H', '^', opts)
+--keymap('n', 'L', '$', opts)
 -- 连续缩进
-keymap('v', '<', '<gv', opts)
-keymap('v', '>', '>gv', opts)
-keymap('v', '<Tab>', '<gv', opts)
-keymap('v', '<S-Tab>', '>gv', opts)
+--keymap('v', '<', '<gv', opts)
+--keymap('v', '>', '>gv', opts)
+--keymap('v', '<Tab>', '<gv', opts)
+--keymap('v', '<S-Tab>', '>gv', opts)
 -- repeat in visual mode
 keymap('v', '.', ':normal .<CR>', opts)
 -- 交换上下行
-keymap('n', '<M-j>', 'mz:m+<cr>`z', opts)
-keymap('n', '<M-k>', 'mz:m-2<cr>`z', opts)
-keymap('v', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", opts)
-keymap('v', '<M-k>', ":m'<-2<cr>`>my`<mzgv`yo`z", opts)
+--keymap('n', '<M-j>', 'mz:m+<cr>`z', opts)
+--keymap('n', '<M-k>', 'mz:m-2<cr>`z', opts)
+-- keymap('v', '<M-j>', ":m'>+<cr>`<my`>mzgv`yo`z", opts)
+-- keymap('v', '<M-k>', ":m'<-2<cr>`>my`<mzgv`yo`z", opts)
 
 ----------------------
 --- plugin keymaps ---
@@ -57,10 +61,10 @@ vim.cmd [[nnoremap <silent> <leader>fc :Telescope neoclip<cr>]]
 ------------------
 vim.cmd [[nnoremap <silent> [b :BufferLineCyclePrev<CR>]]
 vim.cmd [[nnoremap <silent> ]b :BufferLineCycleNext<CR>]]
-vim.cmd [[nnoremap <Leader>bb :BufferLinePick<CR>]]
-vim.cmd [[nnoremap <Leader>bc :BufferLinePickClose<CR>]]
-vim.cmd [[nnoremap <silent> <Leader>b[ :BufferLineCloseLeft<CR>]]
-vim.cmd [[nnoremap <silent> <Leader>b] :BufferLineCloseRight<CR>]]
+--vim.cmd [[nnoremap <Leader>bb :BufferLinePick<CR>]]
+--vim.cmd [[nnoremap <Leader>bc :BufferLinePickClose<CR>]]
+--vim.cmd [[nnoremap <silent> <Leader>b[ :BufferLineCloseLeft<CR>]]
+--vim.cmd [[nnoremap <silent> <Leader>b] :BufferLineCloseRight<CR>]]
 
 -----------------
 --- nvim-tree ---

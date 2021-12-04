@@ -1,10 +1,10 @@
 local configs = {}
 
-configs["nvim-treesitter/nvim-treesitter"] = function(a, bbb, cccc)
-    vim.cmd("set foldmethod=expr")
-    vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
+configs["nvim-treesitter/nvim-treesitter"] = function()
+    vim.o.foldmethod = "expr"
+    vim.o.foldexpr = "nvim_treesitter#foldexpr()"
     require("nvim-treesitter.configs").setup {
-        ensure_installed = "maintained",
+        -- ensure_installed = "maintained",
         sync_install = false,
         highlight = {
             enable = true,
@@ -88,23 +88,23 @@ configs["lewis6991/gitsigns.nvim"] = function ()
             buffer = true,
             noremap = true,
 
-            ['n ]h'] = { expr = true, "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-            ['n [h'] = { expr = true, "&diff ? '[h' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-            ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-            ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-            ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-            ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-            ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-            ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-            ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-            ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
-            ['n <leader>hS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
-            ['n <leader>hU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
+            ['n ]g'] = { expr = true, "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+            ['n [g'] = { expr = true, "&diff ? '[h' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+            ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+            ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+            ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+            ['n <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+            ['v <leader>gr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+            ['n <leader>gR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+            ['n <leader>gp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+            ['n <leader>gb'] = '<cmd>lua require"gitsigns".blame_line{full=true}<CR>',
+            ['n <leader>gS'] = '<cmd>lua require"gitsigns".stage_buffer()<CR>',
+            ['n <leader>gU'] = '<cmd>lua require"gitsigns".reset_buffer_index()<CR>',
             -- Text objects
-            ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-            ['o ah'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-            ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-            ['x ah'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['o ig'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['o ag'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['x ig'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['x ag'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
         },
         current_line_blame = true,
         current_line_blame_opts = {delay = 1000, virtual_text_pos = "eol"},

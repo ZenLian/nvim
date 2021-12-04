@@ -3,6 +3,7 @@ local editor = {}
 editor["nvim-treesitter/nvim-treesitter"] = {
     opt = true,
     run = ":TSUpdate",
+    ft = {"lua"},
     event = {"BufRead", "BufNewFile"}
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
