@@ -1,20 +1,25 @@
 local ui = {}
+local configs = require("modules.ui.configs")
 
-ui['sainnhe/edge'] = {}
-ui['tomasiser/vim-code-dark'] = {}
+ui['sainnhe/edge'] = {
+    config = configs.edge,
+}
 
 ui['kyazdani42/nvim-web-devicons'] = {}
 ui['nvim-lualine/lualine.nvim'] = {
-    requires = 'kyazdani42/nvim-web-devicons'
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = configs.lualine,
 }
 ui['akinsho/nvim-bufferline.lua'] = {
     opt = true,
     event = "BufRead",
-    requires = 'kyazdani42/nvim-web-devicons'
+    requires = 'kyazdani42/nvim-web-devicons',
+    config = configs.bufferline,
 }
 ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
-    event = 'BufRead'
+    event = 'BufRead',
+    config = configs.indent_blankline,
 }
 ui['norcalli/nvim-colorizer.lua'] = {
     config = function()
@@ -24,11 +29,15 @@ ui['norcalli/nvim-colorizer.lua'] = {
 
 ui['folke/zen-mode.nvim'] = {
     opt = true,
-    cmd = {"ZenMode"}
+    cmd = {"ZenMode"},
+    config = configs.zen_mode,
 }
 ui['folke/twilight.nvim'] = {
     opt = true,
-    cmd = {"Twilight"}
+    cmd = {"Twilight"},
+    config = function()
+        require('twilight').setup()
+    end
 }
 
 return ui

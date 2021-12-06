@@ -1,4 +1,5 @@
 local completion = {}
+local configs = require("modules.completion.configs")
 
 completion["neovim/nvim-lspconfig"] = {
     opt = true,
@@ -6,7 +7,8 @@ completion["neovim/nvim-lspconfig"] = {
 }
 
 completion["williamboman/nvim-lsp-installer"] = {
-    after = "nvim-lspconfig"
+    after = "nvim-lspconfig",
+    config = configs.lsp_installer,
 }
 
 completion["ray-x/lsp_signature.nvim"] = {
@@ -25,16 +27,19 @@ completion["hrsh7th/nvim-cmp"] = {
         {"hrsh7th/cmp-cmdline", after = "cmp-path"},
         {"hrsh7th/cmp-calc", after = "cmp-cmdline"},
         {"uga-rosa/cmp-dictionary", after = "cmp-calc"},
-    }
+    },
+    config = configs.cmp,
 }
 
 completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
-    requires = "rafamadriz/friendly-snippets"
+    requires = "rafamadriz/friendly-snippets",
+    config = configs.luasnip,
 }
 
 completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
+    config = configs.autopairs,
 }
 
 completion["folke/trouble.nvim"] = {
@@ -47,6 +52,5 @@ completion["folke/trouble.nvim"] = {
         }
     end
 }
-
 
 return completion

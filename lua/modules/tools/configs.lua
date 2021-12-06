@@ -1,8 +1,6 @@
-local home = require('core.globals').home_dir
-
 local configs = {}
 
-configs['nvim-telescope/telescope.nvim'] = function()
+configs.telescope = function()
     if not packer_plugins["nvim-neoclip.lua"].loaded then
         vim.cmd [[packadd nvim-neoclip.lua]]
     end
@@ -32,7 +30,7 @@ configs['nvim-telescope/telescope.nvim'] = function()
     }
 end
 
-configs["AckslD/nvim-neoclip.lua"] = function()
+configs.neoclip = function()
     if not packer_plugins["sqlite.lua"].loaded then
         vim.cmd [[packadd sqlite.lua]]
     end
@@ -41,7 +39,7 @@ configs["AckslD/nvim-neoclip.lua"] = function()
     }
 end
 
-configs['kyazdani42/nvim-tree.lua'] = function()
+configs.nvim_tree = function()
     vim.g.nvim_tree_respect_buf_cwd = 1
     require("nvim-tree").setup({
         update_cwd = true,
@@ -53,7 +51,7 @@ configs['kyazdani42/nvim-tree.lua'] = function()
     require('nvim-tree').setup()
 end
 
-configs["akinsho/toggleterm.nvim"] = function()
+configs.toggleterm = function()
     require("toggleterm").setup {
         -- size can be a number or function which is passed the current terminal
         size = function(term)
@@ -106,7 +104,7 @@ configs["akinsho/toggleterm.nvim"] = function()
     -- vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua LazygitToggle()<CR>", {noremap = true, silent = true})
 end
 
-configs["rmagatti/auto-session"] = function ()
+configs.auto_session = function ()
     require('auto-session').setup {
         log_level = 'info',
         auto_session_enable_last_session = true,
@@ -118,11 +116,11 @@ configs["rmagatti/auto-session"] = function ()
     }
 end
 
-configs["rmagatti/session-lens"] = function ()
+configs.session_lens = function ()
     require('session-lens').setup { }
 end
 
-configs['folke/which-key.nvim'] = function()
+configs.which_key = function()
     local wk = require('which-key')
     wk.setup()
     wk.register(

@@ -1,14 +1,16 @@
 local editor = {}
+local configs = require("modules.editor.configs")
 
 editor["nvim-treesitter/nvim-treesitter"] = {
     opt = true,
     run = ":TSUpdate",
     ft = {"lua"},
-    event = {"BufRead", "BufNewFile"}
+    event = {"BufRead", "BufNewFile"},
+    config = configs.treesitter,
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
     opt = true,
-    after = "nvim-treesitter"
+    after = "nvim-treesitter",
 }
 -- 代码块高亮很碍眼，当前单词高亮还行，以后需要再配置
 --editor["nvim-treesitter/nvim-treesitter-refactor"] = {
@@ -17,7 +19,7 @@ editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
 --}
 editor["romgrk/nvim-treesitter-context"] = {
     opt = true,
-    after = "nvim-treesitter"
+    after = "nvim-treesitter",
 }
 editor["p00f/nvim-ts-rainbow"] = {
     opt = true,
@@ -30,7 +32,8 @@ editor["terrortylor/nvim-comment"] = {
 }
 editor["mfussenegger/nvim-treehopper"] = {
     opt = true,
-    after = "nvim-treesitter"
+    after = "nvim-treesitter",
+    config = configs.treehopper,
 }
 
 editor["blackCauldron7/surround.nvim"] = {
@@ -39,12 +42,15 @@ editor["blackCauldron7/surround.nvim"] = {
     end
 }
 
-editor["ggandor/lightspeed.nvim"] = {}
+editor["ggandor/lightspeed.nvim"] = {
+    config = configs.lightspeed,
+}
 
 editor["lewis6991/gitsigns.nvim"] = {
     opt = true,
     event = {"BufRead", "BufNewFile"},
-    requires = {"nvim-lua/plenary.nvim", opt = false}
+    requires = {"nvim-lua/plenary.nvim", opt = false},
+    config = configs.gitsigns,
 }
 
 return editor

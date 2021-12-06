@@ -1,10 +1,12 @@
 local tools = {}
+local configs = require("modules.tools.configs")
 
 tools["nvim-lua/plenary.nvim"] = {}
 tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
     cmd = "Telescope",
-    requires = {{"nvim-lua/plenary.nvim", opt = false}}
+    requires = {{"nvim-lua/plenary.nvim", opt = false}},
+    config = configs.telescope,
 }
 
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
@@ -35,11 +37,13 @@ tools["nvim-telescope/telescope-smart-history.nvim"] = {
 
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
-    cmd = {"NvimTreeToggle", "NvimTreeOpen"}
+    cmd = {"NvimTreeToggle", "NvimTreeOpen"},
+    config = configs.nvim_tree,
 }
 
 tools["AckslD/nvim-neoclip.lua"] = {
-    requires = {{"tami5/sqlite.lua", opt=true, module="sqlite"}}
+    requires = {{"tami5/sqlite.lua", opt=true, module="sqlite"}},
+    config = configs.neoclip,
 }
 
 tools["ahmedkhalf/project.nvim"] = {
@@ -53,19 +57,24 @@ tools["ahmedkhalf/project.nvim"] = {
 
 tools["akinsho/toggleterm.nvim"] = {
     opt = true,
-    event = {"BufRead", "BufNewFile"}
+    event = {"BufRead", "BufNewFile"},
+    config = configs.toggleterm,
 }
 
-tools["rmagatti/auto-session"] = { }
+tools["rmagatti/auto-session"] = {
+    config = configs.auto_session,
+}
 tools["rmagatti/session-lens"] = {
     opt = true,
     after = "telescope.nvim",
     requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
+    config = configs.session_lens,
 }
 
 tools["folke/which-key.nvim"] = {
    opt = true,
-   event = "BufRead"
+   event = "BufRead",
+   config = configs.which_key,
 }
 
 tools["dstein64/vim-startuptime"] = {

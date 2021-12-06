@@ -1,6 +1,6 @@
 local configs = {}
 
-configs["nvim-treesitter/nvim-treesitter"] = function()
+configs.treesitter = function()
     vim.o.foldmethod = "expr"
     vim.o.foldexpr = "nvim_treesitter#foldexpr()"
     require("nvim-treesitter.configs").setup {
@@ -76,13 +76,13 @@ configs["nvim-treesitter/nvim-treesitter"] = function()
     }
 end
 
-configs["mfussenegger/nvim-treehopper"] = function()
+configs.treehopper = function()
     vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
     vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
     require("tsht").config.hint_keys = { "j", "k", "l", "f", "d", "s", "h", "g", "m" }
 end
 
-configs["lewis6991/gitsigns.nvim"] = function ()
+configs.gitsigns = function ()
     require("gitsigns").setup {
         keymaps = {
             buffer = true,
@@ -111,7 +111,7 @@ configs["lewis6991/gitsigns.nvim"] = function ()
     }
 end
 
-configs["ggandor/lightspeed.nvim"] = function ()
+configs.lightspeed = function ()
     vim.cmd [[nmap <silent>; <Plug>Lightspeed_;_ft]]
     vim.cmd [[nmap <silent>, <Plug>Lightspeed_,_ft]]
 end

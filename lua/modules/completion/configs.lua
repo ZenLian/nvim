@@ -1,11 +1,11 @@
 local configs = {}
 
-configs["williamboman/nvim-lsp-installer"] = function()
+configs.lsp_installer = function()
     require('modules.completion.lspserver').setup()
     require('modules.completion.lspconfig').setup()
 end
 
-configs["hrsh7th/nvim-cmp"] = function()
+configs.cmp = function()
     local t = function(str)
         return vim.api.nvim_replace_termcodes(str, true, true, true)
     end
@@ -151,7 +151,7 @@ configs["hrsh7th/nvim-cmp"] = function()
     })
 end
 
-configs["L3MON4D3/LuaSnip"] = function()
+configs.luasnip = function()
     require("luasnip").config.set_config {
         history = true,
         updateevents = "TextChanged,TextChangedI"
@@ -159,7 +159,7 @@ configs["L3MON4D3/LuaSnip"] = function()
     require("luasnip.loaders.from_vscode").load()
 end
 
-configs["windwp/nvim-autopairs"] = function()
+configs.autopairs = function()
     require('nvim-autopairs').setup()
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
     local cmp = require('cmp')
