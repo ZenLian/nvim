@@ -31,11 +31,22 @@ configs.telescope = function()
 end
 
 configs.neoclip = function()
-    if not packer_plugins["sqlite.lua"].loaded then
-        vim.cmd [[packadd sqlite.lua]]
-    end
     require('neoclip').setup{
         enable_persistant_history = true,
+        keys = {
+            i = {
+                select = '<cr>',
+                paste = '<c-p>',
+                paste_behind = '<c-l>',
+                custom = {},
+            },
+            n = {
+                select = '<cr>',
+                paste = 'p',
+                paste_behind = 'P',
+                custom = {},
+            }
+        }
     }
 end
 
