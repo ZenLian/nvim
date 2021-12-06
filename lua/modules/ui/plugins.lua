@@ -4,12 +4,15 @@ local configs = require("modules.ui.configs")
 ui['sainnhe/edge'] = {
     config = configs.edge,
 }
+ui['windwp/windline.nvim'] = {
+    config = configs.windline,
+}
 
 ui['kyazdani42/nvim-web-devicons'] = {}
-ui['nvim-lualine/lualine.nvim'] = {
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = configs.lualine,
-}
+--ui['nvim-lualine/lualine.nvim'] = {
+--    requires = 'kyazdani42/nvim-web-devicons',
+--    config = configs.lualine,
+--}
 ui['akinsho/nvim-bufferline.lua'] = {
     opt = true,
     event = "BufRead",
