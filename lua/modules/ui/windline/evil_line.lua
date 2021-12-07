@@ -180,18 +180,20 @@ local default = {
     },
 }
 
-local setup = windline.setup({
-    colors_name = function(colors)
-        -- print(vim.inspect(colors))
-        -- ADD MORE COLOR HERE ----
-        return colors
-    end,
-    statuslines = {
-        default,
-        quickfix,
-        explorer,
-    },
-})
+local setup = function ()
+    windline.setup({
+        colors_name = function(colors)
+            -- print(vim.inspect(colors))
+            -- ADD MORE COLOR HERE ----
+            return colors
+        end,
+        statuslines = {
+            default,
+            quickfix,
+            explorer,
+        },
+    })
+end 
 
 return {
     setup = setup,

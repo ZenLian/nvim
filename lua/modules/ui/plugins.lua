@@ -9,10 +9,6 @@ ui['windwp/windline.nvim'] = {
 }
 
 ui['kyazdani42/nvim-web-devicons'] = {}
---ui['nvim-lualine/lualine.nvim'] = {
---    requires = 'kyazdani42/nvim-web-devicons',
---    config = configs.lualine,
---}
 ui['akinsho/nvim-bufferline.lua'] = {
     opt = true,
     event = "BufRead",
