@@ -2,7 +2,7 @@ local wk = require('which-key')
 
 local leader = {}
 
-local register_basic = function ()
+leader.basic = function ()
     wk.register(
         {
             name = "Editor(Normal)",
@@ -137,7 +137,6 @@ local setup = function ()
             }
         }
     }
-    register_basic()
     for _, fn in pairs(leader) do
         fn()
     end

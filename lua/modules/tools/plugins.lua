@@ -72,8 +72,6 @@ tools["rmagatti/session-lens"] = {
 }
 
 tools["folke/which-key.nvim"] = {
-   opt = true,
-   event = "BufRead",
    config = configs.which_key,
 }
 
