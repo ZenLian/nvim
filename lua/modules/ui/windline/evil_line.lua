@@ -40,67 +40,40 @@ basic.square_mode = {
     end,
 }
 
-basic.lsp_diagnos = {
-    name = 'diagnostic',
-    hl_colors = {
-        red = { 'red', 'black' },
-        yellow = { 'yellow', 'black' },
-        blue = { 'blue', 'black' },
-    },
-    width = breakpoint_width,
-    text = function(bufnr)
-        if lsp_comps.check_lsp(bufnr) then
-            return {
-                { lsp_comps.lsp_error({ format = '  %s', show_zero = true }), 'red' },
-                { lsp_comps.lsp_warning({ format = '  %s', show_zero = true }), 'yellow' },
-                { lsp_comps.lsp_hint({ format = '  %s', show_zero = true }), 'blue' },
-            }
-        end
-        return ''
-    end,
-}
 basic.file = {
     name = 'file',
     hl_colors = {
         default = hl_list.Black,
         white = { 'white', 'black' },
         magenta = { 'magenta', 'black' },
+        green = { 'green', 'black' },
     },
-    text = function(_, _, width)
-        if width > breakpoint_width then
-            return {
-                { b_components.cache_file_size(), 'default' },
-                { ' ', '' },
-                { b_components.cache_file_name('[No Name]', 'unique'), 'magenta' },
-                { b_components.line_col_lua, 'white' },
-                { b_components.progress_lua, '' },
-                { ' ', '' },
-                { b_components.file_modified(' '), 'magenta' },
-            }
-        else
-            return {
-                { b_components.cache_file_size(), 'default' },
-                { ' ', '' },
-                { b_components.cache_file_name('[No Name]', 'unique'), 'magenta' },
-                { ' ', '' },
-                { b_components.file_modified(' '), 'magenta' },
-            }
-        end
+    text = function()
+        return {
+            { ' ', '' },
+            { b_components.cache_file_name('[No Name]', 'unique'), 'white' },
+            { ' ', '' },
+            { b_components.file_modified(' '), 'green' },
+        }
     end,
 }
+
 basic.file_right = {
     hl_colors = {
         default = hl_list.Black,
         white = { 'white', 'black' },
+        green = { 'green', 'black' },
         magenta = { 'magenta', 'black' },
     },
-    text = function(_, _, width)
-        if width < breakpoint_width then
-            return {
-                { b_components.line_col_lua, 'white' },
-                { b_components.progress_lua, '' },
-            }
-        end
+    text = function()
+        return {
+            { b_components.line_col_lua, 'white' },
+            { b_components.progress_lua, '' },
+            { ' ', '' },
+            { b_components.file_encoding(), 'green' },
+            { ' ', '' },
+            { b_components.cache_file_type({icon = true}), 'magenta' },
+        }
     end,
 }
 basic.git = {
@@ -109,14 +82,16 @@ basic.git = {
         green = { 'green', 'black' },
         red = { 'red', 'black' },
         blue = { 'blue', 'black' },
+        magenta = { 'magenta', 'black' }
     },
     width = breakpoint_width,
     text = function(bufnr)
         if git_comps.is_git(bufnr) then
             return {
-                { git_comps.diff_added({ format = ' +%s', show_zero = true }), 'green' },
-                { git_comps.diff_removed({ format = ' -%s', show_zero = true }), 'red' },
-                { git_comps.diff_changed({ format = ' ~%s', show_zero = true }), 'blue' },
+                { git_comps.git_branch(), 'magenta' },
+                { git_comps.diff_added({ format = ' +%s', show_zero = false }), 'green' },
+                { git_comps.diff_removed({ format = ' -%s', show_zero = false }), 'red' },
+                { git_comps.diff_changed({ format = ' ~%s', show_zero = false }), 'blue' },
             }
         end
         return ''
@@ -158,21 +133,27 @@ local explorer = {
     show_last_status = true,
 }
 
-basic.lsp_name = {
-    width = breakpoint_width,
-    name = 'lsp_name',
+basic.lsp_info = {
+    name = 'lsp_info',
     hl_colors = {
+        default = hl_list.Black,
+        red = { 'red', 'black' },
+        yellow = { 'yellow', 'black' },
+        blue = { 'blue', 'black' },
         magenta = { 'magenta', 'black' },
     },
+    width = breakpoint_width,
     text = function(bufnr)
         if lsp_comps.check_lsp(bufnr) then
             return {
+                { lsp_comps.lsp_error({ format = '  %s', show_zero = false }), 'red' },
+                { lsp_comps.lsp_warning({ format = '  %s', show_zero = false }), 'yellow' },
+                { lsp_comps.lsp_hint({ format = '  %s', show_zero = false }), 'green' },
+                { ' ' },
                 { lsp_comps.lsp_name(), 'magenta' },
             }
         end
-        return {
-            { b_components.cache_file_type({icon = true}), 'magenta' },
-        }
+        return ''
     end,
 }
 
@@ -181,13 +162,11 @@ local default = {
     active = {
         basic.square_mode,
         basic.vi_mode,
-        basic.file,
-        basic.lsp_diagnos,
-        basic.divider,
-        basic.file_right,
-        basic.lsp_name,
         basic.git,
-        { git_comps.git_branch(), { 'magenta', 'black' }, breakpoint_width },
+        basic.file,
+        basic.divider,
+        basic.lsp_info,
+        basic.file_right,
         { ' ', hl_list.Black },
         basic.square_mode,
     },
