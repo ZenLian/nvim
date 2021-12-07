@@ -1,6 +1,6 @@
 local wk = require('which-key')
 
-
+local leader = {}
 
 local register_basic = function ()
     wk.register(
@@ -53,7 +53,7 @@ local register_basic = function ()
     )
 end
 
-local register_buffer = function ()
+leader.b = function ()
     -- <Leader>b
     wk.register(
         {
@@ -75,7 +75,7 @@ local register_buffer = function ()
     )
 end
 
-local register_git = function ()
+leader.g = function ()
     wk.register(
         {
             g = {
@@ -90,6 +90,7 @@ local register_git = function ()
                 p = "Preview hunk",
                 b = "Blame line",
             },
+            -- TODO: move out of here
             z = {
                 name = "Zen",
                 z = {"<cmd>ZenMode<CR>", "ZenMode"},
@@ -98,6 +99,31 @@ local register_git = function ()
         },
         {
             prefix = "<Leader>"
+        }
+    )
+    wk.register(
+        {
+            ["[g"] = "Previous git hunk",
+            ["]g"] = "Next git hunk",
+        }
+    )
+end
+
+leader.n = function ()
+    wk.register(
+        {
+            n = {
+                name = "Nvim Tree",
+                n = {"<cmd>NvimTreeToggle<CR>", "Toggle Tree"},
+                f = {"<cmd>NvimTreeFindFile<CR>", "Find File"},
+                r = {"<cmd>NvimTreeRefresh<CR>", "Refresh"},
+            }
+        },
+        { prefix = "<Leader>" }
+    )
+    wk.register(
+        {
+            ["<C-n>"] = {"<cmd>NvimTreeToggle<CR>", "Toggle Tree"},
         }
     )
 end
@@ -112,8 +138,9 @@ local setup = function ()
         }
     }
     register_basic()
-    register_buffer()
-    register_git()
+    for _, fn in pairs(leader) do
+        fn()
+    end
 end
 
 return {

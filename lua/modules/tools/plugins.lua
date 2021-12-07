@@ -37,7 +37,7 @@ tools["nvim-telescope/telescope-smart-history.nvim"] = {
 
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
-    cmd = {"NvimTreeToggle", "NvimTreeOpen"},
+    cmd = {"NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeRefresh"},
     config = configs.nvim_tree,
 }
 

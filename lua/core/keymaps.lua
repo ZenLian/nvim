@@ -59,8 +59,8 @@ vim.cmd [[nnoremap <silent> <leader>fc :Telescope neoclip<cr>]]
 ------------------
 --- bufferline ---
 ------------------
-vim.cmd [[nnoremap <silent> [b :BufferLineCyclePrev<CR>]]
-vim.cmd [[nnoremap <silent> ]b :BufferLineCycleNext<CR>]]
+-- vim.cmd [[nnoremap <silent> [b :BufferLineCyclePrev<CR>]]
+-- vim.cmd [[nnoremap <silent> ]b :BufferLineCycleNext<CR>]]
 --vim.cmd [[nnoremap <Leader>bb :BufferLinePick<CR>]]
 --vim.cmd [[nnoremap <Leader>bc :BufferLinePickClose<CR>]]
 --vim.cmd [[nnoremap <silent> <Leader>b[ :BufferLineCloseLeft<CR>]]
@@ -69,9 +69,9 @@ vim.cmd [[nnoremap <silent> ]b :BufferLineCycleNext<CR>]]
 -----------------
 --- nvim-tree ---
 -----------------
-keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap=true, silent=true})
-keymap('n', '<Leader>nf', ':NvimTreeFindFile<CR>', {noremap=true, silent=true})
-keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
+-- keymap('n', '<C-n>', ':NvimTreeToggle<CR>', {noremap=true, silent=true})
+-- keymap('n', '<Leader>nf', ':NvimTreeFindFile<CR>', {noremap=true, silent=true})
+-- keymap('n', '<Leader>nr', ':NvimTreeRefresh<CR>', {noremap=true, silent=true})
 
 ---------------------------
 --- zenmode && twilight ---
