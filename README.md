@@ -106,7 +106,37 @@ telescope 及其扩展：
 |`<Leader>nf`|find files|
 |`<Leader>nr`|refresh|
 
-- [ ] keymaps in nvim-tree
+keymaps in nvim-tree:
+
+|key|action|
+|-|-|
+|`g?`|help|
+|**navigation**||
+|`<c-]`|cd|
+|`<BS>`|close node|
+|`P`|parent node|
+|`<`/`>`|last/next sibling|
+|`K`/`J`|first/last sibling|
+|**view**||
+|`H`|toggle hidden|
+|`I`|toggle git ignored|
+|`R`|refresh|
+|**open file**||
+|`o`/`<CR>`|edit|
+|`<C-v>`|vsplit|
+|`<C-x>`|split|
+|`<C-t>`|edit in tab|
+|`s`|system open|
+|**operation**||
+|`a`|create file(`a dir/` create directory)|
+|`r`|rename|
+|`d`|delete|
+|`D`|move to trash|
+|`x`|cut|
+|`c`|copy|
+|`p`|paste|
+|`y`|copy name|
+|`Y`|copy path|
 
 ### zenmode && twilight
 
