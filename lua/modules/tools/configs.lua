@@ -22,7 +22,7 @@ configs.telescope = function()
         },
         extensions = {
             frecency = {
-                db_root = vim.fn.stdpath('data')..'/databases/telescope_frecency.sqlite3',
+                db_root = vim.fn.stdpath('data')..'/databases',
                 show_scores = true,
                 show_unindexed = true,
                 ignore_patterns = {"*.git/*", "*/tmp/*"},
