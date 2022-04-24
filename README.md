@@ -60,12 +60,24 @@ telescope 及其扩展：
 
 ### editor
 
+treesitter 及其扩展：
+
 |插件|描述|
 |---|---|
 |[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)|treesitter|
 |[nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)|基于 treesitter 的 textobject|
+|[nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)|当前代码块首行常驻|
 |[nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)|基于 treesitter 的快速选择 textobjects|
-|[lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
+|[nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)|多层括号颜色区分|
+|[nvim-comment](https://github.com/terrortylor/nvim-comment)|快速注释|
+
+其他：
+
+|插件|描述|
+|---|---|
+|[lightspeed](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
+|[surround](https://github.com/blackCauldron7/surround.nvim)|nvim 版本的 vim-surround|
+|[gitsigns](https://github.com/lewis6991/gitsigns.nvim)|git 插件|
 
 ## Keymappings
 
@@ -198,6 +210,10 @@ keymaps in nvim-tree:
 |**visual 模式下**||
 |`m`|选区|
 
+### nvim-comment
+
+`gcc`（Visual 模式下 `gc`）快速注释当前行
+
 ### lightspeed
 
 如果你以前是 vim-sneak 用户，那么 lightspeed 绝对是你的首选。（更喜欢 easymotion 的话，你应该选择 hop.nvim。）
@@ -206,21 +222,25 @@ keymaps in nvim-tree:
 
 同时高亮了 `f`/`t` 的目标，默认继续按 `f`/`t` 到下一个字母。我习惯于用 `;`/`,`，所以我还是映射到 `;`/`,` 上了。
 
+### surround
+
+visual 模式下选中后按 `s` 在两边插入括号。
+
 ### gitsigns
 
-|treehopper||
+|key|action|
 |-|-|
-|`]h`/`[h`|next/prev hunk|
-|`<Leader>hs`|stage hunk|
-|`<Leader>hS`|stage buffer|
-|`<Leader>hu`|undo stage hunk|
-|`<Leader>hU`|undo stage buffer|
-|`<Leader>hr`|reset hunk|
-|`<Leader>hR`|reset buffer|
-|`<Leader>hp`|preview hunk|
-|`<Leader>hb`|show blame|
+|`]g`/`[g`|next/prev hunk|
+|`<Leader>gs`|stage hunk|
+|`<Leader>gS`|stage buffer|
+|`<Leader>gu`|undo stage hunk|
+|`<Leader>gU`|undo stage buffer|
+|`<Leader>gr`|reset hunk|
+|`<Leader>gR`|reset buffer|
+|`<Leader>gp`|preview hunk|
+|`<Leader>gb`|show blame|
 |**text objects**||
-|`ah`/`ih`|a hunk|
+|`ag`/`ig`|a hunk|
 
 ## 不为人知的 vim 原生操作
 
