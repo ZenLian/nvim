@@ -17,7 +17,7 @@ editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
 --    opt = true,
 --    after = "nvim-treesitter"
 --}
-editor["romgrk/nvim-treesitter-context"] = {
+editor["lewis6991/nvim-treesitter-context"] = {
     opt = true,
     after = "nvim-treesitter",
 }

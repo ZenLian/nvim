@@ -10,7 +10,7 @@ neovim 0.5.0 开始使用原生支持 lua 配置，并且内置 lsp 和 treesitt
 
 ## 前置要求
 
-- neovim > 0.5.1
+- neovim >= 0.7.0
 - fzf
 - rg
 - fd

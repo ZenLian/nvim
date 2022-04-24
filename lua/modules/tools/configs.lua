@@ -22,6 +22,7 @@ configs.telescope = function()
         },
         extensions = {
             frecency = {
+                db_root = vim.fn.stdpath('data')..'/databases/telescope_frecency.sqlite3',
                 show_scores = true,
                 show_unindexed = true,
                 ignore_patterns = {"*.git/*", "*/tmp/*"},
@@ -32,21 +33,24 @@ end
 
 configs.neoclip = function()
     require('neoclip').setup{
-        enable_persistant_history = true,
+        enable_persistent_history = true,
+        db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
         keys = {
-            i = {
-                select = '<cr>',
-                paste = '<c-p>',
-                paste_behind = '<c-l>',
-                custom = {},
+            telescope = {
+                i = {
+                    select = '<cr>',
+                    paste = '<c-p>',
+                    paste_behind = '<c-l>',
+                    custom = {},
+                },
+                n = {
+                    select = '<cr>',
+                    paste = 'p',
+                    paste_behind = 'P',
+                    custom = {},
+                }
             },
-            n = {
-                select = '<cr>',
-                paste = 'p',
-                paste_behind = 'P',
-                custom = {},
-            }
-        }
+        },
     }
 end
 

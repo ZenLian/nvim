@@ -11,6 +11,12 @@ completion["williamboman/nvim-lsp-installer"] = {
     config = configs.lsp_installer,
 }
 
+-- completion["ray-x/navigator.lua"] = {
+--     requires = {
+--         { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }
+--     }
+-- }
+
 completion["ray-x/lsp_signature.nvim"] = {
     after = "nvim-lspconfig",
 }
