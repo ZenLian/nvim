@@ -4,7 +4,6 @@ local configs = require("modules.editor.configs")
 editor["nvim-treesitter/nvim-treesitter"] = {
     opt = true,
     run = ":TSUpdate",
-    ft = {"lua"},
     event = {"BufRead", "BufNewFile"},
     config = configs.treesitter,
 }
@@ -25,10 +24,8 @@ editor["p00f/nvim-ts-rainbow"] = {
     opt = true,
     after = "nvim-treesitter",
 }
-editor["terrortylor/nvim-comment"] = {
-    config = function()
-        require("nvim_comment").setup()
-    end
+editor["numToStr/Comment.nvim"] = {
+    config = configs.comment,
 }
 editor["mfussenegger/nvim-treehopper"] = {
     opt = true,

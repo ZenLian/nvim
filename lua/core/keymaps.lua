@@ -1,8 +1,8 @@
 local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, nowait = true}
+local opts = { noremap = true, nowait = true }
 
 ------------------------
--- TODO: 使用 which-key 管理
+-- Deprecated: 键位已经全部使用 which-key 管理
 ------------------------
 
 -- 快速保存和关闭
@@ -11,9 +11,9 @@ local opts = { noremap = true, nowait = true}
 -- 关闭高亮
 --keymap('', '<leader><enter>', ':noh<CR>', opts)
 -- Y 复制到行尾
-keymap('n', 'Y', 'y$', opts)
+-- keymap('n', 'Y', 'y$', opts)
 -- Y 复制到剪贴板（visual mode）
-keymap('v', 'Y', '"+y', opts)
+-- keymap('v', 'Y', '"+y', opts)
 -- 移动到行首/行尾
 --keymap('n', 'H', '^', opts)
 --keymap('n', 'L', '$', opts)
@@ -22,8 +22,8 @@ keymap('v', 'Y', '"+y', opts)
 --keymap('v', '>', '>gv', opts)
 --keymap('v', '<Tab>', '<gv', opts)
 --keymap('v', '<S-Tab>', '>gv', opts)
--- repeat in visual mode
-keymap('v', '.', ':normal .<CR>', opts)
+-- repeat in visual mode(deprecated)
+-- keymap('v', '.', ':normal .<CR>', opts)
 -- 交换上下行
 --keymap('n', '<M-j>', 'mz:m+<cr>`z', opts)
 --keymap('n', '<M-k>', 'mz:m-2<cr>`z', opts)
@@ -42,7 +42,7 @@ keymap('v', '.', ':normal .<CR>', opts)
 -----------------
 --- telescope ---
 -----------------
-vim.cmd [[nnoremap <silent> <C-p> :Telescope git_files<cr>]]
+-- vim.cmd [[nnoremap <silent> <C-p> :Telescope git_files<cr>]]
 -- vim.cmd [[nnoremap <silent> <leader>ff :Telescope find_files<cr>]]
 -- vim.cmd [[nnoremap <silent> <leader>fg :Telescope live_grep<cr>]]
 -- vim.cmd [[nnoremap <silent> <leader>fb :Telescope buffers<cr>]]
@@ -78,4 +78,3 @@ vim.cmd [[nnoremap <silent> <C-p> :Telescope git_files<cr>]]
 ---------------------------
 -- keymap('n', '<Leader>zz', ':ZenMode<CR>', {noremap=true})
 -- keymap('n', '<Leader>zt', ':Twilight<CR>', {noremap=true})
-

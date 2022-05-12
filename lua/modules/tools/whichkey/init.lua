@@ -14,7 +14,10 @@ keymaps.basic = function()
             ["<M-k>"] = { "mz:m-2<cr>`z", "Swap line up" },
             H = { "^", "Start of line" },
             L = { "$", "End of line" },
-            ["<Leader>w"] = { "<cmd>w!<CR>", "Save buffer" },
+            -- 使 Y 复制到行尾，和 D 一致
+            Y = { "y$", "Yank to the end" },
+
+            ["<Leader>w"] = { "<cmd>w!<CR>", "Save" },
             ["<Leader>q"] = { "<cmd>qa!<CR>", "Quit" },
             ["<Leader><Enter>"] = { "<cmd>noh<CR>", "Clear search highlight" },
         }
@@ -24,6 +27,7 @@ keymaps.basic = function()
             name = "editor(visual)",
             H = { "^", "Start of line" },
             L = { "$", "End of line" },
+            Y = { '"+y', "Yank to clipboard" },
             ["<M-j>"] = { ":m'>+<cr>`<my`>mzgv`yo`z", "Swap line down" },
             ["<M-k>"] = { ":m'<-2<cr>`>my`<mzgv`yo`z", "Swap line up" },
             ["<"] = { "<gv", "Shift lines leftwards" },
@@ -37,7 +41,7 @@ keymaps.basic = function()
     )
     wk.register(
         {
-            name = "Next",
+            name = "next",
         },
         {
             prefix = "]"
@@ -45,7 +49,7 @@ keymaps.basic = function()
     )
     wk.register(
         {
-            name = "Previous",
+            name = "previous",
         },
         {
             prefix = "["
@@ -190,7 +194,6 @@ keymaps.z = function()
         }
     )
 end
-
 
 local setup = function()
     wk.setup {

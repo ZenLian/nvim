@@ -3,12 +3,13 @@
 local fn = vim.fn
 local packer_dir = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
+local packer_bootstrap = nil
 if fn.empty(fn.glob(packer_dir)) > 0 then
     packer_bootstrap = fn.system {'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir}
 end
 
 vim.cmd [[packadd packer.nvim]]
-packer = require('packer')
+local packer = require('packer')
 packer.startup({
     function(use)
         use {'wbthomason/packer.nvim', opt = true}

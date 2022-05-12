@@ -5,6 +5,8 @@ local configs = require("modules.tools.configs")
 tools["nvim-lua/plenary.nvim"] = { opt = true, module = "plenary" }
 tools["tami5/sqlite.lua"] = { opt = true, module = "sqlite" }
 
+--#region Telescope
+
 tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
     cmd = "Telescope",
@@ -39,12 +41,6 @@ tools["nvim-telescope/telescope-smart-history.nvim"] = {
     end
 }
 
-tools['kyazdani42/nvim-tree.lua'] = {
-    opt = true,
-    cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeRefresh", "NvimTreeFocus" },
-    config = configs.nvim_tree,
-}
-
 tools["AckslD/nvim-neoclip.lua"] = {
     requires = {
         { "tami5/sqlite.lua" },
@@ -60,6 +56,13 @@ tools["ahmedkhalf/project.nvim"] = {
         require('project_nvim').setup()
         require('telescope').load_extension('projects')
     end
+}
+--#endregion Telescope
+
+tools['kyazdani42/nvim-tree.lua'] = {
+    opt = true,
+    cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeRefresh", "NvimTreeFocus" },
+    config = configs.nvim_tree,
 }
 
 tools["akinsho/toggleterm.nvim"] = {

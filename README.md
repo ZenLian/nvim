@@ -41,7 +41,6 @@ telescope 及其扩展：
 
 |插件|描述|
 |---|---|
-|[plenary.nvim](https://github.com/nvim-lua/plenary.nvim)|required by telescope|
 |[telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)|模糊搜索神器|
 |[telescope-fzf-native.nvim](https://github.com/nvim-telescope/telescope-fzf-native.nvim)|加速 telescope 搜索|
 |[telescope-frecency.nvim](https://github.com/nvim-telescope/telescope-frecency.nvim)|MRU 文件搜索|
@@ -53,9 +52,8 @@ telescope 及其扩展：
 |插件|描述|
 |---|---|
 |[nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)|文件浏览器|
-|[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)|terminal tools|
-|[auto-session](https://github.com/rmagatti/auto-session)|session 管理|
-|[which-key.nvim](https://github.com/folke/which-key.nvim)|keymaps 提示|
+|[toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)|neovim 中的终端|
+|[which-key.nvim](https://github.com/folke/which-key.nvim)|快捷键管理与提示|
 |[vim-startuptime.nvim](https://github.com/dstein64/vim-startuptime)|vim 启动时间查看|
 
 ### editor
@@ -66,10 +64,10 @@ treesitter 及其扩展：
 |---|---|
 |[nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)|treesitter|
 |[nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects)|基于 treesitter 的 textobject|
-|[nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)|当前代码块首行常驻|
-|[nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)|基于 treesitter 的快速选择 textobjects|
+|[nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)|将当前函数固定在顶部|
+|[nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)|代码块快速选择|
 |[nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)|多层括号颜色区分|
-|[nvim-comment](https://github.com/terrortylor/nvim-comment)|快速注释|
+|[Comment.nvim](https://github.com/numToStr/Comment.nvim)|快速注释|
 
 其他：
 
@@ -98,15 +96,16 @@ treesitter 及其扩展：
 
 |key|action|
 |-|-|
-|`<Leader>ps`|`:PackerSync`|
+|`<Leadek>/s`|`:PackerSync`|
+|`<Leadek>/t`|`:PackerStatus`|
 
 ### bufferline
 
 |key|action|
 |-|-|
 |`[b`/`]b`|切换 buffer|
-|`<Leader>bb`|选择 buffer|
-|`<Leader>bc`|选择 buffer　关闭|
+|`<Leader>bb`|选择 buffer 打开|
+|`<Leader>bc`|选择 buffer 关闭|
 |`<Leader>b[`|关闭左侧 buffer|
 |`<Leader>b]`|关闭右侧 buffer|
 
@@ -115,6 +114,7 @@ treesitter 及其扩展：
 |key|action|
 |-|-|
 |`<C-n>`|toggle nvim-tree|
+|`<Leader>nn`|focus nvim-tree|
 |`<Leader>nf`|find files|
 |`<Leader>nr`|refresh|
 
@@ -176,14 +176,14 @@ keymaps in nvim-tree:
 
 |key|action|
 |-|-|
-|C-k/C-j|上下移动|
+|`<C-k>`/`<C-j>`|上下移动|
 
 ### toggleterm
 
 |key|action|
 |-|-|
 |`<C-\>`|toggle terminal|
-|`<Leader>g`|open lazygit tui|
+|`<Leader>gg`|open lazygit tui|
 
 ### treesitter 及其扩展
 
@@ -210,9 +210,11 @@ keymaps in nvim-tree:
 |**visual 模式下**||
 |`m`|选区|
 
-### nvim-comment
+### Comment
 
-`gcc`（Visual 模式下 `gc`）快速注释当前行
+- `gc`/`gb` 分别是行注释/块注释
+- 并且支持 `.` 重复命令
+- 也可以 `gc{motion}` 注释一个代码块，比如 `gcip` 注释一个段落等。
 
 ### lightspeed
 

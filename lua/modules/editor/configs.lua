@@ -4,11 +4,26 @@ configs.treesitter = function()
     vim.o.foldmethod = "expr"
     vim.o.foldexpr = "nvim_treesitter#foldexpr()"
     require("nvim-treesitter.configs").setup {
-        -- ensure_installed = "maintained",
+        ensure_installed = {
+            "help", "vim", "lua", "comment",  "dockerfile", "cuda", "regex",
+            "bash", "c", "cpp", "make", "cmake",
+            "go", "java", "python",
+            "html", "css", "scss", "javascript", "typescript",
+            "json", "json5", "jsonc", "toml", "yaml",
+        },
         sync_install = false,
         highlight = {
             enable = true,
             additional_vim_regex_highlighting = false,
+        },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "gnn",
+                node_incremental = "g=",
+                node_decremental = "g-",
+                scope_incremental = "grc",
+            }
         },
         textobjects = {
             select = {
@@ -76,20 +91,24 @@ configs.treesitter = function()
     }
 end
 
+configs.comment = function()
+    require("Comment").setup()
+end
+
 configs.treehopper = function()
     vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]
     vim.cmd [[vnoremap <silent> m :lua require('tsht').nodes()<CR>]]
     require("tsht").config.hint_keys = { "j", "k", "l", "f", "d", "s", "h", "g", "m" }
 end
 
-configs.gitsigns = function ()
+configs.gitsigns = function()
     require("gitsigns").setup {
         keymaps = {
             buffer = true,
             noremap = true,
 
-            ['n ]g'] = { expr = true, "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-            ['n [g'] = { expr = true, "&diff ? '[h' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+            ['n ]g'] = { expr = true, "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
+            ['n [g'] = { expr = true, "&diff ? '[h' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
             ['n <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
             ['v <leader>gs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
             ['n <leader>gu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
@@ -107,11 +126,11 @@ configs.gitsigns = function ()
             ['x ag'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
         },
         current_line_blame = true,
-        current_line_blame_opts = {delay = 1000, virtual_text_pos = "eol"},
+        current_line_blame_opts = { delay = 500, virtual_text_pos = "eol" },
     }
 end
 
-configs.lightspeed = function ()
+configs.lightspeed = function()
     vim.cmd [[nmap <silent>; <Plug>Lightspeed_;_ft]]
     vim.cmd [[nmap <silent>, <Plug>Lightspeed_,_ft]]
 end
