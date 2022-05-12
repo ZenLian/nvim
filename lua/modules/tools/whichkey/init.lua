@@ -53,6 +53,20 @@ leader.basic = function ()
     )
 end
 
+-- packer.nvim
+leader.p = function ()
+    wk.register(
+        {
+            p = {
+                name = "Packer",
+                s = {"<cmd>PackerSync<CR>", "Packer Sync"},
+            },
+        },
+        { prefix = "<Leader>" }
+    )
+end
+
+-- nvim-bufferline
 leader.b = function ()
     -- <Leader>b
     wk.register(
@@ -61,8 +75,8 @@ leader.b = function ()
                 name = "Buffer",
                 b = {"<cmd>BufferLinePick<CR>", "Pick buffer"},
                 c = {"<cmd>BufferLinePickClose<CR>", "Pick buffer to close"},
-                ["["] = {"<cmd>BufferLineCyclePrev<CR>", "Previous buffer"},
-                ["]"] = {"<cmd>BufferLineCycleNext<CR>", "Next buffer"},
+                ["["] = {"<cmd>BufferLineCloseLeft<CR>", "Close Left buffers"},
+                ["]"] = {"<cmd>BufferLineCloseRight<CR>", "Close right buffers"},
             },
         },
         { prefix = "<Leader>" }
@@ -109,12 +123,13 @@ leader.g = function ()
     )
 end
 
+-- nvim-tree
 leader.n = function ()
     wk.register(
         {
             n = {
                 name = "Nvim Tree",
-                n = {"<cmd>NvimTreeToggle<CR>", "Toggle Tree"},
+                n = {"<cmd>NvimTreeFocus<CR>", "Focus"},
                 f = {"<cmd>NvimTreeFindFile<CR>", "Find File"},
                 r = {"<cmd>NvimTreeRefresh<CR>", "Refresh"},
             }

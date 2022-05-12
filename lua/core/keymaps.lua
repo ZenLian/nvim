@@ -37,7 +37,7 @@ keymap('v', '.', ':normal .<CR>', opts)
 -----------------
 --- packer ---
 -----------------
-vim.cmd [[nnoremap <silent> <leader>ps :PackerSync<CR>]]
+-- vim.cmd [[nnoremap <silent> <leader>ps :PackerSync<CR>]]
 
 -----------------
 --- telescope ---

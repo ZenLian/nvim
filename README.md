@@ -31,7 +31,7 @@ sudo apt-get install sqlite3 libsqlite3-dev
 |[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)|状态栏|
 |[nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)|buffer tab 管理|
 |[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)|显示缩进对齐辅助线|
-|[nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)|显示缩进对齐辅助线|
+|[nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)|颜色显示|
 |[zen-mode.nvim](https://github.com/folke/zen-mode.nvim)|专注模式|
 |[twilight.nvim](https://github.com/folke/twilight.nvim)|专注当前代码块，配合 zen-mode 使用|
 
@@ -91,7 +91,7 @@ treesitter 及其扩展：
 |`<Leader>w`|保存|
 |`<Leader>q`|关闭|
 |`<Leader><Enter>`|关闭搜索结果高亮|
-|`<A-j>`/`<Alt-k>`|交换上下行|
+|`<A-j>`/`<A-k>`|交换上下行|
 |`[t`/`]t`|切换tab页|
 
 ### packer
@@ -260,7 +260,11 @@ visual 模式下选中后按 `s` 在两边插入括号。
 
 ## TODO
 
-- [ ] ~~telescope ui 改成一列的~~
+- [ ] 命令行补全时不能上下选择
+- [ ] vim.lsp.diagnostic.goto_next 已弃用
+
+---
+
 - [ ] telescope 文件浏览器改为 ranger 风格
 - [ ] is0n/fm-nvim 和 telescope 文件浏览器比较
   - [ ] nvim-tree keymaps
@@ -274,6 +278,7 @@ visual 模式下选中后按 `s` 在两边插入括号。
 - [ ] keymaps for trouble.nvim
 - [ ] folke/todo-comments.nvim
 - [ ] 使用 which-key 统一管理全局键位映射
-- [ ] lsp_signature
-  - [ ] 会被 cmp 补全遮挡
+- [x] lsp_signature 浮动窗口显示函数签名
+  - [x] 会被 cmp 补全遮挡
 - [ ] gpanders/editorconfig.nvim 为每个项目使用单独的编辑器设置（缩进等）
+- [ ] ~~telescope ui 改成一列的~~
