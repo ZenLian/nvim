@@ -46,16 +46,34 @@ configs.cmp = function()
     local cmp = require('cmp')
     cmp.setup {
         mapping = {
-            ["<CR>"] = cmp.mapping.confirm({select = true}),
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<C-p>"] = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_prev_item()
+                    else
+                        fallback()
+                    end
+                end,
+                { "i", "c" }
+            ),
+            ["<C-n>"] = cmp.mapping(
+                function(fallback)
+                    if cmp.visible() then
+                        cmp.select_next_item()
+                    else
+                        fallback()
+                    end
+                end,
+                { "i", "c" }
+            ),
             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), {"i", "c"}),
+            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), { "i", "c" }),
             ["<Tab>"] = cmp.mapping(
                 function(fallback)
                     if cmp.visible() then
-                        cmp.confirm({select = true})
+                        cmp.confirm({ select = true })
                         -- cmp.select_next_item()
                     elseif require('luasnip').expand_or_jumpable() then
                         require('luasnip').expand_or_jump()
@@ -65,7 +83,7 @@ configs.cmp = function()
                         fallback()
                     end
                 end,
-                {"i", "s", "c"}
+                { "i", "s", "c" }
             ),
             ["<S-Tab>"] = cmp.mapping(
                 function(fallback)
@@ -77,7 +95,7 @@ configs.cmp = function()
                         fallback()
                     end
                 end,
-                {"i", "s", "c"}
+                { "i", "s", "c" }
             ),
             ["<C-h>"] = function(fallback)
                 if require("luasnip").jumpable(-1) then
@@ -101,12 +119,13 @@ configs.cmp = function()
         },
         sources = {
             { name = 'nvim_lsp' },
-            { name = 'nvim_lua'},
+            { name = 'nvim_lsp_signature_help' },
+            { name = 'nvim_lua' },
             { name = 'luasnip' }, -- For luasnip users.
             { name = 'buffer' },
-            { name = 'path'},
-            { name = 'cmdline'},
-            { name = 'calc'},
+            { name = 'path' },
+            -- { name = 'cmdline' },
+            { name = 'calc' },
             {
                 name = 'dictionary',
                 keyword_length = 1,
@@ -124,10 +143,12 @@ configs.cmp = function()
                     nvim_lsp = "[LSP]",
                     nvim_lua = "[Lua]",
                     luasnip = "[LuaSnip]",
-                    buffer = "[Buffer]",
+                    buffer = "[Buff]",
                     path = "[Path]",
                     calc = "[Calc]",
-                    dictionary = "[Dict]"
+                    dictionary = "[Dict]",
+                    cmdline = "[CMD]",
+                    cmdline_history = "[HIST]",
                 })[entry.source.name]
                 return vim_item
             end
@@ -139,15 +160,22 @@ configs.cmp = function()
 
     cmp.setup.cmdline('/', {
         sources = {
-            { name = 'buffer'},
+            { name = 'buffer' },
+            { name = 'cmdline_history' },
         }
     })
 
     cmp.setup.cmdline(':', {
+        mapping = {
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<C-p>"] = cmp.mapping.select_prev_item(),
+            ["<C-n>"] = cmp.mapping.select_next_item(),
+        },
         sources = {
-            { name = 'path'},
-            { name = 'cmdline'},
-        }
+            { name = 'path' },
+            { name = 'cmdline' },
+            { name = 'cmdline_history' },
+        },
     })
 end
 
@@ -163,8 +191,8 @@ configs.autopairs = function()
     require('nvim-autopairs').setup()
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
     local cmp = require('cmp')
-    cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-    cmp_autopairs.lisp[#cmp_autopairs.lisp+1] = "racket"
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+    cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 end
 
 return configs
