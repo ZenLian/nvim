@@ -1,6 +1,6 @@
 local globals = {}
 
-function join_path(...)
+local function join_path(...)
     return table.concat({...}, '/')
 end
 

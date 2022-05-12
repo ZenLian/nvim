@@ -128,7 +128,7 @@ configs.cmp = function()
             { name = 'calc' },
             {
                 name = 'dictionary',
-                keyword_length = 1,
+                keyword_length = 2,
             },
         },
         completion = {
@@ -149,6 +149,7 @@ configs.cmp = function()
                     dictionary = "[Dict]",
                     cmdline = "[CMD]",
                     cmdline_history = "[HIST]",
+                    nvim_lsp_document_symbol="[SYMBOL]",
                 })[entry.source.name]
                 return vim_item
             end
@@ -162,21 +163,31 @@ configs.cmp = function()
         sources = {
             { name = 'buffer' },
             { name = 'cmdline_history' },
+            { name = 'nvim_lsp_document_symbol' },
         }
     })
 
     cmp.setup.cmdline(':', {
-        mapping = {
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<C-p>"] = cmp.mapping.select_prev_item(),
-            ["<C-n>"] = cmp.mapping.select_next_item(),
-        },
         sources = {
             { name = 'path' },
             { name = 'cmdline' },
             { name = 'cmdline_history' },
         },
     })
+
+	require("cmp_dictionary").setup({
+		dic = {
+			["*"] = { "/usr/share/dict/words" },
+		},
+		-- The following are default values.
+		-- exact = 2,
+		first_case_insensitive = true,
+		-- document = false,
+		-- document_command = "wn %s -over",
+		async = true,
+		-- capacity = 5,
+		-- debug = false,
+	})
 end
 
 configs.luasnip = function()
