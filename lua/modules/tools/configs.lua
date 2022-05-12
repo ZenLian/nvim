@@ -1,11 +1,6 @@
 local configs = {}
 
 configs.telescope = function()
-    if not packer_plugins["nvim-neoclip.lua"].loaded then
-        vim.cmd [[packadd nvim-neoclip.lua]]
-    end
-    require('telescope').load_extension('neoclip')
-
     require('telescope').setup {
         defaults = {
             mappings = {
@@ -29,6 +24,11 @@ configs.telescope = function()
             },
         }
     }
+
+    -- if not packer_plugins["nvim-neoclip.lua"].loaded then
+    --     vim.cmd [[packadd nvim-neoclip.lua]]
+    -- end
+    require('telescope').load_extension('neoclip')
 end
 
 configs.neoclip = function()
@@ -63,7 +63,6 @@ configs.nvim_tree = function()
             update_cwd = true
         },
     })
-    require('nvim-tree').setup()
 end
 
 configs.toggleterm = function()
@@ -117,22 +116,6 @@ configs.toggleterm = function()
     end
 
     -- vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua LazygitToggle()<CR>", {noremap = true, silent = true})
-end
-
-configs.auto_session = function ()
-    require('auto-session').setup {
-        log_level = 'info',
-        auto_session_enable_last_session = true,
-        auto_session_root_dir = vim.fn.stdpath('data').."/sessions/",
-        auto_session_enabled = true,
-        auto_save_enabled = true,
-        auto_restore_enabled = false,
-        auto_session_suppress_dirs = nil
-    }
-end
-
-configs.session_lens = function ()
-    require('session-lens').setup { }
 end
 
 configs.which_key = function()

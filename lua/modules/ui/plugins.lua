@@ -9,7 +9,7 @@ ui['windwp/windline.nvim'] = {
 }
 
 ui['kyazdani42/nvim-web-devicons'] = {}
-ui['akinsho/nvim-bufferline.lua'] = {
+ui['akinsho/bufferline.nvim'] = {
     opt = true,
     event = "BufRead",
     requires = 'kyazdani42/nvim-web-devicons',

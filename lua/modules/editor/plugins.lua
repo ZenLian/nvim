@@ -36,7 +36,7 @@ editor["mfussenegger/nvim-treehopper"] = {
     config = configs.treehopper,
 }
 
-editor["blackCauldron7/surround.nvim"] = {
+editor["ur4ltz/surround.nvim"] = {
     config = function()
         require("surround").setup {mappings_style = "surround"}
     end

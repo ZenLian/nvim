@@ -29,7 +29,7 @@ sudo apt-get install sqlite3 libsqlite3-dev
 |[edge](https://github.com/sainnhe/edge)|colorscheme|
 |[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)|图标显示|
 |[lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)|状态栏|
-|[nvim-bufferline.lua](https://github.com/akinsho/nvim-bufferline.lua)|buffer tab 管理|
+|[nvim-bufferline.lua](https://github.com/akinsho/bufferline.nvim)|buffer tab 管理|
 |[indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)|显示缩进对齐辅助线|
 |[nvim-colorizer.lua](https://github.com/norcalli/nvim-colorizer.lua)|颜色显示|
 |[zen-mode.nvim](https://github.com/folke/zen-mode.nvim)|专注模式|
@@ -76,7 +76,7 @@ treesitter 及其扩展：
 |插件|描述|
 |---|---|
 |[lightspeed](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
-|[surround](https://github.com/blackCauldron7/surround.nvim)|nvim 版本的 vim-surround|
+|[surround](https://github.com/ur4ltz/surround.nvim)|nvim 版本的 vim-surround|
 |[gitsigns](https://github.com/lewis6991/gitsigns.nvim)|git 插件|
 
 ## Keymappings

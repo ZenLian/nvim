@@ -1,35 +1,35 @@
 local wk = require('which-key')
 
-local leader = {}
+local keymaps = {}
 
-leader.basic = function ()
+keymaps.basic = function()
     wk.register(
         {
-            name = "Editor(Normal)",
-            ["<C-h>"] = {"<C-w>h", "Move to window leftwards"},
-            ["<C-l>"] = {"<C-w>l", "Move to window rightwards"},
-            ["<C-k>"] = {"<C-w>k", "Move to window above"},
-            ["<C-j>"] = {"<C-w>j", "Move to window below"},
-            ["<M-j>"] = {"mz:m+<cr>`z", "Swap line down"},
-            ["<M-k>"] = {"mz:m-2<cr>`z", "Swap line up"},
-            H = {"^", "Start of line"},
-            L = {"$", "End of line"},
-            ["<Leader>w"] = {"<cmd>w!<CR>", "Save buffer"},
-            ["<Leader>q"] = {"<cmd>qa!<CR>", "Quit"},
-            ["<Leader><Enter>"] = {"<cmd>noh<CR>", "Clear search highlight"},
+            name = "editor(normal)",
+            ["<C-h>"] = { "<C-w>h", "Move to window leftwards" },
+            ["<C-l>"] = { "<C-w>l", "Move to window rightwards" },
+            ["<C-k>"] = { "<C-w>k", "Move to window above" },
+            ["<C-j>"] = { "<C-w>j", "Move to window below" },
+            ["<M-j>"] = { "mz:m+<cr>`z", "Swap line down" },
+            ["<M-k>"] = { "mz:m-2<cr>`z", "Swap line up" },
+            H = { "^", "Start of line" },
+            L = { "$", "End of line" },
+            ["<Leader>w"] = { "<cmd>w!<CR>", "Save buffer" },
+            ["<Leader>q"] = { "<cmd>qa!<CR>", "Quit" },
+            ["<Leader><Enter>"] = { "<cmd>noh<CR>", "Clear search highlight" },
         }
     )
     wk.register(
         {
-            name = "Editor(Visual)",
-            H = {"^", "Start of line"},
-            L = {"$", "End of line"},
-            ["<M-j>"] = {":m'>+<cr>`<my`>mzgv`yo`z", "Swap line down"},
-            ["<M-k>"] = {":m'<-2<cr>`>my`<mzgv`yo`z", "Swap line up"},
-            ["<"] = {"<gv", "Shift lines leftwards"},
-            [">"] = {">gv", "Shift lines rightwards"},
-            ["<S-Tab>"] = {"<gv", "Shift lines leftwards"},
-            ["<Tab>"] = {">gv", "Shift lines rightwards"},
+            name = "editor(visual)",
+            H = { "^", "Start of line" },
+            L = { "$", "End of line" },
+            ["<M-j>"] = { ":m'>+<cr>`<my`>mzgv`yo`z", "Swap line down" },
+            ["<M-k>"] = { ":m'<-2<cr>`>my`<mzgv`yo`z", "Swap line up" },
+            ["<"] = { "<gv", "Shift lines leftwards" },
+            [">"] = { ">gv", "Shift lines rightwards" },
+            ["<S-Tab>"] = { "<gv", "Shift lines leftwards" },
+            ["<Tab>"] = { ">gv", "Shift lines rightwards" },
         },
         {
             mode = "v",
@@ -54,12 +54,13 @@ leader.basic = function ()
 end
 
 -- packer.nvim
-leader.p = function ()
+keymaps.packer = function()
     wk.register(
         {
-            p = {
-                name = "Packer",
-                s = {"<cmd>PackerSync<CR>", "Packer Sync"},
+            ["/"] = {
+                name = "packer",
+                s = { "<cmd>PackerSync<CR>", "Packer Sync" },
+                t = { "<cmd>PackerStatus<CR>", "Packer Status" },
             },
         },
         { prefix = "<Leader>" }
@@ -67,34 +68,71 @@ leader.p = function ()
 end
 
 -- nvim-bufferline
-leader.b = function ()
+keymaps.b = function()
     -- <Leader>b
     wk.register(
         {
             b = {
-                name = "Buffer",
-                b = {"<cmd>BufferLinePick<CR>", "Pick buffer"},
-                c = {"<cmd>BufferLinePickClose<CR>", "Pick buffer to close"},
-                ["["] = {"<cmd>BufferLineCloseLeft<CR>", "Close Left buffers"},
-                ["]"] = {"<cmd>BufferLineCloseRight<CR>", "Close right buffers"},
+                name = "buffer",
+                b = { "<cmd>BufferLinePick<CR>", "Pick buffer" },
+                c = { "<cmd>BufferLinePickClose<CR>", "Pick buffer to close" },
+                ["["] = { "<cmd>BufferLineCloseLeft<CR>", "Close Left buffers" },
+                ["]"] = { "<cmd>BufferLineCloseRight<CR>", "Close right buffers" },
             },
         },
         { prefix = "<Leader>" }
     )
     wk.register(
         {
-            ["[b"] = {"<cmd>BufferLineCyclePrev<CR>", "Previous buffer"},
-            ["]b"] = {"<cmd>BufferLineCycleNext<CR>", "Next buffer"},
+            ["[b"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous buffer" },
+            ["]b"] = { "<cmd>BufferLineCycleNext<CR>", "Next buffer" },
         }
     )
 end
 
-leader.g = function ()
+-- telescope
+keymaps.f = function()
+    wk.register(
+        {
+            f = {
+                name = "finder(telescope)",
+                f = { "<cmd>Telescope find_files<CR>", "Files" },
+                b = { "<cmd>Telescope buffers<CR>", "Buffers" },
+                g = { "<cmd>Telescope live_grep<CR>", "Grep" },
+                ["/"] = { "<cmd>Telescope help_tags<CR>", "Help Tags" },
+                o = { "<cmd>Telescope oldfiles<CR>", "Old Files" },
+                h = { "<cmd>Telescope frecency<CR>", "Frecency Files" },
+                p = { "<cmd>Telescope projects<CR>", "Projects" },
+                c = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
+                -- n = {"<cmd>Telescope file_browser<CR>", "File Browser"},
+            },
+            ["<Leader>"] = { "<cmd>Telescope<CR>", "Telescope" },
+        },
+        { prefix = "<Leader>" }
+    )
+
+    local project_files = function()
+        local telescope = require("telescope.builtin")
+        local opts = {} -- define some options
+        local ok = pcall(telescope.git_files, opts)
+        if not ok then
+            telescope.find_files(opts)
+        end
+    end
+    wk.register(
+        {
+            ["<C-p>"] = { project_files, "Project(Git) Files" },
+        }
+    )
+end
+
+-- git
+keymaps.g = function()
     wk.register(
         {
             g = {
                 name = "Git",
-                g = {"<cmd>lua LazygitToggle()<CR>", "Lazygit"},
+                g = { "<cmd>lua LazygitToggle()<CR>", "Lazygit" },
                 s = "Stage hunk",
                 S = "Stage file",
                 u = "Undo stage hunk",
@@ -104,12 +142,6 @@ leader.g = function ()
                 p = "Preview hunk",
                 b = "Blame line",
             },
-            -- TODO: move out of here
-            z = {
-                name = "Zen",
-                z = {"<cmd>ZenMode<CR>", "ZenMode"},
-                t = {"<cmd>Twilight<CR>", "Twilight"},
-            }
         },
         {
             prefix = "<Leader>"
@@ -124,26 +156,43 @@ leader.g = function ()
 end
 
 -- nvim-tree
-leader.n = function ()
+keymaps.n = function()
     wk.register(
         {
             n = {
-                name = "Nvim Tree",
-                n = {"<cmd>NvimTreeFocus<CR>", "Focus"},
-                f = {"<cmd>NvimTreeFindFile<CR>", "Find File"},
-                r = {"<cmd>NvimTreeRefresh<CR>", "Refresh"},
+                name = "nvim tree",
+                n = { "<cmd>NvimTreeFocus<CR>", "Focus" },
+                f = { "<cmd>NvimTreeFindFile<CR>", "Find File" },
+                r = { "<cmd>NvimTreeRefresh<CR>", "Refresh" },
             }
         },
         { prefix = "<Leader>" }
     )
     wk.register(
         {
-            ["<C-n>"] = {"<cmd>NvimTreeToggle<CR>", "Toggle Tree"},
+            ["<C-n>"] = { "<cmd>NvimTreeToggle<CR>", "Toggle Tree" },
         }
     )
 end
 
-local setup = function ()
+-- Zen/Focus
+keymaps.z = function()
+    wk.register(
+        {
+            z = {
+                name = "Zen",
+                z = { "<cmd>ZenMode<CR>", "ZenMode" },
+                t = { "<cmd>Twilight<CR>", "Twilight" },
+            },
+        },
+        {
+            prefix = "<Leader>"
+        }
+    )
+end
+
+
+local setup = function()
     wk.setup {
         plugins = {
             spelling = {
@@ -152,7 +201,7 @@ local setup = function ()
             }
         }
     }
-    for _, fn in pairs(leader) do
+    for _, fn in pairs(keymaps) do
         fn()
     end
 end
