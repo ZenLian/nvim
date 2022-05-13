@@ -206,8 +206,17 @@ keymaps.n = function()
     )
     wk.register(
         {
-        ["<C-n>"] = { "<cmd>NvimTreeToggle<CR>", "Toggle Tree" },
-    }
+            ["<C-n>"] = { "<cmd>NvimTreeToggle<CR>", "Toggle Tree" },
+        }
+    )
+end
+
+-- Aerial(symbols outline)
+keymaps.s = function()
+    wk.register(
+        {
+            ["<C-s>"] = { "<cmd>AerialToggle!<CR>", "Toggle Symbols"},
+        }
     )
 end
 
