@@ -2,10 +2,10 @@
 
 ## 启动页
 
+编辑器启动界面，暂时不需要，用前者：
+
 - [ ] alpha-nvim
 - [ ] dashboard
-
-用前者。
 
 ## 文件浏览
 
@@ -22,7 +22,7 @@
 - [x] gitsigns
 - [x] toggleterm
   - [x] lazygit(in toggleterm)
-- [ ] neogit - 可以尝试，专注于 git 工作流
+- [ ] neogit - 来自于 emacs 的 magit，专注于git工作流，提供最符合 vim 哲学的 git 操作。可以尝试。
 
 ## LSP
 
@@ -41,28 +41,37 @@
 
 - [ ] trouble.nvim 底部列表，主要是错误诊断信息
 
-`:Trouble [mode]` 调出，可以显示错误诊断/函数定义等，暂时没设快捷键
+`:Trouble [mode]` 调出，可以显示错误诊断/函数定义等，暂时还没有设快捷键
 
-- [ ] nvim-lsputils, lspsaga.nvim, navigator.lua 3 选 1，更好用的 lsp 功能
+更好用的 lsp 功能，三选一：
+
+- [ ] nvim-lsputils
+- [x] lspsaga.nvim - 为 LSP 提供一个轻量级的 UI，用这个足够了
+- [ ] navigator.lua - 功能很强大，什么都不需要配置就可以得到 IDE 级别的 LSP 支持，但侵入性太强
+
+### UI 界面
+
+- [ ] lspkind.nvim 提供类 vscode 的补全图标
+- [ ] fidget.nvim 提供一个独立的 LSP 加载进度 UI
 
 ### 其他 LSP 相关
 
 - [ ] nlsp-settings.nvim
+- [ ] null-ls. 作为一个中间桥梁，让非 LSP 源能够执行neovim 内的 LSP 操作(格式化等)，比如用 prettier 格式化代码
 
 ## 调试运行
 
 - [ ] nvim-dap
 
+## 优化启动速度
+
+- filetype.nvim
+- impatient.nvim
+- 禁用多余的vim功能（netrw等）
+
 ## 其他
 
-- neogit。来自于 emacs 的 magit，专注于git工作流，提供最符合 vim 哲学的 git 操作。可以尝试。
-- null-ls. 作为一个中间桥梁，让非 LSP 源能够执行neovim 内的 LSP 操作(格式化等)，比如用 prettier 格式化代码
 - todo-comments TODO 注释的高亮和查找(telescope/trouble列表)
-
----
-
-- [ ] dashboard.nvim 编辑器界面，暂时不需要
-- [ ] folke/todo-comments.nvim
 - [ ] gpanders/editorconfig.nvim 为每个项目使用单独的编辑器设置（缩进等）
-
-- [x] which-key 键位整理
+- [ ] glow.nvim 直接在终端预览 markdown
+- [ ] which-key 键位整理

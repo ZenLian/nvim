@@ -2,49 +2,70 @@ local completion = {}
 local configs = require("modules.completion.configs")
 
 completion["neovim/nvim-lspconfig"] = {
-    opt = true,
-    event = { "BufRead", "BufNewFile" }
+    -- opt = true,
+    -- module = "lspconfig",
+    config = configs.lspconfig
 }
 
 completion["williamboman/nvim-lsp-installer"] = {
-    after = "nvim-lspconfig",
-    config = configs.lsp_installer,
+    module = "nvim-lsp-installer"
 }
 
--- completion["ray-x/navigator.lua"] = {
---     requires = {
---         { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }
---     }
--- }
+completion["tami5/lspsaga.nvim"] = {
+    module = "lspsaga",
+    cmd = "Lspsaga",
+    config = configs.lspsaga
+}
 
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
-    event = { "InsertEnter", "CmdlineEnter" },
-    requires = {
-        { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
-        { "hrsh7th/cmp-buffer", after = "cmp_luasnip" },
-        { "hrsh7th/cmp-nvim-lsp", after = "cmp-buffer" },
-        { "hrsh7th/cmp-nvim-lsp-signature-help", after = "cmp-nvim-lsp" },
-        { "hrsh7th/nvim-lsp-document-symbol", after = "cmp-nvim-lsp" },
-        { "hrsh7th/cmp-nvim-lua", after = "cmp-nvim-lsp" },
-        { "hrsh7th/cmp-path", after = "cmp-nvim-lua" },
-        { "hrsh7th/cmp-cmdline", after = "cmp-path" },
-        { "hrsh7th/cmp-calc", after = "cmp-cmdline" },
-        { "dmitmel/cmp-cmdline-history", after = "cmp-cmdline" },
-        { "uga-rosa/cmp-dictionary", module = "cmp_dictionary" },
-    },
-    config = configs.cmp,
+    event = {"InsertEnter", "CmdlineEnter"},
+    requires = {{
+        "saadparwaiz1/cmp_luasnip",
+        after = "LuaSnip"
+    }, {
+        "hrsh7th/cmp-buffer",
+        after = "cmp_luasnip"
+    }, {
+        "hrsh7th/cmp-nvim-lsp",
+        after = "cmp-buffer"
+    }, {
+        "hrsh7th/cmp-nvim-lsp-signature-help",
+        after = "cmp-nvim-lsp"
+    }, {
+        "hrsh7th/cmp-nvim-lsp-document-symbol",
+        after = "cmp-nvim-lsp"
+    }, {
+        "hrsh7th/cmp-nvim-lua",
+        after = "cmp-nvim-lsp"
+    }, {
+        "hrsh7th/cmp-path",
+        after = "cmp-nvim-lua"
+    }, {
+        "hrsh7th/cmp-cmdline",
+        after = "cmp-path"
+    }, {
+        "hrsh7th/cmp-calc",
+        after = "cmp-cmdline"
+    }, {
+        "dmitmel/cmp-cmdline-history",
+        after = "cmp-cmdline"
+    }, {
+        "uga-rosa/cmp-dictionary",
+        module = "cmp_dictionary"
+    }},
+    config = configs.cmp
 }
 
 completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
     requires = "rafamadriz/friendly-snippets",
-    config = configs.luasnip,
+    config = configs.luasnip
 }
 
 completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
-    config = configs.autopairs,
+    config = configs.autopairs
 }
 
 completion["stevearc/aerial.nvim"] = {
@@ -66,7 +87,7 @@ completion["stevearc/aerial.nvim"] = {
             -- },
             highlight_on_hover = true,
             manage_folds = true,
-            min_width = 15,
+            min_width = 15
         }
     end
 }

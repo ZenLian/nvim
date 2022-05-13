@@ -1,8 +1,14 @@
 local configs = {}
 
-configs.lsp_installer = function()
+configs.lspconfig = function()
+    -- 自定义 server
     require('modules.completion.lspserver').setup()
+    -- configs
     require('modules.completion.lspconfig').setup()
+end
+
+configs.lspsaga = function()
+    require'lspsaga'.setup {}
 end
 
 configs.cmp = function()
@@ -11,8 +17,7 @@ configs.cmp = function()
     end
     local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and
-            vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
     local kind_icons = {
@@ -46,57 +51,49 @@ configs.cmp = function()
     local cmp = require('cmp')
     cmp.setup {
         mapping = {
-            ["<CR>"] = cmp.mapping.confirm({ select = true }),
-            ["<C-p>"] = cmp.mapping(
-                function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    else
-                        fallback()
-                    end
-                end,
-                { "i", "c" }
-            ),
-            ["<C-n>"] = cmp.mapping(
-                function(fallback)
-                    if cmp.visible() then
-                        cmp.select_next_item()
-                    else
-                        fallback()
-                    end
-                end,
-                { "i", "c" }
-            ),
+            ["<CR>"] = cmp.mapping.confirm({
+                select = true
+            }),
+            ["<C-p>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                else
+                    fallback()
+                end
+            end, {"i", "c"}),
+            ["<C-n>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                else
+                    fallback()
+                end
+            end, {"i", "c"}),
             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), { "i", "c" }),
-            ["<Tab>"] = cmp.mapping(
-                function(fallback)
-                    if cmp.visible() then
-                        cmp.confirm({ select = true })
-                        -- cmp.select_next_item()
-                    elseif require('luasnip').expand_or_jumpable() then
-                        require('luasnip').expand_or_jump()
-                    elseif has_words_before() then
-                        cmp.complete()
-                    else
-                        fallback()
-                    end
-                end,
-                { "i", "s", "c" }
-            ),
-            ["<S-Tab>"] = cmp.mapping(
-                function(fallback)
-                    if cmp.visible() then
-                        cmp.select_prev_item()
-                    elseif require('luasnip').jumpable(-1) then
-                        require('luasnip').jump(-1)
-                    else
-                        fallback()
-                    end
-                end,
-                { "i", "s", "c" }
-            ),
+            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), {"i", "c"}),
+            ["<Tab>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.confirm({
+                        select = true
+                    })
+                    -- cmp.select_next_item()
+                elseif require('luasnip').expand_or_jumpable() then
+                    require('luasnip').expand_or_jump()
+                elseif has_words_before() then
+                    cmp.complete()
+                else
+                    fallback()
+                end
+            end, {"i", "s", "c"}),
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+                if cmp.visible() then
+                    cmp.select_prev_item()
+                elseif require('luasnip').jumpable(-1) then
+                    require('luasnip').jump(-1)
+                else
+                    fallback()
+                end
+            end, {"i", "s", "c"}),
             ["<C-h>"] = function(fallback)
                 if require("luasnip").jumpable(-1) then
                     vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
@@ -115,22 +112,28 @@ configs.cmp = function()
         snippet = {
             expand = function(args)
                 require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-            end,
+            end
         },
-        sources = {
-            { name = 'nvim_lsp' },
-            { name = 'nvim_lsp_signature_help' },
-            { name = 'nvim_lua' },
-            { name = 'luasnip' }, -- For luasnip users.
-            { name = 'buffer' },
-            { name = 'path' },
-            -- { name = 'cmdline' },
-            { name = 'calc' },
-            {
-                name = 'dictionary',
-                keyword_length = 2,
-            },
-        },
+        sources = {{
+            name = 'nvim_lsp'
+        }, {
+            name = 'nvim_lsp_signature_help'
+        }, {
+            name = 'nvim_lua'
+        }, {
+            name = 'luasnip'
+        }, -- For luasnip users.
+        {
+            name = 'buffer'
+        }, {
+            name = 'path'
+        }, -- { name = 'cmdline' },
+        {
+            name = 'calc'
+        }, {
+            name = 'dictionary',
+            keyword_length = 2
+        }},
         completion = {
             completeopt = 'menu,menuone,noinsert'
         },
@@ -149,7 +152,7 @@ configs.cmp = function()
                     dictionary = "[Dict]",
                     cmdline = "[CMD]",
                     cmdline_history = "[HIST]",
-                    nvim_lsp_document_symbol="[SYMBOL]",
+                    nvim_lsp_document_symbol = "[SYMBOL]"
                 })[entry.source.name]
                 return vim_item
             end
@@ -160,34 +163,38 @@ configs.cmp = function()
     }
 
     cmp.setup.cmdline('/', {
-        sources = {
-            { name = 'buffer' },
-            { name = 'cmdline_history' },
-            { name = 'nvim_lsp_document_symbol' },
-        }
+        sources = {{
+            name = 'buffer'
+        }, {
+            name = 'cmdline_history'
+        }, {
+            name = 'nvim_lsp_document_symbol'
+        }}
     })
 
     cmp.setup.cmdline(':', {
-        sources = {
-            { name = 'path' },
-            { name = 'cmdline' },
-            { name = 'cmdline_history' },
-        },
+        sources = {{
+            name = 'path'
+        }, {
+            name = 'cmdline'
+        }, {
+            name = 'cmdline_history'
+        }}
     })
 
-	require("cmp_dictionary").setup({
-		dic = {
-			["*"] = { "/usr/share/dict/words" },
-		},
-		-- The following are default values.
-		-- exact = 2,
-		first_case_insensitive = true,
-		-- document = false,
-		-- document_command = "wn %s -over",
-		async = true,
-		-- capacity = 5,
-		-- debug = false,
-	})
+    require("cmp_dictionary").setup({
+        dic = {
+            ["*"] = {"/usr/share/dict/words"}
+        },
+        -- The following are default values.
+        -- exact = 2,
+        first_case_insensitive = true,
+        -- document = false,
+        -- document_command = "wn %s -over",
+        async = true
+        -- capacity = 5,
+        -- debug = false,
+    })
 end
 
 configs.luasnip = function()
@@ -202,7 +209,11 @@ configs.autopairs = function()
     require('nvim-autopairs').setup()
     local cmp_autopairs = require('nvim-autopairs.completion.cmp')
     local cmp = require('cmp')
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({
+        map_char = {
+            tex = ''
+        }
+    }))
     cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
 end
 
