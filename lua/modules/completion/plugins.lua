@@ -73,6 +73,7 @@ completion["windwp/nvim-autopairs"] = {
 
 completion["stevearc/aerial.nvim"] = {
     module = "aerial",
+    cmd = "AerialToggle",
     config = function()
         require("aerial").setup {
             -- A list of all symbols to display. Set to false to display all symbols.
@@ -103,6 +104,12 @@ completion["folke/trouble.nvim"] = {
             -- or leave it empty to use the default settings
             -- refer to the configuration section below
         }
+    end
+}
+
+completion["j-hui/fidget.nvim"] = {
+    config = function ()
+        require"fidget".setup{}
     end
 }
 

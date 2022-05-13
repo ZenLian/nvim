@@ -72,7 +72,7 @@ basic.file_right = {
             { ' ', '' },
             { b_components.file_encoding(), 'green' },
             { ' ', '' },
-            { b_components.cache_file_type({icon = true}), 'magenta' },
+            { b_components.cache_file_type({ icon = true }), 'magenta' },
         }
     end,
 }
@@ -101,7 +101,7 @@ basic.git = {
 local quickfix = {
     filetypes = { 'qf', 'Trouble' },
     active = {
-        { '🚦 Quickfix ', { 'white', 'black' } },
+        { '🚦Quickfix ', { 'white', 'black' } },
         { helper.separators.slant_right, { 'black', 'black_light' } },
         {
             function()
@@ -180,7 +180,7 @@ local default = {
     },
 }
 
-local setup = function ()
+local setup = function()
     windline.setup({
         colors_name = function(colors)
             -- print(vim.inspect(colors))
@@ -193,7 +193,7 @@ local setup = function ()
             explorer,
         },
     })
-end 
+end
 
 return {
     setup = setup,

@@ -215,7 +215,7 @@ end
 keymaps.s = function()
     wk.register(
         {
-            ["<C-s>"] = { "<cmd>AerialToggle!<CR>", "Toggle Symbols"},
+            ["<C-t>"] = { "<cmd>AerialToggle<CR>", "Toggle Symbols"},
         }
     )
 end
