@@ -30,6 +30,9 @@ completion["hrsh7th/nvim-cmp"] = {
         "hrsh7th/cmp-nvim-lsp",
         after = "cmp-buffer"
     }, {
+        "onsails/lspkind.nvim",
+        module = "lspkind"
+    }, {
         "hrsh7th/cmp-nvim-lsp-signature-help",
         after = "cmp-nvim-lsp"
     }, {

@@ -8,7 +8,7 @@ configs.lspconfig = function()
 end
 
 configs.lspsaga = function()
-    require'lspsaga'.setup {}
+    require 'lspsaga'.setup {}
 end
 
 configs.cmp = function()
@@ -20,33 +20,33 @@ configs.cmp = function()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
-    local kind_icons = {
-        Text = "",
-        Method = "",
-        Function = "",
-        Constructor = "",
-        Field = "",
-        Variable = "",
-        Class = "ﴯ",
-        Interface = "",
-        Module = "",
-        Property = "ﰠ",
-        Unit = "",
-        Value = "",
-        Enum = "",
-        Keyword = "",
-        Snippet = "",
-        Color = "",
-        File = "",
-        Reference = "",
-        Folder = "",
-        EnumMember = "",
-        Constant = "",
-        Struct = "",
-        Event = "",
-        Operator = "",
-        TypeParameter = ""
-    }
+    -- local kind_icons = {
+    --     Text = "",
+    --     Method = "",
+    --     Function = "",
+    --     Constructor = "",
+    --     Field = "",
+    --     Variable = "",
+    --     Class = "ﴯ",
+    --     Interface = "",
+    --     Module = "",
+    --     Property = "ﰠ",
+    --     Unit = "",
+    --     Value = "",
+    --     Enum = "",
+    --     Keyword = "",
+    --     Snippet = "",
+    --     Color = "",
+    --     File = "",
+    --     Reference = "",
+    --     Folder = "",
+    --     EnumMember = "",
+    --     Constant = "",
+    --     Struct = "",
+    --     Event = "",
+    --     Operator = "",
+    --     TypeParameter = ""
+    -- }
 
     local cmp = require('cmp')
     cmp.setup {
@@ -60,17 +60,17 @@ configs.cmp = function()
                 else
                     fallback()
                 end
-            end, {"i", "c"}),
+            end, { "i", "c" }),
             ["<C-n>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_next_item()
                 else
                     fallback()
                 end
-            end, {"i", "c"}),
+            end, { "i", "c" }),
             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), {"i", "c"}),
+            ["<C-e>"] = cmp.mapping(cmp.mapping.close(), { "i", "c" }),
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.confirm({
@@ -84,7 +84,7 @@ configs.cmp = function()
                 else
                     fallback()
                 end
-            end, {"i", "s", "c"}),
+            end, { "i", "s", "c" }),
             ["<S-Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
                     cmp.select_prev_item()
@@ -93,7 +93,7 @@ configs.cmp = function()
                 else
                     fallback()
                 end
-            end, {"i", "s", "c"}),
+            end, { "i", "s", "c" }),
             ["<C-h>"] = function(fallback)
                 if require("luasnip").jumpable(-1) then
                     vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
@@ -114,48 +114,58 @@ configs.cmp = function()
                 require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             end
         },
-        sources = {{
-            name = 'nvim_lsp'
-        }, {
-            name = 'nvim_lsp_signature_help'
-        }, {
-            name = 'nvim_lua'
-        }, {
-            name = 'luasnip'
-        }, -- For luasnip users.
-        {
-            name = 'buffer'
-        }, {
-            name = 'path'
-        }, -- { name = 'cmdline' },
-        {
-            name = 'calc'
-        }, {
-            name = 'dictionary',
-            keyword_length = 2
-        }},
+        sources = {
+            { name = 'nvim_lsp' },
+            { name = 'nvim_lsp_signature_help' },
+            { name = 'nvim_lua' },
+            { name = 'luasnip' }, -- For luasnip users.
+            { name = 'buffer' },
+            { name = 'path' },
+            -- { name = 'cmdline' },
+            { name = 'calc' },
+            { name = 'dictionary', keyword_length = 2 }
+        },
         completion = {
             completeopt = 'menu,menuone,noinsert'
         },
         formatting = {
-            format = function(entry, vim_item)
-                -- Kind icons
-                vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-                -- Source
-                vim_item.menu = ({
-                    nvim_lsp = "[LSP]",
-                    nvim_lua = "[Lua]",
-                    luasnip = "[LuaSnip]",
-                    buffer = "[Buff]",
-                    path = "[Path]",
-                    calc = "[Calc]",
-                    dictionary = "[Dict]",
-                    cmdline = "[CMD]",
-                    cmdline_history = "[HIST]",
-                    nvim_lsp_document_symbol = "[SYMBOL]"
-                })[entry.source.name]
-                return vim_item
-            end
+            format = require('lspkind').cmp_format({
+                mode = 'symbol',
+                max_width = 50,
+                before = function(entry, vim_item)
+                    -- Source menu
+                    vim_item.menu = ({
+                        nvim_lsp = "[LSP]",
+                        nvim_lua = "[Lua]",
+                        luasnip = "[Snip]",
+                        buffer = "[Buff]",
+                        path = "[Path]",
+                        calc = "[Calc]",
+                        dictionary = "[Dict]",
+                        cmdline = "[CMD]",
+                        cmdline_history = "[HIST]",
+                    })[entry.source.name]
+                    return vim_item
+                end
+            }),
+            -- format = function(entry, vim_item)
+            --     -- Kind icons
+            --     vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+            --     -- Source
+            --     vim_item.menu = ({
+            --         nvim_lsp = "[LSP]",
+            --         nvim_lua = "[Lua]",
+            --         luasnip = "[LuaSnip]",
+            --         buffer = "[Buff]",
+            --         path = "[Path]",
+            --         calc = "[Calc]",
+            --         dictionary = "[Dict]",
+            --         cmdline = "[CMD]",
+            --         cmdline_history = "[HIST]",
+            --         nvim_lsp_document_symbol = "[SYMBOL]"
+            --     })[entry.source.name]
+            --     return vim_item
+            -- end
         },
         experimental = {
             ghost_text = true
@@ -163,28 +173,28 @@ configs.cmp = function()
     }
 
     cmp.setup.cmdline('/', {
-        sources = {{
+        sources = { {
             name = 'buffer'
         }, {
             name = 'cmdline_history'
         }, {
             name = 'nvim_lsp_document_symbol'
-        }}
+        } }
     })
 
     cmp.setup.cmdline(':', {
-        sources = {{
+        sources = { {
             name = 'path'
         }, {
             name = 'cmdline'
         }, {
             name = 'cmdline_history'
-        }}
+        } }
     })
 
     require("cmp_dictionary").setup({
         dic = {
-            ["*"] = {"/usr/share/dict/words"}
+            ["*"] = { "/usr/share/dict/words" }
         },
         -- The following are default values.
         -- exact = 2,

@@ -16,6 +16,7 @@
 ## Telescope
 
 - [ ] telescope-symbols.nvim 列出特殊符号(emoji/数学符号等)
+- [ ] telescope UI 美化
 
 ## Git
 
@@ -45,18 +46,18 @@
 
 更好用的 lsp 功能，三选一：
 
-- [ ] nvim-lsputils
+- [ ] nvim-lsputils - LSP 功能优化
 - [x] lspsaga.nvim - 为 LSP 提供一个轻量级的 UI，用这个足够了
 - [ ] navigator.lua - 功能很强大，什么都不需要配置就可以得到 IDE 级别的 LSP 支持，但侵入性太强
 
 ### UI 界面
 
-- [ ] lspkind.nvim 提供类 vscode 的补全图标
+- [x] lspkind.nvim 提供类 vscode 的补全图标
 - [ ] fidget.nvim 提供一个独立的 LSP 加载进度 UI
 
 ### 其他 LSP 相关
 
-- [ ] nlsp-settings.nvim
+- [ ] nlsp-settings.nvim 用 json 配置 lsp
 - [ ] null-ls. 作为一个中间桥梁，让非 LSP 源能够执行neovim 内的 LSP 操作(格式化等)，比如用 prettier 格式化代码
 
 ## 调试运行
