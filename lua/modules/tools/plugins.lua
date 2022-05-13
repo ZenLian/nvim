@@ -67,7 +67,7 @@ tools['kyazdani42/nvim-tree.lua'] = {
 
 tools["akinsho/toggleterm.nvim"] = {
     opt = true,
-    event = { "BufRead", "BufNewFile" },
+    module = "toggleterm",
     config = configs.toggleterm,
 }
 
