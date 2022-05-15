@@ -11,7 +11,7 @@ tools["nvim-telescope/telescope.nvim"] = {
     opt = true,
     cmd = "Telescope",
     module = "telescope",
-    requires = { { "nvim-lua/plenary.nvim", opt = false } },
+    requires = { { "nvim-lua/plenary.nvim" } },
     config = configs.telescope,
 }
 
@@ -38,6 +38,17 @@ tools["nvim-telescope/telescope-smart-history.nvim"] = {
     requires = { { "tami5/sqlite.lua" } },
     config = function()
         require('telescope').load_extension('smart_history')
+    end
+}
+
+tools["nvim-telescope/telescope-symbols.nvim"] = {
+    after = "telescope.nvim",
+}
+
+tools["nvim-telescope/telescope-file-browser.nvim"] = {
+    after = "telescope.nvim",
+    config = function ()
+        require('telescope').load_extension('file_browser')
     end
 }
 

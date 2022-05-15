@@ -1,27 +1,55 @@
 local configs = {}
 
 configs.telescope = function()
+    -- file_browser actions
+    -- 这时插件还没加载， extensions 会报错，所以把函数放在闭包里延后执行
+    local fb_actions = function(action)
+        return function(...)
+            local actions = require('telescope').extensions.file_browser.actions
+            return actions[action](...)
+        end
+    end
+
     require('telescope').setup {
         defaults = {
             mappings = {
                 i = {
-                    ["<C-h>"] = "which_key",
+                    ["<C-/>"] = "which_key",
                     ["<C-k>"] = "move_selection_previous",
                     ["<C-j>"] = "move_selection_next"
                 }
             },
+            prompt_prefix = ' ',
+            selection_caret = ' ',
+            sorting_strategy = 'ascending',
+            layout_strategy = 'horizontal',
+            layout_config = {
+                prompt_position = "top",
+            },
+            -- border = false,
+            borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
             history = {
-                path = vim.fn.stdpath('data')..'/databases/telescope_history.sqlite3',
+                path = vim.fn.stdpath('data') .. '/databases/telescope_history.sqlite3',
                 limit = 100,
             }
         },
         extensions = {
             frecency = {
-                db_root = vim.fn.stdpath('data')..'/databases',
+                db_root = vim.fn.stdpath('data') .. '/databases',
                 show_scores = true,
                 show_unindexed = true,
-                ignore_patterns = {"*.git/*", "*/tmp/*"},
+                ignore_patterns = { "*.git/*", "*/tmp/*" },
             },
+            file_browser = {
+                theme = 'ivy',
+                mappings = {
+                    n = {
+                        ["a"] = fb_actions('create'),
+                        ["l"] = fb_actions('open'),
+                        ["h"] = fb_actions('goto_parent_dir'),
+                    }
+                }
+            }
         }
     }
 
@@ -32,7 +60,7 @@ configs.telescope = function()
 end
 
 configs.neoclip = function()
-    require('neoclip').setup{
+    require('neoclip').setup {
         enable_persistent_history = true,
         db_path = vim.fn.stdpath("data") .. "/databases/neoclip.sqlite3",
         keys = {

@@ -15,9 +15,10 @@
 
 ## Telescope
 
-- [ ] telescope-symbols.nvim 列出特殊符号(emoji/数学符号等)
-- [ ] telescope 文件浏览器
+- [x] telescope-symbols.nvim 列出特殊符号(emoji/数学符号等)
+- [x] telescope 文件浏览器，normal 键位映射为 ranger 模式
 - [ ] telescope UI 美化
+- [ ] telescope-ui-select.nvim 让 telescope 接管 vim 的默认选择器，可以在 telescope 中执行 code actions 等，需要配置，以后再说
 
 ## Git
 

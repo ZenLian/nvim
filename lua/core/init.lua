@@ -3,12 +3,14 @@ local leader_map = function()
     vim.g.mapleader = " "
 end
 
-function init()
-    leader_map()
+local function init()
 
     require('core.options')
-    require('core.keymaps')
+    leader_map()
+    -- require('core.keymaps')
     require('core.pack')
+
+    vim.cmd [[colorscheme edgeme]]
 end
 
 init()

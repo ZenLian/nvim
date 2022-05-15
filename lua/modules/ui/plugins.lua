@@ -2,8 +2,13 @@ local ui = {}
 local configs = require("modules.ui.configs")
 
 ui['sainnhe/edge'] = {
-    config = configs.edge,
+    -- config = configs.edge,
 }
+
+-- ui['Mofiqul/vscode.nvim'] = {
+--     config = configs.vscode,
+-- }
+
 ui['windwp/windline.nvim'] = {
     config = configs.windline,
 }

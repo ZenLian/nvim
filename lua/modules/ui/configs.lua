@@ -9,6 +9,15 @@ configs.edge = function()
     vim.cmd [[colorscheme edge]]
 end
 
+configs.vscode = function ()
+    vim.o.background = 'dark'
+    vim.g.vscode_style = 'dark'
+    vim.g.vscode_transparent = 0
+    vim.g.vscode_italic_comment = 1
+    vim.g.vscode_disable_nvimtree_bg = false
+    vim.cmd [[colorscheme vscode]]
+end
+
 configs.windline = function ()
     require('modules.ui.windline.evil_line').setup()
     require('wlfloatline').setup()

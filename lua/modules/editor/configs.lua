@@ -92,8 +92,12 @@ configs.treesitter = function()
 end
 
 configs.comment = function()
-    require("Comment").setup()
+    require("Comment").setup {
+        -- ignore blank lines
+        ignore = '^(%s*)$'
+    }
 end
+
 
 configs.treehopper = function()
     vim.cmd [[omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>]]

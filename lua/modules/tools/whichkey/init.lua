@@ -111,7 +111,7 @@ keymaps.f = function()
                 p = { "<cmd>Telescope projects<CR>", "Projects" },
                 c = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
                 r = { "<cmd>Telescope resume<CR>", "Resume" },
-                -- n = {"<cmd>Telescope file_browser<CR>", "File Browser"},
+                n = { "<cmd>Telescope file_browser<CR>", "File Browser" },
             },
             ["<Leader>"] = { "<cmd>Telescope<CR>", "Telescope" },
         },

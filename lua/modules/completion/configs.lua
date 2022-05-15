@@ -114,17 +114,19 @@ configs.cmp = function()
                 require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
             end
         },
-        sources = {
+        sources = cmp.config.sources({
             { name = 'nvim_lsp' },
+            { name = 'luasnip' }, -- For luasnip users.
             { name = 'nvim_lsp_signature_help' },
             { name = 'nvim_lua' },
-            { name = 'luasnip' }, -- For luasnip users.
+        }, {
             { name = 'buffer' },
             { name = 'path' },
             -- { name = 'cmdline' },
+        }, {
             { name = 'calc' },
             { name = 'dictionary', keyword_length = 2 }
-        },
+        }),
         completion = {
             completeopt = 'menu,menuone,noinsert'
         },
