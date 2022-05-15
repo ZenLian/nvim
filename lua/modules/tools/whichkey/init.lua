@@ -145,7 +145,7 @@ keymaps.g = function()
         dir = "git_dir",
         direction = "float",
         float_opts = {
-            border = "double",
+            border = "rounded",
         },
         -- function to run on opening the terminal
         on_open = function(term)

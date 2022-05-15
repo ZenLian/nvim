@@ -2,7 +2,7 @@ local configs = {}
 
 configs.telescope = function()
     -- file_browser actions
-    -- 这时插件还没加载， extensions 会报错，所以把函数放在闭包里延后执行
+    -- TODO: 这时插件还没加载， extensions 会报错，所以把函数放在闭包里延后执行
     local fb_actions = function(action)
         return function(...)
             local actions = require('telescope').extensions.file_browser.actions
@@ -42,10 +42,11 @@ configs.telescope = function()
             },
             file_browser = {
                 theme = 'ivy',
+                initial_mode = 'normal',
                 mappings = {
                     n = {
                         ["a"] = fb_actions('create'),
-                        ["l"] = fb_actions('open'),
+                        ["l"] = "select_default",
                         ["h"] = fb_actions('goto_parent_dir'),
                     }
                 }
@@ -113,7 +114,7 @@ configs.toggleterm = function()
         persist_size = true,
         direction = "vertical",
         close_on_exit = true, -- close the terminal window when the process exits
-        shell = vim.o.shell -- change the default shell
+        shell = vim.o.shell, -- change the default shell
     }
 
     -- vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua LazygitToggle()<CR>", {noremap = true, silent = true})

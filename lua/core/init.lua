@@ -9,8 +9,6 @@ local function init()
     leader_map()
     -- require('core.keymaps')
     require('core.pack')
-
-    vim.cmd [[colorscheme edgeme]]
 end
 
 init()

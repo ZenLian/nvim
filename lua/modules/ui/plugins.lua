@@ -1,13 +1,10 @@
 local ui = {}
 local configs = require("modules.ui.configs")
 
-ui['sainnhe/edge'] = {
-    -- config = configs.edge,
+ui['~/source/edgeme'] = {
+    -- ui['zenlian/edgeme'] = {
+    config = configs.colorscheme,
 }
-
--- ui['Mofiqul/vscode.nvim'] = {
---     config = configs.vscode,
--- }
 
 ui['windwp/windline.nvim'] = {
     config = configs.windline,
@@ -33,12 +30,12 @@ ui['norcalli/nvim-colorizer.lua'] = {
 
 ui['folke/zen-mode.nvim'] = {
     opt = true,
-    cmd = {"ZenMode"},
+    cmd = { "ZenMode" },
     config = configs.zen_mode,
 }
 ui['folke/twilight.nvim'] = {
     opt = true,
-    cmd = {"Twilight"},
+    cmd = { "Twilight" },
     config = function()
         require('twilight').setup()
     end

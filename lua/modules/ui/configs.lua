@@ -1,24 +1,14 @@
 local configs = {}
 
-configs.edge = function()
+configs.colorscheme = function()
     vim.o.background = 'dark'
-    vim.g.edge_style = 'aura'
-    --vim.g.edge_enable_italic = 1
-    vim.g.edge_disable_italic_comment = 1
-    vim.g.edge_better_performance = 1
-    vim.cmd [[colorscheme edge]]
+    require('edgeme').setup {
+        style = 'aura',
+    }
+    vim.cmd [[colorscheme edgeme]]
 end
 
-configs.vscode = function ()
-    vim.o.background = 'dark'
-    vim.g.vscode_style = 'dark'
-    vim.g.vscode_transparent = 0
-    vim.g.vscode_italic_comment = 1
-    vim.g.vscode_disable_nvimtree_bg = false
-    vim.cmd [[colorscheme vscode]]
-end
-
-configs.windline = function ()
+configs.windline = function()
     require('modules.ui.windline.evil_line').setup()
     require('wlfloatline').setup()
 end
@@ -35,7 +25,7 @@ end
 
 configs.indent_blankline = function()
     -- vim.opt.listchars:append('space:⋅')
-    require('indent_blankline').setup{
+    require('indent_blankline').setup {
         -- show_current_context_start = true,
         -- space_char_blankline = " "
         filetype_exclude = { "help", "NvimTree", "lsp-installer", "packer" }

@@ -1,12 +1,12 @@
 # neovim lua 配置
 
-深度参考（~~Ctrl+C, Ctrl+V~~）[ayamir/nvimdots](https://github.com/ayamir/nvimdots) 的纯 lua neovim 配置。
+> **此文档不保证及时更新！**
 
-neovim 0.5.0 开始使用原生支持 lua 配置，并且内置 lsp 和 treesitter
-等特性，比 coc.nvim 要快，不需要大量的 node 依赖。准备将原来的 coc 配置一点点迁移过来了。
+深度参考 [ayamir/nvimdots](https://github.com/ayamir/nvimdots) 的纯 lua neovim 配置。
 
-- 使用 packer.nvim 替代 vim-plug
-- 使用 lspconfig 替代 coc.nvim
+- 使用 packer.nvim 管理插件
+- 使用 lspconfig 实现语言 LSP 配置
+- 使用 treesitter 辅助分析代码
 
 ## 前置要求
 
@@ -73,9 +73,16 @@ treesitter 及其扩展：
 
 |插件|描述|
 |---|---|
-|[lightspeed](https://github.com/ggandor/lightspeed.nvim)|屏幕内移动光标最佳方案|
+|[lightspeed](https://github.com/ggandor/lightspeed.nvim)|光标快速定位|
 |[surround](https://github.com/ur4ltz/surround.nvim)|nvim 版本的 vim-surround|
 |[gitsigns](https://github.com/lewis6991/gitsigns.nvim)|git 插件|
+
+### completion
+
+补全和 LSP 相关插件
+
+==TODO==
+
 
 ## Keymappings
 
@@ -244,7 +251,7 @@ visual 模式下选中后按 `s` 在两边插入括号。
 |**text objects**||
 |`ag`/`ig`|a hunk|
 
-## 不为人知的 vim 原生操作
+## 一些 vim 原生操作技巧
 
 ### 大小写转换
 
