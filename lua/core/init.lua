@@ -1,4 +1,3 @@
-
 local leader_map = function()
     vim.g.mapleader = " "
 end
@@ -12,4 +11,3 @@ local function init()
 end
 
 init()
-

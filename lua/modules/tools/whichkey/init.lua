@@ -61,10 +61,11 @@ end
 keymaps.packer = function()
     wk.register(
         {
-            ["/"] = {
+            ["p"] = {
                 name = "packer",
-                s = { "<cmd>PackerSync<CR>", "Packer Sync" },
-                t = { "<cmd>PackerStatus<CR>", "Packer Status" },
+                p = { "<cmd>PackerSync<CR>", "Packer Sync" },
+                s = { "<cmd>PackerStatus<CR>", "Packer Status" },
+                c = { "<cmd>PackerCompile<CR>", "Packer Complile" },
             },
         },
         { prefix = "<Leader>" }
@@ -206,8 +207,8 @@ keymaps.n = function()
     )
     wk.register(
         {
-            ["<C-n>"] = { "<cmd>NvimTreeToggle<CR>", "Toggle Tree" },
-        }
+        ["<C-n>"] = { "<cmd>NvimTreeToggle<CR>", "Toggle Tree" },
+    }
     )
 end
 
@@ -215,8 +216,8 @@ end
 keymaps.s = function()
     wk.register(
         {
-            ["<C-t>"] = { "<cmd>AerialToggle<CR>", "Toggle Symbols"},
-        }
+        ["<C-t>"] = { "<cmd>AerialToggle<CR>", "Toggle Symbols" },
+    }
     )
 end
 
@@ -231,6 +232,23 @@ keymaps.z = function()
             },
         },
         {
+        prefix = "<Leader>"
+    }
+    )
+end
+
+-- LSP
+keymaps.l = function()
+    wk.register(
+    {
+        l = {
+            name = "language",
+            f = "Format File",
+            c = "Code Action",
+            r = "Rename",
+        }
+    },
+    {
         prefix = "<Leader>"
     }
     )

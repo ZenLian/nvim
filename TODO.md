@@ -79,6 +79,6 @@
 
 ## 其他
 
-- todo-comments TODO 注释的高亮和查找(telescope/trouble列表)
+- [ ] todo-comments TODO 注释的高亮和查找(telescope/trouble列表)
 - [ ] gpanders/editorconfig.nvim 为每个项目使用单独的编辑器设置（缩进等）
 - [ ] which-key 键位整理

@@ -1,10 +1,25 @@
 local ui = {}
 local configs = require("modules.ui.configs")
 
+--#region colorschemes
 ui['~/source/edgeme'] = {
     -- ui['zenlian/edgeme'] = {
-    config = configs.colorscheme,
+    config = configs.edgeme,
 }
+ui['sainnhe/edge'] = {
+    config = function ()
+        vim.g.edge_enable_italic = false
+        vim.g.edge_show_eob = false
+        vim.g.edge_diagnostic_virtual_text = true
+    end
+}
+ui['Mofiqul/vscode.nvim'] = { }
+ui['shaunsingh/nord.nvim'] = { }
+ui['ThemerCorp/themer.lua'] = {
+    config = configs.themer
+}
+--#endregion colorschemes
+
 
 ui['windwp/windline.nvim'] = {
     config = configs.windline,

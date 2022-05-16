@@ -58,6 +58,7 @@ configs.telescope = function()
     --     vim.cmd [[packadd nvim-neoclip.lua]]
     -- end
     require('telescope').load_extension('neoclip')
+    require('telescope').load_extension('themes')
 end
 
 configs.neoclip = function()
@@ -116,7 +117,6 @@ configs.toggleterm = function()
         close_on_exit = true, -- close the terminal window when the process exits
         shell = vim.o.shell, -- change the default shell
     }
-
     -- vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua LazygitToggle()<CR>", {noremap = true, silent = true})
 end
 

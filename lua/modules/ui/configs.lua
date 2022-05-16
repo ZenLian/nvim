@@ -1,11 +1,17 @@
 local configs = {}
 
-configs.colorscheme = function()
+configs.edgeme = function()
     vim.o.background = 'dark'
     require('edgeme').setup {
         style = 'aura',
     }
     vim.cmd [[colorscheme edgeme]]
+end
+
+configs.themer = function ()
+    require('themer').setup {
+        -- colorscheme = "onedark",
+    }
 end
 
 configs.windline = function()
@@ -30,6 +36,22 @@ configs.indent_blankline = function()
         -- space_char_blankline = " "
         filetype_exclude = { "help", "NvimTree", "lsp-installer", "packer" }
     }
+end
+
+configs.colorizer = function ()
+    require('colorizer').setup(
+        {
+            '*',
+            '!NvimTree', -- exclude filetypes
+            css = {
+                names = true,
+                rgb_fb = true, -- rgb(...)
+            },
+        },
+        {
+            names = false
+        }
+    )
 end
 
 configs.zen_mode = function()
