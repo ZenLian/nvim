@@ -20,18 +20,20 @@ ui['ThemerCorp/themer.lua'] = {
 }
 --#endregion colorschemes
 
+-- required by many plugins
+-- ui['kyazdani42/nvim-web-devicons'] = {}
 
 ui['windwp/windline.nvim'] = {
     config = configs.windline,
 }
 
-ui['kyazdani42/nvim-web-devicons'] = {}
 ui['akinsho/bufferline.nvim'] = {
     opt = true,
     event = "BufRead",
     requires = 'kyazdani42/nvim-web-devicons',
     config = configs.bufferline,
 }
+
 ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
     event = 'BufRead',
@@ -54,6 +56,10 @@ ui['folke/twilight.nvim'] = {
     config = function()
         require('twilight').setup()
     end
+}
+
+ui['goolord/alpha-nvim'] = {
+    config = configs.alpha
 }
 
 return ui

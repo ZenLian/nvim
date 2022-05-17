@@ -42,7 +42,7 @@ configs.colorizer = function ()
     require('colorizer').setup(
         {
             '*',
-            '!NvimTree', -- exclude filetypes
+            -- '!NvimTree', -- exclude filetypes
             css = {
                 names = true,
                 rgb_fb = true, -- rgb(...)
@@ -60,6 +60,10 @@ configs.zen_mode = function()
             width = 120
         }
     }
+end
+
+configs.alpha = function ()
+    require('modules.ui.alpha')
 end
 
 return configs

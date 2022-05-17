@@ -8,7 +8,9 @@ configs.lspconfig = function()
 end
 
 configs.lspsaga = function()
-    require 'lspsaga'.setup {}
+    require 'lspsaga'.setup {
+        border_style = "none",
+    }
 end
 
 configs.cmp = function()
@@ -185,13 +187,12 @@ configs.cmp = function()
     })
 
     cmp.setup.cmdline(':', {
-        sources = { {
-            name = 'path'
+        sources = cmp.config.sources({
+            { name = 'cmdline' },
         }, {
-            name = 'cmdline'
-        }, {
-            name = 'cmdline_history'
-        } }
+            { name = 'path' },
+            { name = 'cmdline_history' }
+        })
     })
 
     require("cmp_dictionary").setup({

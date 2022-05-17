@@ -1,13 +1,7 @@
-local leader_map = function()
-    vim.g.mapleader = " "
-end
+vim.g.mapleader = " "
 
-local function init()
+require('core.options')
+require('core.autocmd')
+-- require('core.keymaps')
+require('core.pack')
 
-    require('core.options')
-    leader_map()
-    -- require('core.keymaps')
-    require('core.pack')
-end
-
-init()
