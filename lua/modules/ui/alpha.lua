@@ -35,6 +35,6 @@ dashboard.section.buttons.val = {
 
 local fortune = require("alpha.fortune")
 dashboard.section.footer.val = fortune()
-dashboard.section.footer.opts.hl = "Comment"
+dashboard.section.footer.opts.hl = "String"
 
 alpha.setup(dashboard.config)

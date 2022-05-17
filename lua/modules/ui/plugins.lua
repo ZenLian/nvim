@@ -2,22 +2,20 @@ local ui = {}
 local configs = require("modules.ui.configs")
 
 --#region colorschemes
+-- ui['zenlian/edgeme'] = {
 ui['~/source/edgeme'] = {
-    -- ui['zenlian/edgeme'] = {
     config = configs.edgeme,
 }
 ui['sainnhe/edge'] = {
-    config = function ()
+    config = function()
         vim.g.edge_enable_italic = false
         vim.g.edge_show_eob = false
         vim.g.edge_diagnostic_virtual_text = true
     end
 }
-ui['Mofiqul/vscode.nvim'] = { }
-ui['shaunsingh/nord.nvim'] = { }
-ui['ThemerCorp/themer.lua'] = {
-    config = configs.themer
-}
+-- ui['ThemerCorp/themer.lua'] = {
+--     config = configs.themer
+-- }
 --#endregion colorschemes
 
 -- required by many plugins
@@ -60,6 +58,12 @@ ui['folke/twilight.nvim'] = {
 
 ui['goolord/alpha-nvim'] = {
     config = configs.alpha
+}
+
+ui['rcarriga/nvim-notify'] = {
+    config = function()
+        require('modules.ui.notify')
+    end
 }
 
 return ui
