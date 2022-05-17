@@ -107,14 +107,13 @@ keymaps.f = function()
                 s = { "<cmd>Telescope grep_string<CR>", "Grep String" },
                 z = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy Find in Buffer" },
                 ["/"] = { "<cmd>Telescope help_tags<CR>", "Help Tags" },
-                o = { "<cmd>Telescope oldfiles<CR>", "Old Files" },
                 h = { "<cmd>Telescope frecency<CR>", "Frecency Files" },
                 p = { "<cmd>Telescope projects<CR>", "Projects" },
                 c = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
-                r = { "<cmd>Telescope resume<CR>", "Resume" },
+                r = { "<cmd>Telescope oldfiles<CR>", "Old Files" },
                 n = { "<cmd>Telescope file_browser<CR>", "File Browser" },
             },
-            ["<Leader>"] = { "<cmd>Telescope<CR>", "Telescope" },
+            ["<Leader>"] = { "<cmd>Telescope resume<CR>", "Telescope Resume" },
         },
         { prefix = "<Leader>" }
     )
@@ -237,18 +236,21 @@ keymaps.z = function()
     )
 end
 
--- LSP
+-- language
 keymaps.l = function()
     wk.register(
-    {
-        l = {
-            name = "language",
-            f = "Format File",
-            c = "Code Action",
-            r = "Rename",
-        }
-    },
-    {
+        {
+            l = {
+                name = "language",
+                f = "Format File",
+                c = "Code Action",
+                r = "Rename",
+                d = {"<cmd>TroubleToggle<CR>", "Diagnostics"},
+                -- TODO: should only works in markdown filetype
+                p = { "<cmd>Glow<CR>", "Preview(Markdown)" } -- markdown preview
+            }
+        },
+        {
         prefix = "<Leader>"
     }
     )

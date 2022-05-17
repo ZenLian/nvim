@@ -20,6 +20,7 @@ local function button(...)
     -- btn.opts.hl = "Type"
     -- btn.opts.hl_shortcut = "Function"
     -- btn.opts.cursor = 0
+    -- btn.opts.width = 30
     return btn
 end
 

@@ -10,6 +10,12 @@ configs.telescope = function()
         end
     end
 
+    local dropdown = {
+        theme = 'dropdown',
+        previewer = false,
+        height = 25,
+    }
+
     require('telescope').setup {
         defaults = {
             mappings = {
@@ -22,16 +28,23 @@ configs.telescope = function()
             prompt_prefix = ' ',
             selection_caret = ' ',
             sorting_strategy = 'ascending',
-            layout_strategy = 'horizontal',
+            layout_strategy = 'bottom_pane',
             layout_config = {
                 prompt_position = "top",
+                height = 25,
             },
             -- border = false,
             borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
             history = {
                 path = vim.fn.stdpath('data') .. '/databases/telescope_history.sqlite3',
                 limit = 100,
-            }
+            },
+        },
+        pickers = {
+            builtin = dropdown,
+            find_files = dropdown,
+            git_files = dropdown,
+            oldfiles = dropdown,
         },
         extensions = {
             frecency = {
@@ -41,7 +54,7 @@ configs.telescope = function()
                 ignore_patterns = { "*.git/*", "*/tmp/*" },
             },
             file_browser = {
-                theme = 'ivy',
+                -- theme = 'ivy',
                 initial_mode = 'normal',
                 mappings = {
                     n = {
@@ -50,7 +63,8 @@ configs.telescope = function()
                         ["h"] = fb_actions('goto_parent_dir'),
                     }
                 }
-            }
+            },
+            themes = dropdown,
         }
     }
 

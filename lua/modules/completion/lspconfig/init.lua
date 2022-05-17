@@ -39,6 +39,8 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<Leader>lf', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
     buf_set_keymap("n", "gr", "<cmd>Lspsaga lsp_finder<cr>", opts)
+    buf_set_keymap("n", "gh", "<cmd>Lspsaga signature_help<cr>", opts)
+    buf_set_keymap("n", "gd", "<cmd>Lspsaga preview_definition<cr>", opts)
     buf_set_keymap("n", "<Leader>lr", "<cmd>Lspsaga rename<cr>", opts)
     buf_set_keymap("n", "<Leader>lc", "<cmd>Lspsaga code_action<cr>", opts)
     buf_set_keymap("x", "<Leader>lc", ":<C-u>Lspsaga range_code_action<cr>", opts)
@@ -48,8 +50,6 @@ local on_attach = function(client, bufnr)
     buf_set_keymap("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
     buf_set_keymap("n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<c-u>')<cr>", {})
     buf_set_keymap("n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<c-d>')<cr>", {})
-    buf_set_keymap("n", "gh", "<cmd>Lspsaga signature_help<cr>", opts)
-    buf_set_keymap("n", "gd", "<cmd>Lspsaga preview_definition<cr>", opts)
 
     -- aerial.nvim
     require("aerial").on_attach(client, bufnr)
