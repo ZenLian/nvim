@@ -29,7 +29,7 @@ dashboard.section.buttons.val = {
     button("f", "  > Files", ":Telescope find_files<CR>"),
     button("r", "  > Recent", ":Telescope oldfiles<CR>"),
     button("c", "  > Configs", ":e $MYVIMRC | :cd %:p:h<CR>"),
-    -- button("s", "  > Session"),
+    button("s", "  > Last Session", "<cmd>SessionManager load_last_session<CR>"),
     button("q", "  > Quit", ":qa<CR>"),
 }
 

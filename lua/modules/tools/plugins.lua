@@ -70,6 +70,10 @@ tools["ahmedkhalf/project.nvim"] = {
 }
 --#endregion Telescope
 
+tools["Shatur/neovim-session-manager"] = {
+    config = configs.session
+}
+
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeRefresh", "NvimTreeFocus" },
