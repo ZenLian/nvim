@@ -68,3 +68,17 @@ vim.api.nvim_create_autocmd(
     command = [[checktime]],
 }
 )
+
+-- format on save
+vim.api.nvim_create_augroup("save", { clear = true })
+vim.api.nvim_create_autocmd(
+    {"BufWritePre"},
+    {
+        group = "save",
+        callback = function ()
+            if require('config').format_on_save then
+                vim.lsp.buf.formatting_sync(nil, 1000)
+            end
+        end
+    }
+)

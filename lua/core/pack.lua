@@ -1,17 +1,18 @@
 local fn = vim.fn
 local globals = require('core.globals')
-local packer_compile_path = fn.stdpath('data') .. '/packer_compiled.lua'
+-- local packer_compile_path = fn.stdpath('data') .. '/packer_compiled.lua'
 local packer_dir = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
+local packer_bootstrap
 if fn.empty(fn.glob(packer_dir)) > 0 then
-    packer_bootstrap = fn.system {'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir}
+    packer_bootstrap = fn.system { 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir }
 end
 
 -- load packer
 packer = require('packer')
 packer.startup({
     function(use)
-        use {'wbthomason/packer.nvim'}
+        use { 'wbthomason/packer.nvim' }
         local repos = require('modules')
         for _, repo in ipairs(repos) do
             use(repo)
@@ -30,4 +31,3 @@ packer.startup({
         }
     }
 })
-

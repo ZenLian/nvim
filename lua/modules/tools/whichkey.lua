@@ -265,14 +265,33 @@ keymaps.l = function()
         ["gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Goto Definition" },
         ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
         ["gr"] = { "<cmd>Telescope lsp_references<CR>", "Goto references" },
-        ["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto references(Trouble)" },
+        ["gR"] = { "<cmd>Troublferences<CR>", "Goto references(Trouble)" },
         ["K"] = { vim.lsp.buf.hover, "Hover doc" },
         -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
         ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
         ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
-        ["<Leader>le"] = { vim.diagnostic.open_float, "Line diagnostic"},
+        ["<Leader>le"] = { vim.diagnostic.open_float, "Line diagnostic" },
     })
 end
+
+
+keymaps.dot = function()
+    local function toggle_format_on_save()
+        local config = require('config')
+        config.format_on_save = not config.format_on_save
+    end
+
+    wk.register(
+        {
+            ["."] = {
+                name = "config",
+                f = { toggle_format_on_save, "Toggle format on save" }
+            }
+        }, {
+        prefix = "<Leader>"
+    })
+end
+
 
 wk.setup {
     plugins = {
@@ -285,4 +304,3 @@ wk.setup {
 for _, fn in pairs(keymaps) do
     fn()
 end
-

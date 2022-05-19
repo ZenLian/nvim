@@ -9,7 +9,7 @@ local function diagnostic_setup()
         Info = "",
     }
     for serverity, icon in pairs(signs) do
-        local hl = "DiagnosticSign"..serverity
+        local hl = "DiagnosticSign" .. serverity
         vim.fn.sign_define(hl, {
             text = icon,
             texthl = hl,
