@@ -273,20 +273,15 @@ keymaps.l = function()
     })
 end
 
-local setup = function()
-    wk.setup {
-        plugins = {
-            spelling = {
-                enabled = true,
-                suggestions = 20,
-            }
+wk.setup {
+    plugins = {
+        spelling = {
+            enabled = true,
+            suggestions = 20,
         }
     }
-    for _, fn in pairs(keymaps) do
-        fn()
-    end
+}
+for _, fn in pairs(keymaps) do
+    fn()
 end
 
-return {
-    setup = setup
-}
