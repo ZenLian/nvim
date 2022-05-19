@@ -39,12 +39,11 @@ local setup = function()
     }
 
     local lspconfig = require('lspconfig')
+    local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
     for _, server in ipairs(servers) do
         local opts = {
             on_attach = on_attach,
-            flags = {
-                debounce_text_changes = 150
-            }
+            capabilities = capabilities,
         }
         local ok, custom_opts = pcall(require, 'modules.completion.lspconfig.' .. server)
         if ok then

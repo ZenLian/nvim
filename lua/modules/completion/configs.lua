@@ -22,33 +22,51 @@ configs.cmp = function()
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
     end
 
-    -- local kind_icons = {
-    --     Text = "",
-    --     Method = "",
-    --     Function = "",
-    --     Constructor = "",
-    --     Field = "",
-    --     Variable = "",
-    --     Class = "ﴯ",
-    --     Interface = "",
-    --     Module = "",
-    --     Property = "ﰠ",
-    --     Unit = "",
-    --     Value = "",
-    --     Enum = "",
-    --     Keyword = "",
-    --     Snippet = "",
-    --     Color = "",
-    --     File = "",
-    --     Reference = "",
-    --     Folder = "",
-    --     EnumMember = "",
-    --     Constant = "",
-    --     Struct = "",
-    --     Event = "",
-    --     Operator = "",
-    --     TypeParameter = ""
-    -- }
+    local kind_icons = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        -- Unit = "",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+    }
+
+    local cmp_fmt = function(entry, item)
+        item.kind = string.format('%s', kind_icons[item.kind])
+        -- Source menu
+        item.menu = ({
+            nvim_lsp = "[LSP]",
+            nvim_lua = "[Lua]",
+            luasnip = "[Snip]",
+            buffer = "[Buff]",
+            path = "[Path]",
+            calc = "[Calc]",
+            dictionary = "[Dict]",
+            cmdline = "[CMD]",
+            cmdline_history = "[HIST]",
+        })[entry.source.name]
+        return item
+    end
 
     local cmp = require('cmp')
     cmp.setup {
@@ -117,59 +135,22 @@ configs.cmp = function()
             end
         },
         sources = cmp.config.sources({
+            { name = 'nvim_lua' },
             { name = 'nvim_lsp' },
             { name = 'luasnip' }, -- For luasnip users.
             { name = 'nvim_lsp_signature_help' },
-            { name = 'nvim_lua' },
-        }, {
             { name = 'buffer' },
+        }, {
             { name = 'path' },
             -- { name = 'cmdline' },
-        }, {
             { name = 'calc' },
-            { name = 'dictionary', keyword_length = 2 }
+            { name = 'dictionary', keyword_length = 2 , max_item_count = 10}
         }),
         completion = {
             completeopt = 'menu,menuone,noinsert'
         },
         formatting = {
-            format = require('lspkind').cmp_format({
-                mode = 'symbol',
-                max_width = 50,
-                before = function(entry, vim_item)
-                    -- Source menu
-                    vim_item.menu = ({
-                        nvim_lsp = "[LSP]",
-                        nvim_lua = "[Lua]",
-                        luasnip = "[Snip]",
-                        buffer = "[Buff]",
-                        path = "[Path]",
-                        calc = "[Calc]",
-                        dictionary = "[Dict]",
-                        cmdline = "[CMD]",
-                        cmdline_history = "[HIST]",
-                    })[entry.source.name]
-                    return vim_item
-                end
-            }),
-            -- format = function(entry, vim_item)
-            --     -- Kind icons
-            --     vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
-            --     -- Source
-            --     vim_item.menu = ({
-            --         nvim_lsp = "[LSP]",
-            --         nvim_lua = "[Lua]",
-            --         luasnip = "[LuaSnip]",
-            --         buffer = "[Buff]",
-            --         path = "[Path]",
-            --         calc = "[Calc]",
-            --         dictionary = "[Dict]",
-            --         cmdline = "[CMD]",
-            --         cmdline_history = "[HIST]",
-            --         nvim_lsp_document_symbol = "[SYMBOL]"
-            --     })[entry.source.name]
-            --     return vim_item
-            -- end
+            format = cmp_fmt,
         },
         experimental = {
             ghost_text = true
@@ -189,9 +170,9 @@ configs.cmp = function()
     cmp.setup.cmdline(':', {
         sources = cmp.config.sources({
             { name = 'cmdline' },
+            { name = 'cmdline_history', max_item_count = 5 }
         }, {
             { name = 'path' },
-            { name = 'cmdline_history' }
         })
     })
 
