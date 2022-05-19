@@ -11,11 +11,11 @@ completion["williamboman/nvim-lsp-installer"] = {
     module = "nvim-lsp-installer"
 }
 
-completion["tami5/lspsaga.nvim"] = {
-    module = "lspsaga",
-    cmd = "Lspsaga",
-    config = configs.lspsaga
-}
+-- completion["tami5/lspsaga.nvim"] = {
+--     module = "lspsaga",
+--     cmd = "Lspsaga",
+--     config = configs.lspsaga
+-- }
 
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
@@ -98,19 +98,17 @@ completion["stevearc/aerial.nvim"] = {
 
 completion["folke/trouble.nvim"] = {
     requires = "kyazdani42/nvim-web-devicons",
+    cmd = "Trouble",
+    module = "trouble",
     config = function()
-        require("trouble").setup {
-            -- your configuration comes here
-            -- or leave it empty to use the default settings
-            -- refer to the configuration section below
-        }
+        require('modules.completion.trouble')
     end
 }
 
-completion["j-hui/fidget.nvim"] = {
-    config = function ()
-        require"fidget".setup{}
-    end
-}
+-- completion["j-hui/fidget.nvim"] = {
+--     config = function ()
+--         require"fidget".setup{}
+--     end
+-- }
 
 return completion

@@ -242,10 +242,11 @@ keymaps.l = function()
         {
             l = {
                 name = "language",
-                f = "Format File",
-                c = "Code Action",
-                r = "Rename",
-                d = {"<cmd>TroubleToggle<CR>", "Diagnostics"},
+                f = { vim.lsp.buf.formatting, "File format" },
+                c = { vim.lsp.buf.code_action, "Code action" },
+                r = { vim.lsp.buf.rename, "Rename" },
+                d = { "<cmd>Trouble<CR>", "Diagnostics" },
+                l = { "<cmd>TroubleToggle<CR>", "Trouble Toggle" },
                 -- TODO: should only works in markdown filetype
                 p = { "<cmd>Glow<CR>", "Preview(Markdown)" } -- markdown preview
             }
@@ -254,6 +255,22 @@ keymaps.l = function()
         prefix = "<Leader>"
     }
     )
+    wk.register({
+        ["<Leader>lf"] = { vim.lsp.buf.range_formatting, "Format range" },
+    }, {
+        mode = "v"
+    })
+    wk.register({
+        ["gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Goto Definition" },
+        ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
+        ["gr"] = { "<cmd>Telescope lsp_references<CR>", "Goto references" },
+        ["gR"] = { "<cmd>Trouble lsp_references<CR>", "Goto references(Trouble)" },
+        ["K"] = { vim.lsp.buf.hover, "Hover doc" },
+        -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+        ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
+        ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
+        ["<Leader>le"] = { vim.diagnostic.open_float, "Line diagnostic"},
+    })
 end
 
 local setup = function()

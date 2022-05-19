@@ -7,11 +7,11 @@ configs.lspconfig = function()
     require('modules.completion.lspconfig').setup()
 end
 
-configs.lspsaga = function()
-    require 'lspsaga'.setup {
-        border_style = "none",
-    }
-end
+-- configs.lspsaga = function()
+--     require 'lspsaga'.setup {
+--         border_style = "none",
+--     }
+-- end
 
 configs.cmp = function()
     local t = function(str)

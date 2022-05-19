@@ -47,7 +47,7 @@ tools["nvim-telescope/telescope-symbols.nvim"] = {
 
 tools["nvim-telescope/telescope-file-browser.nvim"] = {
     after = "telescope.nvim",
-    config = function ()
+    config = function()
         require('telescope').load_extension('file_browser')
     end
 }
@@ -91,7 +91,26 @@ tools["folke/which-key.nvim"] = {
 }
 
 tools["dstein64/vim-startuptime"] = {
+    opt = true,
+    cmd = "StartupTime",
+}
+
+tools["lewis6991/impatient.nvim"] = {
     opt = false
+}
+
+tools["nathom/filetype.nvim"] = {
+    opt = false,
+    config = function()
+        require("filetype").setup({
+            overrides = {
+                shebang = {
+                    -- Set the filetype of files with a dash shebang to sh
+                    dash = "sh",
+                },
+            },
+        })
+    end
 }
 
 return tools

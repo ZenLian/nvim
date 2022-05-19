@@ -12,7 +12,6 @@ packer = require('packer')
 packer.startup({
     function(use)
         use {'wbthomason/packer.nvim'}
-        use 'lewis6991/impatient.nvim'
         local repos = require('modules')
         for _, repo in ipairs(repos) do
             use(repo)

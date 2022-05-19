@@ -1,6 +1,9 @@
 
 -- speedup
-require('impatient').enable_profile()
+-- require('impatient').enable_profile()
+require('impatient')
+
+-- TODO: check if necessary
 local disabled_built_plugins = {
     "netrw",
     "gzip",

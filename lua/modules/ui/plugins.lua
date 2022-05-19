@@ -57,12 +57,20 @@ ui['folke/twilight.nvim'] = {
 }
 
 ui['goolord/alpha-nvim'] = {
+    event = "BufWinEnter",
     config = configs.alpha
 }
 
 ui['rcarriga/nvim-notify'] = {
     config = function()
         require('modules.ui.notify')
+    end
+}
+
+-- provide prettier ui hook for vim.ui.input and vim.ui.select
+ui['stevearc/dressing.nvim'] = {
+    config = function ()
+        require('modules.ui.dressing')
     end
 }
 
