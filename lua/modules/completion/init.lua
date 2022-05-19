@@ -1,26 +1,21 @@
 local completion = {}
-local configs = require("modules.completion.configs")
 
 completion["neovim/nvim-lspconfig"] = {
     -- opt = true,
     -- module = "lspconfig",
-    config = configs.lspconfig
+    config = function()
+        require('modules.completion.lspconfig')
+    end
 }
 
 completion["williamboman/nvim-lsp-installer"] = {
     module = "nvim-lsp-installer"
 }
 
--- completion["tami5/lspsaga.nvim"] = {
---     module = "lspsaga",
---     cmd = "Lspsaga",
---     config = configs.lspsaga
--- }
-
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
-    event = {"InsertEnter", "CmdlineEnter"},
-    requires = {{
+    event = { "InsertEnter", "CmdlineEnter" },
+    requires = { {
         "saadparwaiz1/cmp_luasnip",
         after = "LuaSnip"
     }, {
@@ -53,43 +48,32 @@ completion["hrsh7th/nvim-cmp"] = {
     }, {
         "uga-rosa/cmp-dictionary",
         module = "cmp_dictionary"
-    }},
-    config = configs.cmp
+    } },
+    config = function ()
+        require('modules.completion.cmp')
+    end
 }
 
 completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
     requires = "rafamadriz/friendly-snippets",
-    config = configs.luasnip
+    config = function ()
+        require('modules.completion.luasnip')
+    end
 }
 
 completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
-    config = configs.autopairs
+    config = function ()
+        require('modules.completion.autopairs')
+    end
 }
 
 completion["stevearc/aerial.nvim"] = {
     module = "aerial",
     cmd = "AerialToggle",
     config = function()
-        require("aerial").setup {
-            -- A list of all symbols to display. Set to false to display all symbols.
-            -- This can be a filetype map (see :help aerial-filetype-map)
-            -- To see all available values, see :help SymbolKind
-            filter_kind = false,
-            --     "Class",
-            --     "Constructor",
-            --     "Enum",
-            --     "Function",
-            --     "Interface",
-            --     "Module",
-            --     "Method",
-            --     "Struct",
-            -- },
-            highlight_on_hover = true,
-            manage_folds = true,
-            min_width = 15
-        }
+        require('modules.completion.aerial')
     end
 }
 
@@ -101,11 +85,5 @@ completion["folke/trouble.nvim"] = {
         require('modules.completion.trouble')
     end
 }
-
--- completion["j-hui/fidget.nvim"] = {
---     config = function ()
---         require"fidget".setup{}
---     end
--- }
 
 return completion
