@@ -153,7 +153,7 @@ configs.toggleterm = function()
 end
 
 configs.which_key = function()
-    require('modules.tools.whichkey').setup()
+    require('modules.tools.whichkey')
 end
 
 return configs

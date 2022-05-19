@@ -87,7 +87,9 @@ tools["akinsho/toggleterm.nvim"] = {
 }
 
 tools["folke/which-key.nvim"] = {
-    config = configs.which_key,
+    config = function()
+        require('modules.tools.whichkey')
+    end
 }
 
 tools["dstein64/vim-startuptime"] = {
