@@ -65,7 +65,7 @@ ui['folke/twilight.nvim'] = {
 
 ui['goolord/alpha-nvim'] = {
     event = "BufWinEnter",
-    configs = function()
+    config = function()
         require('modules.ui.alpha')
     end
 }

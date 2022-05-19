@@ -1,5 +1,4 @@
 local tools = {}
-local configs = require("modules.tools.configs")
 
 -- utilities required by others
 tools["nvim-lua/plenary.nvim"] = { opt = true, module = "plenary" }
@@ -12,7 +11,9 @@ tools["nvim-telescope/telescope.nvim"] = {
     cmd = "Telescope",
     module = "telescope",
     requires = { { "nvim-lua/plenary.nvim" } },
-    config = configs.telescope,
+    config = function ()
+        require('modules.tools.telescope')
+    end
 }
 
 tools["nvim-telescope/telescope-fzf-native.nvim"] = {
@@ -57,25 +58,31 @@ tools["AckslD/nvim-neoclip.lua"] = {
         { "tami5/sqlite.lua" },
         { "nvim-telescope/telescope.nvim" },
     },
-    config = configs.neoclip,
+    config = function ()
+        require('modules.tools.neoclip')
+    end
 }
 
 --#endregion Telescope
 
 tools["Shatur/neovim-session-manager"] = {
-    config = configs.session
+    config = function ()
+        require('modules.tools.session_manager')
+    end
 }
 
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeRefresh", "NvimTreeFocus" },
-    config = configs.nvim_tree,
+    config = function ()
+        require('modules.tools.nvim_tree')
+    end
 }
 
 tools["akinsho/toggleterm.nvim"] = {
     opt = true,
     module = "toggleterm",
-    config = configs.toggleterm,
+    config = require('modules.tools.toggleterm'),
 }
 
 tools["folke/which-key.nvim"] = {
