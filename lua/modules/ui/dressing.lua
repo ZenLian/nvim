@@ -3,6 +3,8 @@ require('dressing').setup {
         enable = true,
         default_prompt = '﯀',
         border = 'single',
+        winblend = 3,
+        winhighlight = "FloatBorder:Blue"
     },
     select = {
         enable = true,
