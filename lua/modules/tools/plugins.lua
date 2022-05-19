@@ -60,14 +60,6 @@ tools["AckslD/nvim-neoclip.lua"] = {
     config = configs.neoclip,
 }
 
-tools["ahmedkhalf/project.nvim"] = {
-    opt = true,
-    after = "telescope.nvim",
-    config = function()
-        require('project_nvim').setup()
-        require('telescope').load_extension('projects')
-    end
-}
 --#endregion Telescope
 
 tools["Shatur/neovim-session-manager"] = {
