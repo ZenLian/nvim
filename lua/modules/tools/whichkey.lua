@@ -164,6 +164,10 @@ local leader = {
         r = { "lua require('zen-mode').reset()<cr>", "Reset ZenMode" },
         t = { "<cmd>Twilight<CR>", "Twilight" },
     },
+    t = {
+        name = "terminal",
+        s = { "<cmd>ToggleTermSendCurrentLine<cr>", "Send line" },
+    },
     ["/"] = {
         name = "toggle",
         f = {
@@ -193,6 +197,13 @@ local leader = {
     ["<Leader>"] = { "<cmd>Telescope resume<CR>", "Telescope Resume" },
 }
 
+local leader_visual = {
+    t = {
+        name = "terminal",
+        s = { "<cmd>ToggleTermSendVisualSelection<cr>", "Send selected" },
+    }
+}
+
 wk.setup {
     plugins = {
         spelling = {
@@ -203,3 +214,4 @@ wk.setup {
 }
 
 wk.register(leader, { prefix = "<Leader>" })
+wk.register(leader_visual, { prefix = "<Leader>", mode = "v" })

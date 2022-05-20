@@ -11,7 +11,7 @@ tools["nvim-telescope/telescope.nvim"] = {
     cmd = "Telescope",
     module = "telescope",
     requires = { { "nvim-lua/plenary.nvim" } },
-    config = function ()
+    config = function()
         require('modules.tools.telescope')
     end
 }
@@ -58,7 +58,7 @@ tools["AckslD/nvim-neoclip.lua"] = {
         { "tami5/sqlite.lua" },
         { "nvim-telescope/telescope.nvim" },
     },
-    config = function ()
+    config = function()
         require('modules.tools.neoclip')
     end
 }
@@ -66,7 +66,7 @@ tools["AckslD/nvim-neoclip.lua"] = {
 --#endregion Telescope
 
 tools["Shatur/neovim-session-manager"] = {
-    config = function ()
+    config = function()
         require('modules.tools.session_manager')
     end
 }
@@ -74,7 +74,7 @@ tools["Shatur/neovim-session-manager"] = {
 tools['kyazdani42/nvim-tree.lua'] = {
     opt = true,
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFindFile", "NvimTreeRefresh", "NvimTreeFocus" },
-    config = function ()
+    config = function()
         require('modules.tools.nvim_tree')
     end
 }
@@ -82,7 +82,11 @@ tools['kyazdani42/nvim-tree.lua'] = {
 tools["akinsho/toggleterm.nvim"] = {
     opt = true,
     module = "toggleterm",
-    config = require('modules.tools.toggleterm'),
+    cmd = "ToggleTerm",
+    keys = { [[<C-t>]] },
+    config = function()
+        require('modules.tools.toggleterm')
+    end
 }
 
 tools["folke/which-key.nvim"] = {
