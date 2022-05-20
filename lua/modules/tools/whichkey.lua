@@ -31,7 +31,7 @@ map("v", "<S-Tab>", "<gv")
 map("v", "<Tab>", ">gv")
 
 -- Clear search with <esc>
-map("", "<esc>", ":noh<cr>")
+map("n", "<esc>", ":noh<cr>")
 
 -- Paste block
 map("n", "]p", ":pu<cr>")
