@@ -1,297 +1,197 @@
 local wk = require('which-key')
+local util = require('core.util')
+local map = util.map
 
-local keymaps = {}
 
-keymaps.basic = function()
-    wk.register(
-        {
-        name = "editor(normal)",
-        ["<C-h>"] = { "<C-w>h", "Move to window leftwards" },
-        ["<C-l>"] = { "<C-w>l", "Move to window rightwards" },
-        ["<C-k>"] = { "<C-w>k", "Move to window above" },
-        ["<C-j>"] = { "<C-w>j", "Move to window below" },
-        ["<M-j>"] = { "mz:m+<cr>`z", "Swap line down" },
-        ["<M-k>"] = { "mz:m-2<cr>`z", "Swap line up" },
-        H = { "^", "Start of line" },
-        L = { "$", "End of line" },
-        -- 使 Y 复制到行尾，和 D 一致
-        Y = { "y$", "Yank to the end" },
+-- Move to window
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
 
-        ["<Leader>w"] = { "<cmd>w!<CR>", "Save" },
-        ["<Leader>q"] = { "<cmd>qa!<CR>", "Quit" },
-        ["<Leader><Enter>"] = { "<cmd>noh<CR>", "Clear search highlight" },
-    }
-    )
-    wk.register(
-        {
-            name = "editor(visual)",
-            H = { "^", "Start of line" },
-            L = { "$", "End of line" },
-            Y = { '"+y', "Yank to clipboard" },
-            ["<M-j>"] = { ":m'>+<cr>`<my`>mzgv`yo`z", "Swap line down" },
-            ["<M-k>"] = { ":m'<-2<cr>`>my`<mzgv`yo`z", "Swap line up" },
-            ["<"] = { "<gv", "Shift lines leftwards" },
-            [">"] = { ">gv", "Shift lines rightwards" },
-            ["<S-Tab>"] = { "<gv", "Shift lines leftwards" },
-            ["<Tab>"] = { ">gv", "Shift lines rightwards" },
-        },
-        {
-        mode = "v",
-    }
-    )
-    wk.register(
-        {
-            name = "next",
-        },
-        {
-        prefix = "]"
-    }
-    )
-    wk.register(
-        {
-            name = "previous",
-        },
-        {
-        prefix = "["
-    }
-    )
-end
+-- Resize window
+map("n", "<S-Up>", ":resize +2<CR>")
+map("n", "<S-Down>", ":resize -2<CR>")
+map("n", "<S-Left>", ":vertical resize -2<CR>")
+map("n", "<S-Right>", ":vertical resize +2<CR>")
 
--- packer.nvim
-keymaps.packer = function()
-    wk.register(
-        {
-            ["p"] = {
-                name = "packer",
-                p = { "<cmd>PackerSync<CR>", "Packer Sync" },
-                s = { "<cmd>PackerStatus<CR>", "Packer Status" },
-                c = { "<cmd>PackerCompile<CR>", "Packer Complile" },
-            },
-        },
-        { prefix = "<Leader>" }
-    )
-end
+-- Move lines
+map("n", "<A-j>", ":m .+1<CR>==")
+map("n", "<A-k>", ":m .-2<CR>==")
+map("v", "<A-j>", ":m '>+1<CR>gv=gv")
+map("v", "<A-k>", ":m '<-2<CR>gv=gv")
+map("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+map("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 
--- nvim-bufferline
-keymaps.b = function()
-    -- <Leader>b
-    wk.register(
-        {
-            b = {
-                name = "buffer",
-                b = { "<cmd>BufferLinePick<CR>", "Pick buffer" },
-                c = { "<cmd>BufferLinePickClose<CR>", "Pick buffer to close" },
-                ["["] = { "<cmd>BufferLineCloseLeft<CR>", "Close Left buffers" },
-                ["]"] = { "<cmd>BufferLineCloseRight<CR>", "Close right buffers" },
-            },
-        },
-        { prefix = "<Leader>" }
-    )
-    wk.register(
-        {
-        ["[b"] = { "<cmd>BufferLineCyclePrev<CR>", "Previous buffer" },
-        ["]b"] = { "<cmd>BufferLineCycleNext<CR>", "Next buffer" },
-    }
-    )
-end
+-- Indent without leaving Visual Mode
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+-- Indent with tab in Visual Mode
+map("v", "<S-Tab>", "<gv")
+map("v", "<Tab>", ">gv")
 
--- telescope
-keymaps.f = function()
-    wk.register(
-        {
-            f = {
-                name = "fuzzy find",
-                f = { "<cmd>Telescope find_files<CR>", "Files" },
-                b = { "<cmd>Telescope buffers<CR>", "Buffers" },
-                g = { "<cmd>Telescope live_grep<CR>", "Grep" },
-                w = { "<cmd>Telescope grep_string<CR>", "Word" },
-                z = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy Find in Buffer" },
-                ["/"] = { "<cmd>Telescope help_tags<CR>", "Help Tags" },
-                h = { "<cmd>Telescope frecency<CR>", "Frecency files" },
-                p = { "<cmd>Telescope projects<CR>", "Projects" },
-                c = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
-                r = { "<cmd>Telescope oldfiles<CR>", "Recent files" },
-                n = { "<cmd>Telescope file_browser<CR>", "File Browser" },
-                s = { "<cmd>SessionManager load_session<CR>", "Sessions" },
-            },
-            ["<Leader>"] = { "<cmd>Telescope resume<CR>", "Telescope Resume" },
-        },
-        { prefix = "<Leader>" }
-    )
+-- Clear search with <esc>
+map("", "<esc>", ":noh<cr>")
 
-    local project_files = function()
-        local telescope = require("telescope.builtin")
-        local opts = {} -- define some options
-        local ok = pcall(telescope.git_files, opts)
-        if not ok then
-            telescope.find_files(opts)
-        end
+-- Paste block
+map("n", "]p", ":pu<cr>")
+map("n", "[p", ":pu!<cr>")
+-- Yank to end of line, consistence with D/C
+map("n", "Y", "y$")
+-- Yank to system clipboard
+map("v", "Y", '"+y')
+-- H = { "^", "Start of line" },
+-- L = { "$", "End of line" },
+
+-- windows like shortcut
+-- Save
+map("i", "<C-s>", "<esc>:w<cr>")
+map("n", "<C-s>", "<esc>:w<cr>")
+map("v", "<C-s>", "<esc>:w<cr>")
+-- Delete to start
+map("i", "<C-BS>", "<C-u>")
+
+-- n/N always search forward/backward
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+map("n", "n", "'Nn'[v:searchforward]", { expr = true })
+map("v", "n", "'Nn'[v:searchforward]", { expr = true })
+map("o", "n", "'Nn'[v:searchforward]", { expr = true })
+map("n", "N", "'nN'[v:searchforward]", { expr = true })
+map("v", "N", "'nN'[v:searchforward]", { expr = true })
+map("o", "N", "'nN'[v:searchforward]", { expr = true })
+
+--
+-- plugins
+--
+map("n", "[b", "<cmd>BufferLineCyclePrev<CR>")
+map("n", "]b", "<cmd>BufferLineCycleNext<CR>")
+map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
+map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+
+local project_files = function()
+    local telescope = require("telescope.builtin")
+    local opts = {} -- define some options
+    local ok = pcall(telescope.git_files, opts)
+    if not ok then
+        telescope.find_files(opts)
     end
-    wk.register(
-        {
-        ["<C-p>"] = { project_files, "Project(Git) Files" },
-        ["<C-f>"] = { "<cmd>Telescope live_grep<CR>", "Live Grep" },
-    }
-    )
 end
 
--- git
-keymaps.g = function()
+map("n", "<C-p>", project_files)
+-- map("n", "<C-t>", "<cmd>AerialToggle<CR>")
 
-
-    local Terminal = require('toggleterm.terminal').Terminal
-
-    local lazygit = Terminal:new({
-        cmd = "lazygit",
-        dir = "git_dir",
-        direction = "float",
-        float_opts = {
-            border = "single",
+--
+-- leader keymaps
+--
+local leader = {
+    p = {
+        name = "packer",
+        p = { "<cmd>PackerSync<CR>", "Packer Sync" },
+        s = { "<cmd>PackerStatus<CR>", "Packer Status" },
+        c = { "<cmd>PackerCompile<CR>", "Packer Complile" },
+    },
+    b = {
+        name = "buffer",
+        b = { "<cmd>e #<CR>", "Cycle Buffer" },
+        g = { "<cmd>BufferLinePick<CR>", "Goto buffer" },
+        c = { "<cmd>BufferLinePickClose<CR>", "Pick buffer to close" },
+        ["["] = { "<cmd>BufferLineCloseLeft<CR>", "Close Left buffers" },
+        ["]"] = { "<cmd>BufferLineCloseRight<CR>", "Close right buffers" },
+        p = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
+        n = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" },
+        D = { "<cmd>bd<CR>", "Delete Buffer & Window" },
+    },
+    g = {
+        name = "git",
+        g = {
+            function()
+                util.float_terminal("lazygit")
+            end,
+            "LazyGit"
         },
-        -- function to run on opening the terminal
-        on_open = function(term)
-            -- vim.cmd("startinsert!")
-            vim.wo.winhl = "Normal:Terminal,FloatBorder:TerminalBorder"
-            vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-        end,
-        -- function to run on closing the terminal
-        -- on_close = function(term)
-        --     vim.cmd("Closing terminal")
-        -- end,
-        close_on_exit = true, -- close the terminal window when the process exits
-        shade_terminals = false,
-    })
-
-    local toggle_lazygit = function()
-        lazygit:toggle()
-    end
-    wk.register(
-        {
-            g = {
-                name = "Git",
-                g = { toggle_lazygit, "Lazygit" },
-                s = "Stage hunk",
-                S = "Stage file",
-                u = "Undo stage hunk",
-                U = "Undo stage file",
-                r = "Reset hunk",
-                R = "Reset file",
-                p = "Preview hunk",
-                b = "Blame line",
-            },
+        b = { "<cmd>Telescope git_branches<CR>", "Branches" },
+        c = { "<cmd>Telescope git_commits<CR>", "Commits" },
+        s = { "<cmd>Telescope git_status<CR>", "Status" },
+        -- d = DiffViewOpen
+        h = {
+            -- defined by gitsigns
+            name = "hunk",
+            s = "Stage hunk",
+            S = "Stage file",
+            u = "Unstage hunk",
+            U = "Unstage file",
+            r = "Reset hunk",
+            R = "Reset file",
+            p = "Preview hunk",
+            b = "Blame line",
         },
-        {
-        prefix = "<Leader>"
-    }
-    )
-    wk.register(
-        {
-        ["[g"] = "Previous git hunk",
-        ["]g"] = "Next git hunk",
-    }
-    )
-end
-
--- nvim-tree
-keymaps.n = function()
-    wk.register(
-        {
-            n = {
-                name = "nvim tree",
-                n = { "<cmd>NvimTreeFocus<CR>", "Focus" },
-                f = { "<cmd>NvimTreeFindFile<CR>", "Find File" },
-                r = { "<cmd>NvimTreeRefresh<CR>", "Refresh" },
-            }
+    },
+    f = {
+        name = "files",
+        ["/"] = { "<cmd>NvimTreeFocus<CR>", "Focus NvimTree" },
+        f = { "<cmd>Telescope find_files<CR>", "Find Files" },
+        r = { "<cmd>Telescope oldfiles<CR>", "Recent files" },
+        h = { "<cmd>Telescope frecency<CR>", "Frecency files" },
+    },
+    o = {
+        name = "open",
+        g = { "<cmd>Glow<CR>", "Glow" } -- markdown preview
+    },
+    s = {
+        name = "search",
+        b = { "<cmd>Telescope buffers<CR>", "Buffers" },
+        g = { "<cmd>Telescope live_grep<CR>", "Grep" },
+        w = { "<cmd>Telescope grep_string<CR>", "Current word" },
+        z = { "<cmd>Telescope current_buffer_fuzzy_find<CR>", "Fuzzy Find in Buffer" },
+        ["/"] = { "<cmd>Telescope help_tags<CR>", "Help Tags" },
+        c = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
+        n = { "<cmd>Telescope file_browser<CR>", "File Browser" },
+        --TODO: move
+        -- s = { "<cmd>SessionManager load_session<CR>", "Sessions" },
+    },
+    q = {
+        name = "quit",
+        q = { "<cmd>qa<cr>", "Quit" },
+        Q = { "<cmd>qa<cr>", "Force quit" },
+    },
+    x = {
+        name = "errors",
+        x = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble" },
+    },
+    z = {
+        name = "zen",
+        z = { "<cmd>ZenMode<CR>", "ZenMode" },
+        r = { "lua require('zen-mode').reset()<cr>", "Reset ZenMode" },
+        t = { "<cmd>Twilight<CR>", "Twilight" },
+    },
+    ["/"] = {
+        name = "toggle",
+        f = {
+            require('modules.completion.lspconfig.formatting').toggle,
+            "Format on save"
         },
-        { prefix = "<Leader>" }
-    )
-    wk.register(
-        {
-        ["<C-n>"] = { "<cmd>NvimTreeToggle<CR>", "Toggle Tree" },
-    }
-    )
-end
-
--- Aerial(symbols outline)
-keymaps.s = function()
-    wk.register(
-        {
-        ["<C-t>"] = { "<cmd>AerialToggle<CR>", "Toggle Symbols" },
-    }
-    )
-end
-
--- Zen/Focus
-keymaps.z = function()
-    wk.register(
-        {
-            z = {
-                name = "Zen",
-                z = { "<cmd>ZenMode<CR>", "ZenMode" },
-                t = { "<cmd>Twilight<CR>", "Twilight" },
-            },
+        s = {
+            function()
+                util.toggle("spell")
+            end,
+            "Spelling"
         },
-        {
-        prefix = "<Leader>"
-    }
-    )
-end
-
--- language
-keymaps.l = function()
-    wk.register(
-        {
-            l = {
-                name = "language",
-                f = { vim.lsp.buf.formatting, "File format" },
-                c = { vim.lsp.buf.code_action, "Code action" },
-                r = { vim.lsp.buf.rename, "Rename" },
-                d = { "<cmd>Trouble<CR>", "Diagnostics" },
-                l = { "<cmd>TroubleToggle<CR>", "Trouble Toggle" },
-                -- TODO: should only works in markdown filetype
-                p = { "<cmd>Glow<CR>", "Preview(Markdown)" } -- markdown preview
-            }
+        w = {
+            function()
+                util.toggle("wrap")
+            end,
+            "Word wrap"
         },
-        {
-        prefix = "<Leader>"
-    }
-    )
-    wk.register({
-        ["<Leader>lf"] = { vim.lsp.buf.range_formatting, "Format range" },
-    }, {
-        mode = "v"
-    })
-    wk.register({
-        ["gd"] = { "<cmd>Telescope lsp_definitions<CR>", "Goto Definition" },
-        ["gD"] = { "<cmd>lua vim.lsp.buf.declaration()<CR>", "Goto declaration" },
-        ["gr"] = { "<cmd>Telescope lsp_references<CR>", "Goto references" },
-        ["gR"] = { "<cmd>Troublferences<CR>", "Goto references(Trouble)" },
-        ["K"] = { vim.lsp.buf.hover, "Hover doc" },
-        -- buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-        ["[d"] = { vim.diagnostic.goto_prev, "Previous diagnostic" },
-        ["]d"] = { vim.diagnostic.goto_next, "Next diagnostic" },
-        ["<Leader>le"] = { vim.diagnostic.open_float, "Line diagnostic" },
-    })
-end
-
-
-keymaps.dot = function()
-    local function toggle_format_on_save()
-        local config = require('config')
-        config.format_on_save = not config.format_on_save
-    end
-
-    wk.register(
-        {
-            ["."] = {
-                name = "config",
-                f = { toggle_format_on_save, "Toggle format on save" }
-            }
-        }, {
-        prefix = "<Leader>"
-    })
-end
-
+        n = {
+            function()
+                util.toggle("relativenumber", true)
+                util.toggle("number")
+            end,
+            "Line Numbers"
+        }
+    },
+    ["<Leader>"] = { "<cmd>Telescope resume<CR>", "Telescope Resume" },
+}
 
 wk.setup {
     plugins = {
@@ -301,6 +201,5 @@ wk.setup {
         }
     }
 }
-for _, fn in pairs(keymaps) do
-    fn()
-end
+
+wk.register(leader, { prefix = "<Leader>" })

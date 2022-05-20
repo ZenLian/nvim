@@ -1,39 +1,15 @@
 local servers = { "sumneko_lua", "ccls" }
 
-local function diagnostic_setup()
-    local signs = {
-        -- icons / text used for a diagnostic
-        Error = "",
-        Warn = "",
-        Hint = "",
-        Info = "",
-    }
-    for serverity, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. serverity
-        vim.fn.sign_define(hl, {
-            text = icon,
-            texthl = hl,
-            numhl = "",
-        })
-    end
-end
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-    -- local function buf_set_option(...)
-    --     vim.api.nvim_buf_set_option(bufnr, ...)
-    -- end
-
-    -- Enable completion triggered by <c-x><c-o>
-    -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
+    require('modules.completion.lspconfig.formatting').on_attach(client, bufnr)
+    require('modules.completion.lspconfig.keymaps').on_attach(client, bufnr)
     -- aerial.nvim
     require("aerial").on_attach(client, bufnr)
 end
 
 local setup = function()
-    diagnostic_setup()
+    require('modules.completion.lspconfig.diagnostic').setup()
+
     require("nvim-lsp-installer").setup {
         ensure_installed = servers
     }

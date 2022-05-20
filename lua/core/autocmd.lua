@@ -1,84 +1,78 @@
--- vim.api.nvim_create_augroup("edit", {})
+local augroup = function(name)
+    vim.api.nvim_create_augroup(name, { clear = true })
+end
+local autocmd = vim.api.nvim_create_autocmd
 
+augroup("edit")
 -- return to last edit position
-vim.api.nvim_create_autocmd(
+autocmd(
     { "BufReadPost" },
     {
-    -- command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
-    callback = function()
-        local pos = vim.fn.line([['"]])
-        if pos > 1 and pos <= vim.fn.line("$") then
-            vim.cmd [[normal! g'"]]
-        end
-    end,
-}
+        -- command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
+        group = "edit",
+        callback = function()
+            local pos = vim.fn.line([['"]])
+            if pos > 1 and pos <= vim.fn.line("$") then
+                vim.cmd [[normal! g'"]]
+            end
+        end,
+    }
 )
 
 -- highlight on yank
-vim.api.nvim_create_autocmd(
+autocmd(
     { "TextYankPost" },
     {
-    -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
-    callback = function()
-        vim.highlight.on_yank { higroup = "IncSearch", timeout = 250 }
-    end
-}
+        -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
+        group = "edit",
+        callback = function()
+            vim.highlight.on_yank() --{ higroup = "IncSearch", timeout = 250 }
+        end
+    }
 )
 
 -- hide cursorline for unfocused window
-vim.api.nvim_create_augroup("window", { clear = true })
-vim.api.nvim_create_autocmd(
+autocmd(
     { "WinEnter" },
     {
-    group = "window",
-    callback = function()
-        if not vim.wo.cursorline then
+        group = "edit",
+        callback = function()
             vim.wo.cursorline = true
         end
-    end
-}
+    }
 )
-vim.api.nvim_create_autocmd(
+autocmd(
     { "WinLeave" },
     {
-    group = "window",
-    callback = function()
-        if vim.wo.cursorline then
+        group = "edit",
+        callback = function()
             vim.wo.cursorline = false
         end
-    end
-}
+    }
 )
 
 -- equalize window when vim window resized
-vim.api.nvim_create_autocmd(
+autocmd(
     { "VimResized" },
     {
-    group = "window",
-    -- command = [[tabdo wincmd =]]
-    command = [[wincmd =]]
-}
+        group = "edit",
+        -- command = [[tabdo wincmd =]]
+        command = [[wincmd =]]
+    }
 )
 
 -- auto reload file change
 -- FIXME: FocusGained event not working
-vim.api.nvim_create_autocmd(
+autocmd(
     { "FocusGained" },
     {
-    command = [[checktime]],
-}
-)
-
--- format on save
-vim.api.nvim_create_augroup("save", { clear = true })
-vim.api.nvim_create_autocmd(
-    {"BufWritePre"},
-    {
-        group = "save",
-        callback = function ()
-            if require('config').format_on_save then
-                vim.lsp.buf.formatting_sync(nil, 1000)
-            end
-        end
+        command = [[checktime]],
     }
 )
+
+-- windows to close with "q"
+vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo nnoremap <buffer><silent> q :close<CR>]])
+vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+
+-- markdown spell on
+-- vim.cmd([[autocmd FileType markdown setlocal spell]])

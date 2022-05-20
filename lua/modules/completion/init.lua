@@ -49,7 +49,7 @@ completion["hrsh7th/nvim-cmp"] = {
         "uga-rosa/cmp-dictionary",
         module = "cmp_dictionary"
     } },
-    config = function ()
+    config = function()
         require('modules.completion.cmp')
     end
 }
@@ -57,14 +57,14 @@ completion["hrsh7th/nvim-cmp"] = {
 completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
     requires = "rafamadriz/friendly-snippets",
-    config = function ()
+    config = function()
         require('modules.completion.luasnip')
     end
 }
 
 completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
-    config = function ()
+    config = function()
         require('modules.completion.autopairs')
     end
 }

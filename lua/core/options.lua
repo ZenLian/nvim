@@ -1,5 +1,7 @@
 local globals = require('core.globals')
 
+vim.g.mapleader = " "
+
 local options = {
     termguicolors = true,
     mouse = "a",
@@ -31,7 +33,7 @@ local options = {
     shiftround = true,
     timeout = true,
     ttimeout = true,
-    timeoutlen = 500,
+    timeoutlen = 300,
     ttimeoutlen = 0,
     updatetime = 100,
     redrawtime = 1500,
@@ -107,6 +109,24 @@ local function load_options()
     for name, value in pairs(options) do
         vim.o[name] = value
     end
+end
+
+-- don't load these plugins
+local disabled_built_plugins = {
+    "netrw",
+    "netrwPlugin",
+    "gzip",
+    "zip",
+    "zipPlugin",
+    "tar",
+    "tarPlugin",
+    -- "netrwFileHandlers",
+    "matchit",
+    "loaded_matchparen", -- Highlight matching parens
+    "2html_plugin",
+}
+for _, plugin in ipairs(disabled_built_plugins) do
+    vim.g["loaded_" .. plugin] = 1
 end
 
 load_options()
