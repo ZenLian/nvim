@@ -2,11 +2,29 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 require("nvim-treesitter.configs").setup {
     ensure_installed = {
-        "help", "vim", "lua", "comment", "dockerfile", "cuda", "regex",
-        "bash", "c", "cpp", "make", "cmake",
-        "go", "java", "python",
-        "html", "css", "scss", "javascript", "typescript",
-        "json", "json5", "jsonc", "toml", "yaml",
+        "bash",
+        "c",
+        "cmake",
+        "cpp",
+        "css",
+        "dockerfile",
+        "go",
+        "help",
+        "html",
+        "javascript",
+        "json",
+        "json5",
+        "jsonc",
+        "latex",
+        "lua",
+        "markdown",
+        "python",
+        "regex",
+        "scss",
+        "toml",
+        "typescript",
+        "vim",
+        "yaml",
     },
     sync_install = false,
     highlight = {
@@ -16,10 +34,10 @@ require("nvim-treesitter.configs").setup {
     incremental_selection = {
         enable = true,
         keymaps = {
-            init_selection = "gnn",
-            node_incremental = "g=",
-            node_decremental = "g-",
-            scope_incremental = "grc",
+            init_selection = "<C-n>",
+            node_incremental = "<C-n>",
+            node_decremental = "<C-p>",
+            scope_incremental = "<C-k>",
         }
     },
     textobjects = {
@@ -63,7 +81,10 @@ require("nvim-treesitter.configs").setup {
             enable = false
         },
         lsp_interop = {
-            enable = false,
+            enable = true,
+            peek_definition_code = {
+                ["gD"] = "@function.outer"
+            }
         },
     },
     rainbow = {

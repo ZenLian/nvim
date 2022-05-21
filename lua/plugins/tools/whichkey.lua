@@ -65,9 +65,8 @@ map("o", "N", "'nN'[v:searchforward]", { expr = true })
 --
 map("n", "[b", "<cmd>BufferLineCyclePrev<CR>")
 map("n", "]b", "<cmd>BufferLineCycleNext<CR>")
-map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
+-- map("n", "<C-t>", "<cmd>NvimTreeToggle<CR>")
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
-map("n", "<C-t>", "<cmd>AerialToggle<CR>")
 
 local project_files = function()
     local telescope = require("telescope.builtin")
@@ -79,7 +78,6 @@ local project_files = function()
 end
 
 map("n", "<C-p>", project_files)
--- map("n", "<C-t>", "<cmd>AerialToggle<CR>")
 
 --
 -- leader keymaps
@@ -129,7 +127,7 @@ local leader = {
     },
     f = {
         name = "files",
-        ["/"] = { "<cmd>NvimTreeFocus<CR>", "Focus NvimTree" },
+        t = { "<cmd>NvimTreeFocus<CR>", "Focus NvimTree" },
         f = { "<cmd>Telescope find_files<CR>", "Find Files" },
         r = { "<cmd>Telescope oldfiles<CR>", "Recent files" },
         h = { "<cmd>Telescope frecency<CR>", "Frecency files" },
@@ -166,6 +164,9 @@ local leader = {
         r = { "<cmd>lua require('zen-mode').reset()<cr>", "Reset ZenMode" },
         t = { "<cmd>Twilight<CR>", "Twilight" },
     },
+    n = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
+    u = { "<cmd>UndotreeToggle<CR>", "Undo Tree" },
+    t = { "<cmd>AerialToggle<CR>", "Tags" },
     ["\\"] = {
         name = "terminal",
         s = { "<cmd>ToggleTermSendCurrentLine<cr>", "Send line" },

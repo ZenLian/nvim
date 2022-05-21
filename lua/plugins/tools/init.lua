@@ -79,6 +79,10 @@ tools['kyazdani42/nvim-tree.lua'] = {
     end
 }
 
+tools["jiaoshijie/undotree"] = {
+    cmd = "UndotreeToggle",
+}
+
 tools["akinsho/toggleterm.nvim"] = {
     opt = true,
     module = "toggleterm",
