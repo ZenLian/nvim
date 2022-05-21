@@ -60,12 +60,16 @@ map("n", "N", "'nN'[v:searchforward]", { expr = true })
 map("v", "N", "'nN'[v:searchforward]", { expr = true })
 map("o", "N", "'nN'[v:searchforward]", { expr = true })
 
+-- tabs
+map("n", "[t", "<cmd>tabn<CR>")
+map("n", "]t", "<cmd>tabp<CR>")
+
 --
 -- plugins
 --
 map("n", "[b", "<cmd>BufferLineCyclePrev<CR>")
 map("n", "]b", "<cmd>BufferLineCycleNext<CR>")
--- map("n", "<C-t>", "<cmd>NvimTreeToggle<CR>")
+map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 
 local project_files = function()
@@ -98,7 +102,11 @@ local leader = {
         ["]"] = { "<cmd>BufferLineCloseRight<CR>", "Close right buffers" },
         p = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
         n = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" },
-        D = { "<cmd>bd<CR>", "Delete Buffer & Window" },
+        d = { "<cmd>bd<CR>", "Delete Buffer" },
+    },
+    t = {
+        name = "tab",
+        c = { "<cmd>tabclose<CR>", "Close tab" },
     },
     g = {
         name = "git",
@@ -111,7 +119,7 @@ local leader = {
         b = { "<cmd>Telescope git_branches<CR>", "Branches" },
         c = { "<cmd>Telescope git_commits<CR>", "Commits" },
         s = { "<cmd>Telescope git_status<CR>", "Status" },
-        -- d = DiffViewOpen
+        d = { "<cmd>DiffviewOpen<cr>", "DiffView" },
         h = {
             -- defined by gitsigns
             name = "hunk",
@@ -127,7 +135,7 @@ local leader = {
     },
     f = {
         name = "files",
-        t = { "<cmd>NvimTreeFocus<CR>", "Focus NvimTree" },
+        n = { "<cmd>NvimTreeFocus<CR>", "Focus NvimTree" },
         f = { "<cmd>Telescope find_files<CR>", "Find Files" },
         r = { "<cmd>Telescope oldfiles<CR>", "Recent files" },
         h = { "<cmd>Telescope frecency<CR>", "Frecency files" },
@@ -164,9 +172,6 @@ local leader = {
         r = { "<cmd>lua require('zen-mode').reset()<cr>", "Reset ZenMode" },
         t = { "<cmd>Twilight<CR>", "Twilight" },
     },
-    n = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
-    u = { "<cmd>UndotreeToggle<CR>", "Undo Tree" },
-    t = { "<cmd>AerialToggle<CR>", "Tags" },
     ["\\"] = {
         name = "terminal",
         s = { "<cmd>ToggleTermSendCurrentLine<cr>", "Send line" },
@@ -197,6 +202,9 @@ local leader = {
             "Line Numbers"
         }
     },
+    n = { "<cmd>NvimTreeToggle<CR>", "NvimTree" },
+    u = { "<cmd>UndotreeToggle<CR>", "Undo Tree" },
+    [";"] = { "<cmd>AerialToggle<CR>", "Outline" },
     ["<Leader>"] = { "<cmd>Telescope resume<CR>", "Telescope Resume" },
 }
 

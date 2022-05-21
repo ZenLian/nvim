@@ -79,6 +79,14 @@ tools['kyazdani42/nvim-tree.lua'] = {
     end
 }
 
+tools["sindrets/diffview.nvim"] = {
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFileHistory" },
+    module = "diffview",
+    config = function()
+        require('diffview').setup()
+    end,
+}
+
 tools["jiaoshijie/undotree"] = {
     cmd = "UndotreeToggle",
 }
