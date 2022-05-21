@@ -152,7 +152,7 @@ local leader = {
     q = {
         name = "quit",
         q = { "<cmd>qa<cr>", "Quit" },
-        Q = { "<cmd>qa<cr>", "Force quit" },
+        Q = { "<cmd>qa!<cr>", "Force quit" },
         w = { "<cmd>wqa<cr>", "Save all and quit" },
     },
     x = {

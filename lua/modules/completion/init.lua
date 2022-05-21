@@ -3,17 +3,14 @@ local completion = {}
 completion["neovim/nvim-lspconfig"] = {
     -- opt = true,
     -- module = "lspconfig",
+    event = "BufReadPre",
     config = function()
         require('modules.completion.lspconfig')
-    end
-}
-
-completion["williamboman/nvim-lsp-installer"] = {
-    module = "nvim-lsp-installer"
-}
-
-completion["folke/lua-dev.nvim"] = {
-    -- module = "lud-dev"
+    end,
+    requires = {
+        "williamboman/nvim-lsp-installer",
+        "folke/lua-dev.nvim"
+    }
 }
 
 completion["hrsh7th/nvim-cmp"] = {
