@@ -12,6 +12,10 @@ completion["williamboman/nvim-lsp-installer"] = {
     module = "nvim-lsp-installer"
 }
 
+completion["folke/lua-dev.nvim"] = {
+    -- module = "lud-dev"
+}
+
 completion["hrsh7th/nvim-cmp"] = {
     opt = true,
     event = { "InsertEnter", "CmdlineEnter" },
@@ -31,11 +35,8 @@ completion["hrsh7th/nvim-cmp"] = {
         "hrsh7th/cmp-nvim-lsp-document-symbol",
         after = "cmp-nvim-lsp"
     }, {
-        "hrsh7th/cmp-nvim-lua",
-        after = "cmp-nvim-lsp"
-    }, {
         "hrsh7th/cmp-path",
-        after = "cmp-nvim-lua"
+        after = "cmp-nvim-lsp"
     }, {
         "hrsh7th/cmp-cmdline",
         after = "cmp-path"

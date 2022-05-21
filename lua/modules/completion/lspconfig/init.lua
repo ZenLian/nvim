@@ -21,6 +21,8 @@ local setup = function()
             on_attach = on_attach,
             capabilities = capabilities,
         }
+
+        -- custom config in lspconfig/{server}.lua
         local ok, custom_opts = pcall(require, 'modules.completion.lspconfig.' .. server)
         if ok then
             opts = vim.tbl_deep_extend('force', opts, custom_opts)

@@ -40,7 +40,7 @@ local cmp_fmt = function(entry, item)
     -- Source menu
     item.menu = ({
         nvim_lsp = "[LSP]",
-        nvim_lua = "[Lua]",
+        -- nvim_lua = "[Lua]",
         luasnip = "[Snip]",
         buffer = "[Buff]",
         path = "[Path]",
@@ -119,7 +119,7 @@ cmp.setup {
         end
     },
     sources = cmp.config.sources({
-        { name = 'nvim_lua' },
+        -- { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' }, -- For luasnip users.
         { name = 'nvim_lsp_signature_help' },
