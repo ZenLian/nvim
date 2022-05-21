@@ -5,7 +5,7 @@ editor["nvim-treesitter/nvim-treesitter"] = {
     run = ":TSUpdate",
     event = { "BufRead", "BufNewFile" },
     config = function()
-        require('modules.editor.treesitter')
+        require('plugins.editor.treesitter')
     end
 }
 editor["nvim-treesitter/nvim-treesitter-textobjects"] = {
@@ -39,7 +39,7 @@ editor["mfussenegger/nvim-treehopper"] = {
     opt = true,
     after = "nvim-treesitter",
     config = function()
-        require('modules.editor.treehopper')
+        require('plugins.editor.treehopper')
     end
 }
 
@@ -53,7 +53,7 @@ editor["ur4ltz/surround.nvim"] = {
 editor["ggandor/lightspeed.nvim"] = {
     event = { "BufRead", "BufNewFile" },
     config = function()
-        require('modules.editor.lightspeed')
+        require('plugins.editor.lightspeed')
     end
 }
 
@@ -62,7 +62,7 @@ editor["lewis6991/gitsigns.nvim"] = {
     event = { "BufRead", "BufNewFile" },
     requires = { "nvim-lua/plenary.nvim", opt = false },
     config = function()
-        require('modules.editor.gitsigns')
+        require('plugins.editor.gitsigns')
     end
 }
 

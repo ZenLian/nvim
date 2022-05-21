@@ -1,5 +1,4 @@
 local ui = {}
--- local configs = require("modules.ui.configs")
 
 --#region colorschemes
 -- ui['zenlian/edgeme'] = {
@@ -19,7 +18,7 @@ ui['~/source/edgeme'] = {
 
 ui['windwp/windline.nvim'] = {
     config = function()
-        require('modules.ui.windline')
+        require('plugins.ui.windline')
     end
 }
 
@@ -28,7 +27,7 @@ ui['akinsho/bufferline.nvim'] = {
     event = "BufRead",
     requires = 'kyazdani42/nvim-web-devicons',
     config = function()
-        require('modules.ui.bufferline')
+        require('plugins.ui.bufferline')
     end
 }
 
@@ -36,13 +35,13 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
     opt = true,
     event = 'BufRead',
     config = function()
-        require('modules.ui.indent_blankline')
+        require('plugins.ui.indent_blankline')
     end
 }
 
 ui['norcalli/nvim-colorizer.lua'] = {
     config = function()
-        require('modules.ui.colorizer')
+        require('plugins.ui.colorizer')
     end
 }
 
@@ -50,7 +49,7 @@ ui['folke/zen-mode.nvim'] = {
     opt = true,
     cmd = { "ZenMode" },
     config = function()
-        require('modules.ui.zen_mode')
+        require('plugins.ui.zen_mode')
     end
 }
 
@@ -65,20 +64,21 @@ ui['folke/twilight.nvim'] = {
 ui['goolord/alpha-nvim'] = {
     event = "BufWinEnter",
     config = function()
-        require('modules.ui.alpha')
+        require('plugins.ui.alpha')
     end
 }
 
 ui['rcarriga/nvim-notify'] = {
+    event = "VimEnter",
     config = function()
-        require('modules.ui.notify')
+        require('plugins.ui.notify')
     end
 }
 
 -- provide prettier ui hook for vim.ui.input and vim.ui.select
 ui['stevearc/dressing.nvim'] = {
     config = function()
-        require('modules.ui.dressing')
+        require('plugins.ui.dressing')
     end
 }
 

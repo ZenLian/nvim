@@ -1,4 +1,4 @@
-local globals = require('core.globals')
+local cache_dir = require('core.util').paths.cache
 
 vim.g.mapleader = " "
 
@@ -20,12 +20,12 @@ local options = {
     backup = false,
     writebackup = false,
     swapfile = false,
-    directory = globals.cache_dir .. "/swag/",
-    undodir = globals.cache_dir .. "/undo/",
-    backupdir = globals.cache_dir .. "/backup/",
-    viewdir = globals.cache_dir .. "/view/",
-    spellfile = globals.cache_dir .. "/spell/en.uft-8.add",
-    shadafile = globals.cache_dir .. "/shada",
+    directory = cache_dir .. "/swag/",
+    undodir = cache_dir .. "/undo/",
+    backupdir = cache_dir .. "/backup/",
+    viewdir = cache_dir .. "/view/",
+    spellfile = cache_dir .. "/spell/en.uft-8.add",
+    shadafile = cache_dir .. "/shada",
     history = 2000,
     shada = "!,'300,<50,@100,s10,h",
     backupskip = "/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim",

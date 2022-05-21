@@ -5,7 +5,7 @@ completion["neovim/nvim-lspconfig"] = {
     -- module = "lspconfig",
     event = "BufReadPre",
     config = function()
-        require('modules.completion.lspconfig')
+        require('plugins.completion.lspconfig')
     end,
     requires = {
         "williamboman/nvim-lsp-installer",
@@ -45,7 +45,7 @@ completion["hrsh7th/nvim-cmp"] = {
         module = "cmp_dictionary"
     } },
     config = function()
-        require('modules.completion.cmp')
+        require('plugins.completion.cmp')
     end
 }
 
@@ -53,14 +53,14 @@ completion["L3MON4D3/LuaSnip"] = {
     after = "nvim-cmp",
     requires = "rafamadriz/friendly-snippets",
     config = function()
-        require('modules.completion.luasnip')
+        require('plugins.completion.luasnip')
     end
 }
 
 completion["windwp/nvim-autopairs"] = {
     after = "nvim-cmp",
     config = function()
-        require('modules.completion.autopairs')
+        require('plugins.completion.autopairs')
     end
 }
 
@@ -68,7 +68,7 @@ completion["stevearc/aerial.nvim"] = {
     module = "aerial",
     cmd = "AerialToggle",
     config = function()
-        require('modules.completion.aerial')
+        require('plugins.completion.aerial')
     end
 }
 
@@ -77,7 +77,7 @@ completion["folke/trouble.nvim"] = {
     cmd = "Trouble",
     module = "trouble",
     config = function()
-        require('modules.completion.trouble')
+        require('plugins.completion.trouble')
     end
 }
 

@@ -172,7 +172,7 @@ local leader = {
     ["/"] = {
         name = "toggle",
         f = {
-            require('modules.completion.lspconfig.formatting').toggle,
+            require('plugins.completion.lspconfig.formatting').toggle,
             "Format on save"
         },
         s = {

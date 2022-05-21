@@ -1,15 +1,15 @@
 local servers = { "sumneko_lua", "ccls" }
 
 local on_attach = function(client, bufnr)
-    require('modules.completion.lspconfig.formatting').on_attach(client, bufnr)
-    require('modules.completion.lspconfig.keymaps').on_attach(client, bufnr)
-    require('modules.completion.lspconfig.signature').on_attach(client, bufnr)
+    require('plugins.completion.lspconfig.formatting').on_attach(client, bufnr)
+    require('plugins.completion.lspconfig.keymaps').on_attach(client, bufnr)
+    require('plugins.completion.lspconfig.signature').on_attach(client, bufnr)
     -- aerial.nvim
     require("aerial").on_attach(client, bufnr)
 end
 
 local setup = function()
-    require('modules.completion.lspconfig.diagnostic').setup()
+    require('plugins.completion.lspconfig.diagnostic').setup()
 
     require("nvim-lsp-installer").setup {
         ensure_installed = servers
@@ -24,7 +24,7 @@ local setup = function()
         }
 
         -- custom config in lspconfig/{server}.lua
-        local ok, custom_opts = pcall(require, 'modules.completion.lspconfig.' .. server)
+        local ok, custom_opts = pcall(require, 'plugins.completion.lspconfig.' .. server)
         if ok then
             opts = vim.tbl_deep_extend('force', opts, custom_opts)
         end

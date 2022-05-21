@@ -1,5 +1,4 @@
 local fn = vim.fn
-local globals = require('core.globals')
 -- local packer_compile_path = fn.stdpath('data') .. '/packer_compiled.lua'
 local packer_dir = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
@@ -13,7 +12,7 @@ packer = require('packer')
 packer.startup({
     function(use)
         use { 'wbthomason/packer.nvim' }
-        local repos = require('modules')
+        local repos = require('plugins')
         for _, repo in ipairs(repos) do
             use(repo)
         end

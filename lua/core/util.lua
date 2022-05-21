@@ -4,6 +4,23 @@ function M.dump(...)
     print(vim.inspect(...))
 end
 
+function M.join_path(...)
+    return table.concat({ ... }, '/')
+end
+
+-- some global paths
+M.paths = {}
+M.paths.config = vim.fn.stdpath('config')
+M.paths.home = os.getenv("HOME")
+M.paths.cache = M.join_path(M.paths.home, '.cache', 'nvim')
+M.paths.plugins = M.join_path(M.paths.config, 'lua', 'plugins')
+M.paths.data = M.join_path(vim.fn.stdpath('data'), 'site')
+
+-- reload config
+function M.reload()
+    vim.cmd('source ' .. os.getenv("MYVIMRC"))
+end
+
 function M.warn(msg, name)
     vim.notify(msg, vim.log.levels.WARN, { title = name })
 end
@@ -90,5 +107,6 @@ function M.toggle(option, silent)
 end
 
 _G.dump = M.dump
+
 
 return M
