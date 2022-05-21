@@ -6,11 +6,6 @@ require("nvim-tree").setup({
     filters = {
         custom = { ".git", "node_modules", ".cargo" }
     },
-    renderer = {
-        indent_markers = {
-            enable = true,
-        }
-    },
     view = {
         mappings = {
             list = {
