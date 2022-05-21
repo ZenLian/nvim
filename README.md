@@ -150,7 +150,7 @@ keymaps in nvim-tree:
 |`a`|create file(`a dir/` create directory)|
 |`r`|rename|
 |`d`|delete|
-|`D`|move to trash|
+|`D`|trash delete|
 |`x`|cut|
 |`c`|copy|
 |`p`|paste|
