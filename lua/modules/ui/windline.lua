@@ -101,8 +101,8 @@ basic.git = {
 local quickfix = {
     filetypes = { 'qf', 'Trouble' },
     active = {
-        { '🚦Quickfix ', { 'white', 'black' } },
-        { helper.separators.slant_right, { 'black', 'black_light' } },
+        { '🚦Quickfix ', { 'black', 'red' } },
+        { helper.separators.slant_right, { 'red', 'black_light' } },
         {
             function()
                 return vim.fn.getqflist({ title = 0 }).title
@@ -113,8 +113,8 @@ local quickfix = {
         { helper.separators.slant_right, { 'black_light', 'InactiveBg' } },
         { ' ', { 'InactiveFg', 'InactiveBg' } },
         basic.divider,
-        { helper.separators.slant_right, { 'InactiveBg', 'black' } },
-        { '🧛 ', { 'white', 'black' } },
+        { helper.separators.slant_right, { 'InactiveBg', 'red' } },
+        { '🧛 ', { 'black', 'red' } },
     },
 
     always_active = true,
@@ -127,7 +127,7 @@ local explorer = {
         { '  ', { 'black', 'red' } },
         { helper.separators.slant_right, { 'red', 'NormalBg' } },
         { b_components.divider, '' },
-        { b_components.file_name(''), { 'white', 'NormalBg' } },
+        { b_components.cache_file_type({ icon = false }), { 'white', 'NormalBg' } },
     },
     always_active = true,
     show_last_status = true,
