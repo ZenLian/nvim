@@ -14,51 +14,33 @@ completion["neovim/nvim-lspconfig"] = {
 }
 
 completion["hrsh7th/nvim-cmp"] = {
-    opt = true,
     event = { "InsertEnter", "CmdlineEnter" },
-    requires = { {
-        "saadparwaiz1/cmp_luasnip",
-        after = "LuaSnip"
-    }, {
-        "hrsh7th/cmp-buffer",
-        after = "cmp_luasnip"
-    }, {
-        "hrsh7th/cmp-nvim-lsp",
-        after = "cmp-buffer"
-    }, {
-        "hrsh7th/cmp-nvim-lsp-document-symbol",
-        after = "cmp-nvim-lsp"
-    }, {
-        "hrsh7th/cmp-path",
-        after = "cmp-nvim-lsp"
-    }, {
-        "hrsh7th/cmp-cmdline",
-        after = "cmp-path"
-    }, {
-        "hrsh7th/cmp-calc",
-        after = "cmp-cmdline"
-    }, {
-        "dmitmel/cmp-cmdline-history",
-        after = "cmp-cmdline"
-    }, {
-        "uga-rosa/cmp-dictionary",
-        module = "cmp_dictionary"
-    } },
+    after = { "LuaSnip" },
     config = function()
         require('plugins.completion.cmp')
-    end
-}
-
-completion["L3MON4D3/LuaSnip"] = {
-    after = "nvim-cmp",
-    requires = "rafamadriz/friendly-snippets",
-    config = function()
-        require('plugins.completion.luasnip')
-    end
+    end,
+    requires = {
+        {
+            "L3MON4D3/LuaSnip",
+            requires = "rafamadriz/friendly-snippets",
+            config = function()
+                require('plugins.completion.luasnip')
+            end
+        },
+        { "saadparwaiz1/cmp_luasnip" },
+        { "hrsh7th/cmp-buffer" },
+        { "hrsh7th/cmp-nvim-lsp" },
+        { "hrsh7th/cmp-nvim-lsp-document-symbol" },
+        { "hrsh7th/cmp-path" },
+        { "hrsh7th/cmp-cmdline" },
+        { "hrsh7th/cmp-calc" },
+        { "dmitmel/cmp-cmdline-history" },
+        { "uga-rosa/cmp-dictionary" }
+    },
 }
 
 completion["windwp/nvim-autopairs"] = {
-    after = "nvim-cmp",
+    module = "nvim-autopairs",
     config = function()
         require('plugins.completion.autopairs')
     end
