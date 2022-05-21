@@ -31,8 +31,8 @@ require("nvim-treesitter.configs").setup {
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
                 ["ic"] = "@class.inner",
-                ["aa"] = "@parameter.outer",
-                ["ia"] = "@parameter.inner",
+                ["a,"] = "@parameter.outer",
+                ["i,"] = "@parameter.inner",
                 ["ab"] = "@block.outer",
                 ["ib"] = "@block.inner",
             },
@@ -43,7 +43,7 @@ require("nvim-treesitter.configs").setup {
             goto_next_start = {
                 ["]]"] = "@function.outer",
                 ["]c"] = "@class.outer",
-                ["]a"] = "@parameter.inner",
+                ["],"] = "@parameter.inner",
             },
             goto_next_end = {
                 ["]["] = "@function.outer",
@@ -52,7 +52,7 @@ require("nvim-treesitter.configs").setup {
             goto_previous_start = {
                 ["[["] = "@function.outer",
                 ["[c"] = "@class.outer",
-                ["[a"] = "@parameter.inner",
+                ["[,"] = "@parameter.inner",
             },
             goto_previous_end = {
                 ["[]"] = "@function.outer",
@@ -60,21 +60,10 @@ require("nvim-treesitter.configs").setup {
             },
         },
         swap = {
-            enable = true,
-            swap_next = {
-                ["<Leader>]a"] = "@parameter.inner"
-            },
-            swap_previous = {
-                ["<Leader>[a"] = "@parameter.inner"
-            }
+            enable = false
         },
         lsp_interop = {
-            enable = true,
-            border = 'none',
-            peek_definition_code = {
-                ["<leader>df"] = "@function.outer",
-                ["<leader>dF"] = "@class.outer",
-            },
+            enable = false,
         },
     },
     rainbow = {

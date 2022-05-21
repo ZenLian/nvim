@@ -67,6 +67,7 @@ map("n", "[b", "<cmd>BufferLineCyclePrev<CR>")
 map("n", "]b", "<cmd>BufferLineCycleNext<CR>")
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
+map("n", "<C-t>", "<cmd>AerialToggle<CR>")
 
 local project_files = function()
     local telescope = require("telescope.builtin")
@@ -162,10 +163,10 @@ local leader = {
     z = {
         name = "zen",
         z = { "<cmd>ZenMode<CR>", "ZenMode" },
-        r = { "lua require('zen-mode').reset()<cr>", "Reset ZenMode" },
+        r = { "<cmd>lua require('zen-mode').reset()<cr>", "Reset ZenMode" },
         t = { "<cmd>Twilight<CR>", "Twilight" },
     },
-    t = {
+    ["\\"] = {
         name = "terminal",
         s = { "<cmd>ToggleTermSendCurrentLine<cr>", "Send line" },
     },
@@ -199,7 +200,7 @@ local leader = {
 }
 
 local leader_visual = {
-    t = {
+    ["\\"] = {
         name = "terminal",
         s = { "<cmd>ToggleTermSendVisualSelection<cr>", "Send selected" },
     }
