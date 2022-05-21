@@ -20,7 +20,6 @@ ui['~/source/edgeme'] = {
 ui['windwp/windline.nvim'] = {
     config = function()
         require('modules.ui.windline')
-        require('wlfloatline').setup()
     end
 }
 

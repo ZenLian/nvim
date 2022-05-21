@@ -133,6 +133,31 @@ local explorer = {
     show_last_status = true,
 }
 
+local terminal = {
+    filetypes = { 'toggleterm' },
+    active = {
+        { b_components.divider, hl_list.Black },
+        {
+            function()
+                return string.format("  terminal(%s) ", vim.b.toggle_number)
+            end,
+            { 'black', 'red' }
+        },
+        { b_components.divider, hl_list.Black },
+    },
+    inactive = {
+        { b_components.divider, hl_list.Inactive },
+        {
+            function(bufnr)
+                local num = vim.api.nvim_buf_get_var(bufnr, "toggle_number")
+                return string.format("  terminal(%s) ", num)
+            end,
+            hl_list.Inactive
+        },
+        { b_components.divider, hl_list.Inactive },
+    }
+}
+
 basic.lsp_info = {
     name = 'lsp_info',
     hl_colors = {
@@ -171,12 +196,12 @@ local default = {
         basic.square_mode,
     },
     inactive = {
+        basic.divider,
         { b_components.full_file_name, hl_list.Inactive },
-        basic.file_name_inactive,
+        -- basic.file_name_inactive,
         basic.divider,
-        basic.divider,
-        { b_components.line_col, hl_list.Inactive },
-        { b_components.progress, hl_list.Inactive },
+        -- { b_components.line_col, hl_list.Inactive },
+        -- { b_components.progress, hl_list.Inactive },
     },
 }
 
@@ -191,6 +216,7 @@ local setup = function()
             default,
             quickfix,
             explorer,
+            terminal
         },
     })
 end
