@@ -14,5 +14,6 @@ require('indent_blankline').setup {
         "undotree",
         "alpha",
         "aerial",
+        "markdown",
     },
 }
