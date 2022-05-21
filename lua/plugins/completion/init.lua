@@ -9,13 +9,15 @@ completion["neovim/nvim-lspconfig"] = {
     end,
     requires = {
         "williamboman/nvim-lsp-installer",
-        "folke/lua-dev.nvim"
     }
+}
+
+completion["folke/lua-dev.nvim"] = {
+    module = "lua-dev"
 }
 
 completion["hrsh7th/nvim-cmp"] = {
     event = { "InsertEnter", "CmdlineEnter" },
-    after = { "LuaSnip" },
     config = function()
         require('plugins.completion.cmp')
     end,
@@ -23,24 +25,26 @@ completion["hrsh7th/nvim-cmp"] = {
         {
             "L3MON4D3/LuaSnip",
             requires = "rafamadriz/friendly-snippets",
+            after = "nvim-cmp",
             config = function()
                 require('plugins.completion.luasnip')
             end
         },
-        { "saadparwaiz1/cmp_luasnip" },
-        { "hrsh7th/cmp-buffer" },
-        { "hrsh7th/cmp-nvim-lsp" },
-        { "hrsh7th/cmp-nvim-lsp-document-symbol" },
-        { "hrsh7th/cmp-path" },
-        { "hrsh7th/cmp-cmdline" },
-        { "hrsh7th/cmp-calc" },
-        { "dmitmel/cmp-cmdline-history" },
-        { "uga-rosa/cmp-dictionary" }
+        { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+        { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+        { "hrsh7th/cmp-nvim-lsp-document-symbol", after = "nvim-cmp" },
+        { "hrsh7th/cmp-path", after = "nvim-cmp" },
+        { "hrsh7th/cmp-cmdline", after = "nvim-cmp" },
+        { "hrsh7th/cmp-calc", after = "nvim-cmp" },
+        { "dmitmel/cmp-cmdline-history", after = "nvim-cmp" },
+        { "uga-rosa/cmp-dictionary", after = "nvim-cmp" }
     },
 }
 
 completion["windwp/nvim-autopairs"] = {
-    module = "nvim-autopairs",
+    after = "nvim-cmp",
+    -- module = "nvim-autopairs",
     config = function()
         require('plugins.completion.autopairs')
     end
