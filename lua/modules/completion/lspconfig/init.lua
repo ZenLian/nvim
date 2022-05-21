@@ -3,6 +3,7 @@ local servers = { "sumneko_lua", "ccls" }
 local on_attach = function(client, bufnr)
     require('modules.completion.lspconfig.formatting').on_attach(client, bufnr)
     require('modules.completion.lspconfig.keymaps').on_attach(client, bufnr)
+    require('modules.completion.lspconfig.signature').on_attach(client, bufnr)
     -- aerial.nvim
     require("aerial").on_attach(client, bufnr)
 end
