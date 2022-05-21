@@ -83,7 +83,7 @@ tools["akinsho/toggleterm.nvim"] = {
     opt = true,
     module = "toggleterm",
     cmd = "ToggleTerm",
-    keys = { [[<C-t>]] },
+    keys = { [[<C-\>]] },
     config = function()
         require('modules.tools.toggleterm')
     end
