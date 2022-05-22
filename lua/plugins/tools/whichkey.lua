@@ -163,8 +163,9 @@ local leader = {
         w = { "<cmd>wqa<cr>", "Save all and quit" },
     },
     x = {
-        name = "errors",
-        x = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Trouble" },
+        name = "trouble",
+        x = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Diagnostics" },
+        t = { "<cmd>TodoTrouble<cr>", "Todos" },
     },
     z = {
         name = "zen",

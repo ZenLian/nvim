@@ -2,21 +2,18 @@ local ui = {}
 
 --#region colorschemes
 -- ui['zenlian/edgeme'] = {
+-- ui['tjdevries/colorbuddy.nvim'] = {
+-- ui['Mofiqul/vscode.nvim'] = {
+-- ui['ThemerCorp/themer.lua'] = {
 ui['~/source/edgeme'] = {
     config = function()
-        vim.o.background = 'dark'
-        require('edgeme').setup {
-            style = 'aura',
-        }
-        vim.cmd [[colorscheme edgeme]]
+        require('plugins.ui.theme')
     end
 }
--- ui['ThemerCorp/themer.lua'] = {
---     config = configs.themer
--- }
 --#endregion colorschemes
 
 ui['windwp/windline.nvim'] = {
+    event = "VimEnter",
     config = function()
         require('plugins.ui.windline')
     end

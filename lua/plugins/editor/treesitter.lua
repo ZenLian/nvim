@@ -19,6 +19,7 @@ require("nvim-treesitter.configs").setup {
         "lua",
         "markdown",
         "python",
+        "query",
         "regex",
         "scss",
         "toml",

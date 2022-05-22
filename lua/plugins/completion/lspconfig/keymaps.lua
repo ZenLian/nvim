@@ -4,6 +4,9 @@ local wk = require('which-key')
 local util = require('core.util')
 
 local leader = {
+    s = {
+        d = { "<cmd>Telescope diagnostics<cr>", "Search Diagnostics" },
+    },
     l = {
         name = "language",
         f = { vim.lsp.buf.formatting, "File format" },
@@ -11,10 +14,6 @@ local leader = {
         r = { vim.lsp.buf.rename, "Rename" },
         d = { vim.diagnostic.open_float, "Line Diagnostics" },
     },
-    x = {
-        s = { "<cmd>Telescope document_diagnostics<cr>", "Search Document Diagnostics" },
-        w = { "<cmd>Telescope workspace_diagnostics<cr>", "Workspace Diagnostics" },
-    }
 }
 
 local leader_visual = {

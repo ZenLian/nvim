@@ -101,6 +101,14 @@ tools["akinsho/toggleterm.nvim"] = {
     end
 }
 
+tools["folke/todo-comments.nvim"] = {
+    opt = true,
+    event = { "BufWinEnter" },
+    config = function()
+        require('todo-comments').setup()
+    end
+}
+
 tools["folke/which-key.nvim"] = {
     config = function()
         require('plugins.tools.whichkey')

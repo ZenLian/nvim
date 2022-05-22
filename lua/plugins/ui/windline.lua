@@ -2,7 +2,6 @@ local windline = require('windline')
 local helper = require('windline.helpers')
 local b_components = require('windline.components.basic')
 local state = _G.WindLine.state
-
 local lsp_comps = require('windline.components.lsp')
 local git_comps = require('windline.components.git')
 
@@ -196,10 +195,10 @@ local default = {
         basic.square_mode,
     },
     inactive = {
-        basic.divider,
+        { b_components.divider, hl_list.Inactive },
         { b_components.full_file_name, hl_list.Inactive },
         -- basic.file_name_inactive,
-        basic.divider,
+        { b_components.divider, hl_list.Inactive },
         -- { b_components.line_col, hl_list.Inactive },
         -- { b_components.progress, hl_list.Inactive },
     },
@@ -222,3 +221,4 @@ local setup = function()
 end
 
 setup()
+-- require('wlsample.vscode')
