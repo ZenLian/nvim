@@ -109,6 +109,13 @@ tools["folke/todo-comments.nvim"] = {
     end
 }
 
+tools["TimUntersberger/neogit"] = {
+    cmd = "Neogit",
+    config = function()
+        require('neogit').setup()
+    end
+}
+
 tools["folke/which-key.nvim"] = {
     config = function()
         require('plugins.tools.whichkey')
