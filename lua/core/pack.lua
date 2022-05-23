@@ -8,7 +8,7 @@ if fn.empty(fn.glob(packer_dir)) > 0 then
 end
 
 -- load packer
-packer = require('packer')
+local packer = require('packer')
 packer.startup({
     function(use)
         use { 'wbthomason/packer.nvim' }

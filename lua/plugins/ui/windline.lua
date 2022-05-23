@@ -6,10 +6,17 @@ local lsp_comps = require('windline.components.lsp')
 local git_comps = require('windline.components.git')
 
 local hl_list = {
-    Black = { 'white', 'black' },
-    White = { 'black', 'white' },
+    default  = { 'white', 'black' },
+    White    = { 'white', 'black' },
+    Black    = { 'black', 'white' },
+    Blue     = { 'blue', 'black' },
+    Green    = { 'green', 'black' },
+    Red      = { 'red', 'black' },
+    Yellow   = { 'yellow', 'black' },
+    Cyan     = { 'cyan', 'black' },
+    Magenta  = { 'magenta', 'black' },
     Inactive = { 'InactiveFg', 'InactiveBg' },
-    Active = { 'ActiveFg', 'ActiveBg' },
+    Active   = { 'ActiveFg', 'ActiveBg' },
 }
 local basic = {}
 
@@ -18,18 +25,18 @@ basic.divider = { b_components.divider, '' }
 basic.bg = { ' ', 'StatusLine' }
 
 local colors_mode = {
-    Normal = { 'red', 'black' },
-    Insert = { 'green', 'black' },
-    Visual = { 'yellow', 'black' },
-    Replace = { 'blue_light', 'black' },
-    Command = { 'magenta', 'black' },
+    Normal = hl_list.Blue,
+    Insert = hl_list.Green,
+    Visual = hl_list.Yellow,
+    Replace = hl_list.Yellow,
+    Command = hl_list.Magenta,
 }
 
 basic.vi_mode = {
     name = 'vi_mode',
     hl_colors = colors_mode,
     text = function()
-        return { { '  ', state.mode[2] } }
+        return { { '  ', state.mode[2] } }
     end,
 }
 basic.square_mode = {
@@ -41,56 +48,46 @@ basic.square_mode = {
 
 basic.file = {
     name = 'file',
-    hl_colors = {
-        default = hl_list.Black,
-        white = { 'white', 'black' },
-        magenta = { 'magenta', 'black' },
-        green = { 'green', 'black' },
-    },
+    hl_colors = hl_list,
     text = function()
         return {
             { ' ', '' },
-            { b_components.cache_file_name('[No Name]', 'unique'), 'white' },
+            { b_components.cache_file_name('[No Name]', 'unique'), 'White' },
             { ' ', '' },
-            { b_components.file_modified(' '), 'green' },
+            { b_components.file_modified(' '), 'Green' },
         }
     end,
 }
 
+local icon_comp = b_components.cache_file_icon({ default = '', hl_colors = { 'white', 'black_light' } })
 basic.file_right = {
-    hl_colors = {
-        default = hl_list.Black,
-        white = { 'white', 'black' },
-        green = { 'green', 'black' },
-        magenta = { 'magenta', 'black' },
-    },
-    text = function()
+    hl_colors = hl_list,
+    text = function(bufnr)
         return {
-            { b_components.line_col_lua, 'white' },
+            { b_components.line_col_lua, 'White' },
             { b_components.progress_lua, '' },
             { ' ', '' },
-            { b_components.file_encoding(), 'green' },
+            { b_components.file_encoding(), '' },
             { ' ', '' },
-            { b_components.cache_file_type({ icon = true }), 'magenta' },
+            icon_comp(bufnr),
+            { ' ', '' },
+            { b_components.cache_file_type({ icon = false }), 'White' },
+            { ' ', '' },
         }
     end,
 }
+
 basic.git = {
     name = 'git',
-    hl_colors = {
-        green = { 'green', 'black' },
-        red = { 'red', 'black' },
-        blue = { 'blue', 'black' },
-        magenta = { 'magenta', 'black' }
-    },
+    hl_colors = hl_list,
     width = breakpoint_width,
     text = function(bufnr)
         if git_comps.is_git(bufnr) then
             return {
-                { git_comps.git_branch(), 'magenta' },
-                { git_comps.diff_added({ format = ' +%s', show_zero = false }), 'green' },
-                { git_comps.diff_removed({ format = ' -%s', show_zero = false }), 'red' },
-                { git_comps.diff_changed({ format = ' ~%s', show_zero = false }), 'blue' },
+                { git_comps.git_branch(), 'Magenta' },
+                { git_comps.diff_added({ format = ' +%s', show_zero = false }), 'Green' },
+                { git_comps.diff_removed({ format = ' -%s', show_zero = false }), 'Red' },
+                { git_comps.diff_changed({ format = ' ~%s', show_zero = false }), 'Blue' },
             }
         end
         return ''
@@ -100,20 +97,21 @@ basic.git = {
 local quickfix = {
     filetypes = { 'qf', 'Trouble' },
     active = {
-        { '🚦Quickfix ', { 'black', 'red' } },
-        { helper.separators.slant_right, { 'red', 'black_light' } },
+        { '🚦', { 'white', 'red' } },
+        { ' Quickfix ', { 'red', 'black' } },
+        -- { helper.separators.slant_right, { 'blue', 'black_light' } },
         {
             function()
                 return vim.fn.getqflist({ title = 0 }).title
             end,
-            { 'cyan', 'black_light' },
+            { 'blue', 'InactiveBg' },
         },
-        { ' Total : %L ', { 'cyan', 'black_light' } },
-        { helper.separators.slant_right, { 'black_light', 'InactiveBg' } },
-        { ' ', { 'InactiveFg', 'InactiveBg' } },
+        { ' Total : %L ', { 'blue', 'InactiveBg' } },
+        -- { helper.separators.slant_right, { 'black_light', 'InactiveBg' } },
+        -- { ' ', { 'InactiveFg', 'InactiveBg' } },
         basic.divider,
-        { helper.separators.slant_right, { 'InactiveBg', 'red' } },
-        { '🧛 ', { 'black', 'red' } },
+        -- { helper.separators.slant_right, { 'InactiveBg', 'red' } },
+        { '🚦', { 'black', 'red' } },
     },
 
     always_active = true,
@@ -123,10 +121,10 @@ local quickfix = {
 local explorer = {
     filetypes = { 'fern', 'NvimTree', 'lir' },
     active = {
-        { '  ', { 'black', 'red' } },
-        { helper.separators.slant_right, { 'red', 'NormalBg' } },
-        { b_components.divider, '' },
-        { b_components.cache_file_type({ icon = false }), { 'white', 'NormalBg' } },
+        { '  Explorer ', { 'InactiveFg', 'blue' } },
+        -- { helper.separators.slant_right, { 'red', 'NormalBg' } },
+        { b_components.divider, { 'white', 'InactiveBg' } },
+        -- { b_components.cache_file_type({ icon = false }), { 'white', 'NormalBg' } },
     },
     always_active = true,
     show_last_status = true,
@@ -159,22 +157,16 @@ local terminal = {
 
 basic.lsp_info = {
     name = 'lsp_info',
-    hl_colors = {
-        default = hl_list.Black,
-        red = { 'red', 'black' },
-        yellow = { 'yellow', 'black' },
-        blue = { 'blue', 'black' },
-        magenta = { 'magenta', 'black' },
-    },
+    hl_colors = hl_list,
     width = breakpoint_width,
     text = function(bufnr)
         if lsp_comps.check_lsp(bufnr) then
             return {
-                { lsp_comps.lsp_error({ format = '  %s', show_zero = false }), 'red' },
-                { lsp_comps.lsp_warning({ format = '  %s', show_zero = false }), 'yellow' },
-                { lsp_comps.lsp_hint({ format = '  %s', show_zero = false }), 'green' },
+                { lsp_comps.lsp_error({ format = '  %s', show_zero = false }), 'Red' },
+                { lsp_comps.lsp_warning({ format = '  %s', show_zero = false }), 'Yellow' },
+                { lsp_comps.lsp_hint({ format = '  %s', show_zero = false }), 'Green' },
                 { ' ' },
-                { lsp_comps.lsp_name(), 'magenta' },
+                { lsp_comps.lsp_name(), 'Blue' },
             }
         end
         return ''
@@ -191,7 +183,6 @@ local default = {
         basic.divider,
         basic.lsp_info,
         basic.file_right,
-        { ' ', hl_list.Black },
         basic.square_mode,
     },
     inactive = {
