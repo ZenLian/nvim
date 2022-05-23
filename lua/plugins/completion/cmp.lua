@@ -17,8 +17,8 @@ local kind_icons = {
     Interface = "",
     Module = "",
     Property = "ﰠ",
-    -- Unit = "",
-    Unit = "塞",
+    Unit = "",
+    -- Unit = "塞",
     Value = "",
     Enum = "",
     Keyword = "",
@@ -137,7 +137,9 @@ cmp.setup {
         format = cmp_fmt,
     },
     experimental = {
-        ghost_text = true
+        ghost_text = {
+            hl_group = "NonText"
+        }
     }
 }
 
