@@ -105,7 +105,7 @@ tools["folke/todo-comments.nvim"] = {
     opt = true,
     event = { "BufWinEnter" },
     config = function()
-        require('todo-comments').setup()
+        require('plugins.tools.todo-comments')
     end
 }
 
