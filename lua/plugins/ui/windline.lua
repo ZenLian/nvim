@@ -59,7 +59,7 @@ basic.file = {
     end,
 }
 
-local icon_comp = b_components.cache_file_icon({ default = '', hl_colors = { 'white', 'black_light' } })
+local icon_comp = b_components.cache_file_icon({ default = '', hl_colors = hl_list.default })
 basic.file_right = {
     hl_colors = hl_list,
     text = function(bufnr)
