@@ -153,6 +153,7 @@ local leader = {
         ["/"] = { "<cmd>Telescope help_tags<CR>", "Help Tags" },
         c = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
         n = { "<cmd>Telescope file_browser<CR>", "File Browser" },
+        [";"] = { "<cmd>Telescope symbols<CR>", "Symbols" },
         --TODO: move
         -- s = { "<cmd>SessionManager load_session<CR>", "Sessions" },
     },

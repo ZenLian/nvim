@@ -36,6 +36,7 @@ autocmd(
     { "WinEnter" },
     {
         group = "edit",
+        pattern = { "!TelescopePrompt" },
         callback = function()
             vim.wo.cursorline = true
         end
@@ -45,6 +46,7 @@ autocmd(
     { "WinLeave" },
     {
         group = "edit",
+        pattern = { "!TelescopePrompt" },
         callback = function()
             vim.wo.cursorline = false
         end

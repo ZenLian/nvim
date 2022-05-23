@@ -31,7 +31,7 @@ require('telescope').setup {
             height = 25,
         },
         -- border = false,
-        -- borderchars = { " ", " ", " ", " ", " ", " ", " ", " " },
+        -- borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
         history = {
             path = vim.fn.stdpath('data') .. '/databases/telescope_history.sqlite3',
             limit = 100,

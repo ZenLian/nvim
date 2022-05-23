@@ -1,8 +1,10 @@
-vim.o.background = 'dark'
-require('edgeme').setup {
-    style = 'aura',
-}
-vim.cmd [[colorscheme edgeme]]
+-- vim.o.background = 'dark'
+-- require('edgeme').setup {
+--     style = 'aura',
+-- }
+-- vim.cmd [[colorscheme edgeme]]
+
+vim.cmd [[colorscheme nvdark]]
 
 -- require("themer").setup({
 --     colorscheme = "tokyonight"

@@ -5,7 +5,8 @@ local ui = {}
 -- ui['tjdevries/colorbuddy.nvim'] = {
 -- ui['Mofiqul/vscode.nvim'] = {
 -- ui['ThemerCorp/themer.lua'] = {
-ui['~/source/edgeme'] = {
+-- ui['~/source/edgeme'] = {}
+ui['~/source/nvdark.nvim'] = {
     config = function()
         require('plugins.ui.theme')
     end
