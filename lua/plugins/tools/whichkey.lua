@@ -67,8 +67,10 @@ map("n", "]t", "<cmd>tabp<CR>")
 --
 -- plugins
 --
-map("n", "[b", "<cmd>BufferLineCyclePrev<CR>")
-map("n", "]b", "<cmd>BufferLineCycleNext<CR>")
+map("n", "[b", "<cmd>BufferPrevious<CR>")
+map("n", "]b", "<cmd>BufferNext<CR>")
+map("n", "<A-,>", "<cmd>BufferMovePrevious<CR>")
+map("n", "<A-.>", "<cmd>BufferMoveNext<CR>")
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>")
 map("n", "<C-f>", "<cmd>Telescope current_buffer_fuzzy_find<CR>")
 
@@ -95,14 +97,21 @@ local leader = {
     },
     b = {
         name = "buffer",
-        b = { "<cmd>e #<CR>", "Cycle Buffer" },
-        g = { "<cmd>BufferLinePick<CR>", "Goto buffer" },
-        c = { "<cmd>BufferLinePickClose<CR>", "Pick buffer to close" },
-        ["["] = { "<cmd>BufferLineCloseLeft<CR>", "Close Left buffers" },
-        ["]"] = { "<cmd>BufferLineCloseRight<CR>", "Close right buffers" },
-        p = { "<cmd>BufferLineCyclePrev<CR>", "Previous Buffer" },
-        n = { "<cmd>BufferLineCycleNext<CR>", "Next Buffer" },
-        d = { "<cmd>bd<CR>", "Delete Buffer" },
+        -- b = { "<cmd>BufferLast<CR>", "Last buffer" },
+        b = { "<cmd>e #<CR>", "Last buffer" },
+        g = { "<cmd>BufferPick<CR>", "Goto buffer" },
+        p = { "<cmd>BufferPin<CR>", "Pin/Unpin buffer" },
+        c = { "<cmd>BufferClose<CR>", "Close buffer" },
+        w = { "<cmd>BufferWipeout<CR>", "Wipeout buffer" },
+        ["-"] = { "<cmd>BufferCloseAllButCurrent<CR>", "Close other buffers" },
+        ["["] = { "<cmd>BufferCloseBuffersLeft<CR>", "Close left buffers" },
+        ["]"] = { "<cmd>BufferCloseBuffersRight<CR>", "Close right buffers" },
+        o = {
+            name = "order",
+            n = { "<cmd>BufferOrderByBufferNumber<CR>", "Order by buffer number" },
+            d = { "<cmd>BufferOrderByDirectory<CR>", "Order by directory" },
+            l = { "<cmd>BufferOrderByLanguage<CR>", "Order by language" },
+        }
     },
     t = {
         name = "tab",
