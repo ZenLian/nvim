@@ -20,9 +20,9 @@ jobs:
         uses: JohnnyMorganz/stylua-action@1.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          args: --check $LINT_FILES
+          args: --check ${{ env.LINT_FILES }}
 
       - name: Luacheck linter
         uses: lunarmodules/luacheck@v0
         with:
-          args: $LINT_FILES
+          args: ${{ env.LINT_FILES }}
