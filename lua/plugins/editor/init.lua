@@ -55,7 +55,8 @@ editor['ur4ltz/surround.nvim'] = {
 }
 
 editor['ggandor/lightspeed.nvim'] = {
-  event = { 'BufRead', 'BufNewFile' },
+  -- FIXME: `s` map not work when lazy loading
+  -- event = { 'BufRead', 'BufNewFile' },
   config = function()
     require('plugins.editor.lightspeed')
   end,
