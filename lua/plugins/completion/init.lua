@@ -16,6 +16,10 @@ completion["neovim/nvim-lspconfig"] = {
         {
             "jose-elias-alvarez/null-ls.nvim",
             module = "null-ls"
+        },
+        {
+            "b0o/schemastore.nvim",
+            module = "schemastore",
         }
     }
 }

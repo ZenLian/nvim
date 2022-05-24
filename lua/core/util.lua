@@ -43,6 +43,7 @@ function M.execute(id)
     return func()
 end
 
+-- TODO: use vim.keymap.set
 function M.map(mode, lhs, rhs, opts)
     local defaults = {
         nowait = true,
