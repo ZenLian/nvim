@@ -25,12 +25,12 @@ local function button(...)
 end
 
 dashboard.section.buttons.val = {
-    button("e", "  > New", ":ene<CR>"),
-    button("f", "  > Files", ":Telescope find_files<CR>"),
-    button("r", "  > Recent", ":Telescope oldfiles<CR>"),
-    button("s", "  > Sessions", "<cmd>SessionManager load_session<CR>"),
-    button("c", "  > Configs", ":e $MYVIMRC | :cd %:p:h<CR>"),
-    button("q", "  > Quit", ":qa<CR>"),
+    button("e", "   New", ":ene<CR>"),
+    button("f", "   Files", ":Telescope find_files<CR>"),
+    button("r", "   Recent", ":Telescope oldfiles<CR>"),
+    button("s", "   Sessions", "<cmd>SessionManager load_session<CR>"),
+    button("c", "   Configs", ":e $MYVIMRC | :cd %:p:h<CR>"),
+    button("q", "   Quit", ":qa<CR>"),
 }
 
 local fortune = require("alpha.fortune")

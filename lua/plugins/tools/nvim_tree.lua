@@ -4,7 +4,7 @@ require("nvim-tree").setup({
         -- update_cwd = true
     },
     filters = {
-        custom = { ".git", "node_modules", ".cargo" }
+        custom = { "^\\.git" },
     },
     view = {
         width = 30,
