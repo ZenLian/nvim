@@ -36,7 +36,7 @@ local g = {
   t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
 }
 
-function M.on_attach(client, bufnr)
+function M.on_attach(_, bufnr)
   local opts = { buffer = bufnr }
   util.map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
   util.map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)

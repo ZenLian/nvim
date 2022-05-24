@@ -16,7 +16,8 @@ local options = {
   sessionoptions = 'curdir,help,tabpages,winsize',
   -- clipboard = "unnamedplus", -- FIXME: causing clipboard.vim a lot of time to find clip tools
   wildignorecase = true,
-  wildignore = '.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**',
+  wildignore = [[.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,]]
+    .. [[**/node_modules/**,**/bower_modules/**]],
   backup = false,
   writebackup = false,
   swapfile = false,

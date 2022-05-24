@@ -1,5 +1,4 @@
 local windline = require('windline')
-local helper = require('windline.helpers')
 local b_components = require('windline.components.basic')
 local state = _G.WindLine.state
 local lsp_comps = require('windline.components.lsp')
@@ -99,7 +98,6 @@ local quickfix = {
   active = {
     { '🚦', { 'white', 'red' } },
     { ' Quickfix ', { 'red', 'black' } },
-    -- { helper.separators.slant_right, { 'blue', 'black_light' } },
     {
       function()
         return vim.fn.getqflist({ title = 0 }).title
@@ -107,10 +105,7 @@ local quickfix = {
       { 'blue', 'InactiveBg' },
     },
     { ' Total : %L ', { 'blue', 'InactiveBg' } },
-    -- { helper.separators.slant_right, { 'black_light', 'InactiveBg' } },
-    -- { ' ', { 'InactiveFg', 'InactiveBg' } },
     basic.divider,
-    -- { helper.separators.slant_right, { 'InactiveBg', 'red' } },
     { '🚦', { 'black', 'red' } },
   },
 
@@ -122,9 +117,7 @@ local explorer = {
   filetypes = { 'fern', 'NvimTree', 'lir' },
   active = {
     { '  Explorer ', { 'InactiveFg', 'blue' } },
-    -- { helper.separators.slant_right, { 'red', 'NormalBg' } },
     { b_components.divider, { 'white', 'InactiveBg' } },
-    -- { b_components.cache_file_type({ icon = false }), { 'white', 'NormalBg' } },
   },
   always_active = true,
   show_last_status = true,
