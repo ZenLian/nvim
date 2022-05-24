@@ -93,5 +93,24 @@ autocmd(
     }
 )
 
+-- shiftwidth=2 in some filetypes
+-- TODO: maybe use editorconfig.nvim?
+autocmd(
+    { "FileType" },
+    {
+        group = group,
+        pattern = {
+            "json",
+            "jsonc",
+            "html",
+            "css",
+            "scss",
+            "javascript",
+            "typescript",
+        },
+        command = [[setlocal shiftwidth=2]],
+    }
+)
+
 -- markdown spell on
 -- vim.cmd([[autocmd FileType markdown setlocal spell]])
