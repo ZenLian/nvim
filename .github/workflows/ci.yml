@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [lua]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      LINT_FILES: init.lua lua
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: StyLua
+        uses: JohnnyMorganz/stylua-action@1.0.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          args: --check $LINT_FILES
+
+      - name: Luacheck linter
+        uses: lunarmodules/luacheck@v0
+        with:
+          args: $LINT_FILES
