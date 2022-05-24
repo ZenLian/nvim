@@ -11,7 +11,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     env:
-      LINT_FILES: init.lua lua
+      LINT_FILES: filetype.lua lua
     steps:
       - name: Checkout
         uses: actions/checkout@v3

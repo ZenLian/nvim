@@ -131,20 +131,4 @@ tools['lewis6991/impatient.nvim'] = {
   opt = false,
 }
 
--- TODO: use builtin filetype.lua in nvim v0.7
--- ref: https://neovim.io/news/2022/04, #filetype.lua
-tools['nathom/filetype.nvim'] = {
-  opt = false,
-  config = function()
-    require('filetype').setup({
-      overrides = {
-        shebang = {
-          -- Set the filetype of files with a dash shebang to sh
-          dash = 'sh',
-        },
-      },
-    })
-  end,
-}
-
 return tools

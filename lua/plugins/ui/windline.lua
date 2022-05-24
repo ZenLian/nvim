@@ -70,7 +70,7 @@ basic.file_right = {
       { ' ', '' },
       icon_comp(bufnr),
       { ' ', '' },
-      { b_components.cache_file_type({ icon = false }), 'White' },
+      { b_components.cache_file_type({ icon = false, default = 'Plain Text' }), 'White' },
       { ' ', '' },
     }
   end,
