@@ -9,11 +9,15 @@ completion["neovim/nvim-lspconfig"] = {
     end,
     requires = {
         "williamboman/nvim-lsp-installer",
+        {
+            "folke/lua-dev.nvim",
+            module = "lua-dev"
+        },
+        {
+            "jose-elias-alvarez/null-ls.nvim",
+            module = "null-ls"
+        }
     }
-}
-
-completion["folke/lua-dev.nvim"] = {
-    module = "lua-dev"
 }
 
 completion["hrsh7th/nvim-cmp"] = {

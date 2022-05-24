@@ -17,6 +17,8 @@ local setup = function()
 
     local lspconfig = require('lspconfig')
     local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+    require('plugins.completion.lspconfig.null-ls').setup(on_attach)
     for _, server in ipairs(servers) do
         local opts = {
             on_attach = on_attach,

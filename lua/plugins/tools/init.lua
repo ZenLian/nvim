@@ -112,7 +112,7 @@ tools["folke/todo-comments.nvim"] = {
 tools["TimUntersberger/neogit"] = {
     cmd = "Neogit",
     config = function()
-        require('neogit').setup()
+        require('plugins.tools.neogit')
     end
 }
 

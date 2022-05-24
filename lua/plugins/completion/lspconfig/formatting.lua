@@ -20,19 +20,19 @@ function M.toggle()
     end
 end
 
-function M.on_attach(_, bufnr)
-    vim.api.nvim_create_augroup("LspFormat", { clear = true })
-    vim.api.nvim_create_autocmd(
-        { "BufWritePre" },
-        {
-            buffer = bufnr,
-            callback = function()
-                if require('config').format_on_save then
-                    vim.lsp.buf.formatting_sync(nil, 1000)
-                end
-            end
-        }
-    )
+local augroup = vim.api.nvim_create_augroup("LspFormat", { clear = true })
+function M.on_attach(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+        vim.api.nvim_create_autocmd(
+            { "BufWritePre" },
+            {
+                group = augroup,
+                buffer = bufnr,
+                callback = M.format,
+            }
+        )
+    end
 end
 
 return M
