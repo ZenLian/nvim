@@ -48,13 +48,6 @@ autocmd({ 'VimResized' }, {
   command = [[wincmd =]],
 })
 
--- auto reload file change
--- FIXME: FocusGained event not working
-autocmd({ 'FocusGained' }, {
-  group = group,
-  command = [[checktime]],
-})
-
 -- windows to close with "q"
 -- vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo,notify,tsplayground nnoremap <buffer><silent> q :close<CR>]])
 -- vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
@@ -84,6 +77,8 @@ autocmd({ 'FileType' }, {
     'scss',
     'javascript',
     'typescript',
+    'yaml',
+    'lua',
   },
   command = [[setlocal shiftwidth=2]],
 })
