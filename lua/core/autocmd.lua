@@ -3,13 +3,13 @@ local augroup = function(name)
 end
 local autocmd = vim.api.nvim_create_autocmd
 
-augroup("edit")
+local group = augroup("core")
 -- return to last edit position
 autocmd(
     { "BufReadPost" },
     {
         -- command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],
-        group = "edit",
+        group = group,
         callback = function()
             local pos = vim.fn.line([['"]])
             if pos > 1 and pos <= vim.fn.line("$") then
@@ -24,7 +24,7 @@ autocmd(
     { "TextYankPost" },
     {
         -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
-        group = "edit",
+        group = group,
         callback = function()
             vim.highlight.on_yank() --{ higroup = "IncSearch", timeout = 250 }
         end
@@ -35,7 +35,7 @@ autocmd(
 autocmd(
     { "WinEnter" },
     {
-        group = "edit",
+        group = group,
         pattern = { "!TelescopePrompt" },
         callback = function()
             vim.wo.cursorline = true
@@ -45,7 +45,7 @@ autocmd(
 autocmd(
     { "WinLeave" },
     {
-        group = "edit",
+        group = group,
         pattern = { "!TelescopePrompt" },
         callback = function()
             vim.wo.cursorline = false
@@ -57,7 +57,7 @@ autocmd(
 autocmd(
     { "VimResized" },
     {
-        group = "edit",
+        group = group,
         -- command = [[tabdo wincmd =]]
         command = [[wincmd =]]
     }
@@ -68,13 +68,30 @@ autocmd(
 autocmd(
     { "FocusGained" },
     {
+        group = group,
         command = [[checktime]],
     }
 )
 
 -- windows to close with "q"
-vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo,notify,tsplayground nnoremap <buffer><silent> q :close<CR>]])
-vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+-- vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo,notify,tsplayground nnoremap <buffer><silent> q :close<CR>]])
+-- vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
+autocmd(
+    { "FileType" },
+    {
+        group = group,
+        pattern = {
+            "help",
+            "startuptime",
+            "qf",
+            "lspinfo",
+            "notify",
+            "tsplayground",
+            "null-ls-info",
+        },
+        command = [[nnoremap <buffer><silent> q :close<CR>]],
+    }
+)
 
 -- markdown spell on
 -- vim.cmd([[autocmd FileType markdown setlocal spell]])
