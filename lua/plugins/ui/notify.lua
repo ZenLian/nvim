@@ -1,14 +1,14 @@
-local notify = require("notify")
+local notify = require('notify')
 
-notify.setup {
-    stages = "slide",
-    timeout = 2000,
-    -- Function called when a new window is opened,
-    -- use for changing win settings/config
-    on_open = nil,
-    -- Function called when a window is closed
-    on_close = nil,
-}
+notify.setup({
+  stages = 'slide',
+  timeout = 2000,
+  -- Function called when a new window is opened,
+  -- use for changing win settings/config
+  on_open = nil,
+  -- Function called when a window is closed
+  on_close = nil,
+})
 
 vim.notify = notify
 
@@ -104,7 +104,6 @@ vim.notify = notify
 --     end
 -- end
 
-
 -- TODO: use fidget.nvim instead for less visual impact
 -- vim.api.nvim_create_augroup("Notify", { clear = true })
 -- vim.api.nvim_create_autocmd(
@@ -121,12 +120,11 @@ vim.notify = notify
 -- LSP
 -- https://github.com/rcarriga/nvim-notify/wiki/Usage-Recipes#lsp-messages
 local severity = {
-  "error",
-  "warn",
-  "info",
-  "info", -- map both hint and info to info?
+  'error',
+  'warn',
+  'info',
+  'info', -- map both hint and info to info?
 }
-vim.lsp.handlers["window/showMessage"] = function(_, method, params, _)
-             vim.notify(method.message, severity[params.type])
+vim.lsp.handlers['window/showMessage'] = function(_, method, params, _)
+  vim.notify(method.message, severity[params.type])
 end
-

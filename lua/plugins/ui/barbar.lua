@@ -1,4 +1,4 @@
 vim.g.bufferline = {
-    animation = false,
-    icon_pinned = '',
+  animation = false,
+  icon_pinned = '',
 }

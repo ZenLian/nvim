@@ -5,46 +5,46 @@ local packer_dir = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 local packer_bootstrap = nil
 if fn.empty(fn.glob(packer_dir)) > 0 then
-    packer_bootstrap = fn.system { 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir }
+  packer_bootstrap = fn.system({ 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir })
 end
 
-vim.cmd [[packadd packer.nvim]]
+vim.cmd([[packadd packer.nvim]])
 local packer = require('packer')
 packer.startup({
-    function(use)
-        use { 'wbthomason/packer.nvim', opt = true }
+  function(use)
+    use({ 'wbthomason/packer.nvim', opt = true })
 
-        -- use {'neovim/nvim-lspconfig'}
-        -- use {'williamboman/nvim-lsp-installer'}
+    -- use {'neovim/nvim-lspconfig'}
+    -- use {'williamboman/nvim-lsp-installer'}
 
-        -- use {'ray-x/lsp_signature.nvim'}
+    -- use {'ray-x/lsp_signature.nvim'}
 
-        -- use {'hrsh7th/nvim-cmp'}
-        -- use {'hrsh7th/cmp-nvim-lsp'}
+    -- use {'hrsh7th/nvim-cmp'}
+    -- use {'hrsh7th/cmp-nvim-lsp'}
 
-        -- use {'L3MON4D3/LuaSnip'}
-        -- use {'saadparwaiz1/cmp_luasnip'}
+    -- use {'L3MON4D3/LuaSnip'}
+    -- use {'saadparwaiz1/cmp_luasnip'}
 
-        -- use {'windwp/nvim-autopairs'}
-        -- use {'folke/which-key.nvim'}
-        use 'Mofiqul/vscode.nvim'
-    end,
-    config = {
-        display = {
-            open_fn = function()
-                return require("packer.util").float({ border = "single" })
-            end
-        }
-    }
+    -- use {'windwp/nvim-autopairs'}
+    -- use {'folke/which-key.nvim'}
+    use('Mofiqul/vscode.nvim')
+  end,
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end,
+    },
+  },
 })
 
 if packer_bootstrap then
-    packer.sync()
+  packer.sync()
 end
 
 -- Lua:
 -- For dark theme
-vim.g.vscode_style = "dark"
+vim.g.vscode_style = 'dark'
 -- For light theme
 -- vim.g.vscode_style = "light"
 -- Enable transparent background

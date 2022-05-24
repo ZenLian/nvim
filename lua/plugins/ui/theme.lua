@@ -4,7 +4,7 @@
 -- }
 -- vim.cmd [[colorscheme edgeme]]
 
-vim.cmd [[colorscheme nvdark]]
+vim.cmd([[colorscheme nvdark]])
 
 -- require("themer").setup({
 --     colorscheme = "tokyonight"
