@@ -55,6 +55,9 @@ map('o', 'N', "'nN'[v:searchforward]", { expr = true })
 map('n', '[t', '<cmd>tabn<CR>')
 map('n', ']t', '<cmd>tabp<CR>')
 
+-- save
+map('n', '<C-s>', '<cmd>w<CR>')
+
 --
 -- plugins
 --
@@ -164,6 +167,12 @@ local leader = {
     Q = { '<cmd>qa!<cr>', 'Force quit' },
     w = { '<cmd>wqa<cr>', 'Save all and quit' },
   },
+  w = {
+    name = 'workspace',
+    w = { '<cmd>SessionManager load_session', 'Load' },
+    s = { '<cmd>SessionManager save_current_session', 'Save' },
+    d = { '<cmd>SessionManager delete_session', 'Delete' },
+  },
   x = {
     name = 'trouble',
     x = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Diagnostics' },
@@ -205,8 +214,6 @@ local leader = {
       'Line Numbers',
     },
   },
-  w = { '<cmd>w<CR>', 'Save' },
-  W = { '<cmd>wa<CR>', 'Save All' },
   n = { '<cmd>NvimTreeToggle<CR>', 'NvimTree' },
   u = { '<cmd>UndotreeToggle<CR>', 'Undo Tree' },
   [';'] = { '<cmd>AerialToggle<CR>', 'Outline' },

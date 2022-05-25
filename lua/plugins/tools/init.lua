@@ -67,7 +67,7 @@ tools['AckslD/nvim-neoclip.lua'] = {
 
 tools['Shatur/neovim-session-manager'] = {
   config = function()
-    require('plugins.tools.session_manager')
+    require('plugins.tools.session')
   end,
 }
 
@@ -75,7 +75,7 @@ tools['kyazdani42/nvim-tree.lua'] = {
   opt = true,
   cmd = { 'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeFindFile', 'NvimTreeRefresh', 'NvimTreeFocus' },
   config = function()
-    require('plugins.tools.nvim_tree')
+    require('plugins.tools.nvimtree')
   end,
 }
 

@@ -11,7 +11,7 @@ local setup = function()
 
   -- setup lsp installer
   local servers = require('plugins.completion.lspconfig.servers')
-  print('[SERVERS]' .. vim.inspect(vim.tbl_keys(servers)))
+  -- print('[SERVERS]' .. vim.inspect(vim.tbl_keys(servers)))
   require('nvim-lsp-installer').setup {
     ensure_installed = vim.tbl_keys(servers),
   }
@@ -28,8 +28,7 @@ local setup = function()
     opts = vim.tbl_deep_extend('force', defaults, opts)
 
     -- custom config in lspconfig/{server}.lua
-    -- vim.notify(string.format("[CFG] %s", server) ,"info")
-    print(string.format('[CFG] %s', server))
+    -- print(string.format('[CFG] %s', server))
     lspconfig[server].setup(opts)
   end
 end
