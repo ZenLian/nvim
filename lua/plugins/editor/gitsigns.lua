@@ -1,4 +1,4 @@
-require('gitsigns').setup({
+require('gitsigns').setup {
   keymaps = {
     buffer = true,
     noremap = true,
@@ -23,4 +23,4 @@ require('gitsigns').setup({
   },
   current_line_blame = true,
   current_line_blame_opts = { delay = 500, virtual_text_pos = 'eol' },
-})
+}

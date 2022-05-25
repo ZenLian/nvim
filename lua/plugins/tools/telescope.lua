@@ -13,7 +13,7 @@ local dropdown = {
   height = 25,
 }
 
-require('telescope').setup({
+require('telescope').setup {
   defaults = {
     mappings = {
       i = {
@@ -63,7 +63,7 @@ require('telescope').setup({
     },
     themes = dropdown,
   },
-})
+}
 
 -- if not packer_plugins["nvim-neoclip.lua"].loaded then
 --     vim.cmd [[packadd nvim-neoclip.lua]]

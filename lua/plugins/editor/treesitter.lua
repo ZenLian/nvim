@@ -1,6 +1,6 @@
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter.configs').setup {
   ensure_installed = {
     'bash',
     'c',
@@ -96,4 +96,4 @@ require('nvim-treesitter.configs').setup({
     -- colors = {}, -- table of hex strings
     -- termcolors = {} -- table of colour name strings
   },
-})
+}

@@ -1,6 +1,6 @@
 local notify = require('notify')
 
-notify.setup({
+notify.setup {
   stages = 'slide',
   timeout = 2000,
   -- Function called when a new window is opened,
@@ -8,7 +8,7 @@ notify.setup({
   on_open = nil,
   -- Function called when a window is closed
   on_close = nil,
-})
+}
 
 vim.notify = notify
 

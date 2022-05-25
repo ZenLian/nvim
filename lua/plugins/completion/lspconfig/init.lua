@@ -12,9 +12,9 @@ local setup = function()
   -- setup lsp installer
   local servers = require('plugins.completion.lspconfig.servers')
   print('[SERVERS]' .. vim.inspect(vim.tbl_keys(servers)))
-  require('nvim-lsp-installer').setup({
+  require('nvim-lsp-installer').setup {
     ensure_installed = vim.tbl_keys(servers),
-  })
+  }
 
   -- setup lsp servers
   require('plugins.completion.lspconfig.null-ls').setup(on_attach)

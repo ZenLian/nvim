@@ -1,4 +1,4 @@
-require('toggleterm').setup({
+require('toggleterm').setup {
   open_mapping = [[<c-\>]],
   -- hide_numbers = true, -- hide the number column in toggleterm buffers
   -- shade_filetypes = {},
@@ -12,7 +12,7 @@ require('toggleterm').setup({
   -- on_open = function()
   --     vim.wo.winhl = "Normal:Terminal"
   -- end
-})
+}
 -- vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua LazygitToggle()<CR>", {noremap = true, silent = true})
 local function set_terminal_keymaps()
   local opts = { noremap = true }

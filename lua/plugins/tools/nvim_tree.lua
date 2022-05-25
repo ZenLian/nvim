@@ -1,4 +1,4 @@
-require('nvim-tree').setup({
+require('nvim-tree').setup {
   update_focused_file = {
     enable = true,
     -- update_cwd = true
@@ -15,7 +15,7 @@ require('nvim-tree').setup({
       },
     },
   },
-})
+}
 
 -- https://github.com/romgrk/barbar.nvim#integration-with-filetree-plugins
 local nvim_tree_events = require('nvim-tree.events')

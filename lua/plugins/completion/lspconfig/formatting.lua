@@ -45,7 +45,7 @@ function M.format(bufnr, timeout_ms)
     return
   end
 
-  local params = lsputil.make_formatting_params({})
+  local params = lsputil.make_formatting_params {}
   -- local bufnr = vim.api.nvim_get_current_buf()
 
   select_client(function(client)
@@ -76,7 +76,7 @@ function M.on_attach(client, bufnr)
 
   -- dont create autocmds twice
   -- multiple servers are handled in A same callback
-  local autocmds = vim.api.nvim_get_autocmds({ group = group, buffer = bufnr })
+  local autocmds = vim.api.nvim_get_autocmds { group = group, buffer = bufnr }
   if autocmds == nil then
     return
   end

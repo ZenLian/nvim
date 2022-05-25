@@ -1,4 +1,4 @@
-require('dressing').setup({
+require('dressing').setup {
   input = {
     enable = true,
     default_prompt = '﯀',
@@ -17,4 +17,4 @@ require('dressing').setup({
       end
     end,
   },
-})
+}

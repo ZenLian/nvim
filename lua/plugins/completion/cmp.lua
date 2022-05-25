@@ -53,11 +53,11 @@ local cmp_fmt = function(entry, item)
 end
 
 local cmp = require('cmp')
-cmp.setup({
+cmp.setup {
   mapping = {
-    ['<CR>'] = cmp.mapping.confirm({
+    ['<CR>'] = cmp.mapping.confirm {
       select = true,
-    }),
+    },
     ['<C-p>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -77,9 +77,9 @@ cmp.setup({
     ['<C-e>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.confirm({
+        cmp.confirm {
           select = true,
-        })
+        }
         -- cmp.select_next_item()
       elseif require('luasnip').expand_or_jumpable() then
         require('luasnip').expand_or_jump()
@@ -141,7 +141,7 @@ cmp.setup({
       hl_group = 'NonText',
     },
   },
-})
+}
 
 cmp.setup.cmdline('/', {
   sources = {
@@ -166,7 +166,7 @@ cmp.setup.cmdline(':', {
   }),
 })
 
-require('cmp_dictionary').setup({
+require('cmp_dictionary').setup {
   dic = {
     ['*'] = { '/usr/share/dict/words' },
   },
@@ -178,4 +178,4 @@ require('cmp_dictionary').setup({
   async = true,
   -- capacity = 5,
   -- debug = false,
-})
+}

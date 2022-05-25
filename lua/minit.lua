@@ -5,14 +5,14 @@ local packer_dir = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
 
 local packer_bootstrap = nil
 if fn.empty(fn.glob(packer_dir)) > 0 then
-  packer_bootstrap = fn.system({ 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir })
+  packer_bootstrap = fn.system { 'git', 'clone', '--depth=1', 'https://github.com/wbthomason/packer.nvim', packer_dir }
 end
 
 vim.cmd([[packadd packer.nvim]])
 local packer = require('packer')
-packer.startup({
+packer.startup {
   function(use)
-    use({ 'wbthomason/packer.nvim', opt = true })
+    use { 'wbthomason/packer.nvim', opt = true }
 
     -- use {'neovim/nvim-lspconfig'}
     -- use {'williamboman/nvim-lsp-installer'}
@@ -32,11 +32,11 @@ packer.startup({
   config = {
     display = {
       open_fn = function()
-        return require('packer.util').float({ border = 'single' })
+        return require('packer.util').float { border = 'single' }
       end,
     },
   },
-})
+}
 
 if packer_bootstrap then
   packer.sync()

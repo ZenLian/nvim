@@ -67,7 +67,7 @@ basic.file = {
   end,
 }
 
-local icon_comp = b_components.cache_file_icon({ default = '', hl_colors = hl_list.default })
+local icon_comp = b_components.cache_file_icon { default = '', hl_colors = hl_list.default }
 basic.file_right = {
   hl_colors = hl_list,
   text = function(bufnr)
@@ -79,7 +79,7 @@ basic.file_right = {
       { ' ', '' },
       icon_comp(bufnr),
       { ' ', '' },
-      { b_components.cache_file_type({ icon = false, default = 'Plain Text' }), 'White' },
+      { b_components.cache_file_type { icon = false, default = 'Plain Text' }, 'White' },
       { ' ', '' },
     }
   end,
@@ -93,9 +93,9 @@ basic.git = {
     if git_comps.is_git(bufnr) then
       return {
         { git_comps.git_branch(), 'Magenta' },
-        { git_comps.diff_added({ format = ' +%s', show_zero = false }), 'Green' },
-        { git_comps.diff_removed({ format = ' -%s', show_zero = false }), 'Red' },
-        { git_comps.diff_changed({ format = ' ~%s', show_zero = false }), 'Blue' },
+        { git_comps.diff_added { format = ' +%s', show_zero = false }, 'Green' },
+        { git_comps.diff_removed { format = ' -%s', show_zero = false }, 'Red' },
+        { git_comps.diff_changed { format = ' ~%s', show_zero = false }, 'Blue' },
       }
     end
     return ''
@@ -109,9 +109,9 @@ basic.lsp_info = {
   text = function(bufnr)
     if lsp_comps.check_lsp(bufnr) then
       return {
-        { lsp_comps.lsp_error({ format = '  %s', show_zero = false }), 'Red' },
-        { lsp_comps.lsp_warning({ format = '  %s', show_zero = false }), 'Yellow' },
-        { lsp_comps.lsp_hint({ format = '  %s', show_zero = false }), 'Green' },
+        { lsp_comps.lsp_error { format = '  %s', show_zero = false }, 'Red' },
+        { lsp_comps.lsp_warning { format = '  %s', show_zero = false }, 'Yellow' },
+        { lsp_comps.lsp_hint { format = '  %s', show_zero = false }, 'Green' },
         { ' ' },
         { lsp_comps.lsp_name(), 'Blue' },
       }
@@ -209,7 +209,7 @@ local alpha = {
 }
 
 local setup = function()
-  windline.setup({
+  windline.setup {
     global_skip_filetypes = {
       'NvimTree',
       -- 'alpha',
@@ -226,7 +226,7 @@ local setup = function()
       terminal,
       alpha,
     },
-  })
+  }
 end
 
 setup()

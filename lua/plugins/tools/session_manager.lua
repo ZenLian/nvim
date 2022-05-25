@@ -1,5 +1,5 @@
 local Path = require('plenary.path')
-require('session_manager').setup({
+require('session_manager').setup {
   -- The directory where the session files will be saved.
   sessions_dir = Path:new(vim.fn.stdpath('data'), 'sessions'),
   -- The character to which the path separator will be replaced for session files.
@@ -21,4 +21,4 @@ require('session_manager').setup({
   autosave_only_in_session = false,
   -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
   max_path_length = 80,
-})
+}

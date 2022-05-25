@@ -226,14 +226,14 @@ local leader_visual = {
   },
 }
 
-wk.setup({
+wk.setup {
   plugins = {
     spelling = {
       enabled = true,
       suggestions = 20,
     },
   },
-})
+}
 
 wk.register(leader, { prefix = '<Leader>' })
 wk.register(leader_visual, { prefix = '<Leader>', mode = 'v' })

@@ -33,10 +33,10 @@ editor['p00f/nvim-ts-rainbow'] = {
 
 editor['numToStr/Comment.nvim'] = {
   config = function()
-    require('Comment').setup({
+    require('Comment').setup {
       -- ignore blank lines
       ignore = '^(%s*)$',
-    })
+    }
   end,
 }
 editor['mfussenegger/nvim-treehopper'] = {
@@ -50,7 +50,7 @@ editor['mfussenegger/nvim-treehopper'] = {
 editor['ur4ltz/surround.nvim'] = {
   event = { 'BufRead', 'BufNewFile' },
   config = function()
-    require('surround').setup({ mappings_style = 'surround' })
+    require('surround').setup { mappings_style = 'surround' }
   end,
 }
 
@@ -69,6 +69,11 @@ editor['lewis6991/gitsigns.nvim'] = {
   config = function()
     require('plugins.editor.gitsigns')
   end,
+}
+
+editor['gpanders/editorconfig.nvim'] = {
+  opt = true,
+  event = { 'BufRead', 'BufNewFile' },
 }
 
 return editor

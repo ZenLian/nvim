@@ -1,4 +1,4 @@
-require('neogit').setup({
+require('neogit').setup {
   disable_commit_confirmation = true,
   -- kind = "floating",
   signs = {
@@ -9,4 +9,4 @@ require('neogit').setup({
   integrations = {
     diffview = true,
   },
-})
+}
