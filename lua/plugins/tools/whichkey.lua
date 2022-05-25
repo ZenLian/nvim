@@ -158,20 +158,19 @@ local leader = {
     c = { '<cmd>Telescope neoclip<CR>', 'Clipboard' },
     n = { '<cmd>Telescope file_browser<CR>', 'File Browser' },
     [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
-    --TODO: move
-    -- s = { "<cmd>SessionManager load_session<CR>", "Sessions" },
   },
   q = {
     name = 'quit',
     q = { '<cmd>qa<cr>', 'Quit' },
-    Q = { '<cmd>qa!<cr>', 'Force quit' },
+    ['!'] = { '<cmd>qa!<cr>', 'Force quit' },
     w = { '<cmd>wqa<cr>', 'Save all and quit' },
   },
   w = {
     name = 'workspace',
-    w = { '<cmd>SessionManager load_session', 'Load' },
-    s = { '<cmd>SessionManager save_current_session', 'Save' },
-    d = { '<cmd>SessionManager delete_session', 'Delete' },
+    w = { '<cmd>SessionManager load_current_dir_session<CR>', 'Load Current Dir' },
+    l = { '<cmd>SessionManager load_session<CR>', 'Load+' },
+    s = { '<cmd>SessionManager save_current_session<CR>', 'Save' },
+    d = { '<cmd>SessionManager delete_session<CR>', 'Delete+' },
   },
   x = {
     name = 'trouble',
