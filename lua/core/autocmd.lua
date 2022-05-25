@@ -61,6 +61,7 @@ autocmd({ 'FileType' }, {
     'notify',
     'tsplayground',
     'null-ls-info',
+    'checkhealth',
   },
   command = [[nnoremap <buffer><silent> q :close<CR>]],
 })

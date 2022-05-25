@@ -1,4 +1,5 @@
 local cache_dir = require('core.util').paths.cache
+local config = require('config')
 
 vim.g.mapleader = ' '
 
@@ -106,10 +107,9 @@ local options = {
   concealcursor = 'niv',
 }
 
-local function load_options()
-  for name, value in pairs(options) do
-    vim.o[name] = value
-  end
+-- load_options
+for name, value in pairs(options) do
+  vim.o[name] = value
 end
 
 -- don't load these plugins
@@ -126,8 +126,9 @@ local disabled_built_plugins = {
   'loaded_matchparen', -- Highlight matching parens
   '2html_plugin',
 }
+
 for _, plugin in ipairs(disabled_built_plugins) do
   vim.g['loaded_' .. plugin] = 1
 end
 
-load_options()
+vim.g.python3_host_prog = config.provider.python3

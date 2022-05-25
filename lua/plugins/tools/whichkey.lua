@@ -42,14 +42,6 @@ map('v', 'Y', '"+y')
 -- H = { "^", "Start of line" },
 -- L = { "$", "End of line" },
 
--- windows like shortcut
--- Save
-map('i', '<C-s>', '<esc>:w<cr>')
-map('n', '<C-s>', '<esc>:w<cr>')
-map('v', '<C-s>', '<esc>:w<cr>')
--- Delete to start
-map('i', '<C-BS>', '<C-u>')
-
 -- n/N always search forward/backward
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map('n', 'n', "'Nn'[v:searchforward]", { expr = true })
@@ -213,6 +205,8 @@ local leader = {
       'Line Numbers',
     },
   },
+  w = { '<cmd>w<CR>', 'Save' },
+  W = { '<cmd>wa<CR>', 'Save All' },
   n = { '<cmd>NvimTreeToggle<CR>', 'NvimTree' },
   u = { '<cmd>UndotreeToggle<CR>', 'Undo Tree' },
   [';'] = { '<cmd>AerialToggle<CR>', 'Outline' },
