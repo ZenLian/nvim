@@ -1,6 +1,6 @@
 local wk = require('which-key')
 local util = require('core.util')
-local map = util.map
+local map = vim.keymap.set
 
 -- Move to window
 map('n', '<C-h>', '<C-w>h')
@@ -44,12 +44,8 @@ map('v', 'Y', '"+y')
 
 -- n/N always search forward/backward
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map('n', 'n', "'Nn'[v:searchforward]", { expr = true })
-map('v', 'n', "'Nn'[v:searchforward]", { expr = true })
-map('o', 'n', "'Nn'[v:searchforward]", { expr = true })
-map('n', 'N', "'nN'[v:searchforward]", { expr = true })
-map('v', 'N', "'nN'[v:searchforward]", { expr = true })
-map('o', 'N', "'nN'[v:searchforward]", { expr = true })
+map({ 'n', 'v', 'o' }, 'n', "'Nn'[v:searchforward]", { expr = true })
+map({ 'n', 'v', 'o' }, 'n', "'nN'[v:searchforward]", { expr = true })
 
 -- tabs
 map('n', '[t', '<cmd>tabn<CR>')

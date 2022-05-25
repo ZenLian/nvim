@@ -43,32 +43,6 @@ function M.execute(id)
   return func()
 end
 
--- TODO: use vim.keymap.set
-function M.map(mode, lhs, rhs, opts)
-  local defaults = {
-    nowait = true,
-    noremap = true,
-    silent = true,
-  }
-  opts = vim.tbl_deep_extend('force', defaults, opts or {})
-  if type(rhs) == 'function' then
-    table.insert(M.functions, rhs)
-    if opts.expr then
-      rhs = ([[luaeval('require("core.util").execute(%d)')]]):format(#M.functions)
-    else
-      rhs = ([[<cmd>lua require("core.util").execute(%d)<cr>]]):format(#M.functions)
-    end
-  end
-
-  if opts.buffer ~= nil then
-    local buffer = opts.buffer
-    opts.buffer = nil
-    return vim.api.nvim_buf_set_keymap(buffer, mode, lhs, rhs, opts)
-  else
-    return vim.api.nvim_set_keymap(mode, lhs, rhs, opts)
-  end
-end
-
 function M.float_terminal(cmd)
   local buf = vim.api.nvim_create_buf(false, true)
   local vpad = 4

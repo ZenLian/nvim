@@ -1,7 +1,6 @@
 local M = {}
 
 local wk = require('which-key')
-local util = require('core.util')
 
 local leader = {
   s = {
@@ -37,12 +36,16 @@ local g = {
 }
 
 function M.on_attach(_, bufnr)
-  local opts = { buffer = bufnr }
-  util.map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-  util.map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
-  util.map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-  util.map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>', opts)
-  util.map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>', opts)
+  local function map(mode, lhs, rhs, opts)
+    opts = opts or {}
+    opts.buffer = bufnr
+    vim.keymap.set(mode, lhs, rhs, opts)
+  end
+  map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+  map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+  map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+  map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>')
+  map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>')
 
   wk.register(leader, { buffer = bufnr, prefix = '<Leader>' })
   wk.register(leader_visual, { buffer = bufnr, prefix = '<Leader>', mode = 'v' })
