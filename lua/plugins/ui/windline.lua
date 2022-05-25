@@ -20,6 +20,9 @@ local hl_list = {
 local basic = {}
 
 local breakpoint_width = 90
+
+local version = string.format(' NVIM v%s.%s.%s ', vim.version().major, vim.version().minor, vim.version().patch)
+
 basic.divider = { b_components.divider, '' }
 basic.bg = { ' ', 'StatusLine' }
 
@@ -53,7 +56,13 @@ basic.file = {
       { ' ', '' },
       { b_components.cache_file_name('[No Name]', 'unique'), 'White' },
       { ' ', '' },
-      { b_components.file_modified(' '), 'Green' },
+      -- { b_components.file_modified(' '), 'Green' },
+      {
+        function()
+          return vim.bo.modified and ' ' or ''
+        end,
+        'Green',
+      },
     }
   end,
 }
@@ -91,6 +100,46 @@ basic.git = {
     end
     return ''
   end,
+}
+
+basic.lsp_info = {
+  name = 'lsp_info',
+  hl_colors = hl_list,
+  width = breakpoint_width,
+  text = function(bufnr)
+    if lsp_comps.check_lsp(bufnr) then
+      return {
+        { lsp_comps.lsp_error({ format = '  %s', show_zero = false }), 'Red' },
+        { lsp_comps.lsp_warning({ format = '  %s', show_zero = false }), 'Yellow' },
+        { lsp_comps.lsp_hint({ format = '  %s', show_zero = false }), 'Green' },
+        { ' ' },
+        { lsp_comps.lsp_name(), 'Blue' },
+      }
+    end
+    return ''
+  end,
+}
+
+local default = {
+  filetypes = { 'default' },
+  active = {
+    basic.square_mode,
+    basic.vi_mode,
+    basic.git,
+    basic.file,
+    basic.divider,
+    basic.lsp_info,
+    basic.file_right,
+    basic.square_mode,
+  },
+  inactive = {
+    { b_components.divider, hl_list.Inactive },
+    { b_components.full_file_name, hl_list.Inactive },
+    -- basic.file_name_inactive,
+    { b_components.divider, hl_list.Inactive },
+    -- { b_components.line_col, hl_list.Inactive },
+    -- { b_components.progress, hl_list.Inactive },
+  },
 }
 
 local quickfix = {
@@ -148,48 +197,23 @@ local terminal = {
   },
 }
 
-basic.lsp_info = {
-  name = 'lsp_info',
-  hl_colors = hl_list,
-  width = breakpoint_width,
-  text = function(bufnr)
-    if lsp_comps.check_lsp(bufnr) then
-      return {
-        { lsp_comps.lsp_error({ format = '  %s', show_zero = false }), 'Red' },
-        { lsp_comps.lsp_warning({ format = '  %s', show_zero = false }), 'Yellow' },
-        { lsp_comps.lsp_hint({ format = '  %s', show_zero = false }), 'Green' },
-        { ' ' },
-        { lsp_comps.lsp_name(), 'Blue' },
-      }
-    end
-    return ''
-  end,
-}
-
-local default = {
-  filetypes = { 'default' },
+local alpha = {
+  filetypes = { 'alpha', 'dashboard' },
   active = {
     basic.square_mode,
     basic.vi_mode,
-    basic.git,
-    basic.file,
-    basic.divider,
-    basic.lsp_info,
-    basic.file_right,
+    { b_components.divider, hl_list.default },
+    { version, hl_list.default },
     basic.square_mode,
-  },
-  inactive = {
-    { b_components.divider, hl_list.Inactive },
-    { b_components.full_file_name, hl_list.Inactive },
-    -- basic.file_name_inactive,
-    { b_components.divider, hl_list.Inactive },
-    -- { b_components.line_col, hl_list.Inactive },
-    -- { b_components.progress, hl_list.Inactive },
   },
 }
 
 local setup = function()
   windline.setup({
+    global_skip_filetypes = {
+      'NvimTree',
+      -- 'alpha',
+    },
     colors_name = function(colors)
       -- print(vim.inspect(colors))
       -- ADD MORE COLOR HERE ----
@@ -200,6 +224,7 @@ local setup = function()
       quickfix,
       explorer,
       terminal,
+      alpha,
     },
   })
 end

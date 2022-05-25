@@ -1,16 +1,27 @@
 local alpha = require('alpha')
 local dashboard = require('alpha.themes.dashboard')
+local WIDTH = 30
 
 -- header
+-- dashboard.section.header.val = {
+--   '                                                     ',
+--   '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+--   '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+--   '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+--   '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+--   '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+--   '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+--   '                                                     ',
+-- }
 dashboard.section.header.val = {
-  '                                                     ',
-  '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
-  '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
-  '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
-  '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
-  '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
-  '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
-  '                                                     ',
+  '                                    ',
+  '  ███╗   ██╗██╗   ██╗██╗███╗   ███╗ ',
+  '  ████╗  ██║██║   ██║██║████╗ ████║ ',
+  '  ██╔██╗ ██║██║   ██║██║██╔████╔██║ ',
+  '  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+  '  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+  '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+  '                                    ',
 }
 -- dashboard.section.header.opts.hl = "Function"
 
@@ -20,7 +31,7 @@ local function button(...)
   -- btn.opts.hl = "Type"
   -- btn.opts.hl_shortcut = "Function"
   -- btn.opts.cursor = 0
-  -- btn.opts.width = 30
+  btn.opts.width = WIDTH
   return btn
 end
 
@@ -34,7 +45,7 @@ dashboard.section.buttons.val = {
 }
 
 local fortune = require('alpha.fortune')
-dashboard.section.footer.val = fortune()
+dashboard.section.footer.val = fortune(50)
 dashboard.section.footer.opts.hl = 'String'
 
 alpha.setup(dashboard.config)
