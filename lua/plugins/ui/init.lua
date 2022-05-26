@@ -44,9 +44,10 @@ ui['norcalli/nvim-colorizer.lua'] = {
   end,
 }
 
-ui['yamatsum/nvim-cursorline'] = {
+-- TODO: looking for neovim only replacement
+ui['RRethy/vim-illuminate'] = {
   config = function()
-    require('plugins.ui.cursorline')
+    require('plugins.ui.illumimate')
   end,
 }
 

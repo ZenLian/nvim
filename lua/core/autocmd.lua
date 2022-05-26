@@ -26,16 +26,21 @@ autocmd({ 'TextYankPost' }, {
 })
 
 -- hide cursorline for unfocused window
+local cursorline_pattern = {
+  '!TelescopePrompt',
+  '!DressingInput',
+}
+
 autocmd({ 'WinEnter' }, {
   group = group,
-  pattern = { '!TelescopePrompt' },
+  pattern = cursorline_pattern,
   callback = function()
     vim.wo.cursorline = true
   end,
 })
 autocmd({ 'WinLeave' }, {
   group = group,
-  pattern = { '!TelescopePrompt' },
+  pattern = cursorline_pattern,
   callback = function()
     vim.wo.cursorline = false
   end,

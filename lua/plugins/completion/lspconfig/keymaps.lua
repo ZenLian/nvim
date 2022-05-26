@@ -35,6 +35,21 @@ local g = {
   t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
 }
 
+local misc = {
+  ['<A-n>'] = {
+    function()
+      require('illuminate').next_reference { wrap = true }
+    end,
+    'Next reference',
+  },
+  ['<A-p>'] = {
+    function()
+      require('illuminate').next_reference { reverse = true, wrap = true }
+    end,
+    'Previous reference',
+  },
+}
+
 function M.on_attach(_, bufnr)
   local function map(mode, lhs, rhs, opts)
     opts = opts or {}
@@ -50,6 +65,7 @@ function M.on_attach(_, bufnr)
   wk.register(leader, { buffer = bufnr, prefix = '<Leader>' })
   wk.register(leader_visual, { buffer = bufnr, prefix = '<Leader>', mode = 'v' })
   wk.register(g, { buffer = bufnr, prefix = 'g' })
+  wk.register(misc, { buffer = bufnr })
 end
 
 return M

@@ -9,7 +9,7 @@ require('nvim-treesitter.configs').setup {
     'css',
     'dockerfile',
     'go',
-    'help',
+    -- 'help',
     'html',
     'javascript',
     'json',

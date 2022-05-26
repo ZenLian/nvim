@@ -2,8 +2,10 @@ local on_attach = function(client, bufnr)
   require('plugins.completion.lspconfig.formatting').on_attach(client, bufnr)
   require('plugins.completion.lspconfig.keymaps').on_attach(client, bufnr)
   require('plugins.completion.lspconfig.signature').on_attach(client, bufnr)
-  -- aerial.nvim
+
+  -- plugins hook
   require('aerial').on_attach(client, bufnr)
+  require('illuminate').on_attach(client)
 end
 
 local setup = function()
