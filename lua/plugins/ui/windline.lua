@@ -175,17 +175,17 @@ local explorer = {
 local terminal = {
   filetypes = { 'toggleterm' },
   active = {
-    { b_components.divider, hl_list.Black },
+    -- { b_components.divider, hl_list.default },
     {
       function()
         return string.format('  terminal(%s) ', vim.b.toggle_number)
       end,
-      { 'black', 'red' },
+      { 'white', 'bright_green' },
     },
-    { b_components.divider, hl_list.Black },
+    { b_components.divider, { 'white', 'bright_blue' } },
   },
   inactive = {
-    { b_components.divider, hl_list.Inactive },
+    -- { b_components.divider, hl_list.Inactive },
     {
       function(bufnr)
         local num = vim.api.nvim_buf_get_var(bufnr, 'toggle_number')
@@ -215,8 +215,11 @@ local setup = function()
       -- 'alpha',
     },
     colors_name = function(colors)
+      local c = require('nvdark.palette')
       -- print(vim.inspect(colors))
       -- ADD MORE COLOR HERE ----
+      colors.bright_green = c.uiGreen
+      colors.bright_blue = c.uiBlue
       return colors
     end,
     statuslines = {
