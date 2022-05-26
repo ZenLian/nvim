@@ -43,6 +43,8 @@ function M.execute(id)
   return func()
 end
 
+-- Open float terminal with command
+--- @param cmd string #String: The name of shell command
 function M.float_terminal(cmd)
   local buf = vim.api.nvim_create_buf(false, true)
   local vpad = 4
@@ -66,6 +68,9 @@ function M.float_terminal(cmd)
   vim.cmd([[startinsert]])
 end
 
+-- Toggle vim options
+--- @param option string #String: The name of vim option
+--- @param silent boolean #Bool: True to suppress notification
 function M.toggle(option, silent)
   local info = vim.api.nvim_get_option_info(option)
   local scopes = { buf = 'bo', win = 'wo', global = 'o' }

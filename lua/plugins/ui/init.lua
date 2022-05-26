@@ -44,6 +44,12 @@ ui['norcalli/nvim-colorizer.lua'] = {
   end,
 }
 
+ui['yamatsum/nvim-cursorline'] = {
+  config = function()
+    require('plugins.ui.cursorline')
+  end,
+}
+
 ui['folke/zen-mode.nvim'] = {
   opt = true,
   cmd = { 'ZenMode' },

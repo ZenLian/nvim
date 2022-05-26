@@ -21,7 +21,7 @@ autocmd({ 'TextYankPost' }, {
   -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
   group = group,
   callback = function()
-    vim.highlight.on_yank() --{ higroup = "IncSearch", timeout = 250 }
+    vim.highlight.on_yank() -- { higroup = 'Visual', timeout = 250 }
   end,
 })
 

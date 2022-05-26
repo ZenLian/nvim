@@ -1,6 +1,14 @@
 local wk = require('which-key')
 local util = require('core.util')
-local map = vim.keymap.set
+
+local function map(mode, lhs, rhs, opts)
+  local options = {
+    -- noremap = true, -- default in vim.keymap.set
+    silent = true,
+  }
+  options = vim.tbl_deep_extend('force', options, opts or {})
+  vim.keymap.set(mode, lhs, rhs, options)
+end
 
 -- Move to window
 map('n', '<C-h>', '<C-w>h')
@@ -15,6 +23,7 @@ map('n', '<S-Left>', ':vertical resize -2<CR>')
 map('n', '<S-Right>', ':vertical resize +2<CR>')
 
 -- Move lines
+-- https://vim.fandom.com/wiki/Moving_lines_up_or_down#Mappings_to_move_lines
 map('n', '<A-j>', ':m .+1<CR>==')
 map('n', '<A-k>', ':m .-2<CR>==')
 map('v', '<A-j>', ":m '>+1<CR>gv=gv")
@@ -45,7 +54,7 @@ map('v', 'Y', '"+y')
 -- n/N always search forward/backward
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map({ 'n', 'v', 'o' }, 'n', "'Nn'[v:searchforward]", { expr = true })
-map({ 'n', 'v', 'o' }, 'n', "'nN'[v:searchforward]", { expr = true })
+map({ 'n', 'v', 'o' }, 'N', "'nN'[v:searchforward]", { expr = true })
 
 -- tabs
 map('n', '[t', '<cmd>tabn<CR>')
