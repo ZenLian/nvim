@@ -1,8 +1,6 @@
 local cache_dir = require('core.util').paths.cache
 local config = require('config')
 
-vim.g.mapleader = ' '
-
 local options = {
   termguicolors = true,
   mouse = 'a',
@@ -14,8 +12,8 @@ local options = {
   virtualedit = 'block',
   encoding = 'utf-8',
   viewoptions = 'folds,cursor,curdir,slash,unix',
-  -- sessionoptions = 'curdir,help,tabpages,winsize',
-  sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal',
+  -- sessionoptions = 'curdir,buffers,help,tabpages,winsize',
+  -- sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal',
   -- clipboard = "unnamedplus", -- FIXME: causing clipboard.vim a lot of time to find clip tools
   wildignorecase = true,
   wildignore = [[.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,]]
@@ -79,11 +77,11 @@ local options = {
   cmdheight = 2,
   cmdwinheight = 5,
   equalalways = false,
-  laststatus = 3,
+  laststatus = 3, -- global statusline
   display = 'lastline',
   showbreak = '↳  ',
   listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←',
-  pumblend = 10,
+  -- pumblend = 10,
   winblend = 10,
   autoread = true,
   autowrite = true,
@@ -94,6 +92,7 @@ local options = {
   textwidth = 80,
   expandtab = true,
   autoindent = true,
+  smartindent = true,
   tabstop = 4,
   shiftwidth = 4,
   softtabstop = -1,
@@ -113,23 +112,41 @@ for name, value in pairs(options) do
   vim.o[name] = value
 end
 
+vim.g.mapleader = ' '
+
+-- use filetype.lua instead of filetype.vim
+-- https://neovim.io/news/2022/04, #filetype.lua
+vim.g.do_filetype_lua = 1
+vim.g.did_load_filetypes = 0
+
 -- don't load these plugins
-local disabled_built_plugins = {
+local builtin_plugins = {
+  '2html_plugin',
+  'getscript',
+  'getscriptPlugin',
+  'gzip',
+  'logipat',
   'netrw',
   'netrwPlugin',
-  'gzip',
-  'zip',
-  'zipPlugin',
+  'netrwSettings',
+  'netrwFileHandlers',
+  'matchit',
+  'matchparen', -- Highlight matching parens
   'tar',
   'tarPlugin',
-  -- "netrwFileHandlers",
-  'matchit',
-  'loaded_matchparen', -- Highlight matching parens
-  '2html_plugin',
+  'rrhelper',
+  'spellfile_plugin',
+  'vimball',
+  'vimballPlugin',
+  'zip',
+  'zipPlugin',
 }
 
-for _, plugin in ipairs(disabled_built_plugins) do
+for _, plugin in ipairs(builtin_plugins) do
   vim.g['loaded_' .. plugin] = 1
 end
 
-vim.g.python3_host_prog = config.provider.python3
+-- virtual env provider
+if not vim.fn.empty(vim.fn.glob(config.provider.python3)) then
+  vim.g.python3_host_prog = config.provider.python3
+end
