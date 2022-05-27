@@ -131,7 +131,7 @@ local builtin_plugins = {
   'netrwSettings',
   'netrwFileHandlers',
   'matchit',
-  'matchparen', -- Highlight matching parens
+  -- 'matchparen', -- Highlight matching parens
   'tar',
   'tarPlugin',
   'rrhelper',
