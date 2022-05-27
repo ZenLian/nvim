@@ -20,13 +20,11 @@ ui['windwp/windline.nvim'] = {
   end,
 }
 
-ui['romgrk/barbar.nvim'] = {
-  -- opt = true,
-  -- event = "BufRead",
-  -- module = "bufferline",
+ui['akinsho/bufferline.nvim'] = {
+  tag = 'v2.*',
   requires = 'kyazdani42/nvim-web-devicons',
   config = function()
-    require('plugins.ui.barbar')
+    require('plugins.ui.bufferline')
   end,
 }
 

@@ -66,10 +66,10 @@ map('n', '<C-s>', '<cmd>w<CR>')
 --
 -- plugins
 --
-map('n', '[b', '<cmd>BufferPrevious<CR>')
-map('n', ']b', '<cmd>BufferNext<CR>')
-map('n', '<A-,>', '<cmd>BufferMovePrevious<CR>')
-map('n', '<A-.>', '<cmd>BufferMoveNext<CR>')
+map('n', '[b', '<cmd>BufferLineCyclePrev<CR>')
+map('n', ']b', '<cmd>BufferLineCycleNext<CR>')
+map('n', '<A-,>', '<cmd>BufferLineMovePrev<CR>')
+map('n', '<A-.>', '<cmd>BufferLineMoveNext<CR>')
 map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
 map('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
@@ -96,20 +96,19 @@ local leader = {
   },
   b = {
     name = 'buffer',
-    -- b = { "<cmd>BufferLast<CR>", "Last buffer" },
     b = { '<cmd>e #<CR>', 'Last buffer' },
-    g = { '<cmd>BufferPick<CR>', 'Goto buffer' },
-    p = { '<cmd>BufferPin<CR>', 'Pin/Unpin buffer' },
-    c = { '<cmd>BufferClose<CR>', 'Close buffer' },
-    w = { '<cmd>BufferWipeout<CR>', 'Wipeout buffer' },
-    ['-'] = { '<cmd>BufferCloseAllButCurrent<CR>', 'Close other buffers' },
-    ['['] = { '<cmd>BufferCloseBuffersLeft<CR>', 'Close left buffers' },
-    [']'] = { '<cmd>BufferCloseBuffersRight<CR>', 'Close right buffers' },
-    o = {
-      name = 'order',
-      n = { '<cmd>BufferOrderByBufferNumber<CR>', 'Order by buffer number' },
-      d = { '<cmd>BufferOrderByDirectory<CR>', 'Order by directory' },
-      l = { '<cmd>BufferOrderByLanguage<CR>', 'Order by language' },
+    d = { '<cmd>bd<CR>', 'Delete buffer' },
+    g = { '<cmd>BufferLinePick<CR>', 'Goto buffer' },
+    p = { '<cmd>BufferLineTogglePin<CR>', 'Pin/Unpin buffer' },
+    c = { '<cmd>BufferLinePickClose<CR>', 'Pick Close buffer+' },
+    -- ['-'] = { 'Close other buffers' },
+    ['['] = { '<cmd>BufferLineCloseLeft<CR>', 'Close left buffers' },
+    [']'] = { '<cmd>BufferLineCloseRight<CR>', 'Close right buffers' },
+    s = {
+      name = 'sort',
+      n = { '<cmd>BufferLineSortByTabs<CR>', 'Sort by name' },
+      t = { '<cmd>BufferLineSortByExtension<CR>', 'Sort by type' },
+      d = { '<cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
     },
   },
   t = {
