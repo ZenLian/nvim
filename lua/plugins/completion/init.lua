@@ -10,6 +10,10 @@ completion['neovim/nvim-lspconfig'] = {
   requires = {
     'williamboman/nvim-lsp-installer',
     {
+      'ray-x/lsp_signature.nvim',
+      module = 'lsp_signature',
+    },
+    {
       'folke/lua-dev.nvim',
       module = 'lua-dev',
     },
@@ -18,7 +22,8 @@ completion['neovim/nvim-lspconfig'] = {
       module = 'null-ls',
     },
     {
-      'b0o/schemastore.nvim',
+      -- 'b0o/schemastore.nvim',
+      '~/source/schemastore.nvim',
       module = 'schemastore',
     },
   },
