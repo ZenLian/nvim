@@ -39,6 +39,7 @@ editor['numToStr/Comment.nvim'] = {
     }
   end,
 }
+
 editor['mfussenegger/nvim-treehopper'] = {
   opt = true,
   after = 'nvim-treesitter',

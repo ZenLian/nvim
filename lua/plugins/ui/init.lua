@@ -28,6 +28,13 @@ ui['akinsho/bufferline.nvim'] = {
   end,
 }
 
+ui['goolord/alpha-nvim'] = {
+  event = 'BufWinEnter',
+  config = function()
+    require('plugins.ui.alpha')
+  end,
+}
+
 ui['lukas-reineke/indent-blankline.nvim'] = {
   opt = true,
   event = 'BufRead',
@@ -62,13 +69,6 @@ ui['folke/twilight.nvim'] = {
   cmd = { 'Twilight' },
   config = function()
     require('twilight').setup()
-  end,
-}
-
-ui['goolord/alpha-nvim'] = {
-  event = 'BufWinEnter',
-  config = function()
-    require('plugins.ui.alpha')
   end,
 }
 
