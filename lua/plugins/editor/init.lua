@@ -32,6 +32,7 @@ editor['p00f/nvim-ts-rainbow'] = {
 }
 
 editor['numToStr/Comment.nvim'] = {
+  event = { 'BufRead', 'BufNewFile' },
   config = function()
     require('Comment').setup {
       -- ignore blank lines

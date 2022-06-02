@@ -21,6 +21,13 @@ function M.reload()
   vim.cmd('source ' .. os.getenv('MYVIMRC'))
 end
 
+function M.source_dir(name)
+  return M.join_path(
+    require('config').packer.source_dir,
+    name
+  )
+end
+
 function M.warn(msg, name)
   vim.notify(msg, vim.log.levels.WARN, { title = name })
 end

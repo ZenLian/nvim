@@ -1,4 +1,5 @@
 local ui = {}
+local util = require('core.util')
 
 --#region colorschemes
 -- ui['zenlian/edgeme'] = {
@@ -6,7 +7,7 @@ local ui = {}
 -- ui['Mofiqul/vscode.nvim'] = {
 -- ui['ThemerCorp/themer.lua'] = {
 -- ui['~/source/edgeme'] = {}
-ui['~/source/nvdark.nvim'] = {
+ui[util.source_dir('nvdark.nvim')] = {
   config = function()
     require('plugins.ui.theme')
   end,

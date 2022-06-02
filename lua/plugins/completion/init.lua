@@ -1,4 +1,5 @@
 local completion = {}
+local util = require('core.util')
 
 completion['neovim/nvim-lspconfig'] = {
   -- opt = true,
@@ -23,7 +24,7 @@ completion['neovim/nvim-lspconfig'] = {
     },
     {
       -- 'b0o/schemastore.nvim',
-      '~/source/schemastore.nvim',
+      util.source_dir('SchemaStore.nvim'),
       module = 'schemastore',
     },
   },

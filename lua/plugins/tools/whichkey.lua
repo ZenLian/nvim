@@ -162,6 +162,7 @@ local leader = {
     c = { '<cmd>Telescope neoclip<CR>', 'Clipboard' },
     n = { '<cmd>Telescope file_browser<CR>', 'File Browser' },
     [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
+    ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
   },
   q = {
     name = 'quit',

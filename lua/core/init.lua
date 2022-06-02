@@ -1,6 +1,6 @@
 -- speedup
 -- require('impatient').enable_profile()
-require('impatient')
+pcall(require, 'impatient')
 
 require('core.options')
 require('core.autocmd')
