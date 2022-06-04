@@ -6,7 +6,7 @@ local config = {
   -- packer
   packer = {
     source_dir = '~/projects',
-    use_ssh = true
+    use_ssh = false
   },
   format_on_save = true,
   format_priority = { -- default to 0 for not configured servers
