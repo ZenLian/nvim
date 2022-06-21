@@ -9,4 +9,3 @@ cmp.event:on(
     },
   }
 )
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = 'racket'
