@@ -112,7 +112,7 @@ local function setup_catppuccin()
     TelescopePromptNormal = { fg = c.text, bg = c.surface0 },
     TelescopePromptBorder = { fg = c.surface0, bg = c.surface0 },
     TelescopePromptTitle = { fg = c.blue },
-    -- TelescopeSelection = { fg = c.mantle, bg = c.blue },
+    TelescopeSelection = { fg = c.text, bg = c.surface1 },
     TelescopeResultsBorder = { fg = c.mantle, bg = c.mantle },
     -- TelescopeResultsTitle = { fg = c.blue },
     TelescopePreviewNormal = { fg = c.text, bg = c.mantle },
