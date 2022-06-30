@@ -7,7 +7,9 @@ local util = require('core.util')
 -- ui['Mofiqul/vscode.nvim'] = {
 -- ui['ThemerCorp/themer.lua'] = {
 -- ui['~/source/edgeme'] = {}
-ui[util.source_dir('nvdark.nvim')] = {
+ui['catppuccin/nvim'] = {
+  as = 'catppuccin',
+  -- ui[util.source_dir('nvdark.nvim')] = {
   config = function()
     require('plugins.ui.theme')
   end,

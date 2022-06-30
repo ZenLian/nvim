@@ -180,9 +180,9 @@ local terminal = {
       function()
         return string.format('  terminal(%s) ', vim.b.toggle_number)
       end,
-      { 'white', 'bright_green' },
+      { 'black', 'green' },
     },
-    { b_components.divider, { 'white', 'bright_blue' } },
+    { b_components.divider, { 'white', 'blue' } },
   },
   inactive = {
     -- { b_components.divider, hl_list.Inactive },
@@ -215,11 +215,12 @@ local setup = function()
       -- 'alpha',
     },
     colors_name = function(colors)
-      local c = require('nvdark.palette')
+      -- local c = require('nvdark.palette')
       -- print(vim.inspect(colors))
       -- ADD MORE COLOR HERE ----
-      colors.bright_green = c.uiGreen
-      colors.bright_blue = c.uiBlue
+      -- colors.bright_green = c.uiGreen
+      -- colors.bright_blue = c.uiBlue
+      colors.black = '#1e1e2e'
       return colors
     end,
     statuslines = {
