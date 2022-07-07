@@ -24,6 +24,7 @@
 -- vim.cmd([[colorscheme vscode]])
 
 local function setup_catppuccin()
+  -- vim.g.catppuccin_flavour = 'latte'
   vim.g.catppuccin_flavour = 'mocha'
   local catppuccin = require('catppuccin')
   catppuccin.setup {
