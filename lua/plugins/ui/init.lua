@@ -9,6 +9,7 @@ local util = require('core.util')
 -- ui['~/source/edgeme'] = {}
 ui['catppuccin/nvim'] = {
   as = 'catppuccin',
+  -- run = ':CatppuccinCompile',
   -- ui[util.source_dir('nvdark.nvim')] = {
   config = function()
     require('plugins.ui.theme')

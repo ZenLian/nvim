@@ -31,6 +31,10 @@ local function setup_catppuccin()
   local colors = require('catppuccin.palettes').get_palette()
 
   catppuccin.setup {
+    compile = {
+      enabled = false,
+      path = vim.fn.stdpath('cache') .. '/catppuccin',
+    },
     transparent_background = false,
     term_colors = true,
     styles = {
