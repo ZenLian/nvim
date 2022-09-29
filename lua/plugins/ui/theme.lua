@@ -27,38 +27,41 @@ local function setup_catppuccin()
   -- vim.g.catppuccin_flavour = 'latte'
   vim.g.catppuccin_flavour = 'mocha'
   local catppuccin = require('catppuccin')
+
+  local colors = require('catppuccin.palettes').get_palette()
+
   catppuccin.setup {
     transparent_background = false,
     term_colors = true,
     styles = {
-      comments = 'italic',
-      conditionals = 'italic',
-      loops = 'NONE',
-      functions = 'NONE',
-      keywords = 'NONE',
-      strings = 'NONE',
-      variables = 'NONE',
-      numbers = 'NONE',
-      booleans = 'NONE',
-      properties = 'NONE',
-      types = 'NONE',
-      operators = 'NONE',
+      comments = { 'italic' },
+      conditionals = { 'italic' },
+      loops = {},
+      functions = {},
+      keywords = {},
+      strings = {},
+      variables = {},
+      numbers = {},
+      booleans = {},
+      properties = {},
+      types = {},
+      operators = {},
     },
     integrations = {
       treesitter = true,
       native_lsp = {
         enabled = true,
         virtual_text = {
-          errors = 'italic',
-          hints = 'italic',
-          warnings = 'italic',
-          information = 'italic',
+          errors = { 'italic' },
+          hints = { 'italic' },
+          warnings = { 'italic' },
+          information = { 'italic' },
         },
         underlines = {
-          errors = 'undercurl',
-          hints = 'undercurl',
-          warnings = 'undercurl',
-          information = 'undercurl',
+          errors = { 'undercurl' },
+          hints = { 'undercurl' },
+          warnings = { 'undercurl' },
+          information = { 'undercurl' },
         },
       },
       coc_nvim = false,
@@ -97,32 +100,30 @@ local function setup_catppuccin()
       telekasten = false,
       symbols_outline = false,
     },
-  }
+    custom_highlights = {
+      Search = { fg = colors.surface1, bg = colors.pink },
+      Visual = { bg = colors.surface1 },
+      Pmenu = { fg = colors.text, bg = colors.surface0 },
+      PmenuSel = { fg = colors.surface0, bg = colors.blue },
+      CmpItemAbbr = { fg = colors.text },
+      CmpItemAbbrMatch = { fg = colors.blue, style = { 'bold' } },
+      CmpItemAbbrMatchFuzzy = { fg = colors.blue, style = { 'bold' } },
 
-  local c = require('catppuccin.api.colors').get_colors()
-  catppuccin.remap {
-    Search = { fg = c.surface1, bg = c.pink },
-    Visual = { bg = c.surface1 },
-    Pmenu = { fg = c.text, bg = c.surface0 },
-    PmenuSel = { fg = c.surface0, bg = c.blue },
-    CmpItemAbbr = { fg = c.text },
-    CmpItemAbbrMatch = { fg = c.blue, style = 'bold' },
-    CmpItemAbbrMatchFuzzy = { fg = c.blue, style = 'bold' },
+      TelescopeNormal = { fg = colors.text, bg = colors.mantle },
+      TelescopePromptNormal = { fg = colors.text, bg = colors.surface0 },
+      TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },
+      TelescopePromptTitle = { fg = colors.blue },
+      TelescopeSelection = { fg = colors.text, bg = colors.surface1 },
+      TelescopeResultsBorder = { fg = colors.mantle, bg = colors.mantle },
+      -- TelescopeResultsTitle = { fg = c.blue },
+      TelescopePreviewNormal = { fg = colors.text, bg = colors.mantle },
+      TelescopePreviewBorder = { fg = colors.blue, bg = colors.mantle },
+      -- TelescopePreviewTitle = { fg = c.blue },
+      TelescopeMatching = { fg = colors.blue },
 
-    TelescopeNormal = { fg = c.text, bg = c.mantle },
-    TelescopePromptNormal = { fg = c.text, bg = c.surface0 },
-    TelescopePromptBorder = { fg = c.surface0, bg = c.surface0 },
-    TelescopePromptTitle = { fg = c.blue },
-    TelescopeSelection = { fg = c.text, bg = c.surface1 },
-    TelescopeResultsBorder = { fg = c.mantle, bg = c.mantle },
-    -- TelescopeResultsTitle = { fg = c.blue },
-    TelescopePreviewNormal = { fg = c.text, bg = c.mantle },
-    TelescopePreviewBorder = { fg = c.blue, bg = c.mantle },
-    -- TelescopePreviewTitle = { fg = c.blue },
-    TelescopeMatching = { fg = c.blue },
-
-    NeogitHunkHeader = { bg = c.base, fg = c.blue },
-    NeogitHunkHeaderHighlight = { bg = c.blue, fg = c.base },
+      NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
+      NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
+    },
   }
 
   vim.cmd([[colorscheme catppuccin]])
