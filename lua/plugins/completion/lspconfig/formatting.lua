@@ -11,7 +11,7 @@ local function priority(name)
 end
 
 local function select_client(on_choice)
-  local clients = vim.tbl_values(vim.lsp.buf_get_clients())
+  local clients = vim.tbl_values(vim.lsp.get_active_clients())
   clients = vim.tbl_filter(function(client)
     return client.supports_method(FORMATTING)
   end, clients)

@@ -74,11 +74,11 @@ map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
 map('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
 local project_files = function()
-  local telescope = require('telescope.builtin')
-  local opts = {} -- define some options
-  local ok = pcall(telescope.git_files, opts)
-  if not ok then
-    telescope.find_files(opts)
+  local in_git_repo = vim.fn.systemlist('git rev-parse --is-inside-work-tree')[1] == 'true'
+  if in_git_repo then
+    require('telescope.builtin').git_files()
+  else
+    require('telescope.builtin').find_files()
   end
 end
 

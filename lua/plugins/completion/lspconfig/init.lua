@@ -8,29 +8,36 @@ local on_attach = function(client, bufnr)
   require('illuminate').on_attach(client)
 end
 
+local on_server_ready = function(server)
+  -- setup lsp servers
+  local lspconfig = require('lspconfig')
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local servers = require('plugins.completion.lspconfig.servers')
+  local opts = servers[server] or {}
+  local defaults = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
+  opts = vim.tbl_deep_extend('force', defaults, opts)
+  -- custom config in lspconfig/servers.lua
+  lspconfig[server].setup(opts)
+end
+
 local setup = function()
   require('plugins.completion.lspconfig.diagnostic').setup()
 
-  -- setup lsp installer
-  local servers = require('plugins.completion.lspconfig.servers')
-  require('nvim-lsp-installer').setup {
-    -- ensure_installed = vim.tbl_keys(servers),
+  require('mason').setup()
+  require('mason-lspconfig').setup {
+    ensure_installed = {},
+    automatic_installation = true,
   }
-
-  -- setup lsp servers
   require('plugins.completion.lspconfig.null-ls').setup(on_attach)
-  local lspconfig = require('lspconfig')
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-  for server, opts in pairs(servers) do
-    local defaults = {
-      on_attach = on_attach,
-      capabilities = capabilities,
-    }
-    opts = vim.tbl_deep_extend('force', defaults, opts)
 
-    -- custom config in lspconfig/{server}.lua
-    lspconfig[server].setup(opts)
-  end
+  require('mason-lspconfig').setup_handlers {
+    function(server)
+      on_server_ready(server)
+    end,
+  }
 end
 
 setup()

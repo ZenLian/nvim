@@ -9,7 +9,8 @@ completion['neovim/nvim-lspconfig'] = {
     require('plugins.completion.lspconfig')
   end,
   requires = {
-    'williamboman/nvim-lsp-installer',
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
     {
       'ray-x/lsp_signature.nvim',
       module = 'lsp_signature',

@@ -10,7 +10,7 @@
 
 ## 前置要求
 
-- neovim >= 0.7.0
+- neovim >= 0.8.0
 - fzf
 - rg
 - fd
