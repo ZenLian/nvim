@@ -47,7 +47,7 @@ ui['lukas-reineke/indent-blankline.nvim'] = {
   end,
 }
 
-ui['norcalli/nvim-colorizer.lua'] = {
+ui['NvChad/nvim-colorizer.lua'] = {
   config = function()
     require('plugins.ui.colorizer')
   end,
@@ -72,7 +72,7 @@ ui['folke/twilight.nvim'] = {
   opt = true,
   cmd = { 'Twilight' },
   config = function()
-    require('twilight').setup()
+    require('twilight').setup {}
   end,
 }
 
@@ -88,6 +88,13 @@ ui['stevearc/dressing.nvim'] = {
   config = function()
     require('plugins.ui.dressing')
   end,
+}
+
+ui['anuvyklack/pretty-fold.nvim'] = {
+  config = function()
+    require('pretty-fold').setup {}
+  end,
+  event = 'BufRead',
 }
 
 return ui
