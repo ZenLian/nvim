@@ -1,5 +1,5 @@
 return {
-  sumneko_lua = require('lua-dev').setup {},
+  sumneko_lua = {},
   -- ccls = {},
   clangd = {},
   jsonls = {

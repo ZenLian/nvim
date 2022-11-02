@@ -16,8 +16,8 @@ completion['neovim/nvim-lspconfig'] = {
       module = 'lsp_signature',
     },
     {
-      'folke/lua-dev.nvim',
-      module = 'lua-dev',
+      'folke/neodev.nvim',
+      module = 'neodev',
     },
     {
       'jose-elias-alvarez/null-ls.nvim',

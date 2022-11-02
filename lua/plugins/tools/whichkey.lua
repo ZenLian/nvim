@@ -200,20 +200,20 @@ local leader = {
     },
     s = {
       function()
-        util.toggle('spell')
+        util.toggle('spell', false)
       end,
       'Spelling',
     },
     w = {
       function()
-        util.toggle('wrap')
+        util.toggle('wrap', false)
       end,
       'Word wrap',
     },
     n = {
       function()
         util.toggle('relativenumber', true)
-        util.toggle('number')
+        util.toggle('number', false)
       end,
       'Line Numbers',
     },

@@ -4,22 +4,21 @@ local on_attach = function(client, bufnr)
   require('plugins.completion.lspconfig.signature').on_attach(client, bufnr)
 
   -- plugins hook
-  require('aerial').on_attach(client, bufnr)
   require('illuminate').on_attach(client)
 end
 
 local on_server_ready = function(server)
   -- setup lsp servers
   local lspconfig = require('lspconfig')
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
   local servers = require('plugins.completion.lspconfig.servers')
+  -- custom config in lspconfig/servers.lua
   local opts = servers[server] or {}
   local defaults = {
     on_attach = on_attach,
     capabilities = capabilities,
   }
   opts = vim.tbl_deep_extend('force', defaults, opts)
-  -- custom config in lspconfig/servers.lua
   lspconfig[server].setup(opts)
 end
 
@@ -32,6 +31,7 @@ local setup = function()
     automatic_installation = true,
   }
   require('plugins.completion.lspconfig.null-ls').setup(on_attach)
+  require('neodev').setup {}
 
   require('mason-lspconfig').setup_handlers {
     function(server)

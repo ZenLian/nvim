@@ -11,7 +11,7 @@ local notify = require('notify')
 -- }
 notify.setup {}
 
--- vim.notify = notify
+vim.notify = notify
 
 --#region LSP progress
 -- Utility functions shared between progress reports for LSP and DAP
