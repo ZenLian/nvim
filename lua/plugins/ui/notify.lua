@@ -9,7 +9,9 @@ local notify = require('notify')
 --   -- Function called when a window is closed
 --   on_close = nil,
 -- }
-notify.setup {}
+notify.setup {
+  timeout = 2000,
+}
 
 vim.notify = notify
 

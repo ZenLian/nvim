@@ -64,6 +64,13 @@ editor['ggandor/lightspeed.nvim'] = {
   end,
 }
 
+editor['abecodes/tabout.nvim'] = {
+  config = function()
+    require('tabout').setup {}
+  end,
+  after = { 'nvim-cmp', 'nvim-treesitter' },
+}
+
 editor['lewis6991/gitsigns.nvim'] = {
   opt = true,
   event = { 'BufRead', 'BufNewFile' },
