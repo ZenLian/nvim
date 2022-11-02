@@ -24,6 +24,9 @@ completion['neovim/nvim-lspconfig'] = {
       module = 'null-ls',
     },
     {
+      'jayp0521/mason-null-ls.nvim',
+    },
+    {
       -- 'b0o/schemastore.nvim',
       util.source_dir('SchemaStore.nvim'),
       module = 'schemastore',

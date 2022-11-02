@@ -26,13 +26,16 @@ local setup = function()
   require('plugins.completion.lspconfig.diagnostic').setup()
 
   require('mason').setup()
+  require('plugins.completion.lspconfig.null-ls').setup(on_attach)
   require('mason-lspconfig').setup {
     ensure_installed = {},
     automatic_installation = true,
   }
-  require('plugins.completion.lspconfig.null-ls').setup(on_attach)
-  require('neodev').setup {}
+  require('mason-null-ls').setup {
+    automatic_installation = true,
+  }
 
+  require('neodev').setup {}
   require('mason-lspconfig').setup_handlers {
     function(server)
       on_server_ready(server)
