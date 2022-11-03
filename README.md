@@ -6,7 +6,7 @@
 
 ## 👀 Prerequisite
 
-- neovim v0.7+
+- neovim v0.8+
 - fzf
 - ripgrep
 - fd
@@ -60,9 +60,11 @@
 
 ### ✒️ Editor
 
+Treesitter
+
 | Plugin                                                                                       | Description                  |
 | -------------------------------------------------------------------------------------------- | ---------------------------- |
-| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                        | multi-language syntax parser |
+| [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                        | base plugin for neovim's built-in tree-sitter(language syntax parser) |
 | [playground](https://github.com/nvim-treesitter/playground)                                  | inspect treesitter structure |
 | [nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | textobject                   |
 | [nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)              | fixed context header         |

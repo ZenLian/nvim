@@ -56,12 +56,24 @@ editor['ur4ltz/surround.nvim'] = {
   end,
 }
 
-editor['ggandor/lightspeed.nvim'] = {
-  -- FIXME: `s` map not work when lazy loading
-  -- event = { 'BufRead', 'BufNewFile' },
+editor['ggandor/leap.nvim'] = {
   config = function()
-    require('plugins.editor.lightspeed')
+    require('plugins.editor.leap')
   end,
+}
+
+editor['ggandor/flit.nvim'] = {
+  config = function()
+    require('flit').setup {}
+  end,
+  after = { 'leap.nvim' },
+}
+
+editor['ggandor/leap-spooky.nvim'] = {
+  config = function()
+    require('leap-spooky').setup {}
+  end,
+  after = { 'leap.nvim' },
 }
 
 editor['abecodes/tabout.nvim'] = {
