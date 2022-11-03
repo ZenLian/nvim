@@ -64,7 +64,9 @@ editor['ggandor/leap.nvim'] = {
 
 editor['ggandor/flit.nvim'] = {
   config = function()
-    require('flit').setup {}
+    require('flit').setup {
+      labeled_modes = 'nvo',
+    }
   end,
   after = { 'leap.nvim' },
 }
