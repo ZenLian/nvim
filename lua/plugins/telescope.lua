@@ -74,6 +74,16 @@ local config = function()
   require('telescope').load_extension('notify')
 end
 
+local project_files = function()
+  local in_git_repo = vim.fn.systemlist('git rev-parse --is-inside-work-tree')[1] == 'true'
+  if in_git_repo then
+    require('telescope.builtin').git_files()
+  else
+    require('telescope.builtin').find_files()
+  end
+end
+
 return {
   config = config,
+  project_files = project_files,
 }
