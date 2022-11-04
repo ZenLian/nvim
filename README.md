@@ -11,6 +11,7 @@
 - ripgrep
 - fd
 - sqlite3
+- [deno](https://deno.land/)(optional, for [peek.nvim](https://github.com/toppair/peek.nvim))
 
 ## 🔌 Plugins
 
@@ -43,7 +44,7 @@
 | [telescope-file-browser.nvim](https://github.com/nvim-telescope/telescope-file-browser.nvim)   | file browser                |
 | [nvim-neoclip.lua](https://github.com/AckslD/nvim-neoclip.lua)                                 | clipboard search            |
 
-#### 🦴 Others
+#### Others
 
 | Plugin                                                                     | Description                        |
 | -------------------------------------------------------------------------- | ---------------------------------- |
@@ -62,19 +63,19 @@
 
 Treesitter
 
-| Plugin                                                                                       | Description                  |
-| -------------------------------------------------------------------------------------------- | ---------------------------- |
+| Plugin                                                                                       | Description                                                           |
+| -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)                        | base plugin for neovim's built-in tree-sitter(language syntax parser) |
-| [playground](https://github.com/nvim-treesitter/playground)                                  | inspect treesitter structure |
-| [nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | textobject                   |
-| [nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)              | fixed context header         |
-| [nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)                           | fast range selection         |
-| [nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                                   | rainbow brackets             |
-| [Comment.nvim](https://github.com/numToStr/Comment.nvim)                                     | fast comment/uncomment       |
-| [surround.nvim](https://github.com/ur4ltz/surround.nvim)                                     | fast surround brackets       |
-| [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)                                | fast movement                |
-| [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                                       | visualized git signs         |
-| [editorconfig.nvim](https://github.com/gpanders/editorconfig.nvim)                           | editorconfig                 |
+| [playground](https://github.com/nvim-treesitter/playground)                                  | inspect treesitter structure                                          |
+| [nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | textobject                                                            |
+| [nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)              | fixed context header                                                  |
+| [nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)                           | fast range selection                                                  |
+| [nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                                   | rainbow brackets                                                      |
+| [Comment.nvim](https://github.com/numToStr/Comment.nvim)                                     | fast comment/uncomment                                                |
+| [surround.nvim](https://github.com/ur4ltz/surround.nvim)                                     | fast surround brackets                                                |
+| [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)                                | fast movement                                                         |
+| [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                                       | visualized git signs                                                  |
+| [editorconfig.nvim](https://github.com/gpanders/editorconfig.nvim)                           | editorconfig                                                          |
 
 ### 🔥 Completion
 
@@ -90,6 +91,14 @@ Treesitter
 | [nvim-autopairs](https://github.com/windwp/nvim-autopairs)               | autopairs                                                   |
 | [aerial.nvim](https://github.com/stevearc/aerial.nvim)                   | symbols outline                                             |
 | [trouble.nvim](https://github.com/folke/trouble.nvim)                    | pretty diagnostic list                                      |
+
+### 📔 Markdown
+
+| Plugin                                            | Description  |
+| ------------------------------------------------- | ------------ |
+| [peek.nvim](https://github.com/toppair/peek.nvim) | live preview |
+
+## Workflows
 
 ## ❤️ Credits
 
