@@ -1,8 +1,6 @@
 # 😽 Neovim lua config
 
-![screenshot](https://raw.githubusercontent.com/ZenLian/imglib/main/screenshot.png)
-
-![telescope](https://raw.githubusercontent.com/ZenLian/imglib/main/telescope.png)
+![screenshot](https://raw.githubusercontent.com/ZenLian/imglib/main/202211050611008.png)
 
 ## 👀 Prerequisite
 

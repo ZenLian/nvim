@@ -1,9 +1,10 @@
 # TODO
 
+- refactor: put keymaps in one place
 - fix: highlight conflict between selection and cursorword
 - feat: styled git commit message
-- refactor: put keymaps in one place
-- fix: no cursorword on Neogit\* filetypes
+- fix: dont need cursorword on Neogit\* filetypes
+- fix: outdated README
 - plugins
   - mini.nvim
   - neo-tree.nvim: alternative to NvimTree
