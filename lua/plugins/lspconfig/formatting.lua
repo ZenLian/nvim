@@ -1,10 +1,10 @@
 local M = {}
 local config = require('config').config
 local util = require('util')
-local lsputil = vim.lsp.util
 
-local FORMATTING = 'textDocument/formatting'
 local TITLE = 'Formatting'
+local FORMATTING_METHOD = 'textDocument/formatting'
+local TIMEOUT = 2000
 
 function M.priority(name)
   return config.format_priority[name] or 0
@@ -13,10 +13,10 @@ end
 function M.select_client(on_choice)
   local clients = vim.tbl_values(vim.lsp.get_active_clients())
   clients = vim.tbl_filter(function(client)
-    return client.supports_method(FORMATTING)
+    return client.supports_method(FORMATTING_METHOD)
   end, clients)
 
-  -- only reserve clients with max priority
+  -- filter clients with max priority
   local max_priority = 0
   for _, client in ipairs(clients) do
     max_priority = math.max(M.priority(client.name), max_priority)
@@ -25,9 +25,10 @@ function M.select_client(on_choice)
     return M.priority(client.name) == max_priority
   end, clients)
 
+  -- prompt for selection
   if #clients > 1 then
     vim.ui.select(clients, {
-      prompt = 'Select a language server:',
+      prompt = TITLE .. 'select a language server',
       format_item = function(client)
         return client.name
       end,
@@ -39,23 +40,15 @@ function M.select_client(on_choice)
   end
 end
 
--- TODO: use vim.lsp.format with `filter` in v0.8
-function M.format(bufnr, timeout_ms)
-  if not config.format_on_save then
-    return
-  end
-
-  local params = lsputil.make_formatting_params {}
-  -- local bufnr = vim.api.nvim_get_current_buf()
-
+function M.format(opts)
+  local defaults = {
+    bufnr = 0,
+    timeout_ms = TIMEOUT,
+  }
+  opts = vim.tbl_extend('force', defaults, opts or {})
   M.select_client(function(client)
-    local result, err = client.request_sync(FORMATTING, params, timeout_ms, bufnr)
-    if result and result.result then
-      lsputil.apply_text_edits(result.result, bufnr, client.offset_encoding)
-      -- util.info('autoformat by ' .. client.name, NAME)
-    elseif err then
-      util.warn(err, TITLE)
-    end
+    opts.id = client.id
+    vim.lsp.buf.format(opts)
   end)
 end
 
@@ -68,16 +61,16 @@ function M.toggle()
   end
 end
 
-local group = vim.api.nvim_create_augroup('LspFormat', { clear = true })
+local group = vim.api.nvim_create_augroup(TITLE, { clear = true })
 function M.on_attach(client, bufnr)
-  if not client.supports_method(FORMATTING) then
+  if not client.supports_method(FORMATTING_METHOD) then
     return
   end
 
   -- dont create autocmds twice
-  -- multiple servers are handled in A same callback
+  -- multiple servers are handled in the same callback
   local autocmds = vim.api.nvim_get_autocmds { group = group, buffer = bufnr }
-  if autocmds == nil then
+  if #autocmds > 0 then
     return
   end
 
@@ -86,7 +79,10 @@ function M.on_attach(client, bufnr)
     group = group,
     buffer = bufnr,
     callback = function()
-      M.format(bufnr, 2000)
+      if not config.format_on_save then
+        return
+      end
+      M.format { bufnr = bufnr }
     end,
   })
 end

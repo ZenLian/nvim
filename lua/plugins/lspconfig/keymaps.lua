@@ -8,7 +8,12 @@ local leader = {
   },
   l = {
     name = 'language',
-    f = { vim.lsp.buf.formatting, 'File format' },
+    f = {
+      function()
+        require('plugins.lspconfig.formatting').format()
+      end,
+      'File format',
+    },
     a = { vim.lsp.buf.code_action, 'Code action' },
     r = { vim.lsp.buf.rename, 'Rename' },
     d = { vim.diagnostic.open_float, 'Line Diagnostics' },
@@ -18,7 +23,14 @@ local leader = {
 local leader_visual = {
   l = {
     name = 'language',
-    f = { vim.lsp.buf.range_formatting, 'Range Format' },
+    f = {
+      function()
+        require('plugins.lspconfig.formatting').format {
+          range = {},
+        }
+      end,
+      'Range Format',
+    },
     a = { vim.lsp.buf.range_code_action, 'Code action' },
   },
 }
