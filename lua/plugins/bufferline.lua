@@ -11,6 +11,7 @@ local config = function()
         },
       },
     },
+    highlights = require('catppuccin.groups.integrations.bufferline').get(),
     -- themable = true,
   }
 end
