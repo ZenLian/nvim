@@ -53,23 +53,15 @@ M.config = function()
       markdown = true,
       mason = true,
       neogit = true,
+      neotree = true,
       notify = true,
-      nvimtree = {
-        enabled = true,
-        show_root = false,
-        transparent_panel = false,
-      },
+      nvimtree = false,
       telescope = true,
       treesitter = true,
       treesitter_context = true,
       ts_rainbow = true,
       which_key = true,
 
-      neotree = {
-        enabled = false,
-        show_root = false,
-        transparent_panel = false,
-      },
       indent_blankline = {
         enabled = true,
         colored_indent_levels = false,
@@ -94,6 +86,8 @@ M.config = function()
       TelescopePreviewBorder = { fg = colors.blue, bg = colors.mantle },
       -- TelescopePreviewTitle = { fg = c.blue },
       TelescopeMatching = { fg = colors.blue },
+
+      NeoTreeNormalNC = { link = 'NeoTreeNormal' },
 
       NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
       NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },

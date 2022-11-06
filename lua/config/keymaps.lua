@@ -70,7 +70,7 @@ map('n', '[b', '<cmd>BufferLineCyclePrev<CR>')
 map('n', ']b', '<cmd>BufferLineCycleNext<CR>')
 map('n', '<A-,>', '<cmd>BufferLineMovePrev<CR>')
 map('n', '<A-.>', '<cmd>BufferLineMoveNext<CR>')
-map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')
+map('n', '<C-e>', '<cmd>Neotree<CR>')
 map('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
 map('n', '<C-p>', function()
@@ -81,6 +81,7 @@ end)
 -- leader keymaps
 --
 local leader = {
+  e = { '<cmd>Neotree toggle=true<CR>', 'toggle neotree' },
   p = {
     name = 'packer',
     p = { '<cmd>PackerSync<CR>', 'Packer Sync' },
@@ -136,7 +137,7 @@ local leader = {
   },
   f = {
     name = 'files',
-    n = { '<cmd>NvimTreeFocus<CR>', 'Focus NvimTree' },
+    -- n = { '<cmd>NvimTreeFocus<CR>', 'Focus NvimTree' },
     f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
     r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
     h = { '<cmd>Telescope frecency<CR>', 'Frecency files' },

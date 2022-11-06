@@ -81,6 +81,10 @@ local plugins = {
     module = 'plenary',
   },
   {
+    'MunifTanjim/nui.nvim',
+    module = 'nui',
+  },
+  {
     'tami5/sqlite.lua',
     module = 'sqlite',
   },
@@ -118,16 +122,12 @@ local plugins = {
   },
   {
     'AckslD/nvim-neoclip.lua',
-    requires = {
-      { 'tami5/sqlite.lua' },
-      { 'nvim-telescope/telescope.nvim' },
-    },
     config = true,
   },
-  -- { 'Shatur/neovim-session-manager' },
   {
-    'kyazdani42/nvim-tree.lua',
-    cmd = { 'NvimTreeToggle', 'NvimTreeOpen', 'NvimTreeFindFile', 'NvimTreeRefresh', 'NvimTreeFocus' },
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v2.x',
+    cmd = { 'Neotree' },
     config = true,
   },
   {
@@ -253,7 +253,6 @@ local plugins = {
   {
     'lewis6991/gitsigns.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    requires = { 'nvim-lua/plenary.nvim' },
     config = true,
   },
   {

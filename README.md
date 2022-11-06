@@ -47,7 +47,7 @@
 | Plugin                                                                     | Description                        |
 | -------------------------------------------------------------------------- | ---------------------------------- |
 | [neovim-session-manager](https://github.com/Shatur/neovim-session-manager) | save/load sessions                 |
-| [nvim-tree.lua](https://github.com/kyazdani42/nvim-tree.lua)               | file tree                          |
+| [neo-tree.lua](https://github.com/nvim-neo-tree/neo-tree.nvim)             | file explorer                      |
 | [undotree](https://github.com/jiaoshijie/undotree)                         | visualize undotree                 |
 | [toggleterm.nvim](https://github.com/akinsho/toggleterm.nvim)              | manage terminals                   |
 | [diffview.lua](https://github.com/sindrets/diffview.nvim)                  | pretty diffview                    |
@@ -96,7 +96,44 @@ Treesitter
 | ------------------------------------------------- | ------------ |
 | [peek.nvim](https://github.com/toppair/peek.nvim) | live preview |
 
-## Workflows
+## 🚀 Workflows
+
+### File Explorer
+
+- `<C-e>` open/focus file explorer
+- `<Leader>e` toggle file explorer
+
+Inside explorer navigation:
+
+- `.`/`<bs>` cd/navigate up
+- `h'/'j'/'k'/'l` navigate/open files
+- `<c-v>`/`<c-s>`/`<c-t>` open in vsplit/split/tab
+- `<`/`>` switch source(file, buffer, git)
+
+file actions:
+
+- `a` add file or directory(end with `/`)
+- `A` add directory
+- `d` delete
+- `r` rename
+- `y` copy
+- `x` cut
+- `p` paste
+
+search:
+
+- `/` to search file, `<C-n>`/`<C-p>` to choose, and `<enter>` to open
+- `sf`/`sg` to find/grep in current node
+
+view changes:
+
+- `zR`: expand all
+- `zM`: close all
+- `<tab>`: toggle node
+- `H`: toggle hidden
+- `R`: refresh
+- [ ] `zh`: toggle dotfiles
+- [ ] `zg`: toggle gitignored files
 
 ## ❤️ Credits
 

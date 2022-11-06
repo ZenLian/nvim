@@ -1,3 +1,4 @@
+-- TODO: delete
 local config = function()
   local Path = require('plenary.path')
   require('session_manager').setup {
