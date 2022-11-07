@@ -3,7 +3,7 @@ local config = function()
     return {
       cwd = path,
       search_dirs = { path },
-      attach_mappings = function(prompt_bufnr, map)
+      attach_mappings = function(prompt_bufnr)
         local actions = require('telescope.actions')
         actions.select_default:replace(function()
           actions.close(prompt_bufnr)

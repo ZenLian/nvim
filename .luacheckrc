@@ -5,4 +5,5 @@ cache = true
 
 globals = {
   'vim',
+  'packer_plugins',
 }
