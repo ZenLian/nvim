@@ -100,6 +100,19 @@ Treesitter
 
 ### ✏️ Edit
 
+leap(~~sneak~~):
+
+- Normal mode: `s`/`S` with 2 chars
+- Visual mode: `x`/`S` with 2 chars
+
+surround:
+
+- `ys{motion})` insert `()` surround `{motion}`
+- `ds{motion}` delete surround `{motion}`
+- Visual mode: `s)` to insert `()`
+
+misc:
+
 > TODO: don't use `s` key
 
 - `<Leader>s;` search symbols

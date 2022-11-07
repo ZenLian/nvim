@@ -220,11 +220,7 @@ local plugins = {
   {
     'ggandor/flit.nvim',
     after = { 'leap.nvim' },
-    config = function()
-      require('leap').setup {
-        labeled_modes = 'nvo',
-      }
-    end,
+    config = true,
   },
   {
     'ggandor/leap-spooky.nvim',
@@ -247,7 +243,6 @@ local plugins = {
   },
   {
     'gpanders/editorconfig.nvim',
-    opt = true,
     event = { 'BufRead', 'BufNewFile' },
   },
 
