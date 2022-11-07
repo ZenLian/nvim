@@ -1,21 +1,3 @@
-local cfg = require('config').config
-
-local config = {
-  display = {
-    open_fn = function()
-      return require('packer.util').float {
-        border = 'none',
-      }
-    end,
-  },
-}
-
-if cfg.packer.use_ssh then
-  config.git = {
-    default_url_format = 'git@github.com:%s',
-  }
-end
-
 local plugins = {
   {
     'catppuccin/nvim',
@@ -279,7 +261,8 @@ local plugins = {
   },
   {
     'L3MON4D3/LuaSnip',
-    module = 'luasnip',
+    -- module = 'luasnip',
+    after = 'nvim-cmp',
     requires = 'rafamadriz/friendly-snippets',
     config = true,
   },
@@ -346,7 +329,4 @@ local plugins = {
   },
 }
 
-require('util.packer').setup {
-  plugins = plugins,
-  config = config,
-}
+require('util.packer').setup { plugins = plugins }

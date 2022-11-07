@@ -10,7 +10,7 @@ M.config = {
   -- packer
   packer = {
     local_dir = '~/projects',
-    use_ssh = false,
+    git_src = 'default', -- one of 'default'/'ssh'/'gitclone'/'kgithub'
   },
   dirs = {
     config = vim.fn.stdpath('config'),

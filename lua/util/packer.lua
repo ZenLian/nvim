@@ -4,15 +4,34 @@ local M = {}
 local util = require('util')
 local cfg = require('config').config
 
+local packer_config = {
+  display = {
+    open_fn = function()
+      return require('packer.util').float {
+        border = 'none',
+      }
+    end,
+  },
+  -- log = { level = 'info' },
+}
+
+local url_map = {
+  default = 'https://github.com/%s',
+  ssh = 'git@github.com:%s',
+  gitclone = 'https://gitclone.com/github.com/%s',
+  kgithub = 'https://kgithub.com/%s',
+}
+packer_config.git = {
+  default_url_format = url_map[cfg.packer.git_src] or url_map.default,
+}
+
 function M.bootstrap()
   local fn = vim.fn
-  local packer_dir = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  local packer_dir = fn.stdpath('data') .. '/site/pack/packer/opt/packer.nvim'
   if fn.empty(fn.glob(packer_dir)) > 0 then
-    local prefix = 'https://github.com/'
-    if cfg.packer.use_ssh then
-      prefix = 'git@github.com:'
-    end
-    fn.system { 'git', 'clone', '--depth=1', prefix .. 'wbthomason/packer.nvim', packer_dir }
+    local url = string.format(packer_config.git.default_url_format, 'wbthomason/packer.nvim')
+    print(string.format('cloning %s into %s', url, packer_dir))
+    fn.system { 'git', 'clone', '--depth=1', url, packer_dir }
     return true
   end
 end
@@ -60,16 +79,17 @@ end
 function M.setup(opts)
   local bootstrap = M.bootstrap()
 
+  vim.cmd([[packadd packer.nvim]])
   local packer = require('packer')
   packer.startup {
     function(use)
-      use { 'wbthomason/packer.nvim' }
+      use { 'wbthomason/packer.nvim', opt = true }
       for _, plugin in ipairs(opts.plugins) do
         plugin = preprocess(plugin)
         use(plugin)
       end
     end,
-    config = opts.config,
+    config = packer_config,
   }
 
   if bootstrap then

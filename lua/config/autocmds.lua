@@ -1,9 +1,9 @@
 local augroup = function(name)
-  vim.api.nvim_create_augroup(name, { clear = true })
+  return vim.api.nvim_create_augroup(name, { clear = true })
 end
 local autocmd = vim.api.nvim_create_autocmd
 
-local group = augroup('core')
+local group = augroup('config.autocmds')
 -- return to last edit position
 autocmd({ 'BufReadPost' }, {
   -- command = [[if line("'\"") > 1 && line("'\"") <= line("$") | execute "normal! g'\"" | endif]],

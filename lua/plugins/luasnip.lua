@@ -1,5 +1,5 @@
 local config = function()
-  require('luasnip').config.set_config {
+  require('luasnip').setup {
     history = true,
     updateevents = 'TextChanged,TextChangedI',
   }

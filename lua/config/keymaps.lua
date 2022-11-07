@@ -1,4 +1,3 @@
-local wk = require('which-key')
 local util = require('util')
 
 local function map(mode, lhs, rhs, opts)
@@ -225,5 +224,10 @@ local leader_visual = {
   },
 }
 
-wk.register(leader, { prefix = '<Leader>' })
-wk.register(leader_visual, { prefix = '<Leader>', mode = 'v' })
+local function register()
+  local wk = require('which-key')
+  wk.register(leader, { prefix = '<Leader>' })
+  wk.register(leader_visual, { prefix = '<Leader>', mode = 'v' })
+end
+
+pcall(register)

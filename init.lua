@@ -1,2 +1,2 @@
 require('config').setup()
--- lua require('minit')
+-- require('minit')
