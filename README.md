@@ -98,7 +98,14 @@ Treesitter
 
 ## 🚀 Workflows
 
-### File Explorer
+### ✏️ Edit
+
+> TODO: don't use `s` key
+
+- `<Leader>s;` search symbols
+- `<Leader>sc` search clipboard
+
+### 📁 File Explorer
 
 - `<C-e>` open/focus file explorer
 - `<Leader>e` toggle file explorer
@@ -134,6 +141,50 @@ view changes:
 - `R`: refresh
 - [ ] `zh`: toggle dotfiles
 - [ ] `zg`: toggle gitignored files
+
+### 🔎 Search
+
+search for files:
+
+- `<C-p>` search git files
+- `<Leader>ff` search files
+- `<Leader>fr` search recent files
+- `<Leader>fh` search frecency files
+
+search for text:
+
+- `<C-f>`/`<Leader>sz` search in current buffer
+- `<Leader>sg` live grep in workspace
+- `<Leader>sw` search current word in workspace
+
+### 🔖 Git
+
+Git keymaps mostly start with `<Leader>g`.
+
+- `[g`/`]g` previous/next git hunk
+- `<Leader>gg` open neogit(**most frequently used**)
+- `<Leader>gl` open lazygit
+- `<Leader>gd` open diffview
+
+- `<Leader>gb` explore git branches
+- `<Leader>gc` explore git commits
+- `<Leader>gs` explore git status(all diff files)
+- `<Leader>gh` operations related to git hunks
+
+Inside neogit:
+
+- `<tab>` close/expand groups
+- `1`/`2`/... set fold level
+- `s`/`S` stage current/stage all
+- `u`/`U` unstage current/unstage all
+- `c` commit
+- `p` pull
+- `P` Push
+
+### ⬇️ Markdown
+
+- [ ] `<Leader>op` toggle live preview(peek)
+- [ ] `<Leader>og` open glow preview
 
 ## ❤️ Credits
 

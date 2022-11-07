@@ -220,10 +220,18 @@ local plugins = {
   {
     'ggandor/flit.nvim',
     after = { 'leap.nvim' },
+    config = function()
+      require('leap').setup {
+        labeled_modes = 'nvo',
+      }
+    end,
   },
   {
     'ggandor/leap-spooky.nvim',
     after = { 'leap.nvim' },
+    config = function()
+      require('leap-spooky').setup()
+    end,
   },
   {
     'abecodes/tabout.nvim',

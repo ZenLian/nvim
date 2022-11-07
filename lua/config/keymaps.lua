@@ -144,6 +144,7 @@ local leader = {
   o = {
     name = 'open',
     g = { '<cmd>Glow<CR>', 'Glow' }, -- markdown preview
+    p = { '<cmd>PeekToggle<CR>', 'Live preview' },
   },
   s = {
     name = 'search',
