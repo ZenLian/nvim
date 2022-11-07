@@ -27,7 +27,7 @@ local function setup_packer()
           { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
           { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
           { 'dmitmel/cmp-cmdline-history', after = 'nvim-cmp' },
-          { 'uga-rosa/cmp-dictionary', after = 'nvim-cmp', module='cmp_dictionary' },
+          { 'uga-rosa/cmp-dictionary', after = 'nvim-cmp', module = 'cmp_dictionary' },
         },
         config = function()
           local t = function(str)
@@ -207,7 +207,7 @@ local function setup_packer()
             -- capacity = 5,
             -- debug = false,
           }
-        end
+        end,
       }
       use {
         'L3MON4D3/LuaSnip',

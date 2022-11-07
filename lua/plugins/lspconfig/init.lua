@@ -1,4 +1,3 @@
-
 local config = function()
   local function on_attach(client, bufnr)
     require('plugins.lspconfig.formatting').on_attach(client, bufnr)
@@ -24,24 +23,24 @@ local config = function()
     lspconfig[server].setup(opts)
   end
 
-    require('plugins.lspconfig.diagnostic').setup()
+  require('plugins.lspconfig.diagnostic').setup()
 
-    require('mason').setup()
-    require('plugins.lspconfig.null-ls').setup(on_attach)
-    require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = true,
-    }
-    require('mason-null-ls').setup {
-      automatic_installation = true,
-    }
+  require('mason').setup()
+  require('plugins.lspconfig.null-ls').setup(on_attach)
+  require('mason-lspconfig').setup {
+    ensure_installed = {},
+    automatic_installation = true,
+  }
+  require('mason-null-ls').setup {
+    automatic_installation = true,
+  }
 
-    require('neodev').setup {}
-    require('mason-lspconfig').setup_handlers {
-      function(server)
-        on_server_ready(server)
-      end,
-    }
+  require('neodev').setup {}
+  require('mason-lspconfig').setup_handlers {
+    function(server)
+      on_server_ready(server)
+    end,
+  }
 end
 
 return { config = config }
