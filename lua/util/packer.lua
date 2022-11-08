@@ -13,6 +13,10 @@ local packer_config = {
     end,
   },
   -- log = { level = 'info' },
+  -- profile = {
+  --   enable = true,
+  --   threshold = 0,
+  -- },
 }
 
 local url_map = {

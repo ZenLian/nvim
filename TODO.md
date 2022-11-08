@@ -7,3 +7,9 @@
 - fix: persisted.nvim work with other plugins(neotree, aerial, etc.)
 - plugins
   - mini.nvim
+  - nvim-bqf
+  - ccc.nvim: colorizer alternative
+  - dial.nvim: quick switcher
+  - nvim-navic: breadcrumbs
+  - refactoring.nvim
+  - nvim-spectre

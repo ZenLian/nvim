@@ -1,4 +1,6 @@
-local config = function()
+local M = {}
+
+M.config = function()
   local packer = require('util.packer')
   local telescope = require('telescope')
 
@@ -68,23 +70,25 @@ local config = function()
   }
 
   -- require('telescope').load_extension('themes')
-  telescope.load_extension('fzf')
-  telescope.load_extension('file_browser')
+  -- telescope.load_extension('fzf')
+  -- telescope.load_extension('file_browser')
 
   telescope.load_extension('notify')
-  telescope.load_extension('persisted') -- To load the telescope extension
+  -- telescope.load_extension('persisted') -- To load the telescope extension
 end
 
-local project_files = function()
+M.project_files = function()
+  local opts = { show_untracked = true }
   local in_git_repo = vim.fn.systemlist('git rev-parse --is-inside-work-tree')[1] == 'true'
   if in_git_repo then
-    require('telescope.builtin').git_files()
+    require('telescope.builtin').git_files(opts)
   else
-    require('telescope.builtin').find_files()
+    local clients = vim.lsp.get_active_clients()
+    if #clients > 0 then
+      opts.cwd = clients[1].config.root_dir
+    end
+    require('telescope.builtin').find_files(opts)
   end
 end
 
-return {
-  config = config,
-  project_files = project_files,
-}
+return M

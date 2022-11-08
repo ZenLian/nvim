@@ -30,6 +30,7 @@ function M.setup()
   pcall(require, 'impatient')
 
   require('config.options')
+
   require('config.autocmds')
   require('config.keymaps')
   require('config.plugins')

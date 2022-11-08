@@ -13,10 +13,6 @@ function M.reload()
   vim.cmd('source ' .. os.getenv('MYVIMRC'))
 end
 
-function M.source_dir(name)
-  return M.join_path(require('config').packer.source_dir, name)
-end
-
 function M.warn(msg, name)
   vim.notify(msg, vim.log.levels.WARN, { title = name })
 end
@@ -40,7 +36,7 @@ function M.execute(id)
 end
 
 -- Open float terminal with command
---- @param cmd string #String: The name of shell command
+--- @param cmd: #String The name of shell command
 function M.float_terminal(cmd)
   local buf = vim.api.nvim_create_buf(false, true)
   local vpad = 4

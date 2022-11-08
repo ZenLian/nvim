@@ -22,6 +22,7 @@ local config = function()
     --   vim.lsp.stop_client(vim.lsp.get_active_clients())
     -- end,
   }
+  require('telescope').load_extension('persisted') -- To load the telescope extension
 end
 
 return { config = config }

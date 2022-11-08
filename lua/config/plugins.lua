@@ -83,6 +83,9 @@ local plugins = {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make',
     after = 'telescope.nvim',
+    config = function()
+      require('telescope').load_extension('fzf')
+    end,
   },
   {
     'nvim-telescope/telescope-frecency.nvim',
@@ -96,6 +99,9 @@ local plugins = {
   {
     'nvim-telescope/telescope-file-browser.nvim',
     after = 'telescope.nvim',
+    config = function()
+      require('telescope').load_extension('file_browser')
+    end,
   },
 
   {
@@ -251,16 +257,18 @@ local plugins = {
   {
     'hrsh7th/nvim-cmp',
     event = { 'InsertEnter', 'CmdlineEnter' },
+    module = 'cmp',
     requires = {
       { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-      { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-emoji' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
       { 'dmitmel/cmp-cmdline-history', after = 'nvim-cmp' },
-      { 'uga-rosa/cmp-dictionary', after = 'nvim-cmp' },
+      { 'uga-rosa/cmp-dictionary', module = 'cmp_dictionary' },
     },
     config = true,
   },
@@ -299,7 +307,7 @@ local plugins = {
   {
     'neovim/nvim-lspconfig',
     config = true,
-    --event = 'BufReadPre',
+    event = 'BufReadPre',
   },
   {
     'williamboman/mason.nvim',
