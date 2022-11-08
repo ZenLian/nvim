@@ -36,7 +36,7 @@ function M.bootstrap()
   end
 end
 
-function M.is_loaded(plugin)
+function M.loaded(plugin)
   return packer_plugins[plugin] and packer_plugins[plugin].loaded
 end
 
@@ -61,17 +61,15 @@ local preprocess = function(plugin)
   -- seperated config
   local t = type(plugin.config)
   local name
-  if t == 'function' then
-    return plugin
-  elseif t == 'string' then
+  if t == 'string' then
     name = plugin.config
-  else
+  elseif plugin.config == true then
     name = plugin.as or get_name(plugin)
+  else
+    return plugin
   end
-  local ok, pkg = pcall(require, 'plugins.' .. name)
-  if ok and pkg.config then
-    plugin.config = pkg.config
-  end
+  local pkg = require('plugins.' .. name)
+  plugin.config = pkg.config
 
   return plugin
 end

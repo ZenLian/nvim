@@ -70,6 +70,8 @@ local plugins = {
     'kkharji/sqlite.lua',
     module = 'sqlite',
   },
+
+  -- telescope
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
@@ -84,15 +86,8 @@ local plugins = {
   },
   {
     'nvim-telescope/telescope-frecency.nvim',
-    opt = true,
-    after = 'telescope.nvim',
     requires = { 'kkharji/sqlite.lua' },
-  },
-  {
-    'nvim-telescope/telescope-smart-history.nvim',
-    opt = true,
     after = 'telescope.nvim',
-    requires = { 'kkharji/sqlite.lua' },
   },
   {
     'nvim-telescope/telescope-symbols.nvim',
@@ -102,10 +97,7 @@ local plugins = {
     'nvim-telescope/telescope-file-browser.nvim',
     after = 'telescope.nvim',
   },
-  -- {
-  --   'AckslD/nvim-neoclip.lua',
-  --   config = true,
-  -- },
+
   {
     'gbprod/yanky.nvim',
     requires = { 'kkharji/sqlite.lua' },
@@ -115,6 +107,12 @@ local plugins = {
     'nvim-neo-tree/neo-tree.nvim',
     branch = 'v2.x',
     cmd = { 'Neotree' },
+    config = true,
+  },
+  {
+    'olimorris/persisted.nvim',
+    module = { 'persisted' },
+    after = { 'telescope.nvim' },
     config = true,
   },
   {
@@ -151,7 +149,6 @@ local plugins = {
   {
     'dstein64/vim-startuptime',
     cmd = 'StartupTime',
-    config = true,
   },
   { 'lewis6991/impatient.nvim' },
 

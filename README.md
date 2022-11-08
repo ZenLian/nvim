@@ -197,6 +197,18 @@ Inside neogit:
 - `p` pull
 - `P` Push
 
+### Sessions
+
+> - [ ] neovim-session-manager alternative
+
+start with `<Leader>w`("workspace"):
+
+- `<Leader>ww` list sessions
+  - `<CR>` to source
+  - `<C-d>` to delete
+- `<Leader>ws` save session
+- `<Leader>wt` toggle
+
 ### ⬇️ Markdown
 
 - [ ] `<Leader>op` toggle live preview(peek)

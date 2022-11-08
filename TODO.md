@@ -4,5 +4,6 @@
 - feat: simulate vim-unimpaired
 - fix: highlight conflict between selection and cursorword
 - fix: dont need cursorword on Neogit\* filetypes
+- fix: persisted.nvim work with other plugins(neotree, aerial, etc.)
 - plugins
   - mini.nvim

@@ -1,7 +1,8 @@
 local config = function()
-  -- file_browser actions
-  -- TODO: 这时插件还没加载， extensions 会报错，所以把函数放在闭包里延后执行
-  local fb_actions = function(action)
+  local packer = require('util.packer')
+  local telescope = require('telescope')
+
+  local file_browser_actions = function(action)
     return function(...)
       local actions = require('telescope').extensions.file_browser.actions
       return actions[action](...)
@@ -14,7 +15,7 @@ local config = function()
     height = 25,
   }
 
-  require('telescope').setup {
+  telescope.setup {
     defaults = {
       mappings = {
         i = {
@@ -56,9 +57,9 @@ local config = function()
         initial_mode = 'normal',
         mappings = {
           n = {
-            ['a'] = fb_actions('create'),
-            ['l'] = 'select_default',
-            ['h'] = fb_actions('goto_parent_dir'),
+            ['a'] = file_browser_actions('create'),
+            ['l'] = file_browser_actions('select_default'),
+            ['h'] = file_browser_actions('goto_parent_dir'),
           },
         },
       },
@@ -67,7 +68,11 @@ local config = function()
   }
 
   -- require('telescope').load_extension('themes')
-  require('telescope').load_extension('notify')
+  telescope.load_extension('fzf')
+  telescope.load_extension('file_browser')
+
+  telescope.load_extension('notify')
+  telescope.load_extension('persisted') -- To load the telescope extension
 end
 
 local project_files = function()

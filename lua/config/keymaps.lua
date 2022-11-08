@@ -190,10 +190,9 @@ local leader = {
   u = { '<cmd>UndotreeToggle<CR>', 'Undo Tree' },
   w = {
     name = 'workspace',
-    w = { '<cmd>SessionManager load_current_dir_session<CR>', 'Load Current Dir' },
-    l = { '<cmd>SessionManager load_session<CR>', 'Load+' },
-    s = { '<cmd>SessionManager save_current_session<CR>', 'Save' },
-    d = { '<cmd>SessionManager delete_session<CR>', 'Delete+' },
+    w = { '<cmd>Telescope persisted<CR>', 'List' },
+    t = { '<cmd>lua require("persisted").toggle()<CR>', 'Toggle' },
+    s = { '<cmd>lua require("persisted").save()<CR>', 'Save' },
   },
   x = {
     name = 'trouble',
