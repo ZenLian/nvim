@@ -66,10 +66,6 @@ local config = function()
     },
   }
 
-  -- if not packer_plugins["nvim-neoclip.lua"].loaded then
-  --     vim.cmd [[packadd nvim-neoclip.lua]]
-  -- end
-  require('telescope').load_extension('neoclip')
   -- require('telescope').load_extension('themes')
   require('telescope').load_extension('notify')
 end

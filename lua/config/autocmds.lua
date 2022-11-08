@@ -16,14 +16,14 @@ autocmd({ 'BufReadPost' }, {
   end,
 })
 
--- highlight on yank
-autocmd({ 'TextYankPost' }, {
-  -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
-  group = group,
-  callback = function()
-    vim.highlight.on_yank() -- { higroup = 'Visual', timeout = 250 }
-  end,
-})
+-- highlight on yank (handled by yanky.nvim)
+-- autocmd({ 'TextYankPost' }, {
+--   -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
+--   group = group,
+--   callback = function()
+--     vim.highlight.on_yank() -- { higroup = 'Visual', timeout = 250 }
+--   end,
+-- })
 
 -- hide cursorline for unfocused window
 local cursorline_pattern = {

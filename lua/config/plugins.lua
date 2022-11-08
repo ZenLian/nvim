@@ -67,7 +67,7 @@ local plugins = {
     module = 'nui',
   },
   {
-    'tami5/sqlite.lua',
+    'kkharji/sqlite.lua',
     module = 'sqlite',
   },
   {
@@ -86,13 +86,13 @@ local plugins = {
     'nvim-telescope/telescope-frecency.nvim',
     opt = true,
     after = 'telescope.nvim',
-    requires = { { 'tami5/sqlite.lua' } },
+    requires = { 'kkharji/sqlite.lua' },
   },
   {
     'nvim-telescope/telescope-smart-history.nvim',
     opt = true,
     after = 'telescope.nvim',
-    requires = { { 'tami5/sqlite.lua' } },
+    requires = { 'kkharji/sqlite.lua' },
   },
   {
     'nvim-telescope/telescope-symbols.nvim',
@@ -102,8 +102,13 @@ local plugins = {
     'nvim-telescope/telescope-file-browser.nvim',
     after = 'telescope.nvim',
   },
+  -- {
+  --   'AckslD/nvim-neoclip.lua',
+  --   config = true,
+  -- },
   {
-    'AckslD/nvim-neoclip.lua',
+    'gbprod/yanky.nvim',
+    requires = { 'kkharji/sqlite.lua' },
     config = true,
   },
   {

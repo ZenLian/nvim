@@ -41,8 +41,8 @@ map('v', '<Tab>', '>gv')
 map('n', '<esc>', ':noh<cr>')
 
 -- Paste block
-map('n', ']p', ':pu<cr>')
-map('n', '[p', ':pu!<cr>')
+-- map('n', ']p', ':pu<cr>')
+-- map('n', '[p', ':pu!<cr>')
 -- Yank to end of line, consistence with D/C
 map('n', 'Y', 'y$')
 -- Yank to system clipboard
@@ -72,6 +72,25 @@ map('n', '<A-.>', '<cmd>BufferLineMoveNext<CR>')
 map('n', '<C-e>', '<cmd>Neotree<CR>')
 map('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
+-- yanky.nvim
+vim.keymap.set({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
+vim.keymap.set({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)')
+vim.keymap.set({ 'n', 'x' }, 'P', '<Plug>(YankyPutBefore)')
+vim.keymap.set({ 'n', 'x' }, 'gp', '<Plug>(YankyGPutAfter)')
+vim.keymap.set({ 'n', 'x' }, 'gP', '<Plug>(YankyGPutBefore)')
+vim.keymap.set('n', '<A-]>', '<Plug>(YankyCycleForward)')
+vim.keymap.set('n', '<A-[>', '<Plug>(YankyCycleBackward)')
+vim.keymap.set('n', ']p', '<Plug>(YankyPutIndentAfterLinewise)')
+vim.keymap.set('n', '[p', '<Plug>(YankyPutIndentBeforeLinewise)')
+vim.keymap.set('n', ']P', '<Plug>(YankyPutIndentAfterLinewise)')
+vim.keymap.set('n', '[P', '<Plug>(YankyPutIndentBeforeLinewise)')
+vim.keymap.set('n', '>p', '<Plug>(YankyPutIndentAfterShiftRight)')
+vim.keymap.set('n', '<p', '<Plug>(YankyPutIndentAfterShiftLeft)')
+vim.keymap.set('n', '>P', '<Plug>(YankyPutIndentBeforeShiftRight)')
+vim.keymap.set('n', '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)')
+vim.keymap.set('n', '=p', '<Plug>(YankyPutAfterFilter)')
+vim.keymap.set('n', '=P', '<Plug>(YankyPutBeforeFilter)')
+
 map('n', '<C-p>', function()
   require('plugins.telescope').project_files()
 end)
@@ -80,13 +99,6 @@ end)
 -- leader keymaps
 --
 local leader = {
-  e = { '<cmd>Neotree toggle=true<CR>', 'toggle neotree' },
-  p = {
-    name = 'packer',
-    p = { '<cmd>PackerSync<CR>', 'Packer Sync' },
-    s = { '<cmd>PackerStatus<CR>', 'Packer Status' },
-    c = { '<cmd>PackerCompile<CR>', 'Packer Complile' },
-  },
   b = {
     name = 'buffer',
     b = { '<cmd>e #<CR>', 'Last buffer' },
@@ -104,9 +116,13 @@ local leader = {
       d = { '<cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
     },
   },
-  t = {
-    name = 'tab',
-    c = { '<cmd>tabclose<CR>', 'Close tab' },
+  e = { '<cmd>Neotree toggle=true<CR>', 'toggle neotree' },
+  f = {
+    name = 'files',
+    -- n = { '<cmd>NvimTreeFocus<CR>', 'Focus NvimTree' },
+    f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
+    r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
+    h = { '<cmd>Telescope frecency<CR>', 'Frecency files' },
   },
   g = {
     name = 'git',
@@ -134,17 +150,27 @@ local leader = {
       b = 'Blame line',
     },
   },
-  f = {
-    name = 'files',
-    -- n = { '<cmd>NvimTreeFocus<CR>', 'Focus NvimTree' },
-    f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
-    r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
-    h = { '<cmd>Telescope frecency<CR>', 'Frecency files' },
+  i = {
+    name = 'insert',
+    s = { '<cmd>Telescope symbols<CR>', 'Symbols' },
+    y = { '<cmd>YankyRingHistory<CR>', 'Yank History' },
   },
   o = {
     name = 'open',
     g = { '<cmd>Glow<CR>', 'Glow' }, -- markdown preview
     p = { '<cmd>PeekToggle<CR>', 'Live preview' },
+  },
+  p = {
+    name = 'packer',
+    p = { '<cmd>PackerSync<CR>', 'Packer Sync' },
+    s = { '<cmd>PackerStatus<CR>', 'Packer Status' },
+    c = { '<cmd>PackerCompile<CR>', 'Packer Complile' },
+  },
+  q = {
+    name = 'quit',
+    q = { '<cmd>qa<cr>', 'Quit' },
+    ['!'] = { '<cmd>qa!<cr>', 'Force quit' },
+    w = { '<cmd>wqa<cr>', 'Save all and quit' },
   },
   s = {
     name = 'search',
@@ -155,15 +181,13 @@ local leader = {
     ['/'] = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
     c = { '<cmd>Telescope neoclip<CR>', 'Clipboard' },
     n = { '<cmd>Telescope file_browser<CR>', 'File Browser' },
-    [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
     ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
   },
-  q = {
-    name = 'quit',
-    q = { '<cmd>qa<cr>', 'Quit' },
-    ['!'] = { '<cmd>qa!<cr>', 'Force quit' },
-    w = { '<cmd>wqa<cr>', 'Save all and quit' },
+  t = {
+    name = 'tab',
+    c = { '<cmd>tabclose<CR>', 'Close tab' },
   },
+  u = { '<cmd>UndotreeToggle<CR>', 'Undo Tree' },
   w = {
     name = 'workspace',
     w = { '<cmd>SessionManager load_current_dir_session<CR>', 'Load Current Dir' },
@@ -212,8 +236,6 @@ local leader = {
       'Line Numbers',
     },
   },
-  n = { '<cmd>NvimTreeToggle<CR>', 'NvimTree' },
-  u = { '<cmd>UndotreeToggle<CR>', 'Undo Tree' },
   [';'] = { '<cmd>AerialToggle<CR>', 'Outline' },
   ['<Leader>'] = { '<cmd>Telescope resume<CR>', 'Telescope Resume' },
 }

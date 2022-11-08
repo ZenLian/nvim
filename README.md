@@ -111,12 +111,15 @@ surround:
 - `ds{motion}` delete surround `{motion}`
 - Visual mode: `s)` to insert `()`
 
-misc:
+clipboard management:
 
-> TODO: don't use `s` key
+- `[p`/`]p` paste before/after as block
+- `<A-]>`/`<A-]>` cycle clipboard
+- `<Leader>iy` select from clipboard(yank history)
 
-- `<Leader>s;` search symbols
-- `<Leader>sc` search clipboard
+interactive insert:
+
+- `<Leader>is` symbols
 
 ### 📁 File Explorer
 
