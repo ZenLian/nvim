@@ -50,6 +50,8 @@ local config = function()
   dashboard.section.footer.opts.hl = 'String'
 
   alpha.setup(dashboard.config)
+
+  vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
 end
 
 return {
