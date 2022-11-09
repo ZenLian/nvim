@@ -152,10 +152,11 @@ local plugins = {
     'jiaoshijie/undotree',
     cmd = 'UndotreeToggle',
   },
-  {
-    'dstein64/vim-startuptime',
-    cmd = 'StartupTime',
-  },
+  -- use vim-startuptime shell cmd(written in go)
+  -- {
+  --   'dstein64/vim-startuptime',
+  --   cmd = 'StartupTime',
+  -- },
   { 'lewis6991/impatient.nvim' },
 
   {

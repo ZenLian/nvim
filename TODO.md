@@ -4,12 +4,14 @@
 - feat: simulate vim-unimpaired
 - fix: highlight conflict between selection and cursorword
 - fix: dont need cursorword on Neogit\* filetypes
+- feat: github action with vim-startuptime check
 - fix: persisted.nvim work with other plugins(neotree, aerial, etc.)
 - plugins
-  - mini.nvim
+  - dial.nvim: quick switcher
   - nvim-bqf
   - ccc.nvim: colorizer alternative
-  - dial.nvim: quick switcher
+  - noice.nvim: new ui
   - nvim-navic: breadcrumbs
-  - refactoring.nvim
   - nvim-spectre
+  - refactoring.nvim
+  - mini.nvim
