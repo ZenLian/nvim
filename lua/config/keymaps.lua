@@ -119,10 +119,10 @@ local leader = {
   e = { '<cmd>Neotree toggle=true<CR>', 'toggle neotree' },
   f = {
     name = 'files',
-    -- n = { '<cmd>NvimTreeFocus<CR>', 'Focus NvimTree' },
-    f = { '<cmd>Telescope find_files<CR>', 'Find Files' },
+    f = { '<cmd>Telescope find_files<CR>', 'Find files' },
     r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
     h = { '<cmd>Telescope frecency<CR>', 'Frecency files' },
+    e = { '<cmd>Telescope file_browser<CR>', 'File Explorer' },
   },
   g = {
     name = 'git',
@@ -179,15 +179,12 @@ local leader = {
     w = { '<cmd>Telescope grep_string<CR>', 'Current word' },
     z = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Fuzzy Find in Buffer' },
     ['/'] = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
-    c = { '<cmd>Telescope neoclip<CR>', 'Clipboard' },
-    n = { '<cmd>Telescope file_browser<CR>', 'File Browser' },
     ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
   },
   t = {
     name = 'tab',
     c = { '<cmd>tabclose<CR>', 'Close tab' },
   },
-  u = { '<cmd>UndotreeToggle<CR>', 'Undo Tree' },
   w = {
     name = 'workspace',
     w = { '<cmd>Telescope persisted<CR>', 'List' },
