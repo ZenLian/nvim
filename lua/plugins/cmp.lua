@@ -122,7 +122,7 @@ local config = function()
     sources = cmp.config.sources({
       -- { name = 'nvim_lua' },
       { name = 'nvim_lsp' },
-      { name = 'luasnip' }, -- For luasnip users.
+      { name = 'luasnip' },
       -- { name = 'nvim_lsp_signature_help' },
       { name = 'buffer' },
     }, {
@@ -146,15 +146,9 @@ local config = function()
 
   cmp.setup.cmdline('/', {
     sources = {
-      {
-        name = 'buffer',
-      },
-      {
-        name = 'cmdline_history',
-      },
-      {
-        name = 'nvim_lsp_document_symbol',
-      },
+      { name = 'buffer' },
+      { name = 'cmdline_history' },
+      { name = 'nvim_lsp_document_symbol' },
     },
   })
 
@@ -169,7 +163,7 @@ local config = function()
 
   require('cmp_dictionary').setup {
     dic = {
-      ['*'] = { '/usr/share/dict/words' },
+      ['*'] = { '~/.config/nvim/spell/english.dict', '/usr/share/dict/words' },
     },
     -- The following are default values.
     -- exact = 2,
@@ -177,6 +171,7 @@ local config = function()
     -- document = false,
     -- document_command = "wn %s -over",
     async = true,
+    -- max_items = -1,
     -- capacity = 5,
     -- debug = false,
   }

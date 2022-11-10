@@ -2,7 +2,7 @@ local M = {}
 local config = require('config').config
 local util = require('util')
 
-local TITLE = 'Formatting'
+local TITLE = 'lsp.formatting'
 local FORMATTING_METHOD = 'textDocument/formatting'
 local TIMEOUT = 2000
 

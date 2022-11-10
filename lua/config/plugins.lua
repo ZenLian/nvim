@@ -1,4 +1,19 @@
 local plugins = {
+  -- requirements
+  {
+    'nvim-lua/plenary.nvim',
+    module = 'plenary',
+  },
+  {
+    'MunifTanjim/nui.nvim',
+    module = 'nui',
+  },
+  {
+    'kkharji/sqlite.lua',
+    module = 'sqlite',
+  },
+
+  -- ui
   {
     'catppuccin/nvim',
     as = 'catppuccin',
@@ -19,6 +34,15 @@ local plugins = {
   {
     'goolord/alpha-nvim',
     event = 'BufWinEnter',
+    config = true,
+  },
+  {
+    'rcarriga/nvim-notify',
+    event = 'VimEnter',
+    config = true,
+  },
+  {
+    'stevearc/dressing.nvim',
     config = true,
   },
   {
@@ -44,32 +68,14 @@ local plugins = {
     'folke/twilight.nvim',
     cmd = { 'Twilight' },
   },
-  {
-    'rcarriga/nvim-notify',
-    event = 'VimEnter',
-    config = true,
-  },
-  {
-    'stevearc/dressing.nvim',
-    config = true,
-  },
-  {
-    'anuvyklack/pretty-fold.nvim',
-    event = 'BufRead',
-  },
-
-  {
-    'nvim-lua/plenary.nvim',
-    module = 'plenary',
-  },
-  {
-    'MunifTanjim/nui.nvim',
-    module = 'nui',
-  },
-  {
-    'kkharji/sqlite.lua',
-    module = 'sqlite',
-  },
+  -- {
+  --   -- TODO: set manually
+  --   'anuvyklack/pretty-fold.nvim',
+  --   event = 'BufRead',
+  --   config = function()
+  --     require('pretty-fold').setup {}
+  --   end,
+  -- },
 
   -- telescope
   {
@@ -234,13 +240,15 @@ local plugins = {
     after = { 'leap.nvim' },
     config = true,
   },
-  {
-    'ggandor/leap-spooky.nvim',
-    after = { 'leap.nvim' },
-    config = function()
-      require('leap-spooky').setup()
-    end,
-  },
+  -- FIXME: conflicts with yanky
+  -- {
+  --   'ggandor/leap-spooky.nvim',
+  --   after = { 'leap.nvim' },
+  --   config = function()
+  --     require('leap-spooky').setup()
+  --   end,
+  -- },
+
   {
     'abecodes/tabout.nvim',
     after = { 'nvim-cmp', 'nvim-treesitter' },
@@ -291,24 +299,6 @@ local plugins = {
   },
 
   {
-    'stevearc/aerial.nvim',
-    module = 'aerial',
-    cmd = 'AerialToggle',
-    config = true,
-  },
-  {
-    'folke/trouble.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    cmd = 'Trouble',
-    module = 'trouble',
-    config = function()
-      require('trouble').setup {
-        autoclose = true,
-      }
-    end,
-  },
-
-  {
     'neovim/nvim-lspconfig',
     config = true,
     event = 'BufReadPre',
@@ -338,6 +328,23 @@ local plugins = {
     module = 'mason-null-ls',
   },
 
+  {
+    'stevearc/aerial.nvim',
+    module = 'aerial',
+    cmd = 'AerialToggle',
+    config = true,
+  },
+  {
+    'folke/trouble.nvim',
+    requires = 'kyazdani42/nvim-web-devicons',
+    cmd = 'Trouble',
+    module = 'trouble',
+    config = function()
+      require('trouble').setup {
+        autoclose = true,
+      }
+    end,
+  },
   {
     -- 'b0o/schemastore.nvim',
     'SchemaStore.nvim',
