@@ -1,7 +1,7 @@
 local config = function()
   require('neogit').setup {
     disable_commit_confirmation = true,
-    -- kind = "floating",
+    -- kind = 'floating',
     signs = {
       section = { '', '' },
       item = { '', '' },

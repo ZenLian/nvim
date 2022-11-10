@@ -1,4 +1,8 @@
 local config = function()
+  local function lspconfig_setup()
+    require('lspconfig.ui.windows').default_options.border = 'single'
+  end
+
   local function on_attach(client, bufnr)
     require('plugins.lspconfig.formatting').on_attach(client, bufnr)
     require('plugins.lspconfig.keymaps').on_attach(client, bufnr)
@@ -23,9 +27,14 @@ local config = function()
     lspconfig[server].setup(opts)
   end
 
-  require('plugins.lspconfig.diagnostic').setup()
-
-  require('mason').setup()
+  require('mason').setup {
+    github = {
+      download_url_template = 'https://kgithub.com/%s/releases/download/%s/%s',
+    },
+    ui = {
+      border = 'single',
+    },
+  }
   require('plugins.lspconfig.null-ls').setup(on_attach)
   require('mason-lspconfig').setup {
     ensure_installed = {},
@@ -34,13 +43,15 @@ local config = function()
   require('mason-null-ls').setup {
     automatic_installation = true,
   }
-
   require('neodev').setup {}
   require('mason-lspconfig').setup_handlers {
     function(server)
       on_server_ready(server)
     end,
   }
+
+  lspconfig_setup()
+  require('plugins.lspconfig.diagnostic').setup()
 end
 
 return { config = config }

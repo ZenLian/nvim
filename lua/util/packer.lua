@@ -8,7 +8,7 @@ local packer_config = {
   display = {
     open_fn = function()
       return require('packer.util').float {
-        border = 'none',
+        border = 'single',
       }
     end,
   },

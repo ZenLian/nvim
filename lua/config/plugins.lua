@@ -151,6 +151,9 @@ local plugins = {
   {
     'jiaoshijie/undotree',
     cmd = 'UndotreeToggle',
+    config = function()
+      require('undotree').setup()
+    end,
   },
   -- use vim-startuptime shell cmd(written in go)
   -- {
