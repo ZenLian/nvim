@@ -91,9 +91,7 @@ vim.keymap.set('n', '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)')
 vim.keymap.set('n', '=p', '<Plug>(YankyPutAfterFilter)')
 vim.keymap.set('n', '=P', '<Plug>(YankyPutBeforeFilter)')
 
-map('n', '<C-p>', function()
-  require('plugins.telescope').project_files()
-end)
+map('n', '<C-p>', function() require('plugins.telescope').project_files() end)
 
 --
 -- leader keymaps
@@ -128,9 +126,7 @@ local leader = {
     name = 'git',
     g = { '<cmd>Neogit<CR>', 'Neogit' },
     l = {
-      function()
-        util.float_terminal('lazygit')
-      end,
+      function() util.float_terminal('lazygit') end,
       'LazyGit',
     },
     b = { '<cmd>Telescope git_branches<CR>', 'Branches' },
@@ -213,15 +209,11 @@ local leader = {
       'Format on save',
     },
     s = {
-      function()
-        util.toggle('spell', false)
-      end,
+      function() util.toggle('spell', false) end,
       'Spelling',
     },
     w = {
-      function()
-        util.toggle('wrap', false)
-      end,
+      function() util.toggle('wrap', false) end,
       'Word wrap',
     },
     n = {

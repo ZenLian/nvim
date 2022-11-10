@@ -1,5 +1,6 @@
 # TODO
 
+- fix: peek not working
 - fix: outdated README
 - feat: simulate vim-unimpaired
 - fix: highlight conflict between selection and cursorword

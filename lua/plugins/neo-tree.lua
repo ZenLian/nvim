@@ -10,9 +10,7 @@ local config = function()
           local action_state = require('telescope.actions.state')
           local selection = action_state.get_selected_entry()
           local filename = selection.filename
-          if filename == nil then
-            filename = selection[1]
-          end
+          if filename == nil then filename = selection[1] end
           -- any way to open the file without triggering auto-close event of neo-tree?
           require('neo-tree.sources.filesystem').navigate(state, state.path, filename)
         end)
@@ -72,15 +70,11 @@ local config = function()
         trash = function(state)
           local tree = state.tree
           local node = tree:get_node()
-          if node.type == 'message' then
-            return
-          end
+          if node.type == 'message' then return end
           local _, name = require('neo-tree.utils').split_path(node.path)
           local msg = string.format("Are you sure you want to trash '%s'?", name)
           require('neo-tree.ui.inputs').confirm(msg, function(confirmed)
-            if not confirmed then
-              return
-            end
+            if not confirmed then return end
             vim.api.nvim_command('silent !trash ' .. node.path)
             require('neo-tree.sources.filesystem.commands').refresh(state)
           end)
@@ -88,15 +82,11 @@ local config = function()
         trash_visual = function(state, selected_nodes)
           local paths_to_trash = {}
           for _, node in ipairs(selected_nodes) do
-            if node.type ~= 'message' then
-              table.insert(paths_to_trash, node.path)
-            end
+            if node.type ~= 'message' then table.insert(paths_to_trash, node.path) end
           end
           local msg = 'Are you sure you want to trash ' .. #paths_to_trash .. ' items?'
           require('neo-tree.ui.inputs').confirm(msg, function(confirmed)
-            if not confirmed then
-              return
-            end
+            if not confirmed then return end
             for _, path in ipairs(paths_to_trash) do
               vim.api.nvim_command('silent !trash ' .. path)
             end
@@ -113,9 +103,7 @@ local config = function()
         end,
         navigation_forward = function(state)
           local node = state.tree:get_node()
-          if node.type == 'message' then
-            return
-          end
+          if node.type == 'message' then return end
           if node.type ~= 'directory' or not node:is_expanded() then
             require('neo-tree.sources.filesystem.commands').open(state)
           end

@@ -89,9 +89,7 @@ local plugins = {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make',
     after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension('fzf')
-    end,
+    config = function() require('telescope').load_extension('fzf') end,
   },
   {
     'nvim-telescope/telescope-frecency.nvim',
@@ -105,9 +103,7 @@ local plugins = {
   {
     'nvim-telescope/telescope-file-browser.nvim',
     after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension('file_browser')
-    end,
+    config = function() require('telescope').load_extension('file_browser') end,
   },
 
   {
@@ -208,9 +204,7 @@ local plugins = {
   {
     'numToStr/Comment.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    config = function()
-      require('Comment').setup()
-    end,
+    config = function() require('Comment').setup() end,
   },
   {
     'mfussenegger/nvim-treehopper',
@@ -227,9 +221,7 @@ local plugins = {
   {
     'ur4ltz/surround.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    config = function()
-      require('surround').setup { mappings_style = 'surround' }
-    end,
+    config = function() require('surround').setup { mappings_style = 'surround' } end,
   },
   {
     'ggandor/leap.nvim',
@@ -248,14 +240,18 @@ local plugins = {
   --     require('leap-spooky').setup()
   --   end,
   -- },
-
   {
     'abecodes/tabout.nvim',
     after = { 'nvim-cmp', 'nvim-treesitter' },
-    config = function()
-      require('tabout').setup {}
-    end,
+    config = function() require('tabout').setup {} end,
   },
+  {
+    'monaqa/dial.nvim',
+    -- module = 'dial.map',
+    keys = { '<C-a>', '<C-x>' },
+    config = true,
+  },
+
   {
     'lewis6991/gitsigns.nvim',
     event = { 'BufRead', 'BufNewFile' },

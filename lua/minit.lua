@@ -17,9 +17,8 @@ local config = function()
     'info',
     'info', -- map both hint and info to info?
   }
-  vim.lsp.handlers['window/showMessage'] = function(_, method, params, _)
-    vim.notify(method.message, severity[params.type])
-  end
+  vim.lsp.handlers['window/showMessage'] =
+    function(_, method, params, _) vim.notify(method.message, severity[params.type]) end
 end
 
 local function setup_packer()
@@ -45,21 +44,15 @@ local function setup_packer()
     end,
     config = {
       display = {
-        open_fn = function()
-          return require('packer.util').float { border = 'single' }
-        end,
+        open_fn = function() return require('packer.util').float { border = 'single' } end,
       },
     },
   }
 
-  if packer_bootstrap then
-    packer.sync()
-  end
+  if packer_bootstrap then packer.sync() end
 end
 
 setup_packer()
 
 vim.o.termguicolors = true
-vim.keymap.set('n', '<C-p>', function()
-  vim.notify('this is an info', vim.log.levels.INFO, { title = 'minimal' })
-end)
+vim.keymap.set('n', '<C-p>', function() vim.notify('this is an info', vim.log.levels.INFO, { title = 'minimal' }) end)

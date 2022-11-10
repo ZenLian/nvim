@@ -1,6 +1,4 @@
-local augroup = function(name)
-  return vim.api.nvim_create_augroup(name, { clear = true })
-end
+local augroup = function(name) return vim.api.nvim_create_augroup(name, { clear = true }) end
 local autocmd = vim.api.nvim_create_autocmd
 
 local group = augroup('config.autocmds')
@@ -10,9 +8,7 @@ autocmd({ 'BufReadPost' }, {
   group = group,
   callback = function()
     local pos = vim.fn.line([['"]])
-    if pos > 1 and pos <= vim.fn.line('$') then
-      vim.cmd([[normal! g'"]])
-    end
+    if pos > 1 and pos <= vim.fn.line('$') then vim.cmd([[normal! g'"]]) end
   end,
 })
 
@@ -34,16 +30,12 @@ local cursorline_pattern = {
 autocmd({ 'WinEnter' }, {
   group = group,
   pattern = cursorline_pattern,
-  callback = function()
-    vim.wo.cursorline = true
-  end,
+  callback = function() vim.wo.cursorline = true end,
 })
 autocmd({ 'WinLeave' }, {
   group = group,
   pattern = cursorline_pattern,
-  callback = function()
-    vim.wo.cursorline = false
-  end,
+  callback = function() vim.wo.cursorline = false end,
 })
 
 -- equalize window when vim window resized

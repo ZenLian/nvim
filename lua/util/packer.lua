@@ -40,9 +40,7 @@ function M.bootstrap()
   end
 end
 
-function M.loaded(plugin)
-  return packer_plugins[plugin] and packer_plugins[plugin].loaded
-end
+function M.loaded(plugin) return packer_plugins[plugin] and packer_plugins[plugin].loaded end
 
 local function get_name(plugin)
   local parts = vim.split(plugin[1], '/')
@@ -94,9 +92,7 @@ function M.setup(opts)
     config = packer_config,
   }
 
-  if bootstrap then
-    packer.sync()
-  end
+  if bootstrap then packer.sync() end
 end
 
 return M

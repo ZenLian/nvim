@@ -40,15 +40,11 @@ M.config = function()
   basic.vi_mode = {
     name = 'vi_mode',
     hl_colors = colors_mode,
-    text = function()
-      return { { '  ', state.mode[2] } }
-    end,
+    text = function() return { { '  ', state.mode[2] } } end,
   }
   basic.square_mode = {
     hl_colors = colors_mode,
-    text = function()
-      return { { '▊', state.mode[2] } }
-    end,
+    text = function() return { { '▊', state.mode[2] } } end,
   }
 
   basic.file = {
@@ -61,9 +57,7 @@ M.config = function()
         { ' ', '' },
         -- { b_components.file_modified(' '), 'Green' },
         {
-          function()
-            return vim.bo.modified and ' ' or ''
-          end,
+          function() return vim.bo.modified and ' ' or '' end,
           'Green',
         },
       }
@@ -151,9 +145,7 @@ M.config = function()
       { '🚦', { 'white', 'red' } },
       { ' Quickfix ', { 'red', 'black' } },
       {
-        function()
-          return vim.fn.getqflist({ title = 0 }).title
-        end,
+        function() return vim.fn.getqflist({ title = 0 }).title end,
         { 'blue', 'InactiveBg' },
       },
       { ' Total : %L ', { 'blue', 'InactiveBg' } },
@@ -180,9 +172,7 @@ M.config = function()
     active = {
       -- { b_components.divider, hl_list.default },
       {
-        function()
-          return string.format('  terminal(%s) ', vim.b.toggle_number)
-        end,
+        function() return string.format('  terminal(%s) ', vim.b.toggle_number) end,
         { 'black', 'green' },
       },
       { b_components.divider, { 'white', 'blue' } },
