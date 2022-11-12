@@ -111,11 +111,41 @@ surround:
 - `ds{motion}` delete surround `{motion}`
 - Visual mode: `s)` to insert `()`
 
+textobjects:
+
+- pairs
+  - digit (`0`-`9`)
+  - punctuation (`_`, `*`, `,`, etc.)
+  - whitespace (space, tab, etc.)
+- `b`: alias for `)`, `]` or `}`
+- `q`: alias for `'`, `"` or ```
+- `t`: tag, e.g. `<h1></h1>`
+- `f`: function
+- `a`: parameter
+- `c`: class
+- `g`: git hunk
+- customs
+  - `e`: whole buffer
+  - [ ] `u`: url
+  - [ ] `/`: comment
+  - [ ] `i`: indent
+- `j`/`k`: next/last textobjects(never used!)
+- not used: `rydhlzxvnm`
+
+visual mode quick selection:
+
+- `m` quick label-based selection
+- `+`/`-` incremental/decremental selection
+
 clipboard management:
 
 - `[p`/`]p` paste before/after as block
 - `<A-]>`/`<A-]>` cycle clipboard
 - `<Leader>iy` select from clipboard(yank history)
+
+quick switches:
+
+- `<C-a>`/`<C-x>` can switch words like `true`/`false`, `Monday`/`Tuesday` etc.
 
 interactive insert:
 

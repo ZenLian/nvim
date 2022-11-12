@@ -37,58 +37,58 @@ local config = function()
       enable = true,
       keymaps = {
         -- init_selection = "<C-n>",
-        node_incremental = '<C-n>',
-        node_decremental = '<C-p>',
+        node_incremental = '+',
+        node_decremental = '-',
         -- scope_incremental = "<C-k>",
       },
     },
-    textobjects = {
-      select = {
-        enable = true,
-        lookahead = true,
-        keymaps = {
-          ['af'] = '@function.outer',
-          ['if'] = '@function.inner',
-          ['ac'] = '@class.outer',
-          ['ic'] = '@class.inner',
-          ['a,'] = '@parameter.outer',
-          ['i,'] = '@parameter.inner',
-          ['ab'] = '@block.outer',
-          ['ib'] = '@block.inner',
-        },
-      },
-      move = {
-        enable = true,
-        set_jumps = true, -- whether to set jumps in the jumplist
-        goto_next_start = {
-          [']]'] = '@function.outer',
-          [']c'] = '@class.outer',
-          ['],'] = '@parameter.inner',
-        },
-        goto_next_end = {
-          [']['] = '@function.outer',
-          [']C'] = '@class.outer',
-        },
-        goto_previous_start = {
-          ['[['] = '@function.outer',
-          ['[c'] = '@class.outer',
-          ['[,'] = '@parameter.inner',
-        },
-        goto_previous_end = {
-          ['[]'] = '@function.outer',
-          ['[C'] = '@class.outer',
-        },
-      },
-      swap = {
-        enable = false,
-      },
-      lsp_interop = {
-        enable = true,
-        peek_definition_code = {
-          ['gD'] = '@function.outer',
-        },
-      },
-    },
+    -- textobjects = {
+    --   select = {
+    --     enable = true,
+    --     lookahead = true,
+    --     keymaps = {
+    --       ['af'] = '@function.outer',
+    --       ['if'] = '@function.inner',
+    --       ['ac'] = '@class.outer',
+    --       ['ic'] = '@class.inner',
+    --       ['aa'] = '@parameter.outer',
+    --       ['ia'] = '@parameter.inner',
+    --       ['ab'] = '@block.outer',
+    --       ['ib'] = '@block.inner',
+    --     },
+    --   },
+    --   move = {
+    --     enable = true,
+    --     set_jumps = true, -- whether to set jumps in the jumplist
+    --     goto_next_start = {
+    --       [']['] = '@function.outer',
+    --       [']c'] = '@class.outer',
+    --       [']a'] = '@parameter.inner',
+    --     },
+    --     goto_next_end = {
+    --       [']]'] = '@function.outer',
+    --       [']C'] = '@class.outer',
+    --     },
+    --     goto_previous_start = {
+    --       ['[['] = '@function.outer',
+    --       ['[c'] = '@class.outer',
+    --       ['[a'] = '@parameter.inner',
+    --     },
+    --     goto_previous_end = {
+    --       ['[]'] = '@function.outer',
+    --       ['[C'] = '@class.outer',
+    --     },
+    --   },
+    --   swap = {
+    --     enable = false,
+    --   },
+    --   lsp_interop = {
+    --     enable = true,
+    --     peek_definition_code = {
+    --       ['gD'] = '@function.outer',
+    --     },
+    --   },
+    -- },
     rainbow = {
       enable = true,
       disable = { 'html' }, -- list of languages you want to disable the plugin for

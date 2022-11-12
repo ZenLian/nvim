@@ -3,8 +3,8 @@ local config = function()
     -- Priority list of preferred backends for aerial.
     -- This can be a filetype map (see :help aerial-filetype-map)
     backends = {
-      'lsp',
       'treesitter',
+      'lsp',
       'markdown',
     },
     layout = {
@@ -14,7 +14,7 @@ local config = function()
       -- max_width = {40, 0.2} means "the lesser of 40 columns or 20% of total"
       max_width = { 40, 0.2 },
       width = nil,
-      min_width = 20,
+      -- min_width = 20,
 
       -- Determines the default direction to open the aerial window. The 'prefer'
       -- options will open the window in the other direction *if* there is a

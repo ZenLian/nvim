@@ -165,11 +165,11 @@ local config = function()
     },
     -- The following are default values.
     -- exact = 2,
-    first_case_insensitive = true,
+    -- first_case_insensitive = false,
     -- document = false,
     -- document_command = "wn %s -over",
     async = true,
-    -- max_items = -1,
+    -- max_items = 1000,
     -- capacity = 5,
     -- debug = false,
   }

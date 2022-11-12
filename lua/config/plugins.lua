@@ -1,5 +1,6 @@
+-- vim:foldmethod=marker:foldmarker={,}:
 local plugins = {
-  -- requirements
+  --{{{ requirements
   {
     'nvim-lua/plenary.nvim',
     module = 'plenary',
@@ -12,8 +13,9 @@ local plugins = {
     'kkharji/sqlite.lua',
     module = 'sqlite',
   },
+  ---}}} requirements
 
-  -- ui
+  -- {{{ ui
   {
     'catppuccin/nvim',
     as = 'catppuccin',
@@ -76,8 +78,9 @@ local plugins = {
   --     require('pretty-fold').setup {}
   --   end,
   -- },
+  -- }}} ui
 
-  -- telescope
+  -- {{{ telescope
   {
     'nvim-telescope/telescope.nvim',
     cmd = 'Telescope',
@@ -105,6 +108,7 @@ local plugins = {
     after = 'telescope.nvim',
     config = function() require('telescope').load_extension('file_browser') end,
   },
+  -- }}} telescope
 
   {
     'gbprod/yanky.nvim',
@@ -346,6 +350,11 @@ local plugins = {
     'SchemaStore.nvim',
     module = 'schemastore',
     is_local = true,
+  },
+
+  {
+    'echasnovski/mini.nvim',
+    config = true,
   },
 }
 

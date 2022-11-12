@@ -1,7 +1,6 @@
 local config = function()
   local peek = require('peek')
   peek.setup()
-  -- require('peek').setup {}
   vim.api.nvim_create_user_command('PeekOpen', peek.open, {})
   vim.api.nvim_create_user_command('PeekClose', peek.close, {})
   vim.api.nvim_create_user_command('PeekToggle', function()
