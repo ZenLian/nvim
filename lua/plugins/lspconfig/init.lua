@@ -5,9 +5,6 @@ local config = function()
     require('plugins.lspconfig.formatting').on_attach(client, bufnr)
     require('plugins.lspconfig.keymaps').on_attach(client, bufnr)
     require('plugins.lspconfig.signature').on_attach(client, bufnr)
-
-    -- plugins hook
-    require('illuminate').on_attach(client)
   end
 
   -- local function on_server_ready(server)

@@ -1,24 +1,63 @@
 -- used for minimum vimrc debug
 
-local config = function()
-  local notify = require('notify')
-
-  notify.setup {
-    --stages = 'slide',
-    timeout = 1000,
+local illuminate_config = function()
+  require('illuminate').configure {
+    -- providers: provider used to get references in the buffer, ordered by priority
+    providers = {
+      -- 'treesitter',
+      'lsp',
+      'regex',
+    },
+    -- delay: delay in milliseconds
+    delay = 100,
+    -- filetype_overrides: filetype specific overrides.
+    -- The keys are strings to represent the filetype while the values are tables that
+    -- supports the same keys passed to .configure except for filetypes_denylist and filetypes_allowlist
+    filetype_overrides = {},
+    -- filetypes_denylist: filetypes to not illuminate, this overrides filetypes_allowlist
+    filetypes_denylist = {
+      'dirvish',
+      'fugitive',
+      'checkhealth',
+      'packer',
+      'NvimTree',
+      'TelescopePrompt',
+      'DressingInput',
+      'alpha',
+      'aerial',
+      'NeogitStatus',
+      'NeogitPopup',
+    },
+    -- modes_denylist = { 'v', 'V' },
+    -- modes_allowlist: modes to illuminate, this is overriden by modes_denylist
+    modes_allowlist = { 'n' },
+    -- under_cursor: whether or not to illuminate under the cursor
+    under_cursor = true,
   }
+end
 
-  vim.notify = notify
-  -- LSP
-  -- https://github.com/rcarriga/nvim-notify/wiki/Usage-Recipes#lsp-messages
-  local severity = {
-    'error',
-    'warn',
-    'info',
-    'info', -- map both hint and info to info?
+local treesitter_config = function ()
+  vim.o.foldmethod = 'expr'
+  vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+  require('nvim-treesitter.configs').setup {
+    ensure_installed = {
+      'lua',
+      'markdown',
+    },
+    sync_install = false,
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
   }
-  vim.lsp.handlers['window/showMessage'] =
-    function(_, method, params, _) vim.notify(method.message, severity[params.type]) end
+end
+
+local function lsp_config()
+  require('lspconfig').sumneko_lua.setup{
+    attach = function()
+      require('illuminate').attach()
+    end
+  }
 end
 
 local function setup_packer()
@@ -37,9 +76,16 @@ local function setup_packer()
     function(use)
       use { 'wbthomason/packer.nvim', opt = true }
       use {
-        'rcarriga/nvim-notify',
-        event = 'VimEnter',
-        config = config,
+        'RRethy/vim-illuminate',
+        config = illuminate_config,
+      }
+      use {
+        'nvim-treesitter/nvim-treesitter',
+        config = treesitter_config,
+      }
+      use {
+        'neovim/nvim-lspconfig',
+        config = lsp_config,
       }
     end,
     config = {
@@ -52,7 +98,5 @@ local function setup_packer()
   if packer_bootstrap then packer.sync() end
 end
 
-setup_packer()
-
 vim.o.termguicolors = true
-vim.keymap.set('n', '<C-p>', function() vim.notify('this is an info', vim.log.levels.INFO, { title = 'minimal' }) end)
+setup_packer()

@@ -1,6 +1,5 @@
 # TODO
 
-- fix: highlight conflict between selection and cursorword
 - fix: outdated README
 - feat: simulate vim-unimpaired
 - fix: dont need cursorword on Neogit\* filetypes
