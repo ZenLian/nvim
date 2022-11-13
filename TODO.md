@@ -11,5 +11,5 @@
   - ccc.nvim: colorizer alternative
   - noice.nvim: new ui
   - nvim-navic: breadcrumbs
-  - nvim-spectre
+  - nvim-spectre: find/replace ui
   - refactoring.nvim
