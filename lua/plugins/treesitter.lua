@@ -36,10 +36,10 @@ local config = function()
     incremental_selection = {
       enable = true,
       keymaps = {
-        -- init_selection = "<C-n>",
+        init_selection = 'vn',
         node_incremental = '+',
         node_decremental = '-',
-        -- scope_incremental = "<C-k>",
+        -- scope_incremental = '',
       },
     },
     -- textobjects = {

@@ -244,8 +244,12 @@ local plugins = {
   },
   {
     'monaqa/dial.nvim',
-    -- module = 'dial.map',
     keys = { '<C-a>', '<C-x>' },
+    config = true,
+  },
+  {
+    'ziontee113/syntax-tree-surfer',
+    after = { 'nvim-treesitter' },
     config = true,
   },
 

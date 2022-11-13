@@ -120,7 +120,7 @@ local leader = {
       d = { '<cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
     },
   },
-  e = { '<cmd>Neotree toggle=true<CR>', 'toggle neotree' },
+  e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
   f = {
     name = 'files',
     f = { '<cmd>Telescope find_files<CR>', 'Find files' },

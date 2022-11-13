@@ -100,10 +100,6 @@ Treesitter
 
 ### ✏️ Edit
 
-tips:
-
-- Press `<C-O>` in insert mode, temporarily switching to normal mode for one movement.
-
 leap(~~sneak~~):
 
 - Normal mode: `s`/`S` with 2 chars
@@ -125,7 +121,7 @@ textobjects:
 - `q`: alias for `'`, `"` or ```
 - `t`: tag, e.g. `<h1></h1>`
 - `f`: function
-- `a`: parameter
+- `a`: parameter(argument)
 - `c`: class
 - `g`: git hunk
 - customs
@@ -136,10 +132,19 @@ textobjects:
 - `j`/`k`: next/last textobjects(never used!)
 - not used: `rydhlzxvnm`
 
-quick selection(in Visual mode):
+treesitter nodes:
 
-- `m` enter quick label-based selection
-- `+`/`-` incremental/decremental selection
+- Normal Mode:
+  - `vn`: select current node
+  - `vx`: select parent node(never used)
+  - `vd`/`vu`: swap current node with next/previous sibling
+  - `vD`/`vU`: swap parent node with next/previous sibling(never used)
+- Visual Mode:
+  - `J`/`K`: select next/previous sibling node
+  - `H`/`L`: select parent/child node
+  - `<A-d>`/`<A-u>`\*\*: swap nodes
+  - `m`: label-based selection
+  - `+`/`-` incremental/decremental selection
 
 clipboard management:
 
@@ -154,6 +159,10 @@ quick switches:
 interactive insert:
 
 - `<Leader>is` symbols
+
+tips:
+
+- Press `<C-O>` in insert mode, temporarily switching to normal mode for one movement.
 
 ### 📁 File Explorer
 
