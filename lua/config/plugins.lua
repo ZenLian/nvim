@@ -70,14 +70,11 @@ local plugins = {
     'folke/twilight.nvim',
     cmd = { 'Twilight' },
   },
-  -- {
-  --   -- TODO: set manually
-  --   'anuvyklack/pretty-fold.nvim',
-  --   event = 'BufRead',
-  --   config = function()
-  --     require('pretty-fold').setup {}
-  --   end,
-  -- },
+  {
+    'anuvyklack/pretty-fold.nvim',
+    event = 'BufRead',
+    config = function() require('pretty-fold').setup {} end,
+  },
   -- }}} ui
 
   -- {{{ telescope
@@ -121,12 +118,12 @@ local plugins = {
     cmd = { 'Neotree' },
     config = true,
   },
-  {
-    'olimorris/persisted.nvim',
-    module = { 'persisted' },
-    after = { 'telescope.nvim' },
-    config = true,
-  },
+  -- FIXME: conflicts with treesitter foldexpr
+  -- {
+  --   'olimorris/persisted.nvim',
+  --   module = { 'persisted' },
+  --   config = true,
+  -- },
   {
     'sindrets/diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },

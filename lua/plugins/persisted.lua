@@ -1,11 +1,6 @@
 local config = function()
   require('persisted').setup {
-    autosave = true,
-    should_autosave = function()
-      -- do not autosave if the alpha dashboard is the current filetype
-      if vim.bo.filetype == 'alpha' then return false end
-      return true
-    end,
+    -- autosave = false,
     before_save = function() pcall(vim.cmd, 'Neotree close') end,
     after_save = function() print('Session saved!') end,
     before_source = function() print('Sesson sourcing...') end,

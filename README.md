@@ -100,16 +100,21 @@ Treesitter
 
 ### ✏️ Edit
 
-leap(~~sneak~~):
+#### 🚶 Movement
 
-- Normal mode: `s`/`S` with 2 chars
-- Visual mode: `x`/`S` with 2 chars
+- Never repeat `hjkl` more than 3 times!!!
+- Use `f`/`F`/`t`/`T` for inline movement, then `,`/`;` to choose.
+- Use `/`/`?` to search words for cross line movement, then `n`/`N` to choose.
+- with leap.nvim, you can jump to anywhere in vision:
+  - Normal mode: `s`/`S` followed by 2 chars
+  - Visual mode: `x`/`S` followed by 2 chars
+  - `r` motion on remote textobject(e.g. `yarp` to "yank a remote paragraph")
 
-surround:
+tips:
 
-- `ys{motion})` insert `()` surround `{motion}`
-- `ds{motion}` delete surround `{motion}`
-- Visual mode: `s)` to insert `()`
+- Press `<C-O>` in insert mode, temporarily switching to normal mode for one movement.
+
+#### 🥄 Selection
 
 textobjects:
 
@@ -117,19 +122,19 @@ textobjects:
   - digit (`0`-`9`)
   - punctuation (`_`, `*`, `,`, etc.)
   - whitespace (space, tab, etc.)
-- `b`: alias for `)`, `]` or `}`
-- `q`: alias for `'`, `"` or ```
+- `b`: bracket, alias for `)`, `]` or `}`
+- `q`: quote, alias for `'`, `"` or ```
 - `t`: tag, e.g. `<h1></h1>`
 - `f`: function
 - `a`: parameter(argument)
 - `c`: class
 - `g`: git hunk
+- `j`/`k`: next/last textobjects(never used!)
 - customs
   - `e`: whole buffer
   - [ ] `u`: url
   - [ ] `/`: comment
   - [ ] `i`: indent
-- `j`/`k`: next/last textobjects(never used!)
 - not used: `rydhlzxvnm`
 
 treesitter nodes:
@@ -146,7 +151,16 @@ treesitter nodes:
   - `m`: label-based selection
   - `+`/`-` incremental/decremental selection
 
-clipboard management:
+#### 📓 Text Edit
+
+surround:
+
+- `ys{motion})` insert `()` surround `{motion}`
+- `ds{motion}` delete surround `{motion}`
+- Visual mode: `s)` to insert `()`
+  clipboard management:
+
+clipboard:
 
 - `[p`/`]p` paste before/after as block
 - `<A-]>`/`<A-]>` cycle clipboard
@@ -159,10 +173,6 @@ quick switches:
 interactive insert:
 
 - `<Leader>is` symbols
-
-tips:
-
-- Press `<C-O>` in insert mode, temporarily switching to normal mode for one movement.
 
 ### 📁 File Explorer
 
