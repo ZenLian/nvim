@@ -6,6 +6,8 @@ local TITLE = 'lsp.formatting'
 local FORMATTING_METHOD = 'textDocument/formatting'
 local TIMEOUT = 2000
 
+local format_on_save = config.format_on_save
+
 function M.priority(name)
   return config.format_priority[name] or 0
 end
@@ -45,19 +47,24 @@ function M.format(opts)
     bufnr = 0,
     timeout_ms = TIMEOUT,
   }
-  opts = vim.tbl_extend('force', defaults, opts or {})
+  opts = util.tbl_merge(defaults, opts)
   M.select_client(function(client)
     opts.id = client.id
     vim.lsp.buf.format(opts)
   end)
 end
 
-function M.toggle()
-  config.format_on_save = not config.format_on_save
-  if config.format_on_save then
-    util.info('Enable autoformat', TITLE)
+-- @param value? boolean
+function M.toggle(value)
+  if type(value) == 'boolean' then
+    format_on_save = value
   else
-    util.warn('Disabled autoformat', TITLE)
+    format_on_save = not format_on_save
+  end
+  if format_on_save then
+    util.info('Toggle autoformat on', TITLE)
+  else
+    util.warn('Toggle autoformat off', TITLE)
   end
 end
 
@@ -79,7 +86,7 @@ function M.on_attach(client, bufnr)
     group = group,
     buffer = bufnr,
     callback = function()
-      if not config.format_on_save then
+      if not format_on_save then
         return
       end
       M.format { bufnr = bufnr }

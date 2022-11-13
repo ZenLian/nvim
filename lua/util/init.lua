@@ -8,6 +8,10 @@ function M.join_path(...)
   return table.concat({ ... }, '/')
 end
 
+function M.tbl_merge(defaults, opts)
+  return vim.tbl_deep_extend('force', defaults or {}, opts or {})
+end
+
 -- reload config
 function M.reload()
   vim.cmd('source ' .. os.getenv('MYVIMRC'))
@@ -61,19 +65,48 @@ function M.float_terminal(cmd)
 end
 
 -- Toggle vim options
---- @param option string #String: The name of vim option
---- @param silent boolean #Bool: True to suppress notification
-function M.toggle(option, silent)
-  local info = vim.api.nvim_get_option_info(option)
+-- Parameters: ~
+--     {name}  Option name
+--     {opts}  Optional parameters
+--             • scope: one of 'buf', 'win', 'global'
+--             • silent: true to disable notification.
+--
+-- Return: ~
+--     nil
+-- @param name string
+-- @param opts? table<string, any>
+function M.toggle(name, opts)
+  local defaults = {
+    scope = nil,
+    value = nil,
+    silent = false,
+  }
+  opts = M.tbl_merge(defaults, opts)
+
+  -- scope
   local scopes = { buf = 'bo', win = 'wo', global = 'o' }
-  local scope = scopes[info.scope]
+  local scope = scopes[opts.scope]
+  if not scope then
+    local info = vim.api.nvim_get_option_info(name)
+    scope = scopes[info.scope]
+  end
+
+  -- value
   local options = vim[scope]
-  options[option] = not options[option]
-  if silent ~= true then
-    if options[option] then
-      M.info('enabled vim.' .. scope .. '.' .. option, 'Toggle')
+  if type(opts.value) == 'boolean' then
+    options[name] = opts.value
+  else
+    options[name] = not options[name]
+  end
+
+  -- silent
+  if opts.silent ~= true then
+    local value = options[name]
+    local msg = string.format('vim.%s.%s = %s', scope, name, value)
+    if value then
+      M.info(msg, 'Toggle')
     else
-      M.warn('disabled vim.' .. scope .. '.' .. option, 'Toggle')
+      M.warn(msg, 'Toggle')
     end
   end
 end

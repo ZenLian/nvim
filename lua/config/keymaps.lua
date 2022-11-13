@@ -55,18 +55,12 @@ map('v', 'Y', '"+y')
 map({ 'n', 'v', 'o' }, 'n', "'Nn'[v:searchforward]", { expr = true })
 map({ 'n', 'v', 'o' }, 'N', "'nN'[v:searchforward]", { expr = true })
 
--- tabs
-map('n', '[t', '<cmd>tabn<CR>')
-map('n', ']t', '<cmd>tabp<CR>')
-
 -- save
 map('n', '<C-s>', '<cmd>w<CR>')
 
 --
 -- plugins
 --
-map('n', '[b', '<cmd>BufferLineCyclePrev<CR>')
-map('n', ']b', '<cmd>BufferLineCycleNext<CR>')
 map('n', '<A-,>', '<cmd>BufferLineMovePrev<CR>')
 map('n', '<A-.>', '<cmd>BufferLineMoveNext<CR>')
 map('n', '<C-e>', '<cmd>Neotree<CR>')
@@ -100,6 +94,93 @@ vim.api.nvim_set_keymap('o', 'm', ':<C-U>lua require("tsht").nodes()<CR>', { sil
 map('n', '<C-p>', function()
   require('plugins.telescope').project_files()
 end)
+
+--
+-- next/previous
+--
+-- require('bufferline').
+local next = {
+  name = 'Next',
+  b = { '<cmd>lua require("bufferline").cycle(1)<cr>', 'Next buffer' },
+  -- B = { ':bfirst' },
+  B = { '<cmd>lua require("bufferline").go_to_buffer(1, true)<cr>', 'First buffer' },
+  d = 'Next diagnostic',
+  e = 'Next error',
+  g = 'Next git hunk',
+  t = { ':tabn<cr>', 'Next tab page' },
+}
+
+local prev = {
+  name = 'Previous',
+  b = { '<cmd>lua require("bufferline").cycle(-1)<cr>', 'Previous buffer' },
+  -- B = { ':blast' },
+  B = { '<cmd>lua require("bufferline").go_to_buffer(-1, true)<cr>', 'Last buffer' },
+  d = 'Previous diagnostic',
+  e = 'Previous error',
+  g = 'Previous git hunk',
+  t = { ':tabp<cr>', 'Previous tab page' },
+}
+
+-- Params: ~
+--   specs
+--     {name} vim option name
+--     {desc} description
+--     {opts} additional opts for util.toggle
+local function make_toggles(specs)
+  local keys = {
+    name = 'Toggles',
+  }
+  for key, v in pairs(specs) do
+    keys[key] = {}
+    local entry = keys[key]
+    entry.name = v.name
+    local name = entry.name
+    entry[key] = {
+      function()
+        util.toggle(name, v.opts)
+      end,
+      'Toggle ' .. name,
+    }
+    entry['['] = {
+      function()
+        util.toggle(name, util.tbl_merge(v.opts, { value = true }))
+      end,
+      'Toggle ' .. name .. ' on',
+    }
+    entry[']'] = {
+      function()
+        util.toggle(name, util.tbl_merge(v.opts, { value = false }))
+      end,
+      'Toggle ' .. name .. ' off',
+    }
+  end
+  return keys
+end
+
+local toggles = make_toggles {
+  s = { name = 'spell', desc = 'spell check' },
+  w = { name = 'wrap', desc = 'word wrap' },
+
+  -- TODO: merge these two
+  n = { name = 'relativenumber', desc = 'relative line number' },
+  N = { name = 'number', desc = 'line number' },
+}
+
+toggles.f = {
+  name = 'auto format',
+  f = {
+    '<cmd>lua require("plugins.lspconfig.formatting").toggle()<cr>',
+    'Toggle auto format',
+  },
+  ['['] = {
+    '<cmd>lua require("plugins.lspconfig.formatting").toggle(true)<cr>',
+    'Toggle auto format on',
+  },
+  [']'] = {
+    '<cmd>lua require("plugins.lspconfig.formatting").toggle(false)<cr>',
+    'Toggle auto format off',
+  },
+}
 
 --
 -- leader keymaps
@@ -212,32 +293,6 @@ local leader = {
     name = 'terminal',
     s = { '<cmd>ToggleTermSendCurrentLine<cr>', 'Send line' },
   },
-  ['/'] = {
-    name = 'toggle',
-    f = {
-      require('plugins.lspconfig.formatting').toggle,
-      'Format on save',
-    },
-    s = {
-      function()
-        util.toggle('spell', false)
-      end,
-      'Spelling',
-    },
-    w = {
-      function()
-        util.toggle('wrap', false)
-      end,
-      'Word wrap',
-    },
-    n = {
-      function()
-        util.toggle('relativenumber', true)
-        util.toggle('number', false)
-      end,
-      'Line Numbers',
-    },
-  },
   [';'] = { '<cmd>AerialToggle<CR>', 'Outline' },
   ['<Leader>'] = { '<cmd>Telescope resume<CR>', 'Telescope Resume' },
 }
@@ -251,6 +306,9 @@ local leader_visual = {
 
 local function register()
   local wk = require('which-key')
+  wk.register(next, { prefix = ']' })
+  wk.register(prev, { prefix = '[' })
+  wk.register(toggles, { prefix = '<Leader>/' })
   wk.register(leader, { prefix = '<Leader>' })
   wk.register(leader_visual, { prefix = '<Leader>', mode = 'v' })
 end

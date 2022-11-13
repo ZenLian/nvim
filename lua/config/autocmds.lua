@@ -41,7 +41,7 @@ autocmd({ 'BufWinEnter' }, {
 -- highlight on yank (handled by yanky.nvim)
 -- autocmd({ 'TextYankPost' }, {
 --   -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
---   group = NAME,
+--   group = group,
 --   callback = function()
 --     vim.highlight.on_yank() -- { higroup = 'Visual', timeout = 250 }
 --   end,
@@ -81,6 +81,7 @@ autocmd({ 'VimResized' }, {
 -- vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
 autocmd({ 'FileType' }, {
   group = group,
+  desc = 'Filetypes to close with "q"',
   pattern = {
     'help',
     'startuptime',

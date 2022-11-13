@@ -19,6 +19,7 @@ local config = function()
         i = { '@conditional.inner', '@loop.inner' },
       },
       -- TODO: u-url, /-comment, i-indent
+      C = spec.treesitter { a = '@comment.outer', i = '@comment.inner' },
       -- u = { 'https://' },
     },
     -- Module mappings. Use `''` (empty string) to disable one.

@@ -1,7 +1,7 @@
 local config = function()
   require('which-key').setup {
     plugins = {
-      presets = false,
+      -- presets = false,
       spelling = {
         enabled = true,
         suggestions = 20,
