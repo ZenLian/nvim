@@ -73,24 +73,30 @@ map('n', '<C-e>', '<cmd>Neotree<CR>')
 map('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
 -- yanky.nvim
-vim.keymap.set({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
-vim.keymap.set({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)')
-vim.keymap.set({ 'n', 'x' }, 'P', '<Plug>(YankyPutBefore)')
-vim.keymap.set({ 'n', 'x' }, 'gp', '<Plug>(YankyGPutAfter)')
-vim.keymap.set({ 'n', 'x' }, 'gP', '<Plug>(YankyGPutBefore)')
-vim.keymap.set('n', '<A-]>', '<Plug>(YankyCycleForward)')
-vim.keymap.set('n', '<A-[>', '<Plug>(YankyCycleBackward)')
-vim.keymap.set('n', ']p', '<Plug>(YankyPutIndentAfterLinewise)')
-vim.keymap.set('n', '[p', '<Plug>(YankyPutIndentBeforeLinewise)')
-vim.keymap.set('n', ']P', '<Plug>(YankyPutIndentAfterLinewise)')
-vim.keymap.set('n', '[P', '<Plug>(YankyPutIndentBeforeLinewise)')
-vim.keymap.set('n', '>p', '<Plug>(YankyPutIndentAfterShiftRight)')
-vim.keymap.set('n', '<p', '<Plug>(YankyPutIndentAfterShiftLeft)')
-vim.keymap.set('n', '>P', '<Plug>(YankyPutIndentBeforeShiftRight)')
-vim.keymap.set('n', '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)')
-vim.keymap.set('n', '=p', '<Plug>(YankyPutAfterFilter)')
-vim.keymap.set('n', '=P', '<Plug>(YankyPutBeforeFilter)')
+map({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
+map({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)')
+map({ 'n', 'x' }, 'P', '<Plug>(YankyPutBefore)')
+map({ 'n', 'x' }, 'gp', '<Plug>(YankyGPutAfter)')
+map({ 'n', 'x' }, 'gP', '<Plug>(YankyGPutBefore)')
+map('n', '<A-]>', '<Plug>(YankyCycleForward)')
+map('n', '<A-[>', '<Plug>(YankyCycleBackward)')
+map('n', ']p', '<Plug>(YankyPutIndentAfterLinewise)')
+map('n', '[p', '<Plug>(YankyPutIndentBeforeLinewise)')
+map('n', ']P', '<Plug>(YankyPutIndentAfterLinewise)')
+map('n', '[P', '<Plug>(YankyPutIndentBeforeLinewise)')
+map('n', '>p', '<Plug>(YankyPutIndentAfterShiftRight)')
+map('n', '<p', '<Plug>(YankyPutIndentAfterShiftLeft)')
+map('n', '>P', '<Plug>(YankyPutIndentBeforeShiftRight)')
+map('n', '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)')
+map('n', '=p', '<Plug>(YankyPutAfterFilter)')
+map('n', '=P', '<Plug>(YankyPutBeforeFilter)')
 
+-- treehopper
+-- FIXME: vim.keymap.set don't work as expected
+vim.api.nvim_set_keymap('x', 'm', ':lua require("tsht").nodes()<CR>', { silent = true, noremap = true })
+vim.api.nvim_set_keymap('o', 'm', ':<C-U>lua require("tsht").nodes()<CR>', { silent = true })
+
+-- telescope
 map('n', '<C-p>', function() require('plugins.telescope').project_files() end)
 
 --

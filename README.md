@@ -100,6 +100,10 @@ Treesitter
 
 ### ✏️ Edit
 
+tips:
+
+- Press `<C-O>` in insert mode, temporarily switching to normal mode for one movement.
+
 leap(~~sneak~~):
 
 - Normal mode: `s`/`S` with 2 chars
@@ -132,9 +136,9 @@ textobjects:
 - `j`/`k`: next/last textobjects(never used!)
 - not used: `rydhlzxvnm`
 
-visual mode quick selection:
+quick selection(in Visual mode):
 
-- `m` quick label-based selection
+- `m` enter quick label-based selection
 - `+`/`-` incremental/decremental selection
 
 clipboard management:

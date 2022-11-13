@@ -212,16 +212,9 @@ local plugins = {
   },
   {
     'mfussenegger/nvim-treehopper',
-    opt = true,
-    after = 'nvim-treesitter',
-    config = true,
+    module = 'tsht',
+    config = function() require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' } end,
   },
-  -- 代码块高亮很碍眼，当前单词高亮还行，以后需要再配置
-  -- {
-  --   'nvim-treesitter/nvim-treesitter-refactor',
-  --   opt = true,
-  --   after = 'nvim-treesitter',
-  -- },
   {
     'ur4ltz/surround.nvim',
     event = { 'BufRead', 'BufNewFile' },
@@ -236,7 +229,7 @@ local plugins = {
     after = { 'leap.nvim' },
     config = true,
   },
-  -- FIXME: conflicts with yanky
+  -- TODO: conflicts with yanky
   -- {
   --   'ggandor/leap-spooky.nvim',
   --   after = { 'leap.nvim' },
