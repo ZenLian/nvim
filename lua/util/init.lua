@@ -1,23 +1,37 @@
 local M = {}
 
-function M.dump(...) print(vim.inspect(...)) end
+function M.dump(...)
+  print(vim.inspect(...))
+end
 
-function M.join_path(...) return table.concat({ ... }, '/') end
+function M.join_path(...)
+  return table.concat({ ... }, '/')
+end
 
 -- reload config
-function M.reload() vim.cmd('source ' .. os.getenv('MYVIMRC')) end
+function M.reload()
+  vim.cmd('source ' .. os.getenv('MYVIMRC'))
+end
 
-function M.warn(msg, name) vim.notify(msg, vim.log.levels.WARN, { title = name }) end
+function M.warn(msg, name)
+  vim.notify(msg, vim.log.levels.WARN, { title = name })
+end
 
-function M.error(msg, name) vim.notify(msg, vim.log.levels.ERROR, { title = name }) end
+function M.error(msg, name)
+  vim.notify(msg, vim.log.levels.ERROR, { title = name })
+end
 
-function M.info(msg, name) vim.notify(msg, vim.log.levels.INFO, { title = name }) end
+function M.info(msg, name)
+  vim.notify(msg, vim.log.levels.INFO, { title = name })
+end
 
 M.functions = {}
 
 function M.execute(id)
   local func = M.functions[id]
-  if not func then M.error('Function not exist: ' .. id, 'util') end
+  if not func then
+    M.error('Function not exist: ' .. id, 'util')
+  end
   return func()
 end
 

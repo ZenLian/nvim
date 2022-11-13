@@ -36,7 +36,7 @@ local illuminate_config = function()
   }
 end
 
-local treesitter_config = function ()
+local treesitter_config = function()
   vim.o.foldmethod = 'expr'
   vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
   require('nvim-treesitter.configs').setup {
@@ -53,10 +53,10 @@ local treesitter_config = function ()
 end
 
 local function lsp_config()
-  require('lspconfig').sumneko_lua.setup{
+  require('lspconfig').sumneko_lua.setup {
     attach = function()
       require('illuminate').attach()
-    end
+    end,
   }
 end
 
@@ -90,12 +90,16 @@ local function setup_packer()
     end,
     config = {
       display = {
-        open_fn = function() return require('packer.util').float { border = 'single' } end,
+        open_fn = function()
+          return require('packer.util').float { border = 'single' }
+        end,
       },
     },
   }
 
-  if packer_bootstrap then packer.sync() end
+  if packer_bootstrap then
+    packer.sync()
+  end
 end
 
 vim.o.termguicolors = true

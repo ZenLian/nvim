@@ -142,4 +142,6 @@ for _, plugin in ipairs(builtin_plugins) do
 end
 
 -- virtual env provider
-if vim.fn.glob(config.provider.python3) ~= '' then vim.g.python3_host_prog = config.provider.python3 end
+if vim.fn.glob(config.provider.python3) ~= '' then
+  vim.g.python3_host_prog = config.provider.python3
+end

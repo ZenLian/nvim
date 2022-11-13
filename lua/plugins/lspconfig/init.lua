@@ -1,5 +1,7 @@
 local config = function()
-  local function setup_lspconfig() require('lspconfig.ui.windows').default_options.border = 'single' end
+  local function setup_lspconfig()
+    require('lspconfig.ui.windows').default_options.border = 'single'
+  end
 
   local function on_attach(client, bufnr)
     require('plugins.lspconfig.formatting').on_attach(client, bufnr)

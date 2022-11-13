@@ -84,7 +84,9 @@ M.project_files = function()
     require('telescope.builtin').git_files(opts)
   else
     local clients = vim.lsp.get_active_clients()
-    if #clients > 0 then opts.cwd = clients[1].config.root_dir end
+    if #clients > 0 then
+      opts.cwd = clients[1].config.root_dir
+    end
     require('telescope.builtin').find_files(opts)
   end
 end

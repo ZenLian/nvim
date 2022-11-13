@@ -9,7 +9,9 @@ local leader = {
   l = {
     name = 'language',
     f = {
-      function() require('plugins.lspconfig.formatting').format() end,
+      function()
+        require('plugins.lspconfig.formatting').format()
+      end,
       'File format',
     },
     a = { vim.lsp.buf.code_action, 'Code action' },
@@ -47,11 +49,15 @@ local g = {
 
 local misc = {
   ['<A-n>'] = {
-    function() require('illuminate').next_reference { wrap = true } end,
+    function()
+      require('illuminate').next_reference { wrap = true }
+    end,
     'Next reference',
   },
   ['<A-p>'] = {
-    function() require('illuminate').next_reference { reverse = true, wrap = true } end,
+    function()
+      require('illuminate').next_reference { reverse = true, wrap = true }
+    end,
     'Previous reference',
   },
 }

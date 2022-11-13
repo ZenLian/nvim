@@ -73,7 +73,9 @@ local plugins = {
   {
     'anuvyklack/pretty-fold.nvim',
     event = 'BufRead',
-    config = function() require('pretty-fold').setup {} end,
+    config = function()
+      require('pretty-fold').setup {}
+    end,
   },
   -- }}} ui
 
@@ -89,7 +91,9 @@ local plugins = {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'make',
     after = 'telescope.nvim',
-    config = function() require('telescope').load_extension('fzf') end,
+    config = function()
+      require('telescope').load_extension('fzf')
+    end,
   },
   {
     'nvim-telescope/telescope-frecency.nvim',
@@ -103,7 +107,9 @@ local plugins = {
   {
     'nvim-telescope/telescope-file-browser.nvim',
     after = 'telescope.nvim',
-    config = function() require('telescope').load_extension('file_browser') end,
+    config = function()
+      require('telescope').load_extension('file_browser')
+    end,
   },
   -- }}} telescope
 
@@ -205,17 +211,23 @@ local plugins = {
   {
     'numToStr/Comment.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    config = function() require('Comment').setup() end,
+    config = function()
+      require('Comment').setup()
+    end,
   },
   {
     'mfussenegger/nvim-treehopper',
     module = 'tsht',
-    config = function() require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' } end,
+    config = function()
+      require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
+    end,
   },
   {
     'ur4ltz/surround.nvim',
     event = { 'BufRead', 'BufNewFile' },
-    config = function() require('surround').setup { mappings_style = 'surround' } end,
+    config = function()
+      require('surround').setup { mappings_style = 'surround' }
+    end,
   },
   {
     'ggandor/leap.nvim',
@@ -237,7 +249,9 @@ local plugins = {
   {
     'abecodes/tabout.nvim',
     after = { 'nvim-cmp', 'nvim-treesitter' },
-    config = function() require('tabout').setup {} end,
+    config = function()
+      require('tabout').setup {}
+    end,
   },
   {
     'monaqa/dial.nvim',
