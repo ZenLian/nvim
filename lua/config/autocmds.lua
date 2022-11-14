@@ -48,26 +48,26 @@ autocmd({ 'BufWinEnter' }, {
 -- })
 
 -- hide cursorline for unfocused window
-local cursorline_ignore_ft = {
-  'TelescopePrompt',
-  'DressingInput',
-  '',
-}
-
-autocmd({ 'WinEnter', 'WinLeave' }, {
-  group = group,
-  desc = 'Hide cursorline for unfocused windows',
-  callback = function(args)
-    if vim.tbl_contains(cursorline_ignore_ft, vim.bo.filetype) then
-      return
-    end
-    if args.event == 'WinLeave' then
-      vim.wo.cursorline = false
-    else -- 'WinEnter'
-      vim.wo.cursorline = true
-    end
-  end,
-})
+-- local cursorline_ignore_ft = {
+--   'TelescopePrompt',
+--   'DressingInput',
+--   '',
+-- }
+--
+-- autocmd({ 'WinEnter', 'WinLeave' }, {
+--   group = group,
+--   desc = 'Hide cursorline for unfocused windows',
+--   callback = function(args)
+--     if vim.tbl_contains(cursorline_ignore_ft, vim.bo.filetype) then
+--       return
+--     end
+--     if args.event == 'WinLeave' then
+--       vim.wo.cursorline = false
+--     else -- 'WinEnter'
+--       vim.wo.cursorline = true
+--     end
+--   end,
+-- })
 
 -- equalize window when vim window resized
 autocmd({ 'VimResized' }, {
