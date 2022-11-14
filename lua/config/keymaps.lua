@@ -243,7 +243,8 @@ local function register_leader()
     b = {
       name = 'buffer',
       b = { '<cmd>e #<CR>', 'Last buffer' },
-      d = { '<cmd>bd<CR>', 'Delete buffer' },
+      -- d = { '<cmd>bd<CR>', 'Delete buffer' },
+      d = { '<cmd>lua require("mini.bufremove").delete()<CR>', 'Delete buffer' },
       g = { '<cmd>BufferLinePick<CR>', 'Goto buffer' },
       p = { '<cmd>BufferLineTogglePin<CR>', 'Pin/Unpin buffer' },
       c = { '<cmd>BufferLinePickClose<CR>', 'Pick Close buffer+' },
@@ -357,7 +358,6 @@ function M.init()
   register_leader()
 end
 
--- pcall(M.init)
-M.init()
+pcall(M.init)
 
 return M
