@@ -73,6 +73,7 @@ local preprocess = function(plugin)
     return plugin
   end
   local pkg = require('plugins.' .. name)
+  -- NOTE: config can not use 'upvalue'(module's local variables, etc.)
   plugin.config = pkg.config
 
   return plugin

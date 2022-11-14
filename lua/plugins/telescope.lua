@@ -78,16 +78,17 @@ M.config = function()
 end
 
 M.project_files = function()
+  local builtin = require('telescope.builtin')
   local opts = { show_untracked = true }
   local in_git_repo = vim.fn.systemlist('git rev-parse --is-inside-work-tree')[1] == 'true'
   if in_git_repo then
-    require('telescope.builtin').git_files(opts)
+    builtin.git_files(opts)
   else
     local clients = vim.lsp.get_active_clients()
     if #clients > 0 then
       opts.cwd = clients[1].config.root_dir
     end
-    require('telescope.builtin').find_files(opts)
+    builtin.find_files(opts)
   end
 end
 

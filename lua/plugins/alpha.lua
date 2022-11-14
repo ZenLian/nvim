@@ -38,9 +38,9 @@ local config = function()
 
   dashboard.section.buttons.val = {
     button('e', '   New', ':ene<CR>'),
-    button('f', '   Files', ':Telescope find_files<CR>'),
+    button('f', '   Files', '<cmd>lua require("plugins.telescope").project_files()<CR>'),
     button('r', '   Recent', ':Telescope oldfiles<CR>'),
-    button('s', '   Sessions', '<cmd>SessionManager load_session<CR>'),
+    button('s', '   Sessions', '<cmd>Telescope persisted<CR>'),
     button('c', '   Configs', ':e $MYVIMRC | :cd %:p:h<CR>'),
     button('q', '   Quit', ':qa<CR>'),
   }
@@ -51,7 +51,23 @@ local config = function()
 
   alpha.setup(dashboard.config)
 
-  vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
+  local group = vim.api.nvim_create_augroup('plugins.alpha', { clear = true })
+  vim.api.nvim_create_autocmd('User', {
+    group = group,
+    pattern = 'AlphaReady',
+    callback = function()
+      vim.o.showtabline = 0
+      vim.wo.cursorline = true
+      vim.api.nvim_create_autocmd('BufUnload', {
+        group = group,
+        buffer = 0,
+        callback = function()
+          vim.o.showtabline = 2
+        end,
+      })
+    end,
+  })
+  -- vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
 end
 
 return {
