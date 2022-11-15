@@ -29,16 +29,6 @@ function M.info(msg, name)
   vim.notify(msg, vim.log.levels.INFO, { title = name })
 end
 
-M.functions = {}
-
-function M.execute(id)
-  local func = M.functions[id]
-  if not func then
-    M.error('Function not exist: ' .. id, 'util')
-  end
-  return func()
-end
-
 -- Open float terminal with command
 --- @param cmd: #String The name of shell command
 function M.float_terminal(cmd)
