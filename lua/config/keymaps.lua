@@ -2,70 +2,78 @@ local util = require('util')
 local _, wk = pcall(require, 'which-key')
 local M = {}
 
-local function map(mode, lhs, rhs, opts)
-  local options = {
-    -- noremap = true, -- default in vim.keymap.set
-    silent = true,
-  }
-  options = vim.tbl_deep_extend('force', options, opts or {})
-  vim.keymap.set(mode, lhs, rhs, options)
+local function keymap(mode, lhs, rhs, opts)
+  opts = util.tbl_merge({ noremap = true, silent = true }, opts)
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 local function register_basic()
+  -- Save
+  keymap('', '<C-s>', '<cmd>w<CR>')
+  -- Quit
+  keymap('', '<C-q>', '<cmd>qa<CR>')
+  -- Close buffer
+  keymap('', 'Q', '<cmd>lua require("mini.bufremove").delete()<CR>')
+
   -- Move to window
-  map('n', '<C-h>', '<C-w>h')
-  map('n', '<C-j>', '<C-w>j')
-  map('n', '<C-k>', '<C-w>k')
-  map('n', '<C-l>', '<C-w>l')
+  keymap('n', '<C-h>', '<C-w>h')
+  keymap('n', '<C-j>', '<C-w>j')
+  keymap('n', '<C-k>', '<C-w>k')
+  keymap('n', '<C-l>', '<C-w>l')
   -- Resize window
-  map('n', '<S-Up>', ':resize +2<CR>')
-  map('n', '<S-Down>', ':resize -2<CR>')
-  map('n', '<S-Left>', ':vertical resize -2<CR>')
-  map('n', '<S-Right>', ':vertical resize +2<CR>')
+  keymap('n', '<C-Up>', ':resize +2<CR>')
+  keymap('n', '<C-Down>', ':resize -2<CR>')
+  keymap('n', '<C-Left>', ':vertical resize -2<CR>')
+  keymap('n', '<C-Right>', ':vertical resize +2<CR>')
   -- Move lines
   -- https://vim.fandom.com/wiki/Moving_lines_up_or_down#Mappings_to_move_lines
-  map('n', '<A-j>', ':m .+1<CR>==')
-  map('n', '<A-k>', ':m .-2<CR>==')
-  map('v', '<A-j>', ":m '>+1<CR>gv=gv")
-  map('v', '<A-k>', ":m '<-2<CR>gv=gv")
-  map('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
-  map('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
+  keymap('n', '<A-j>', ':m .+1<CR>==')
+  keymap('n', '<A-k>', ':m .-2<CR>==')
+  keymap('v', '<A-j>', ":m '>+1<CR>gv=gv")
+  keymap('v', '<A-k>', ":m '<-2<CR>gv=gv")
+  keymap('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
+  keymap('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
   -- Indent without leaving Visual Mode
-  map('v', '<', '<gv')
-  map('v', '>', '>gv')
+  keymap('v', '<', '<gv')
+  keymap('v', '>', '>gv')
   -- Indent with tab in Visual Mode
-  map('v', '<S-Tab>', '<gv')
-  map('v', '<Tab>', '>gv')
+  keymap('v', '<S-Tab>', '<gv')
+  keymap('v', '<Tab>', '>gv')
   -- Clear search with <esc>
-  map('n', '<esc>', ':noh<cr>')
+  keymap('n', '<esc>', ':noh<cr>')
+
   -- Paste block
   -- map('n', ']p', ':pu<cr>')
   -- map('n', '[p', ':pu!<cr>')
+  -- Safe paste
+  -- keymap('v', 'p', '"_dp')
   -- Yank to end of line, consistence with D/C
-  map('n', 'Y', 'y$')
+  keymap('n', 'Y', 'y$')
   -- Yank to system clipboard
-  map('v', 'Y', '"+y')
-  -- H = { "^", "Start of line" },
-  -- L = { "$", "End of line" },
+  keymap('v', 'Y', '"+y', { noremap = false })
+
   -- n/N always search forward/backward
   -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-  map({ 'n', 'v', 'o' }, 'n', "'Nn'[v:searchforward]", { expr = true })
-  map({ 'n', 'v', 'o' }, 'N', "'nN'[v:searchforward]", { expr = true })
-  -- save
-  map('n', '<C-s>', '<cmd>w<CR>')
+  keymap({ 'n', 'v', 'o' }, 'n', "'Nn'[v:searchforward]", { expr = true })
+  keymap({ 'n', 'v', 'o' }, 'N', "'nN'[v:searchforward]", { expr = true })
 
   -- plugins
-  map('n', '<A-,>', '<cmd>BufferLineMovePrev<CR>')
-  map('n', '<A-.>', '<cmd>BufferLineMoveNext<CR>')
-  map('n', '<C-e>', '<cmd>Neotree<CR>')
-  map('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
+  keymap('n', '<C-e>', '<cmd>Neotree<CR>')
+  keymap('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
+
+  -- bufferline
+  keymap('n', 'H', '<cmd>lua require("bufferline").cycle(-1)<CR>', { desc = 'Previous buffer' })
+  keymap('n', 'L', '<cmd>lua require("bufferline").cycle(1)<CR>', { desc = 'Next buffer' })
+  keymap('n', '<A-,>', '<cmd>BufferLineMovePrev<CR>')
+  keymap('n', '<A-.>', '<cmd>BufferLineMoveNext<CR>')
+
   -- treehopper
   -- FIXME: vim.keymap.set don't work as expected
   vim.api.nvim_set_keymap('x', 'm', ':lua require("tsht").nodes()<CR>', { silent = true, noremap = true })
   vim.api.nvim_set_keymap('o', 'm', ':<C-U>lua require("tsht").nodes()<CR>', { silent = true })
 
   -- telescope
-  map('n', '<C-p>', function()
+  keymap('n', '<C-p>', function()
     require('plugins.telescope').project_files()
   end)
 end
@@ -164,23 +172,23 @@ end
 
 -- yanky.nvim
 local function register_yanky()
-  map({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
-  map({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)')
-  map({ 'n', 'x' }, 'P', '<Plug>(YankyPutBefore)')
-  map({ 'n', 'x' }, 'gp', '<Plug>(YankyGPutAfter)')
-  map({ 'n', 'x' }, 'gP', '<Plug>(YankyGPutBefore)')
-  map('n', '<A-]>', '<Plug>(YankyCycleForward)')
-  map('n', '<A-[>', '<Plug>(YankyCycleBackward)')
-  map('n', ']p', '<Plug>(YankyPutIndentAfterLinewise)')
-  map('n', '[p', '<Plug>(YankyPutIndentBeforeLinewise)')
-  map('n', ']P', '<Plug>(YankyPutIndentAfterLinewise)')
-  map('n', '[P', '<Plug>(YankyPutIndentBeforeLinewise)')
-  map('n', '>p', '<Plug>(YankyPutIndentAfterShiftRight)')
-  map('n', '<p', '<Plug>(YankyPutIndentAfterShiftLeft)')
-  map('n', '>P', '<Plug>(YankyPutIndentBeforeShiftRight)')
-  map('n', '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)')
-  map('n', '=p', '<Plug>(YankyPutAfterFilter)')
-  map('n', '=P', '<Plug>(YankyPutBeforeFilter)')
+  keymap({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
+  keymap({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)')
+  keymap({ 'n', 'x' }, 'P', '<Plug>(YankyPutBefore)')
+  keymap({ 'n', 'x' }, 'gp', '<Plug>(YankyGPutAfter)')
+  keymap({ 'n', 'x' }, 'gP', '<Plug>(YankyGPutBefore)')
+  keymap('n', '<A-]>', '<Plug>(YankyCycleForward)')
+  keymap('n', '<A-[>', '<Plug>(YankyCycleBackward)')
+  keymap('n', ']p', '<Plug>(YankyPutIndentAfterLinewise)')
+  keymap('n', '[p', '<Plug>(YankyPutIndentBeforeLinewise)')
+  keymap('n', ']P', '<Plug>(YankyPutIndentAfterLinewise)')
+  keymap('n', '[P', '<Plug>(YankyPutIndentBeforeLinewise)')
+  keymap('n', '>p', '<Plug>(YankyPutIndentAfterShiftRight)')
+  keymap('n', '<p', '<Plug>(YankyPutIndentAfterShiftLeft)')
+  keymap('n', '>P', '<Plug>(YankyPutIndentBeforeShiftRight)')
+  keymap('n', '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)')
+  keymap('n', '=p', '<Plug>(YankyPutAfterFilter)')
+  keymap('n', '=P', '<Plug>(YankyPutBeforeFilter)')
 end
 
 function M.register_gitsigns(bufnr)
@@ -189,20 +197,19 @@ function M.register_gitsigns(bufnr)
   whichkey.register({
     name = 'git',
     D = { '<cmd>lua require("gitsigns").diffthis()<CR>', 'Diff index' },
-    p = { '<cmd>lua require("gitsigns").preview_hunk_inline<CR>', 'Preview inline' },
+    p = { '<cmd>lua require("gitsigns").preview_hunk_inline()<CR>', 'Preview inline' },
+    P = { '<cmd>lua require("gitsigns").preview_hunk()<CR>', 'Preview' },
     q = { '<cmd>lua require("gitsigns").setqflist(0)<CR>', 'Send to quickfix window' },
+    b = { '<cmd>lua require("gitsigns").blame_line{full=true}<CR>', 'Git blame' },
     h = {
       -- defined by gitsigns
       name = 'hunk',
-      b = { '<cmd>lua require"gitsigns".blame_line{full=true}<CR>', 'Blame line' },
-      s = { '<cmd>lua require"gitsigns".stage_hunk()<CR>', 'Stage hunk' },
-      S = { '<cmd>lua require"gitsigns".stage_buffer()<CR>', 'Stage file' },
-      u = { '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>', 'Unstage hunk' },
-      U = { '<cmd>lua require"gitsigns".reset_buffer_index()<CR>', 'Unstage file' },
-      r = { '<cmd>lua require"gitsigns".reset_hunk()<CR>', 'Reset hunk' },
-      R = { '<cmd>lua require"gitsigns".reset_buffer()<CR>', 'Reset file' },
-      p = { '<cmd>lua require("gitsigns").preview_hunk_inline<CR>', 'Preview inline' },
-      P = { '<cmd>lua require("gitsigns").preview_hunk<CR>', 'Preview' },
+      s = { '<cmd>lua require("gitsigns").stage_hunk()<CR>', 'Stage hunk' },
+      S = { '<cmd>lua require("gitsigns").stage_buffer()<CR>', 'Stage file' },
+      u = { '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', 'Unstage hunk' },
+      U = { '<cmd>lua require("gitsigns").reset_buffer_index()<CR>', 'Unstage file' },
+      r = { '<cmd>lua require("gitsigns").reset_hunk()<CR>', 'Reset hunk' },
+      R = { '<cmd>lua require("gitsigns").reset_buffer()<CR>', 'Reset file' },
     },
   }, { prefix = '<Leader>g', buffer = bufnr })
   -- <Leader>g Visual
@@ -211,8 +218,8 @@ function M.register_gitsigns(bufnr)
     h = {
       -- defined by gitsigns
       name = 'hunk',
-      r = { '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Reset hunk' },
-      s = { '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Stage hunk' },
+      r = { '<cmd>lua require"gitsigns.actions".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Reset hunk' },
+      s = { '<cmd>lua require"gitsigns.actions".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Stage hunk' },
     },
   }, { prefix = '<Leader>g', mode = 'v', buffer = bufnr })
   -- Next/Previous hunk
@@ -230,8 +237,8 @@ function M.register_gitsigns(bufnr)
   }, { buffer = bufnr })
   -- Text objects
   whichkey.register({
-    ['ig'] = { '<cmd>lua require("gitsigns.actions").selecte_hunk()<CR>', 'a hunk' },
-    ['ag'] = { '<cmd>lua require("gitsigns.actions").selecte_hunk()<CR>', 'a hunk' },
+    ['ig'] = { '<cmd>lua require("gitsigns.actions").select_hunk()<CR>', 'a hunk' },
+    ['ag'] = { '<cmd>lua require("gitsigns.actions").select_hunk()<CR>', 'a hunk' },
   }, { mode = { 'o', 'x' }, buffer = bufnr })
 end
 
@@ -260,11 +267,15 @@ local function register_leader()
     },
     e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
     f = {
-      name = 'files',
+      name = 'find files/text',
       f = { '<cmd>Telescope find_files<CR>', 'Find files' },
       r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
       h = { '<cmd>Telescope frecency<CR>', 'Frecency files' },
       e = { '<cmd>Telescope file_browser<CR>', 'File Explorer' },
+      b = { '<cmd>Telescope buffers<CR>', 'Buffers' },
+      g = { '<cmd>Telescope live_grep<CR>', 'Grep' },
+      w = { '<cmd>Telescope grep_string<CR>', 'Current word' },
+      z = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Fuzzy Find in Buffer' },
     },
     g = {
       name = 'git',
@@ -275,15 +286,10 @@ local function register_leader()
         end,
         'LazyGit',
       },
-      b = { '<cmd>Telescope git_branches<CR>', 'Branches' },
-      c = { '<cmd>Telescope git_commits<CR>', 'Commits' },
+      B = { '<cmd>Telescope git_branches<CR>', 'Branches' },
+      C = { '<cmd>Telescope git_commits<CR>', 'Commits' },
       s = { '<cmd>Telescope git_status<CR>', 'Status' },
       d = { '<cmd>DiffviewOpen<cr>', 'DiffView' },
-    },
-    i = {
-      name = 'insert',
-      s = { '<cmd>Telescope symbols<CR>', 'Symbols' },
-      y = { '<cmd>YankyRingHistory<CR>', 'Yank History' },
     },
     o = {
       name = 'open',
@@ -291,29 +297,28 @@ local function register_leader()
       p = { '<cmd>PeekToggle<CR>', 'Live preview' },
     },
     p = {
-      name = 'packer',
-      p = { '<cmd>PackerSync<CR>', 'Packer Sync' },
-      s = { '<cmd>PackerStatus<CR>', 'Packer Status' },
+      name = 'package management',
+      p = { '<cmd>PackerStatus<CR>', 'Packer Status' },
+      u = { '<cmd>PackerUpdate<CR>', 'Packer Update' },
+      s = { '<cmd>PackerSync<CR>', 'Packer Sync' },
       c = { '<cmd>PackerCompile<CR>', 'Packer Complile' },
+      l = { '<cmd>LspInfo<CR>', 'Lsp Info' },
+      L = { '<cmd>LspInstall<CR>', 'Install lsp server' },
+      n = { '<cmd>NullLsInfo<CR>', 'Null-ls Info' },
+      N = { '<cmd>NullLsInstall<CR>', 'Install null-ls source' },
     },
     q = {
       name = 'quit',
-      q = { '<cmd>qa<cr>', 'Quit' },
-      ['!'] = { '<cmd>qa!<cr>', 'Force quit' },
+      q = { '<cmd>qa!<cr>', 'Quit' },
       w = { '<cmd>wqa<cr>', 'Save all and quit' },
+      t = { '<cmd>tabclose<cr>', 'Close tab' },
     },
     s = {
       name = 'search',
-      b = { '<cmd>Telescope buffers<CR>', 'Buffers' },
-      g = { '<cmd>Telescope live_grep<CR>', 'Grep' },
-      w = { '<cmd>Telescope grep_string<CR>', 'Current word' },
-      z = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Fuzzy Find in Buffer' },
-      ['/'] = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
+      h = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
+      y = { '<cmd>YankyRingHistory<CR>', 'Yank History' },
+      [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
       ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
-    },
-    t = {
-      name = 'tab',
-      c = { '<cmd>tabclose<CR>', 'Close tab' },
     },
     w = {
       name = 'workspace',

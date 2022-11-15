@@ -213,18 +213,16 @@ view changes:
 
 ### 🔎 Search
 
-search for files:
+search for files/text:
 
 - `<C-p>` search git files
 - `<Leader>ff` search files
 - `<Leader>fr` search recent files
 - `<Leader>fh` search frecency files
-
-search for text:
-
-- `<C-f>`/`<Leader>sz` search in current buffer
-- `<Leader>sg` live grep in workspace
-- `<Leader>sw` search current word in workspace
+- `<Leader>fb` search buffers
+- `<Leader>fg` live grep in workspace
+- `<Leader>fw` search current word in workspace
+- `<C-f>`/`<Leader>fz` search in current buffer
 
 ### 🔖 Git
 
@@ -235,10 +233,16 @@ Git keymaps mostly start with `<Leader>g`.
 - `<Leader>gl` open lazygit
 - `<Leader>gd` open diffview
 
-- `<Leader>gb` explore git branches
-- `<Leader>gc` explore git commits
-- `<Leader>gs` explore git status(all diff files)
+- `<Leader>gD` diff current file
+- `<Leader>gb` blameline
+- `<Leader>gp` preview inline
+- `<Leader>gP` preview in popup window
+- `<Leader>gq` send to quickfix
 - `<Leader>gh` operations related to git hunks
+
+- `<Leader>gB` explore git branches
+- `<Leader>gC` explore git commits
+- `<Leader>gs` explore git status
 
 Inside neogit:
 
