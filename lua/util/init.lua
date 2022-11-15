@@ -3,6 +3,7 @@ local M = {}
 function M.dump(...)
   print(vim.inspect(...))
 end
+_G.dump = M.dump
 
 function M.join_path(...)
   return table.concat({ ... }, '/')
@@ -10,6 +11,12 @@ end
 
 function M.tbl_merge(defaults, opts)
   return vim.tbl_deep_extend('force', defaults or {}, opts or {})
+end
+
+function M.foreach(list, callback)
+  for k, v in pairs(list) do
+    callback(v, k)
+  end
 end
 
 -- reload config
@@ -101,6 +108,15 @@ function M.toggle(name, opts)
   end
 end
 
-_G.dump = M.dump
+M.augroup = function(name, autocmds)
+  local group = vim.api.nvim_create_augroup(name, { clear = true })
+  local create_autocmd = vim.api.nvim_create_autocmd
+  M.foreach(autocmds, function(autocmd)
+    local event = autocmd.event
+    autocmd.event = nil
+    autocmd.group = group
+    create_autocmd(event, autocmd)
+  end)
+end
 
 return M

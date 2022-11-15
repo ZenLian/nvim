@@ -1,99 +1,108 @@
 local fn = vim.fn
-local autocmd = vim.api.nvim_create_autocmd
+local util = require('util')
 
-local NAME = 'config.autocmds'
-local group = vim.api.nvim_create_augroup(NAME, { clear = true })
+util.augroup('vimrc.autocmds', {
+  -- https://github.com/ethanholz/nvim-lastplace
+  {
+    desc = 'Back to where you leave',
+    event = { 'BufWinEnter' },
+    callback = function()
+      -- local pos = vim.fn.line([['"]])
+      -- if pos > 1 and pos <= vim.fn.line('$') then vim.cmd([[normal! g'"]]) end
 
-autocmd({ 'BufWinEnter' }, {
-  group = group,
-  desc = 'Return to last position',
-  callback = function()
-    -- local pos = vim.fn.line([['"]])
-    -- if pos > 1 and pos <= vim.fn.line('$') then vim.cmd([[normal! g'"]]) end
-
-    -- ref to https://github.com/ethanholz/nvim-lastplace
-    if fn.line('.') > 1 then
-      return
-    end
-    local last_line = fn.line([['"]])
-    local buff_last_line = fn.line('$')
-    local window_last_line = fn.line('w$')
-    local window_first_line = fn.line('w0')
-    -- If the last line is set and the less than the last line in the buffer
-    if last_line > 0 and last_line <= buff_last_line then
-      -- Check if the last line of the buffer is the same as the window
-      if window_last_line == buff_last_line then
-        -- Set line to last line edited
-        vim.cmd([[normal! g`"]])
-      -- Try to center
-      elseif buff_last_line - last_line > ((window_last_line - window_first_line) / 2) - 1 then
-        vim.cmd([[normal! g`"zz]])
-      else
-        vim.cmd([[normal! G'"<c-e>]])
+      if fn.line('.') > 1 then
+        return
       end
-    end
-    if fn.foldclosed('.') ~= -1 then
-      vim.cmd([[normal! zvzz]])
-    end
-  end,
-})
-
--- highlight on yank (handled by yanky.nvim)
--- autocmd({ 'TextYankPost' }, {
---   -- command = [[ silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=150} ]],
---   group = group,
---   callback = function()
---     vim.highlight.on_yank() -- { higroup = 'Visual', timeout = 250 }
---   end,
--- })
-
--- hide cursorline for unfocused window
--- local cursorline_ignore_ft = {
---   'TelescopePrompt',
---   'DressingInput',
---   '',
--- }
---
--- autocmd({ 'WinEnter', 'WinLeave' }, {
---   group = group,
---   desc = 'Hide cursorline for unfocused windows',
---   callback = function(args)
---     if vim.tbl_contains(cursorline_ignore_ft, vim.bo.filetype) then
---       return
---     end
---     if args.event == 'WinLeave' then
---       vim.wo.cursorline = false
---     else -- 'WinEnter'
---       vim.wo.cursorline = true
---     end
---   end,
--- })
-
--- equalize window when vim window resized
-autocmd({ 'VimResized' }, {
-  group = group,
-  -- command = [[tabdo wincmd =]]
-  command = [[wincmd =]],
-})
-
--- windows to close with "q"
--- vim.cmd([[autocmd FileType help,startuptime,qf,lspinfo,notify,tsplayground nnoremap <buffer><silent> q :close<CR>]])
--- vim.cmd([[autocmd FileType man nnoremap <buffer><silent> q :quit<CR>]])
-autocmd({ 'FileType' }, {
-  group = group,
-  desc = 'Filetypes to close with "q"',
-  pattern = {
-    'help',
-    'startuptime',
-    'qf',
-    'lspinfo',
-    'notify',
-    'tsplayground',
-    'null-ls-info',
-    'checkhealth',
+      local last_line = fn.line([['"]])
+      local buff_last_line = fn.line('$')
+      local window_last_line = fn.line('w$')
+      local window_first_line = fn.line('w0')
+      -- If the last line is set and the less than the last line in the buffer
+      if last_line > 0 and last_line <= buff_last_line then
+        -- Check if the last line of the buffer is the same as the window
+        if window_last_line == buff_last_line then
+          -- Set line to last line edited
+          vim.cmd([[normal! g`"]])
+        -- Try to center
+        elseif buff_last_line - last_line > ((window_last_line - window_first_line) / 2) - 1 then
+          vim.cmd([[normal! g`"zz]])
+        else
+          vim.cmd([[normal! G'"<c-e>]])
+        end
+      end
+      if fn.foldclosed('.') ~= -1 then
+        vim.cmd([[normal! zvzz]])
+      end
+    end,
   },
-  command = [[nnoremap <buffer><silent> q :close<CR>]],
+  {
+    desc = 'Equalize window',
+    event = 'VimResized',
+    command = [[wincmd =]],
+  },
+  {
+    desc = 'Filetypes to close with "q"',
+    event = { 'FileType' },
+    pattern = {
+      'help',
+      'startuptime',
+      'qf',
+      'lspinfo',
+      'notify',
+      'tsplayground',
+      'null-ls-info',
+      'checkhealth',
+    },
+    command = [[nnoremap <buffer><silent> q :close<CR>]],
+  },
+  {
+    desc = 'Auto close corresponding loclist',
+    event = { 'QuitPre' },
+    pattern = '*',
+    nested = true,
+    callback = function()
+      if vim.bo.filetype ~= 'qf' then
+        vim.cmd('silent! lclose')
+      end
+    end,
+  },
+  -- NOTE: now handled by yanky.nvim
+  -- {
+  --   event = { 'TextYankPost' },
+  --   callback = function()
+  --     vim.highlight.on_yank {
+  --       timeout = 250,
+  --       on_visual = false,
+  --       higroup = 'Visual',
+  --     }
+  --   end,
+  -- },
+  {
+    -- https://vim.fandom.com/wiki/Use_gf_to_open_a_file_via_its_URL
+    desc = "use gf to open a file via it's URL",
+    event = { 'BufReadCmd' },
+    pattern = { 'file:///*' },
+    nested = true,
+    callback = function(args)
+      vim.cmd.bdelete { bang = true }
+      vim.cmd.edit(vim.uri_to_fname(args.file))
+    end,
+  },
 })
+
+-- Disable CapLock
+-- util.augroup('CapLockDisable', {
+--   {
+--     event = 'VimEnter',
+--     pattern = '*',
+--     command = 'silent !setxkbmap -option ctrl:nocaps',
+--   },
+--   {
+--     event = 'VimLeave',
+--     pattern = '*',
+--     command = 'silent !setxkbmap -option',
+--   },
+-- })
 
 -- markdown spell on
 -- vim.cmd([[autocmd FileType markdown setlocal spell]])
