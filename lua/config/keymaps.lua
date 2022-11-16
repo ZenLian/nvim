@@ -321,10 +321,10 @@ local function register_leader()
       ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
     },
     w = {
-      name = 'workspace',
-      w = { '<cmd>Telescope persisted<CR>', 'List' },
-      t = { '<cmd>lua require("persisted").toggle()<CR>', 'Toggle' },
-      s = { '<cmd>lua require("persisted").save()<CR>', 'Save' },
+      name = 'sessions',
+      w = { '<cmd>lua MiniSessions.select("read", {})<CR>', 'Load Session+' },
+      d = { '<cmd>lua MiniSessions.select("delete", {})<CR>', 'Delete Session+' },
+      s = { '<cmd>lua MiniSessions.write(nil, {})<CR>', 'Save Session' },
     },
     x = {
       name = 'trouble',

@@ -43,6 +43,7 @@ local config = function()
     -- n_lines = 50,
     search_method = 'cover',
   }
+  -- require('mini.bufremove').setup {}
 end
 
 return { config = config }
