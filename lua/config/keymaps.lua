@@ -151,6 +151,22 @@ local function register_toggles()
     N = { name = 'number', desc = 'line number' },
   }
 
+  toggles.d = {
+    name = 'diagnostics',
+    d = {
+      '<cmd>lua require("plugins.lspconfig.diagnostic").toggle()<cr>',
+      'Toggle diagnostics',
+    },
+    ['['] = {
+      '<cmd>lua require("plugins.lspconfig.diagnostic").toggle(true)<cr>',
+      'Toggle diagnostics on',
+    },
+    [']'] = {
+      '<cmd>lua require("plugins.lspconfig.diagnostic").toggle(false)<cr>',
+      'Toggle diagnostics off',
+    },
+  }
+
   toggles.f = {
     name = 'auto format',
     f = {
@@ -164,6 +180,14 @@ local function register_toggles()
     [']'] = {
       '<cmd>lua require("plugins.lspconfig.formatting").toggle(false)<cr>',
       'Toggle auto format off',
+    },
+  }
+
+  toggles.g = {
+    name = 'git blame',
+    g = {
+      '<cmd>lua require("gitsigns").toggle_current_line_blame()<cr>',
+      'Toggle git blame',
     },
   }
 
