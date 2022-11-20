@@ -325,7 +325,7 @@ local function register_leader()
       p = { '<cmd>PackerStatus<CR>', 'Packer Status' },
       u = { '<cmd>PackerUpdate<CR>', 'Packer Update' },
       s = { '<cmd>PackerSync<CR>', 'Packer Sync' },
-      c = { '<cmd>PackerCompile<CR>', 'Packer Complile' },
+      c = { '<cmd>PackerCompile<CR>', 'Packer Compile' },
       l = { '<cmd>LspInfo<CR>', 'Lsp Info' },
       L = { '<cmd>LspInstall<CR>', 'Install lsp server' },
       n = { '<cmd>NullLsInfo<CR>', 'Null-ls Info' },

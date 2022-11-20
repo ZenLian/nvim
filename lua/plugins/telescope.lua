@@ -1,7 +1,6 @@
 local M = {}
 
 M.config = function()
-  local packer = require('util.packer')
   local telescope = require('telescope')
 
   local file_browser_actions = function(action)
@@ -19,6 +18,17 @@ M.config = function()
 
   telescope.setup {
     defaults = {
+      vimgrep_arguments = {
+        'rg',
+        '--color=never',
+        '--no-heading',
+        '--with-filename',
+        '--line-number',
+        '--column',
+        '--smart-case',
+        '--hidden',
+        -- '--glob="!.git/*"',
+      },
       mappings = {
         i = {
           ['<C-/>'] = 'which_key',
@@ -69,12 +79,7 @@ M.config = function()
     },
   }
 
-  -- require('telescope').load_extension('themes')
-  -- telescope.load_extension('fzf')
-  -- telescope.load_extension('file_browser')
-
   telescope.load_extension('notify')
-  -- telescope.load_extension('persisted') -- To load the telescope extension
 end
 
 M.project_files = function()
@@ -88,6 +93,7 @@ M.project_files = function()
     if #clients > 0 then
       opts.cwd = clients[1].config.root_dir
     end
+    opts.hidden = true
     builtin.find_files(opts)
   end
 end
