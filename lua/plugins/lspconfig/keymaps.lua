@@ -68,7 +68,7 @@ function M.on_attach(_, bufnr)
     opts.buffer = bufnr
     vim.keymap.set(mode, lhs, rhs, opts)
   end
-  map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+  -- map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
   map('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
   map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
   map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>')

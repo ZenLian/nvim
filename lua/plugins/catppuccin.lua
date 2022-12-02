@@ -3,6 +3,7 @@ local M = {}
 M.config = function()
   -- vim.g.catppuccin_flavour = 'latte'
   vim.g.catppuccin_flavour = 'mocha'
+  -- vim.g.catppuccin_flavour = 'macchiato'
   local catppuccin = require('catppuccin')
 
   local colors = require('catppuccin.palettes').get_palette()
@@ -69,6 +70,8 @@ M.config = function()
       -- bufferline = true,
     },
     custom_highlights = {
+      MatchParen = { fg = colors.mantle, bg = colors.blue },
+
       Pmenu = { fg = colors.text, bg = colors.surface0 },
       PmenuSel = { fg = colors.surface0, bg = colors.blue },
       CmpItemAbbr = { fg = colors.text },
@@ -97,6 +100,8 @@ M.config = function()
 
       NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
       NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
+
+      UfoFoldedBg = { bg = colors.surface1 },
     },
   }
 

@@ -148,17 +148,17 @@ M.config = function()
   local quickfix = {
     filetypes = { 'qf', 'Trouble' },
     active = {
-      { '🚦', { 'white', 'red' } },
+      { ' ', { 'white', 'red' } },
       { ' Quickfix ', { 'red', 'black' } },
       {
         function()
           return vim.fn.getqflist({ title = 0 }).title
         end,
-        { 'blue', 'InactiveBg' },
+        { 'blue', 'black' },
       },
-      { ' Total : %L ', { 'blue', 'InactiveBg' } },
+      { ' Total : %L ', { 'blue', 'black' } },
       basic.divider,
-      { '🚦', { 'black', 'red' } },
+      { ' ', { 'black', 'red' } },
     },
 
     always_active = true,

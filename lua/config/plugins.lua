@@ -71,11 +71,9 @@ local plugins = {
     cmd = { 'Twilight' },
   },
   {
-    'anuvyklack/pretty-fold.nvim',
-    event = 'BufRead',
-    config = function()
-      require('pretty-fold').setup {}
-    end,
+    'kevinhwang91/nvim-ufo',
+    requires = 'kevinhwang91/promise-async',
+    config = true,
   },
   -- }}} ui
 
