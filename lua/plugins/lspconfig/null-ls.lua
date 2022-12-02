@@ -1,21 +1,26 @@
 local M = {}
 
 function M.setup(on_attach)
-  require('null-ls').setup {
+  local null_ls = require('null-ls')
+  null_ls.setup {
     sources = {
       -- lua
-      require('null-ls').builtins.diagnostics.luacheck.with {
+      null_ls.builtins.diagnostics.luacheck.with {
         diagnostics_format = '#{m} (#{s})',
       },
-      require('null-ls').builtins.formatting.stylua,
-      require('null-ls').builtins.diagnostics.eslint_d,
-      require('null-ls').builtins.code_actions.eslint_d,
-      require('null-ls').builtins.formatting.prettierd,
+      null_ls.builtins.formatting.stylua,
+      null_ls.builtins.diagnostics.eslint_d,
+      null_ls.builtins.code_actions.eslint_d,
+      null_ls.builtins.formatting.prettierd,
       -- markdown
-      require('null-ls').builtins.diagnostics.markdownlint.with {
+      null_ls.builtins.diagnostics.markdownlint.with {
         diagnostics_format = '[#{c}] #{m} (#{s})',
       },
-      require('null-ls').builtins.formatting.markdownlint,
+      null_ls.builtins.formatting.markdownlint,
+      -- shell
+      null_ls.builtins.diagnostics.shellcheck,
+      null_ls.builtins.code_actions.shellcheck,
+      null_ls.builtins.formatting.beautysh,
     },
     on_attach = on_attach,
   }

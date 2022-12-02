@@ -131,6 +131,10 @@ local plugins = {
   --   config = true,
   -- },
   {
+    'ahmedkhalf/project.nvim',
+    config = true,
+  },
+  {
     'sindrets/diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },
     module = 'diffview',

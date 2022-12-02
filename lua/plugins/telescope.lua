@@ -80,6 +80,7 @@ M.config = function()
   }
 
   telescope.load_extension('notify')
+  telescope.load_extension('projects')
 end
 
 M.project_files = function()

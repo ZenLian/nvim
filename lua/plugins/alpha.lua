@@ -24,7 +24,7 @@ local config = function()
     '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
     '                                    ',
   }
-  -- dashboard.section.header.opts.hl = "Function"
+  dashboard.section.header.opts.hl = 'Function'
 
   -- buttons
   local function button(...)
@@ -40,7 +40,7 @@ local config = function()
     button('e', '   New', ':ene<CR>'),
     button('f', '   Files', '<cmd>lua require("plugins.telescope").project_files()<CR>'),
     button('r', '   Recent', ':Telescope oldfiles<CR>'),
-    button('s', '   Sessions', '<cmd>Telescope persisted<CR>'),
+    button('p', '   Projects', '<cmd>Telescope projects<CR>'),
     button('c', '   Configs', ':e $MYVIMRC | :cd %:p:h<CR>'),
     button('q', '   Quit', ':qa<CR>'),
   }

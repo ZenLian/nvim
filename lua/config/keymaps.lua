@@ -340,6 +340,7 @@ local function register_leader()
     s = {
       name = 'search',
       h = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
+      p = { '<cmd>Telescope projects<CR>', 'Yank History' },
       y = { '<cmd>YankyRingHistory<CR>', 'Yank History' },
       [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
       ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
