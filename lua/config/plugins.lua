@@ -22,12 +22,6 @@ local plugins = {
     config = true,
   },
   {
-    'windwp/windline.nvim',
-    -- event = 'VimEnter',
-    opt = true,
-    config = true,
-  },
-  {
     'rebelot/heirline.nvim',
     event = 'VimEnter',
     config = true,

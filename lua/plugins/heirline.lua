@@ -25,6 +25,15 @@ M.config = function()
     hl = function(self)
       return { fg = self:mode_color() }
     end,
+    update = { 'ModeChanged' },
+  }
+
+  local SquareMode = {
+    provider = '█',
+    hl = function(self)
+      return { fg = self:mode_color() }
+    end,
+    update = { 'ModeChanged' },
   }
 
   local FileFlags = {
@@ -66,6 +75,9 @@ M.config = function()
     -- filename
     {
       provider = function(self)
+        if vim.bo.filetype == 'help' then
+          return vim.fn.fnamemodify(self.filename, ':t')
+        end
         -- first, trim the pattern relative to the current directory.
         -- :h filename-modifers
         local filename = vim.fn.fnamemodify(self.filename, ':.')
@@ -88,14 +100,14 @@ M.config = function()
 
   local WorkDir = {
     provider = function()
-      local icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
+      -- local icon = (vim.fn.haslocaldir(0) == 1 and 'l' or 'g') .. ' ' .. ' '
       local cwd = vim.fn.getcwd(0)
       cwd = vim.fn.fnamemodify(cwd, ':~')
-      if not conditions.width_percent_below(#cwd, 0.25) then
-        cwd = vim.fn.pathshorten(cwd)
-      end
+      -- if not conditions.width_percent_below(#cwd, 0.25) then
+      --   cwd = vim.fn.pathshorten(cwd)
+      -- end
       local trail = cwd:sub(-1) == '/' and '' or '/'
-      return icon .. cwd .. trail
+      return cwd .. trail
     end,
     hl = { fg = 'blue', bold = true },
   }
@@ -172,7 +184,7 @@ M.config = function()
     hl = function(self)
       return { fg = 'bg', bg = self:mode_color() }
     end,
-    update = { 'CursorMoved', 'ModeChanged' },
+    update = { 'CursorMoved', 'CursorMovedI', 'ModeChanged' },
   }
 
   local LSPActive = {
@@ -292,21 +304,60 @@ M.config = function()
         filetype = { 'alpha', 'dashboard' },
       }
     end,
+    static = {
+      version = string.format(' NVIM v%s.%s.%s ', vim.version().major, vim.version().minor, vim.version().patch),
+    },
     ViMode,
     Align,
-    { provider = string.format(' NVIM v%s.%s.%s ', vim.version().major, vim.version().minor, vim.version().patch) },
+    {
+      provider = function(self)
+        return self.version
+      end,
+    },
+    Align,
+    SquareMode,
   }
 
-  -- stylua: ignore
-  local SpecialStatusline = {
+  local ExplorerStatusline = {
+    condition = function()
+      return vim.tbl_contains({ 'neo-tree', 'drex' }, vim.bo.filetype)
+    end,
+    SquareMode,
+    {
+      provider = '  ',
+      hl = function(self)
+        return { fg = self:mode_color() }
+      end,
+    },
+    WorkDir,
+    Align,
+    FileType,
+    Space,
+    ScrollBar,
+  }
+
+  local QuickfixStatusline = {
     condition = function()
       return conditions.buffer_matches {
-        buftype = { 'nofile', 'prompt', 'help', 'quickfix' },
-        filetype = { '^git.*', 'fugitive' },
+        buftype = { 'quickfix' },
+        filetype = { 'qf', 'Trouble' },
       }
+      -- return vim.tbl_contains({ 'qf', 'Trouble' }, vim.bo.filetype)
     end,
-
-    ViMode, Space, FileType, Space, HelpFileName, Align, ScrollBar,
+    static = {},
+    {
+      provider = '█ 🔨 ',
+      hl = { fg = 'red' },
+    },
+    {
+      provider = 'Quickfix',
+      hl = { fg = 'magenta' },
+    },
+    Align,
+    {
+      provider = '█',
+      hl = { fg = 'red' },
+    },
   }
 
   local TerminalStatusline = {
@@ -321,6 +372,7 @@ M.config = function()
       hl = function(self)
         return { fg = self:mode_color() }
       end,
+      update = { 'ModeChanged' },
     },
     Space,
     TerminalName,
@@ -332,17 +384,30 @@ M.config = function()
         }
       end,
       provider = function()
-        return string.format('toggleterm#%s', vim.b.toggle_number)
+        local trim = ''
+        if vim.b.toggle_number then
+          trim = '#' .. vim.b.toggle_number
+        end
+        return 'toggleterm' .. trim
       end,
       hl = { fg = 'yellow' },
     },
     Space,
-    {
-      provider = '█',
-      hl = function(self)
-        return { fg = self:mode_color() }
-      end,
-    },
+    SquareMode,
+  }
+
+
+  -- stylua: ignore
+  local SpecialStatusline = {
+    condition = function()
+      return conditions.buffer_matches {
+        buftype = { 'nofile', 'prompt' },
+        filetype = { '^git.*', 'fugitive', 'Neogit.*' },
+        -- bufname = {'.*COMMIT_EDITMSG$'}
+      }
+    end,
+
+    ViMode, Space, FileType, Align, SquareMode,
   }
 
   local StatusLines = {
@@ -400,8 +465,10 @@ M.config = function()
     hl = { fg = 'fg', bg = 'bg' },
     fallthrough = false,
     AlphaStatusline,
-    SpecialStatusline,
+    ExplorerStatusline,
+    QuickfixStatusline,
     TerminalStatusline,
+    SpecialStatusline,
     DefaultStatusline,
   }
 
