@@ -59,6 +59,7 @@ local function register_basic()
 
   -- plugins
   keymap('n', '<C-e>', '<cmd>Neotree<CR>')
+  -- keymap('n', '<C-e>', '<cmd>DrexDrawerOpen<CR>')
   keymap('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
   -- bufferline
@@ -215,57 +216,6 @@ local function register_yanky()
   keymap('n', '=P', '<Plug>(YankyPutBeforeFilter)')
 end
 
-function M.register_gitsigns(bufnr)
-  local whichkey = require('which-key')
-  -- <Leader>g
-  whichkey.register({
-    name = 'git',
-    D = { '<cmd>lua require("gitsigns").diffthis()<CR>', 'Diff index' },
-    p = { '<cmd>lua require("gitsigns").preview_hunk_inline()<CR>', 'Preview inline' },
-    P = { '<cmd>lua require("gitsigns").preview_hunk()<CR>', 'Preview' },
-    q = { '<cmd>lua require("gitsigns").setqflist(0)<CR>', 'Send to quickfix window' },
-    b = { '<cmd>lua require("gitsigns").blame_line{full=true}<CR>', 'Git blame' },
-    h = {
-      -- defined by gitsigns
-      name = 'hunk',
-      s = { '<cmd>lua require("gitsigns").stage_hunk()<CR>', 'Stage hunk' },
-      S = { '<cmd>lua require("gitsigns").stage_buffer()<CR>', 'Stage file' },
-      u = { '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', 'Unstage hunk' },
-      U = { '<cmd>lua require("gitsigns").reset_buffer_index()<CR>', 'Unstage file' },
-      r = { '<cmd>lua require("gitsigns").reset_hunk()<CR>', 'Reset hunk' },
-      R = { '<cmd>lua require("gitsigns").reset_buffer()<CR>', 'Reset file' },
-    },
-  }, { prefix = '<Leader>g', buffer = bufnr })
-  -- <Leader>g Visual
-  whichkey.register({
-    name = 'git',
-    h = {
-      -- defined by gitsigns
-      name = 'hunk',
-      r = { '<cmd>lua require"gitsigns.actions".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Reset hunk' },
-      s = { '<cmd>lua require"gitsigns.actions".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Stage hunk' },
-    },
-  }, { prefix = '<Leader>g', mode = 'v', buffer = bufnr })
-  -- Next/Previous hunk
-  whichkey.register({
-    ['[g'] = {
-      "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'",
-      'Previous hunk',
-      expr = true,
-    },
-    [']g'] = {
-      "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'",
-      'Next hunk',
-      expr = true,
-    },
-  }, { buffer = bufnr })
-  -- Text objects
-  whichkey.register({
-    ['ig'] = { '<cmd>lua require("gitsigns.actions").select_hunk()<CR>', 'a hunk' },
-    ['ag'] = { '<cmd>lua require("gitsigns.actions").select_hunk()<CR>', 'a hunk' },
-  }, { mode = { 'o', 'x' }, buffer = bufnr })
-end
-
 local function register_leader()
   --
   -- leader keymaps
@@ -290,6 +240,7 @@ local function register_leader()
       },
     },
     e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
+    -- e = { '<cmd>DrexDrawerToggle<CR>', 'Toggle File Explorer' },
     f = {
       name = 'find files/text',
       f = { '<cmd>Telescope find_files<CR>', 'Find files' },
@@ -340,7 +291,7 @@ local function register_leader()
     s = {
       name = 'search',
       h = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
-      p = { '<cmd>Telescope projects<CR>', 'Yank History' },
+      p = { '<cmd>Telescope projects<CR>', 'Projects' },
       y = { '<cmd>YankyRingHistory<CR>', 'Yank History' },
       [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
       ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
@@ -386,6 +337,57 @@ function M.init()
   register_toggles()
   register_yanky()
   register_leader()
+end
+
+function M.register_gitsigns(bufnr)
+  local whichkey = require('which-key')
+  -- <Leader>g
+  whichkey.register({
+    name = 'git',
+    D = { '<cmd>lua require("gitsigns").diffthis()<CR>', 'Diff index' },
+    p = { '<cmd>lua require("gitsigns").preview_hunk_inline()<CR>', 'Preview inline' },
+    P = { '<cmd>lua require("gitsigns").preview_hunk()<CR>', 'Preview' },
+    q = { '<cmd>lua require("gitsigns").setqflist(0)<CR>', 'Send to quickfix window' },
+    b = { '<cmd>lua require("gitsigns").blame_line{full=true}<CR>', 'Git blame' },
+    h = {
+      -- defined by gitsigns
+      name = 'hunk',
+      s = { '<cmd>lua require("gitsigns").stage_hunk()<CR>', 'Stage hunk' },
+      S = { '<cmd>lua require("gitsigns").stage_buffer()<CR>', 'Stage file' },
+      u = { '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', 'Unstage hunk' },
+      U = { '<cmd>lua require("gitsigns").reset_buffer_index()<CR>', 'Unstage file' },
+      r = { '<cmd>lua require("gitsigns").reset_hunk()<CR>', 'Reset hunk' },
+      R = { '<cmd>lua require("gitsigns").reset_buffer()<CR>', 'Reset file' },
+    },
+  }, { prefix = '<Leader>g', buffer = bufnr })
+  -- <Leader>g Visual
+  whichkey.register({
+    name = 'git',
+    h = {
+      -- defined by gitsigns
+      name = 'hunk',
+      r = { '<cmd>lua require"gitsigns.actions".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Reset hunk' },
+      s = { '<cmd>lua require"gitsigns.actions".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>', 'Stage hunk' },
+    },
+  }, { prefix = '<Leader>g', mode = 'v', buffer = bufnr })
+  -- Next/Previous hunk
+  whichkey.register({
+    ['[g'] = {
+      "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'",
+      'Previous hunk',
+      expr = true,
+    },
+    [']g'] = {
+      "&diff ? ']h' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'",
+      'Next hunk',
+      expr = true,
+    },
+  }, { buffer = bufnr })
+  -- Text objects
+  whichkey.register({
+    ['ig'] = { '<cmd>lua require("gitsigns.actions").select_hunk()<CR>', 'a hunk' },
+    ['ag'] = { '<cmd>lua require("gitsigns.actions").select_hunk()<CR>', 'a hunk' },
+  }, { mode = { 'o', 'x' }, buffer = bufnr })
 end
 
 pcall(M.init)

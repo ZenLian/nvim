@@ -54,7 +54,7 @@ local options = {
   ttimeoutlen = 0,
   updatetime = 100,
   redrawtime = 1500,
-  lazyredraw = false,
+  lazyredraw = true,
 
   -- search
   ignorecase = true,

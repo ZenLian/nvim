@@ -78,6 +78,10 @@ M.config = function()
       CmpItemAbbrMatch = { fg = colors.blue, style = { 'bold' } },
       CmpItemAbbrMatchFuzzy = { fg = colors.blue, style = { 'bold' } },
 
+      DiagnosticHint = { fg = colors.blue, style = { 'italic' } },
+      DiagnosticSignHint = { fg = colors.blue },
+      DiagnosticFloatingHint = { fg = colors.blue },
+
       LspInfoBorder = { link = 'FloatBorder' },
       LspInfoTitle = { fg = colors.blue },
       LspInfoList = { fg = colors.green },

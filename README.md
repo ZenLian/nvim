@@ -174,6 +174,13 @@ interactive insert:
 
 - `<Leader>is` symbols
 
+tips:
+
+- Insert Mode:
+  - `<C-K>{1or2char}` to insert digraphs(`:digraphs`), e.g. `<C-k>vv` insert `│`.
+  - `<C-V><Tab>` to insert actual Tab.
+  - `<C-R>` insert a register content, e.g. `<C-R>+` to insert clipboard content.
+
 ### 📁 File Explorer
 
 - `<C-e>` open/focus file explorer

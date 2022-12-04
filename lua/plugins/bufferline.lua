@@ -5,7 +5,13 @@ local config = function()
       offsets = {
         {
           filetype = 'neo-tree',
-          text = '  File Explorer',
+          text = '  Neo Tree',
+          highlight = 'NeoTreeNormal',
+          text_align = 'left',
+        },
+        {
+          filetype = 'drex',
+          text = '  Drex',
           highlight = 'NeoTreeNormal',
           text_align = 'left',
         },

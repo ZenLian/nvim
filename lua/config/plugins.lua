@@ -23,6 +23,12 @@ local plugins = {
   },
   {
     'windwp/windline.nvim',
+    -- event = 'VimEnter',
+    opt = true,
+    config = true,
+  },
+  {
+    'rebelot/heirline.nvim',
     event = 'VimEnter',
     config = true,
   },
@@ -122,12 +128,11 @@ local plugins = {
     cmd = { 'Neotree' },
     config = true,
   },
-  -- FIXME: conflicts with treesitter foldexpr
-  -- {
-  --   'olimorris/persisted.nvim',
-  --   module = { 'persisted' },
-  --   config = true,
-  -- },
+  {
+    'theblob42/drex.nvim',
+    cmd = { 'Drex', 'DrexDrawerOpen', 'DrexDrawerToggle' },
+    config = true,
+  },
   {
     'ahmedkhalf/project.nvim',
     config = true,

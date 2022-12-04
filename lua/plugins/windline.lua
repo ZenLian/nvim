@@ -166,7 +166,7 @@ M.config = function()
   }
 
   local explorer = {
-    filetypes = { 'fern', 'NvimTree', 'lir' },
+    filetypes = { 'fern', 'NvimTree', 'lir', 'neo-tree', 'drex' },
     active = {
       { '  Explorer ', { 'InactiveFg', 'blue' } },
       { b_components.divider, { 'white', 'InactiveBg' } },

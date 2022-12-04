@@ -4,16 +4,17 @@ local util = require('util')
 local TITLE = 'Diagnostics'
 M.enable = true
 
+M.signs = {
+  -- icons / text used for a diagnostic
+  Error = '',
+  Warn = '',
+  Hint = '',
+  Info = '',
+}
+
 function M.setup()
-  local signs = {
-    -- icons / text used for a diagnostic
-    Error = '',
-    Warn = '',
-    Hint = '',
-    Info = '',
-  }
-  for serverity, icon in pairs(signs) do
-    local hl = 'DiagnosticSign' .. serverity
+  for severity, icon in pairs(M.signs) do
+    local hl = 'DiagnosticSign' .. severity
     vim.fn.sign_define(hl, {
       text = icon,
       texthl = hl,
