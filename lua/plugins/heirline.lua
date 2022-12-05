@@ -19,6 +19,8 @@ M.config = function()
 
   local Align = { provider = '%=' }
   local Space = { provider = ' ' }
+  local Empty = { provider = '' }
+  local Trim = { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
 
   local ViMode = {
     provider = '█ ',
@@ -70,32 +72,34 @@ M.config = function()
   local FileName = {
     init = function(self)
       self.filename = vim.api.nvim_buf_get_name(0)
+      if self.filename == '' then
+        self.relative_filename = '[No Name]'
+        self.tail_filename = '[No Name]'
+        return
+      end
+      self.relative_filename = vim.fn.fnamemodify(self.filename, ':.')
+      self.tail_filename = vim.fn.fnamemodify(self.filename, ':t')
     end,
     FileIcon,
     -- filename
     {
-      provider = function(self)
-        if vim.bo.filetype == 'help' then
-          return vim.fn.fnamemodify(self.filename, ':t')
-        end
-        -- first, trim the pattern relative to the current directory.
-        -- :h filename-modifers
-        local filename = vim.fn.fnamemodify(self.filename, ':.')
-        if filename == '' then
-          return '[No Name]'
-        end
-        -- now, if the filename would occupy more than 1/4th of the available
-        -- space, we trim the file path to its initials
-        -- See Flexible Components section below for dynamic truncation
-        if not conditions.width_percent_below(#filename, 0.25) then
-          filename = vim.fn.pathshorten(filename)
-        end
-        return filename
-      end,
+      flexible = true,
       hl = { fg = 'blue' },
+      {
+        provider = function(self)
+          if vim.bo.filetype == 'help' then
+            return self.tail_filename
+          end
+          return self.relative_filename
+        end,
+      },
+      {
+        provider = function(self)
+          return self.tail_filename
+        end,
+      },
     },
     FileFlags,
-    { provider = '%<' }, -- this means that the statusline is cut here when there's not enough space
   }
 
   local WorkDir = {
@@ -112,23 +116,21 @@ M.config = function()
     hl = { fg = 'blue', bold = true },
   }
 
-  local HelpFileName = {
-    condition = function()
-      return vim.bo.filetype == 'help'
-    end,
-    provider = function(self)
-      vim.fn.bufname(0)
-      local filename = vim.api.nvim_buf_get_name(0)
-      return vim.fn.fnamemodify(filename, ':t')
-    end,
-    hl = { fg = 'blue' },
-  }
-
   local FileType = {
     provider = function()
       return vim.bo.filetype
     end,
     hl = { fg = 'yellow' },
+    on_click = {
+      callback = function()
+        vim.ui.input({ prompt = 'Change filetype: ', default = vim.bo.filetype }, function(input)
+          if input and input ~= '' then
+            vim.bo.filetype = input
+          end
+        end)
+      end,
+      name = 'heirline_filetype',
+    },
   }
   local FileEncoding = {
     provider = function()
@@ -157,16 +159,28 @@ M.config = function()
   }
 
   local FileInfo = {
-    FileEncoding,
-    FileFormat,
+    flexible = true,
+    {
+      FileEncoding,
+      FileFormat,
+      FileType,
+    },
+    {
+      FileEncoding,
+      FileType,
+    },
     FileType,
+    Empty,
   }
 
   local Ruler = {
+    flexible = true,
     -- %l = current line number
     -- %L = number of lines in the buffer
     -- %c = column number
-    provider = '%7(%l/%-3L%):%-2c',
+    { provider = '%7(%l/%-3L%):%-2c' },
+    { provider = '%l:%c' },
+    Empty,
   }
 
   local ScrollBar = {
@@ -187,17 +201,71 @@ M.config = function()
     update = { 'CursorMoved', 'CursorMovedI', 'ModeChanged' },
   }
 
+  local NullLsInfo = {
+    on_click = {
+      callback = function()
+        vim.schedule(function()
+          vim.cmd('NullLsInfo')
+        end)
+      end,
+      name = 'heirline_nulllsinfo',
+    },
+    flexible = true,
+    {
+      provider = function(self)
+        return string.format('NULL-LS(%s) ', table.concat(self.sources, '|'))
+      end,
+    },
+    {
+      provider = function(self)
+        return 'null-ls '
+      end,
+    },
+  }
+
   local LSPActive = {
     condition = conditions.lsp_attached,
     update = { 'LspAttach', 'LspDetach' },
-
-    provider = function()
-      local names = vim.tbl_map(function(client)
-        return client.name
-      end, vim.lsp.get_active_clients { bufnr = 0 })
-      return '[' .. table.concat(names, ' ') .. ']'
+    init = function(self)
+      self.clients = {}
+      self.sources = nil
+      for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+        if client.name ~= 'null-ls' then
+          self.clients[#self.clients + 1] = client.name
+        else -- null-ls sources
+          self.sources = vim.tbl_map(function(source)
+            return source.name
+          end, require('null-ls.sources').get_available(vim.bo.filetype))
+        end
+      end
     end,
     hl = { fg = 'green', bold = true },
+
+    {
+      on_click = {
+        callback = function()
+          vim.schedule(function()
+            vim.cmd('Mason')
+          end)
+        end,
+        name = 'heirline_lspinstall',
+      },
+      provider = '[',
+    },
+    NullLsInfo,
+    {
+      on_click = {
+        callback = function()
+          vim.schedule(function()
+            vim.cmd('LspInfo')
+          end)
+        end,
+        name = 'heirline_lspinfo',
+      },
+      provider = function(self)
+        return table.concat(self.clients, ' ') .. ']'
+      end,
+    },
   }
 
   local Diagnostics = {
@@ -215,21 +283,73 @@ M.config = function()
     end,
 
     update = { 'DiagnosticChanged', 'BufEnter' },
+
+    on_click = {
+      callback = function()
+        require('trouble').toggle { mode = 'document_diagnostics' }
+      end,
+      name = 'heirline_diagnostics',
+    },
+
+    { provider = '🔨[' },
+    {
+      provider = function(self)
+        local severity = 'Error'
+        local count = self[severity]
+        return count > 0 and (self.signs[severity] .. count .. ' ')
+      end,
+      hl = { fg = utils.get_highlight('DiagnosticSignError').fg },
+    },
+    {
+      provider = function(self)
+        local severity = 'Warn'
+        local count = self[severity]
+        return count > 0 and (self.signs[severity] .. count .. ' ')
+      end,
+      hl = { fg = utils.get_highlight('DiagnosticSignWarn').fg },
+    },
+    {
+      provider = function(self)
+        local severity = 'Info'
+        local count = self[severity]
+        return count > 0 and (self.signs[severity] .. count .. ' ')
+      end,
+      hl = { fg = utils.get_highlight('DiagnosticSignInfo').fg },
+    },
+    {
+      provider = function(self)
+        local severity = 'Hint'
+        local count = self[severity]
+        return count > 0 and (self.signs[severity] .. count)
+      end,
+      hl = { fg = utils.get_highlight('DiagnosticSignHint').fg },
+    },
+    { provider = ']' },
   }
 
-  for severity, icon in pairs(Diagnostics.static.signs) do
-    table.insert(Diagnostics, {
-      provider = function()
-        local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[string.upper(severity)] })
-        return count > 0 and (icon .. ' ' .. count .. ' ')
-      end,
-      hl = { fg = utils.get_highlight('DiagnosticSign' .. severity).fg },
-    })
-  end
+  -- table.insert(Diagnostics, { provider = '![' })
+  -- for severity, icon in pairs(Diagnostics.static.signs) do
+  --   table.insert(Diagnostics, {
+  --     provider = function()
+  --       local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[string.upper(severity)] })
+  --       return count > 0 and (icon .. ' ' .. count .. ' ')
+  --     end,
+  --     hl = { fg = utils.get_highlight('DiagnosticSign' .. severity).fg },
+  --   })
+  -- end
+  -- table.insert(Diagnostics, { provider = ']' })
 
   local LspInfo = {
-    Diagnostics,
-    LSPActive,
+    flexible = true,
+    {
+      Diagnostics,
+      Space,
+      LSPActive,
+    },
+    {
+      Diagnostics,
+    },
+    Empty,
   }
 
   local Git = {
@@ -246,39 +366,64 @@ M.config = function()
       provider = function(self)
         return ' ' .. self.status_dict.head
       end,
+      on_click = {
+        callback = function()
+          -- vim.defer_fn(function()
+          --   require('telescope.builtin').git_branches()
+          -- end, 50)
+          vim.schedule(function()
+            require('telescope.builtin').git_branches()
+          end)
+        end,
+        name = 'heirline_gitbranch',
+      },
     },
     {
-      condition = function(self)
-        return self.has_changes
-      end,
-      provider = '(',
-    },
-    {
-      provider = function(self)
-        local count = self.status_dict.added or 0
-        return count > 0 and ('+' .. count)
-      end,
-      hl = { fg = 'green' },
-    },
-    {
-      provider = function(self)
-        local count = self.status_dict.removed or 0
-        return count > 0 and ('-' .. count)
-      end,
-      hl = { fg = 'red' },
-    },
-    {
-      provider = function(self)
-        local count = self.status_dict.changed or 0
-        return count > 0 and ('~' .. count)
-      end,
-      hl = { fg = 'blue' },
-    },
-    {
-      condition = function(self)
-        return self.has_changes
-      end,
-      provider = ')',
+      flexible = true,
+      on_click = {
+        callback = function()
+          vim.schedule(function()
+            require('gitsigns').diffthis()
+          end)
+        end,
+        name = 'heirline_gitdiff',
+      },
+      {
+        {
+          condition = function(self)
+            return self.has_changes
+          end,
+          provider = '(',
+        },
+        {
+          provider = function(self)
+            local count = self.status_dict.added or 0
+            return count > 0 and ('+' .. count)
+          end,
+          hl = { fg = 'green' },
+        },
+        {
+          provider = function(self)
+            local count = self.status_dict.removed or 0
+            return count > 0 and ('-' .. count)
+          end,
+          hl = { fg = 'red' },
+        },
+        {
+          provider = function(self)
+            local count = self.status_dict.changed or 0
+            return count > 0 and ('~' .. count)
+          end,
+          hl = { fg = 'blue' },
+        },
+        {
+          condition = function(self)
+            return self.has_changes
+          end,
+          provider = ')',
+        },
+      },
+      Empty,
     },
   }
 
@@ -292,10 +437,17 @@ M.config = function()
     hl = { fg = 'blue', bold = true },
   }
 
-  -- stylua: ignore
   local DefaultStatusline = {
-    ViMode, Space, Git, Space, FileName, Align,
-    LspInfo, Space, FileInfo, Space, Ruler, Space, ScrollBar,
+    ViMode,
+    { flexible = 20, { Space, Git }, Empty },
+    { flexible = 100, { Space, FileName } },
+    Trim,
+    Align,
+
+    { flexible = 10, { LspInfo, Space }, Empty },
+    { flexible = 30, { FileInfo, Space }, Empty },
+    { flexible = 40, { Ruler, Space }, Empty },
+    ScrollBar,
   }
 
   local AlphaStatusline = {

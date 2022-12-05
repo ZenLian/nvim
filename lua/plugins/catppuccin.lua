@@ -88,6 +88,8 @@ M.config = function()
       LspInfoFiletype = { fg = colors.yellow },
       LspInfoTip = { link = 'Comment' },
 
+      NullLsInfoBorder = { link = 'FloatBorder' },
+
       TelescopeNormal = { fg = colors.text, bg = colors.mantle },
       TelescopePromptNormal = { fg = colors.text, bg = colors.surface0 },
       TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },

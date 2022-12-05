@@ -13,12 +13,18 @@
 
 ## 🔌 Plugins
 
+### Requirements
+
+- [plenary.nvim](https://github.com/nvim-lua/plenary.nvim)
+- [nui.nvim](https://github.com/MunifTanjim/nui.nvim)
+- [sqlite.lua](https://github.com/kkharji/sqlite.lua)
+
 ### 🖼️ UI
 
 | Plugin                                                                          | Description                              |
 | ------------------------------------------------------------------------------- | ---------------------------------------- |
-| [nvdark.nvim](https://github.com/ZenLian/nvdark.nvim)                           | colorscheme like vscode dark+            |
-| [windline.nvim](https://github.com/windwp/windline.nvim)                        | status line                              |
+| [catppuccin](https://github.com/catppuccin/nvim)                                | colorscheme                              |
+| [rebelot/heirline.nvim](https://github.com/rebelot/heirline.nvim)               | statusline/winbar                        |
 | [bufferline.nvim](https://github.com/akinsho/bufferline.nvim)                   | buffer/tab line                          |
 | [alpha-nvim](https://github.com/goolord/alpha-nvim)                             | greeter                                  |
 | [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim) | visualized indent line                   |

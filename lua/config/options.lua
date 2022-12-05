@@ -44,8 +44,8 @@ local options = {
   pumheight = 15,
   helpheight = 12,
   previewheight = 12,
-  pumblend = 10,
-  winblend = 10,
+  pumblend = 0,
+  winblend = 0,
 
   -- timeout
   timeout = true,

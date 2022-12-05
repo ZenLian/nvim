@@ -57,7 +57,6 @@ local plugins = {
     config = true,
   },
   {
-    -- TODO: not neovim only
     'RRethy/vim-illuminate',
     config = true,
   },
