@@ -30,9 +30,6 @@ util.augroup('vimrc.autocmds', {
           vim.cmd([[normal! G'"<c-e>]])
         end
       end
-      if fn.foldclosed('.') ~= -1 then
-        vim.cmd([[normal! zvzz]])
-      end
     end,
   },
   {
@@ -52,6 +49,7 @@ util.augroup('vimrc.autocmds', {
       'tsplayground',
       'null-ls-info',
       'checkhealth',
+      'drex',
     },
     command = [[nnoremap <buffer><silent> q :close<CR>]],
   },

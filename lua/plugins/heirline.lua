@@ -14,6 +14,7 @@ M.config = function()
     blue = palette.blue,
     magenta = palette.peach,
     cyan = palette.teal,
+    dark = palette.mantle,
   }
   require('heirline').load_colors(colors)
 
@@ -469,14 +470,43 @@ M.config = function()
         return self.version
       end,
     },
-    Align,
     SquareMode,
+  }
+
+  local DrexInfo = {
+    condition = function()
+      return vim.bo.filetype == 'drex'
+    end,
+    -- drex current directory
+    {
+      provider = function()
+        return require('drex.utils').get_root_path(0)
+      end,
+      hl = { fg = 'blue' },
+    },
+    -- clipboard entries
+    {
+      init = function(self)
+        self.count = vim.tbl_count(require('drex.clipboard').clipboard)
+      end,
+      provider = function(self)
+        return '  ' .. self.count
+      end,
+      hl = { fg = 'magenta' },
+    },
+  }
+
+  local DirectoryInfo = {
+    fallthrough = false,
+    DrexInfo,
+    WorkDir,
   }
 
   local ExplorerStatusline = {
     condition = function()
       return vim.tbl_contains({ 'neo-tree', 'drex' }, vim.bo.filetype)
     end,
+    hl = { bg = 'dark' },
     SquareMode,
     {
       provider = '  ',
@@ -484,11 +514,13 @@ M.config = function()
         return { fg = self:mode_color() }
       end,
     },
-    WorkDir,
+    DirectoryInfo,
     Align,
     FileType,
     Space,
-    ScrollBar,
+    utils.insert({
+      hl = { fg = 'dark', bg = 'blue', force = true },
+    }, ScrollBar),
   }
 
   local QuickfixStatusline = {

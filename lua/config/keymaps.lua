@@ -59,7 +59,7 @@ local function register_basic()
 
   -- plugins
   keymap('n', '<C-e>', '<cmd>Neotree<CR>')
-  -- keymap('n', '<C-e>', '<cmd>DrexDrawerOpen<CR>')
+  -- keymap('n', '<C-d>', '<cmd>DrexDrawerOpen<CR>')
   keymap('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
   -- bufferline
@@ -239,8 +239,8 @@ local function register_leader()
         d = { '<cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
       },
     },
+    d = { '<cmd>DrexDrawerToggle<CR>', 'Toggle File Explorer' },
     e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
-    -- e = { '<cmd>DrexDrawerToggle<CR>', 'Toggle File Explorer' },
     f = {
       name = 'find files/text',
       f = { '<cmd>Telescope find_files<CR>', 'Find files' },

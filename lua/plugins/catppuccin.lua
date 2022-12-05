@@ -104,6 +104,9 @@ M.config = function()
 
       NeoTreeNormalNC = { link = 'NeoTreeNormal' },
 
+      DrexMarked = { fg = colors.base, bg = colors.red },
+      DrexSelected = { link = 'Substitute' },
+
       NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
       NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
 
