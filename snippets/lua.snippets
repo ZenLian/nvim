@@ -1,0 +1,10 @@
+snippet conf "plugin config module"
+	local M = {}
+
+	function M.config()
+		local ${1} = require('${1:`fnamemodify(bufname(), ':t:r')`}')
+		$0
+	end
+
+	return M
+

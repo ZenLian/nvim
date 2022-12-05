@@ -222,12 +222,16 @@ local plugins = {
       require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
     end,
   },
+  -- {
+  --   'ur4ltz/surround.nvim',
+  --   event = { 'BufRead', 'BufNewFile' },
+  --   config = function()
+  --     require('surround').setup { mappings_style = 'surround' }
+  --   end,
+  -- },
   {
-    'ur4ltz/surround.nvim',
-    event = { 'BufRead', 'BufNewFile' },
-    config = function()
-      require('surround').setup { mappings_style = 'surround' }
-    end,
+    'kylechui/nvim-surround',
+    config = true,
   },
   {
     'ggandor/leap.nvim',

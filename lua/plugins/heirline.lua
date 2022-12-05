@@ -113,7 +113,7 @@ M.config = function()
       local trail = cwd:sub(-1) == '/' and '' or '/'
       return cwd .. trail
     end,
-    hl = { fg = 'blue', bold = true },
+    hl = { fg = 'blue' },
   }
 
   local FileType = {
@@ -211,18 +211,31 @@ M.config = function()
       name = 'heirline_nulllsinfo',
     },
     flexible = true,
+
     {
       provider = function(self)
-        return string.format('NULL-LS(%s) ', table.concat(self.sources, '|'))
+        return string.format('null-ls(%s) ', table.concat(self.sources, '|'))
       end,
     },
     {
-      provider = function(self)
+      provider = function()
         return 'null-ls '
       end,
     },
   }
-
+  local LspInfo = {
+    on_click = {
+      callback = function()
+        vim.schedule(function()
+          vim.cmd('LspInfo')
+        end)
+      end,
+      name = 'heirline_lspinfo',
+    },
+    provider = function(self)
+      return table.concat(self.clients, ' ') .. ']'
+    end,
+  }
   local LSPActive = {
     condition = conditions.lsp_attached,
     update = { 'LspAttach', 'LspDetach' },
@@ -239,7 +252,7 @@ M.config = function()
         end
       end
     end,
-    hl = { fg = 'green', bold = true },
+    hl = { fg = 'green' },
 
     {
       on_click = {
@@ -253,19 +266,7 @@ M.config = function()
       provider = '[',
     },
     NullLsInfo,
-    {
-      on_click = {
-        callback = function()
-          vim.schedule(function()
-            vim.cmd('LspInfo')
-          end)
-        end,
-        name = 'heirline_lspinfo',
-      },
-      provider = function(self)
-        return table.concat(self.clients, ' ') .. ']'
-      end,
-    },
+    LspInfo,
   }
 
   local Diagnostics = {
@@ -290,6 +291,8 @@ M.config = function()
       end,
       name = 'heirline_diagnostics',
     },
+
+    hl = { fg = 'yellow' },
 
     { provider = '🔨[' },
     {
@@ -339,7 +342,7 @@ M.config = function()
   -- end
   -- table.insert(Diagnostics, { provider = ']' })
 
-  local LspInfo = {
+  local LspBlock = {
     flexible = true,
     {
       Diagnostics,
@@ -444,7 +447,7 @@ M.config = function()
     Trim,
     Align,
 
-    { flexible = 10, { LspInfo, Space }, Empty },
+    { flexible = 10, { LspBlock, Space }, Empty },
     { flexible = 30, { FileInfo, Space }, Empty },
     { flexible = 40, { Ruler, Space }, Empty },
     ScrollBar,

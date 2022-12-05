@@ -4,8 +4,10 @@ local config = function()
       enable = true,
       default_prompt = '﯀',
       border = 'single',
-      winblend = 3,
-      -- winhighlight = 'FloatBorder:Blue',
+      win_options = {
+        winblend = 3,
+        -- winhighlight = 'FloatBorder:Blue',
+      },
     },
     select = {
       enable = true,
