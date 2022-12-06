@@ -162,6 +162,11 @@ local plugins = {
     'folke/which-key.nvim',
     config = true,
   },
+  {
+    'anuvyklack/hydra.nvim',
+    config = true,
+    after = 'which-key.nvim',
+  },
   -- {
   --   'jiaoshijie/undotree',
   --   module = 'undotree',

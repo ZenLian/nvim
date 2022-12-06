@@ -72,7 +72,11 @@ local preprocess = function(plugin)
   else
     return plugin
   end
-  local pkg = require('plugins.' .. name)
+  local ok, pkg = pcall(require, 'plugins.' .. name)
+  if not ok then
+      util.error('cannot load config' , name)
+      return plugin
+  end
   -- NOTE: config can not use 'upvalue'(module's local variables, etc.)
   plugin.config = pkg.config
 

@@ -112,8 +112,14 @@ function M.config()
           end,
           { desc = 'rename elements' },
         },
-        ['p'] = { '<cmd>lua require("drex.actions.files").copy_and_paste<cr>', { desc = 'copy&paste(clipboard)' } },
-        ['P'] = { '<cmd>lua require("drex.actions.files").cut_and_move<cr>', { desc = 'cut&move(clipboard)' } },
+        ['p'] = {
+          '<cmd>lua require("drex.actions.files").copy_and_paste()<cr>' .. clear_clipboard_cmd,
+          { desc = 'copy&paste(clipboard)' },
+        },
+        ['P'] = {
+          '<cmd>lua require("drex.actions.files").cut_and_move()<cr>' .. clear_clipboard_cmd,
+          { desc = 'cut&move(clipboard)' },
+        },
         -- TODO: trash visual/clipboard
         ['t'] = {
           function()
