@@ -25,7 +25,7 @@ local config = function()
     default_component_configs = {
       icon = {
         folder_empty = '',
-        default = '',
+        -- default = '',
       },
       modified = {
         symbol = ' ',

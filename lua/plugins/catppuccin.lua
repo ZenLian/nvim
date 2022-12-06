@@ -110,6 +110,9 @@ M.config = function()
       NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
       NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
 
+      YankyPut = { link = 'CurSearch' },
+      YankyYanked = { link = 'CurSearch' },
+
       UfoFoldedBg = { bg = colors.surface1 },
     },
   }

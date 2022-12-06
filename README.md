@@ -189,8 +189,10 @@ tips:
 
 ### 📁 File Explorer
 
-- `<C-e>` open/focus file explorer
-- `<Leader>e` toggle file explorer
+#### neo-tree
+
+- `<C-e>` open/focus neo-tree
+- `<Leader>e` toggle neo-tree
 
 Inside explorer navigation:
 
@@ -223,6 +225,49 @@ view changes:
 - `R`: refresh
 - [ ] `zh`: toggle dotfiles
 - [ ] `zg`: toggle gitignored files
+
+#### drex
+
+> open directories in buffer and modify like normal text
+
+- `<Leader>d` toggle drex drawer
+- `<Leader>D` open drex buffer
+
+navigation:
+
+- `h`/`j`/`k`/`l`/`<CR>`: basic navigation
+- `<Tab>`: toggle directory
+- `-`/`.`: goto parent/child directory
+- `~`: goto home
+- `<C-v>`/`<C-s>`/`<C-t>` open in vsplit/split/tab
+- `<C-r>`: reload
+
+clipboard:
+
+- `m`: toggle mark
+- `M`: mark
+- `u`: unmark
+- `U`: unmark all
+- `c`: edit clipboard
+
+file actions:
+
+- `s`: show file stats
+- `a`/`A`: create file or directory, `A` to create inside cursor directory
+- `d`: delete current elements
+- `D`: delete all in clipboard
+- 't': trash current elements
+- 'T': trash all in clipboard
+- `p`: copy all in clipboard to cursor position
+- `P`: move all in clipboard to cursor position
+- 'r': rename current elements
+- 'R': rename all in clipboard
+
+strings:
+
+- `y`: copy name
+- `Y`: copy relative path
+- `<C-y>`: copy absolute path
 
 ### 🔎 Search
 

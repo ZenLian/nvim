@@ -3,8 +3,16 @@ local config = function()
     disable_commit_confirmation = true,
     -- kind = 'floating',
     signs = {
-      section = { '', '' },
-      item = { '', '' },
+      -- section = { '', '' },
+      -- item = { '', '' },
+      -- hunk = { '', '' },
+      --  
+      --  
+      --  
+      --  
+      --  
+      section = { '', '' },
+      item = { '', '' },
       hunk = { '', '' },
     },
     integrations = {

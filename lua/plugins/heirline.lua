@@ -492,7 +492,7 @@ M.config = function()
       provider = function(self)
         return '  ' .. self.count
       end,
-      hl = { fg = 'magenta' },
+      hl = { fg = 'red' },
     },
   }
 

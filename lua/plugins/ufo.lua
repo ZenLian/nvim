@@ -48,6 +48,7 @@ function M.config()
   end
 
   ufo.setup {
+    open_fold_hl_timeout = 250,
     provider_selector = function(bufnr, filetype, buftype)
       return { 'treesitter', 'indent' }
     end,

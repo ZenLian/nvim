@@ -13,6 +13,11 @@ local plugins = {
     'kkharji/sqlite.lua',
     module = 'sqlite',
   },
+  {
+    'kyazdani42/nvim-web-devicons',
+    module = 'nvim-web-devicons',
+    config = true,
+  },
   ---}}} requirements
 
   -- {{{ ui

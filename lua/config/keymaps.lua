@@ -239,7 +239,8 @@ local function register_leader()
         d = { '<cmd>BufferLineSortByDirectory<CR>', 'Sort by directory' },
       },
     },
-    d = { '<cmd>DrexDrawerToggle<CR>', 'Toggle File Explorer' },
+    d = { '<cmd>DrexDrawerToggle<CR>', 'Toggle drex' },
+    D = { '<cmd>Drex<CR>', 'Open drex buffer' },
     e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
     f = {
       name = 'find files/text',
