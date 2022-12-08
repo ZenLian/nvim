@@ -108,15 +108,25 @@ function M.toggle(name, opts)
   end
 end
 
-M.augroup = function(name, autocmds)
-  local group = vim.api.nvim_create_augroup(name, { clear = true })
-  local create_autocmd = vim.api.nvim_create_autocmd
-  M.foreach(autocmds, function(autocmd)
-    local event = autocmd.event
-    autocmd.event = nil
-    autocmd.group = group
-    create_autocmd(event, autocmd)
-  end)
+M.augroup = function(groups) -- {name=autocmds}
+  for name, autocmds in pairs(groups) do
+    local group = vim.api.nvim_create_augroup(name, { clear = true })
+    local create_autocmd = vim.api.nvim_create_autocmd
+    -- {autocmd, autocmd, ...}
+    if autocmds.event == nil then
+      M.foreach(autocmds, function(autocmd)
+        local event = autocmd.event
+        autocmd.event = nil
+        autocmd.group = group
+        create_autocmd(event, autocmd)
+      end)
+    else -- autocmd without wrapper {}
+      local event = autocmds.event
+      autocmds.event = nil
+      autocmds.group = group
+      create_autocmd(event, autocmds)
+    end
+  end
 end
 
 return M

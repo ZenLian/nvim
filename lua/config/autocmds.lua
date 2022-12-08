@@ -1,9 +1,9 @@
 local fn = vim.fn
 local util = require('util')
 
-util.augroup('vimrc.autocmds', {
-  -- https://github.com/ethanholz/nvim-lastplace
-  {
+util.augroup {
+  ['vimrc.lastedit'] = {
+    -- https://github.com/ethanholz/nvim-lastplace
     desc = 'Back to where you leave',
     event = { 'BufWinEnter' },
     callback = function()
@@ -23,7 +23,7 @@ util.augroup('vimrc.autocmds', {
         if window_last_line == buff_last_line then
           -- Set line to last line edited
           vim.cmd([[normal! g`"]])
-        -- Try to center
+          -- Try to center
         elseif buff_last_line - last_line > ((window_last_line - window_first_line) / 2) - 1 then
           vim.cmd([[normal! g`"zz]])
         else
@@ -32,50 +32,41 @@ util.augroup('vimrc.autocmds', {
       end
     end,
   },
-  {
+  ['vimrc.equalwin'] = {
     desc = 'Equalize window',
     event = 'VimResized',
     command = [[wincmd =]],
   },
-  {
-    desc = 'Filetypes to close with "q"',
-    event = { 'FileType' },
-    pattern = {
-      'help',
-      'startuptime',
-      'qf',
-      'lspinfo',
-      'notify',
-      'tsplayground',
-      'null-ls-info',
-      'checkhealth',
-      'drex',
+  ['vimrc.smartclose'] = {
+    {
+      desc = 'Filetypes to close with "q"',
+      event = { 'FileType' },
+      pattern = {
+        'help',
+        'startuptime',
+        'qf',
+        'lspinfo',
+        'notify',
+        'tsplayground',
+        'null-ls-info',
+        'checkhealth',
+        'drex',
+      },
+      command = [[nnoremap <buffer><silent> q :close<CR>]],
     },
-    command = [[nnoremap <buffer><silent> q :close<CR>]],
+    {
+      desc = 'Auto close corresponding loclist',
+      event = { 'QuitPre' },
+      pattern = '*',
+      nested = true,
+      callback = function()
+        if vim.bo.filetype ~= 'qf' then
+          vim.cmd('silent! lclose')
+        end
+      end,
+    },
   },
-  {
-    desc = 'Auto close corresponding loclist',
-    event = { 'QuitPre' },
-    pattern = '*',
-    nested = true,
-    callback = function()
-      if vim.bo.filetype ~= 'qf' then
-        vim.cmd('silent! lclose')
-      end
-    end,
-  },
-  -- NOTE: now handled by yanky.nvim
-  -- {
-  --   event = { 'TextYankPost' },
-  --   callback = function()
-  --     vim.highlight.on_yank {
-  --       timeout = 250,
-  --       on_visual = false,
-  --       higroup = 'Visual',
-  --     }
-  --   end,
-  -- },
-  {
+  ['vimrc.smartopen'] = {
     -- https://vim.fandom.com/wiki/Use_gf_to_open_a_file_via_its_URL
     desc = "use gf to open a file via it's URL",
     event = { 'BufReadCmd' },
@@ -86,21 +77,28 @@ util.augroup('vimrc.autocmds', {
       vim.cmd.edit(vim.uri_to_fname(args.file))
     end,
   },
-})
-
--- Disable CapLock
--- util.augroup('CapLockDisable', {
---   {
---     event = 'VimEnter',
---     pattern = '*',
---     command = 'silent !setxkbmap -option ctrl:nocaps',
---   },
---   {
---     event = 'VimLeave',
---     pattern = '*',
---     command = 'silent !setxkbmap -option',
---   },
--- })
+  -- NOTE: now handled by yanky.nvim
+  -- ['vimrc.highlightYank'] = {
+  -- {
+  --   desc='highlight on yank',
+  --   event = { 'TextYankPost' },
+  --   callback = function()
+  --     vim.highlight.on_yank {
+  --       timeout = 250,
+  --       on_visual = false,
+  --       higroup = 'Visual',
+  --     }
+  --   end,
+  -- },
+  ['vimrc.markdown'] = {
+    desc = 'markdown file',
+    event = { 'FileType' },
+    pattern = { 'markdown' },
+    callback = function()
+      vim.wo.spell = true
+    end,
+  },
+}
 
 -- markdown spell on
 -- vim.cmd([[autocmd FileType markdown setlocal spell]])
