@@ -31,10 +31,8 @@ function M.toggle(value)
   end
   if M.enable then
     vim.diagnostic.enable()
-    util.info('Toggle diagnostics on', TITLE)
   else
     vim.diagnostic.disable()
-    util.warn('Toggle diagnostics off', TITLE)
   end
 end
 

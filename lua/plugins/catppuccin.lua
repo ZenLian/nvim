@@ -9,10 +9,10 @@ M.config = function()
   local colors = require('catppuccin.palettes').get_palette()
 
   catppuccin.setup {
-    compile = {
-      enabled = false,
-      path = vim.fn.stdpath('cache') .. '/catppuccin',
-    },
+    -- compile = {
+    --   enabled = false,
+    --   path = vim.fn.stdpath('cache') .. '/catppuccin',
+    -- },
     transparent_background = false,
     term_colors = true,
     styles = {
@@ -71,6 +71,8 @@ M.config = function()
     },
     custom_highlights = {
       MatchParen = { fg = colors.mantle, bg = colors.blue },
+      NormalFloat = { fg = colors.text, bg = colors.mantle },
+      FloatBorder = { fg = colors.blue, bg = colors.mantle },
 
       Pmenu = { fg = colors.text, bg = colors.surface0 },
       PmenuSel = { fg = colors.surface0, bg = colors.blue },
@@ -110,10 +112,16 @@ M.config = function()
       NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
       NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
 
-      YankyPut = { link = 'CurSearch' },
-      YankyYanked = { link = 'CurSearch' },
+      YankyPut = { link = 'IncSearch' },
+      YankyYanked = { link = 'YankyPut' },
 
       UfoFoldedBg = { bg = colors.surface1 },
+
+      HydraRed = { fg = colors.red, style = { 'bold' } },
+      HydraBlue = { fg = colors.blue, style = { 'bold' } },
+      HydraAmaranth = { fg = colors.mauve, style = { 'bold' } },
+      HydraPink = { fg = colors.pink, style = { 'bold' } },
+      HydraTeal = { fg = colors.teal, style = { 'bold' } },
     },
   }
 

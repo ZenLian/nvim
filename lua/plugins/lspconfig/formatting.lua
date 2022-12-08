@@ -6,7 +6,7 @@ local TITLE = 'lsp.formatting'
 local FORMATTING_METHOD = 'textDocument/formatting'
 local TIMEOUT = 2000
 
-local format_on_save = config.format_on_save
+M.format_on_save = config.format_on_save
 
 function M.priority(name)
   return config.format_priority[name] or 0
@@ -57,14 +57,9 @@ end
 -- @param value? boolean
 function M.toggle(value)
   if type(value) == 'boolean' then
-    format_on_save = value
+    M.format_on_save = value
   else
-    format_on_save = not format_on_save
-  end
-  if format_on_save then
-    util.info('Toggle autoformat on', TITLE)
-  else
-    util.warn('Toggle autoformat off', TITLE)
+    M.format_on_save = not M.format_on_save
   end
 end
 
@@ -86,7 +81,7 @@ function M.on_attach(client, bufnr)
     group = group,
     buffer = bufnr,
     callback = function()
-      if not format_on_save then
+      if not M.format_on_save then
         return
       end
       M.format { bufnr = bufnr }

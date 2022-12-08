@@ -106,95 +106,6 @@ local function register_next_prev()
   wk.register(prev, { prefix = '[' })
 end
 
-local function register_toggles()
-  -- Params: ~
-  --   specs
-  --     {name} vim option name
-  --     {desc} description
-  --     {opts} additional opts for util.toggle
-  local function make_toggles(specs)
-    local keys = {
-      name = 'Toggles',
-    }
-    for key, v in pairs(specs) do
-      keys[key] = {}
-      local entry = keys[key]
-      entry.name = v.name
-      local name = entry.name
-      entry[key] = {
-        function()
-          util.toggle(name, v.opts)
-        end,
-        'Toggle ' .. name,
-      }
-      entry['['] = {
-        function()
-          util.toggle(name, util.tbl_merge(v.opts, { value = true }))
-        end,
-        'Toggle ' .. name .. ' on',
-      }
-      entry[']'] = {
-        function()
-          util.toggle(name, util.tbl_merge(v.opts, { value = false }))
-        end,
-        'Toggle ' .. name .. ' off',
-      }
-    end
-    return keys
-  end
-
-  local toggles = make_toggles {
-    s = { name = 'spell', desc = 'spell check' },
-    w = { name = 'wrap', desc = 'word wrap' },
-
-    -- TODO: merge these two
-    n = { name = 'relativenumber', desc = 'relative line number' },
-    N = { name = 'number', desc = 'line number' },
-  }
-
-  toggles.d = {
-    name = 'diagnostics',
-    d = {
-      '<cmd>lua require("plugins.lspconfig.diagnostic").toggle()<cr>',
-      'Toggle diagnostics',
-    },
-    ['['] = {
-      '<cmd>lua require("plugins.lspconfig.diagnostic").toggle(true)<cr>',
-      'Toggle diagnostics on',
-    },
-    [']'] = {
-      '<cmd>lua require("plugins.lspconfig.diagnostic").toggle(false)<cr>',
-      'Toggle diagnostics off',
-    },
-  }
-
-  toggles.f = {
-    name = 'auto format',
-    f = {
-      '<cmd>lua require("plugins.lspconfig.formatting").toggle()<cr>',
-      'Toggle auto format',
-    },
-    ['['] = {
-      '<cmd>lua require("plugins.lspconfig.formatting").toggle(true)<cr>',
-      'Toggle auto format on',
-    },
-    [']'] = {
-      '<cmd>lua require("plugins.lspconfig.formatting").toggle(false)<cr>',
-      'Toggle auto format off',
-    },
-  }
-
-  toggles.g = {
-    name = 'git blame',
-    g = {
-      '<cmd>lua require("gitsigns").toggle_current_line_blame()<cr>',
-      'Toggle git blame',
-    },
-  }
-
-  require('which-key').register(toggles, { prefix = '<Leader>/' })
-end
-
 -- yanky.nvim
 local function register_yanky()
   keymap({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
@@ -242,17 +153,6 @@ local function register_leader()
     d = { '<cmd>DrexDrawerToggle<CR>', 'Toggle drex' },
     D = { '<cmd>Drex<CR>', 'Open drex buffer' },
     e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
-    f = {
-      name = 'find files/text',
-      f = { '<cmd>Telescope find_files<CR>', 'Find files' },
-      r = { '<cmd>Telescope oldfiles<CR>', 'Recent files' },
-      h = { '<cmd>Telescope frecency<CR>', 'Frecency files' },
-      e = { '<cmd>Telescope file_browser<CR>', 'File Explorer' },
-      b = { '<cmd>Telescope buffers<CR>', 'Buffers' },
-      g = { '<cmd>Telescope live_grep<CR>', 'Grep' },
-      w = { '<cmd>Telescope grep_string<CR>', 'Current word' },
-      z = { '<cmd>Telescope current_buffer_fuzzy_find<CR>', 'Fuzzy Find in Buffer' },
-    },
     g = {
       name = 'git',
       g = { '<cmd>Neogit<CR>', 'Neogit' },
@@ -288,14 +188,6 @@ local function register_leader()
       q = { '<cmd>qa!<cr>', 'Quit' },
       w = { '<cmd>wqa<cr>', 'Save all and quit' },
       t = { '<cmd>tabclose<cr>', 'Close tab' },
-    },
-    s = {
-      name = 'search',
-      h = { '<cmd>Telescope help_tags<CR>', 'Help Tags' },
-      p = { '<cmd>Telescope projects<CR>', 'Projects' },
-      y = { '<cmd>YankyRingHistory<CR>', 'Yank History' },
-      [';'] = { '<cmd>Telescope symbols<CR>', 'Symbols' },
-      ["'"] = { '<cmd>Telescope notify<CR>', 'Notifications' },
     },
     w = {
       name = 'sessions',
@@ -335,7 +227,6 @@ end
 function M.init()
   register_basic()
   register_next_prev()
-  register_toggles()
   register_yanky()
   register_leader()
 end
