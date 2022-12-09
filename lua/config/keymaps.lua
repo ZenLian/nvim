@@ -241,16 +241,6 @@ function M.register_gitsigns(bufnr)
     P = { '<cmd>lua require("gitsigns").preview_hunk()<CR>', 'Preview' },
     q = { '<cmd>lua require("gitsigns").setqflist(0)<CR>', 'Send to quickfix window' },
     b = { '<cmd>lua require("gitsigns").blame_line{full=true}<CR>', 'Git blame' },
-    h = {
-      -- defined by gitsigns
-      name = 'hunk',
-      s = { '<cmd>lua require("gitsigns").stage_hunk()<CR>', 'Stage hunk' },
-      S = { '<cmd>lua require("gitsigns").stage_buffer()<CR>', 'Stage file' },
-      u = { '<cmd>lua require("gitsigns").undo_stage_hunk()<CR>', 'Unstage hunk' },
-      U = { '<cmd>lua require("gitsigns").reset_buffer_index()<CR>', 'Unstage file' },
-      r = { '<cmd>lua require("gitsigns").reset_hunk()<CR>', 'Reset hunk' },
-      R = { '<cmd>lua require("gitsigns").reset_buffer()<CR>', 'Reset file' },
-    },
   }, { prefix = '<Leader>g', buffer = bufnr })
   -- <Leader>g Visual
   whichkey.register({

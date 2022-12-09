@@ -76,7 +76,8 @@ local plugins = {
   },
   {
     'kevinhwang91/nvim-ufo',
-    requires = 'kevinhwang91/promise-async',
+    requires = { 'kevinhwang91/promise-async', module = 'promise' },
+    event = 'BufWinEnter',
     config = true,
   },
   -- }}} ui

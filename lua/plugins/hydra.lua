@@ -47,7 +47,7 @@ function M.options()
     ^^                  Options
     ^
     _v_ %{ve} virtual edit    ^^^ _d_ %{dgn} diagnostics
-    _i_ %{list} invisible chars ^ _f_ %{fmt} format on save  
+    _i_ %{list} invisible chars ^ _f_ %{fmt} format on save  ^
     _s_ %{spell} spell            _b_ %{blame} blame line
     _w_ %{wrap} wrap
     _c_ %{cul} cursor line
@@ -186,14 +186,17 @@ end
 
 function M.git_widget()
   local Hydra = require('hydra')
-  local gitsigns = require('gitsigns')
+  local cmd = require('hydra.keymap-util').cmd
 
   local hint = [[
- _J_: next hunk   _s_: stage hunk        _d_: show deleted   _b_: blame line
- _K_: prev hunk   _u_: undo last stage   _p_: preview hunk   _B_: blame show full 
- ^ ^              _S_: stage buffer      ^ ^                 _/_: show base file
- ^
- ^ ^              _<Enter>_: Neogit              _q_: exit
+  ^_J_/_K_: next/prev hunk    _s_: stage hunk     _S_: stage file
+  ^^^  _p_: preview hunk      _u_: unstage hunk   _U_: unstage file  ^
+  ^^^  _d_: toggle deleted    _r_: reset hunk     _R_: reset file
+  ^^^  _D_: diff file
+  ^^^  _b_: blame line
+  ^^^  _B_: blame file
+  ^
+  ^ ^              _<Enter>_: Neogit         _<ESC>_/_q_: exit
 ]]
   Hydra {
     name = 'Git',
@@ -206,18 +209,21 @@ function M.git_widget()
         border = 'single',
       },
       on_enter = function()
+        local gitsigns = require('gitsigns')
         vim.cmd('mkview')
         vim.cmd('silent! %foldopen!')
         vim.bo.modifiable = false
-        gitsigns.toggle_signs(true)
+        -- gitsigns.toggle_signs(true)
         gitsigns.toggle_linehl(true)
+        -- gitsigns.toggle_deleted(true)
       end,
       on_exit = function()
+        local gitsigns = require('gitsigns')
         local cursor_pos = vim.api.nvim_win_get_cursor(0)
         vim.cmd('loadview')
         vim.api.nvim_win_set_cursor(0, cursor_pos)
         vim.cmd('normal zv')
-        gitsigns.toggle_signs(false)
+        -- gitsigns.toggle_signs(false)
         gitsigns.toggle_linehl(false)
         gitsigns.toggle_deleted(false)
       end,
@@ -232,6 +238,7 @@ function M.git_widget()
             return ']c'
           end
           vim.schedule(function()
+            local gitsigns = require('gitsigns')
             gitsigns.next_hunk()
           end)
           return '<Ignore>'
@@ -245,28 +252,39 @@ function M.git_widget()
             return '[c'
           end
           vim.schedule(function()
+            local gitsigns = require('gitsigns')
             gitsigns.prev_hunk()
           end)
           return '<Ignore>'
         end,
         { expr = true, desc = 'prev hunk' },
       },
-      { 's', ':Gitsigns stage_hunk<CR>', { silent = true, desc = 'stage hunk' } },
-      { 'u', gitsigns.undo_stage_hunk, { desc = 'undo last stage' } },
-      { 'S', gitsigns.stage_buffer, { desc = 'stage buffer' } },
-      { 'p', gitsigns.preview_hunk, { desc = 'preview hunk' } },
-      { 'd', gitsigns.toggle_deleted, { nowait = true, desc = 'toggle deleted' } },
-      { 'b', gitsigns.blame_line, { desc = 'blame' } },
+      { 's', cmd('lua require("gitsigns").stage_hunk()'), { silent = true, desc = 'stage hunk' } },
+      { 'S', cmd('lua require("gitsigns").stage_buffer()'), { desc = 'stage buffer' } },
+      { 'u', cmd('lua require("gitsigns").undo_stage_hunk()'), { desc = 'unstage hunk' } },
+      { 'U', cmd('lua require("gitsigns").reset_buffer_index()'), { desc = 'unstage file' } },
+      { 'r', cmd('lua require("gitsigns").reset_hunk()'), { desc = 'reset hunk' } },
+      { 'R', cmd('lua require("gitsigns").reset_buffer()'), { desc = 'reset buffer' } },
+      { 'p', cmd('lua require("gitsigns").preview_hunk()'), { desc = 'preview hunk' } },
+      { 'd', cmd('lua require("gitsigns").toggle_deleted()'), { nowait = true, desc = 'toggle deleted' } },
+      {
+        'D',
+        function()
+          vim.defer_fn(function()
+            require('gitsigns').diffthis()
+          end, 50)
+        end,
+        { exit = true, desc = 'diff file' },
+      },
+      { 'b', cmd('lua require("gitsigns").blame_line()'), { desc = 'blame' } },
       {
         'B',
-        function()
-          gitsigns.blame_line { full = true }
-        end,
+        cmd('require("gitsigns").blame_line { full = true }'),
         { desc = 'blame show full' },
       },
-      { '/', gitsigns.show, { exit = true, desc = 'show base file' } }, -- show the base of the file
       { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
       { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
+      { '<ESC>', nil, { exit = true, nowait = true, desc = 'exit' } },
     },
   }
 end
@@ -277,7 +295,7 @@ function M.telescope_widget()
 
   local hint = [[
   _f_: files             _g_: live grep
-  _r_: recent files      _w_: find current word  
+  _r_: recent files      _w_: find current word  ^
   _R_: frecency          _/_: search in buffer
   _b_: buffers
   ^
@@ -287,7 +305,7 @@ function M.telescope_widget()
   ^
   ^
   _<SPACE>_: resume
-     _<CR>_: Telescope              _<ESC>_/_q_
+     _<CR>_: Telescope          _<ESC>_/_q_: exit
 ]]
 
   Hydra {
@@ -304,7 +322,7 @@ function M.telescope_widget()
     body = '<leader>f',
     heads = {
       -- files
-      { 'f', cmd('Telescope find_files'), { desc = 'Find files' } },
+      { 'f', cmd('lua require("plugins.telescope").project_files()'), { desc = 'Find files' } },
       { 'r', cmd('Telescope oldfiles'), { desc = 'Recent files' } },
       { 'R', cmd('Telescope frecency'), { desc = 'Frecency files' } },
       { 'b', cmd('Telescope buffers'), { desc = 'Buffers' } },
