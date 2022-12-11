@@ -29,8 +29,8 @@ function M.setup()
   -- require('impatient').enable_profile()
   pcall(require, 'impatient')
 
-  require('config.options')
-  require('config.keymaps')
+  require('config.options').setup()
+  require('config.keymaps').setup()
   require('config.autocmds')
   require('config.plugins')
 end

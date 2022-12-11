@@ -79,16 +79,17 @@ util.augroup {
   },
   -- NOTE: now handled by yanky.nvim
   -- ['vimrc.highlightYank'] = {
-  -- {
-  --   desc='highlight on yank',
-  --   event = { 'TextYankPost' },
-  --   callback = function()
-  --     vim.highlight.on_yank {
-  --       timeout = 250,
-  --       on_visual = false,
-  --       higroup = 'Visual',
-  --     }
-  --   end,
+  --   {
+  --     desc = 'highlight on yank',
+  --     event = { 'TextYankPost' },
+  --     callback = function()
+  --       vim.highlight.on_yank {
+  --         timeout = 250,
+  --         on_visual = false,
+  --         higroup = 'Visual',
+  --       }
+  --     end,
+  --   },
   -- },
   ['vimrc.markdown'] = {
     desc = 'markdown file',
@@ -102,3 +103,4 @@ util.augroup {
 
 -- markdown spell on
 -- vim.cmd([[autocmd FileType markdown setlocal spell]])
+--

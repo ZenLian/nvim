@@ -1,5 +1,60 @@
+local M = {}
+
 local config = require('config').config
 local cache_dir = config.dirs.cache
+
+-- Better quickfix ui
+-- https://github.com/kevinhwang91/nvim-bqf#format-new-quickfix
+function _G.qftf(info)
+  local fn = vim.fn
+  local items
+  local ret = {}
+  -- The name of item in list is based on the directory of quickfix window.
+  -- Change the directory for quickfix window make the name of item shorter.
+  -- It's a good opportunity to change current directory in quickfixtextfunc :)
+  --
+  -- local alterBufnr = fn.bufname('#') -- alternative buffer is the buffer before enter qf window
+  -- local root = getRootByAlterBufnr(alterBufnr)
+  -- vim.cmd(('noa lcd %s'):format(fn.fnameescape(root)))
+  --
+  if info.quickfix == 1 then
+    items = fn.getqflist({ id = info.id, items = 0 }).items
+  else
+    items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
+  end
+  local limit = 31
+  local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
+  local validFmt = '%s │%5d:%-3d│%s %s'
+  for i = info.start_idx, info.end_idx do
+    local e = items[i]
+    local fname = ''
+    local str
+    if e.valid == 1 then
+      if e.bufnr > 0 then
+        fname = fn.bufname(e.bufnr)
+        if fname == '' then
+          fname = '[No Name]'
+        else
+          fname = fname:gsub('^' .. vim.env.HOME, '~')
+        end
+        -- char in fname may occur more than 1 width, ignore this issue in order to keep performance
+        if #fname <= limit then
+          fname = fnameFmt1:format(fname)
+        else
+          fname = fnameFmt2:format(fname:sub(1 - limit))
+        end
+      end
+      local lnum = e.lnum > 99999 and -1 or e.lnum
+      local col = e.col > 999 and -1 or e.col
+      local qtype = e.type == '' and '' or ' ' .. e.type:sub(1, 1):upper()
+      str = validFmt:format(fname, lnum, col, qtype, e.text)
+    else
+      str = e.text
+    end
+    table.insert(ret, str)
+  end
+  return ret
+end
 
 local options = {
   termguicolors = true,
@@ -35,6 +90,9 @@ local options = {
   wildignorecase = true,
   wildignore = [[.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,]]
     .. [[**/node_modules/**,**/bower_modules/**]],
+  -- quickfix
+  -- qftf = '{info -> v:lua.require"config.options".qftf(info)}',
+  quickfixtextfunc = '{info -> v:lua._G.qftf(info)}',
 
   -- windows
   splitbelow = true,
@@ -127,14 +185,6 @@ local options = {
   concealcursor = 'niv',
 }
 
--- load_options
-for name, value in pairs(options) do
-  vim.o[name] = value
-end
-
-vim.g.mapleader = ' '
-
--- don't load these plugins
 local builtin_plugins = {
   '2html_plugin',
   'getscript',
@@ -157,11 +207,19 @@ local builtin_plugins = {
   'zipPlugin',
 }
 
-for _, plugin in ipairs(builtin_plugins) do
-  vim.g['loaded_' .. plugin] = 1
+function M.setup()
+  -- load_options
+  for name, value in pairs(options) do
+    vim.o[name] = value
+  end
+  -- disable builtin plugins
+  for _, plugin in ipairs(builtin_plugins) do
+    vim.g['loaded_' .. plugin] = 1
+  end
+  -- virtual env provider
+  if vim.fn.glob(config.provider.python3) ~= '' then
+    vim.g.python3_host_prog = config.provider.python3
+  end
 end
 
--- virtual env provider
-if vim.fn.glob(config.provider.python3) ~= '' then
-  vim.g.python3_host_prog = config.provider.python3
-end
+return M

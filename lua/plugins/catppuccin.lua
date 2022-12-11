@@ -122,9 +122,25 @@ M.config = function()
       HydraAmaranth = { fg = colors.mauve, style = { 'bold' } },
       HydraPink = { fg = colors.pink, style = { 'bold' } },
       HydraTeal = { fg = colors.teal, style = { 'bold' } },
+
+      BqfPreviewFloat = { link = 'NormalFloat' },
+      BqfPreviewBorder = { link = 'TelescopePreviewBorder' },
     },
   }
 
   vim.cmd([[colorscheme catppuccin]])
+
+  -- set winheighlight
+  local util = require('util')
+  util.augroup {
+    ['vimrc.theme'] = {
+      desc = 'Set winheighlight',
+      event = { 'FileType' },
+      pattern = {
+        'qf',
+      },
+      command = [[setlocal winhl=Normal:NormalFloat,NormalNC:NormalFloat]],
+    },
+  }
 end
 return M

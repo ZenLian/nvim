@@ -108,6 +108,15 @@ function M.toggle(name, opts)
   end
 end
 
+-- usage:
+-- augroup {
+--   group1 = autocmd,
+--   group2 = {
+--     autocmd1,
+--     autocmd2,
+--   },
+--   ...
+-- }
 M.augroup = function(groups) -- {name=autocmds}
   for name, autocmds in pairs(groups) do
     local group = vim.api.nvim_create_augroup(name, { clear = true })

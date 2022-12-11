@@ -1,4 +1,4 @@
--- vim:foldmethod=marker:foldmarker={,}:
+-- vim:foldmethod=marker:foldmarker={{{,}}}:
 local plugins = {
   --{{{ requirements
   {
@@ -194,6 +194,8 @@ local plugins = {
     run = { 'deno task --quiet build:fast' },
     config = true,
   },
+
+  --- treesitter {{{
   {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -215,6 +217,20 @@ local plugins = {
     after = 'nvim-treesitter',
   },
   {
+    'mfussenegger/nvim-treehopper',
+    module = 'tsht',
+    config = function()
+      require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
+    end,
+  },
+  {
+    'ziontee113/syntax-tree-surfer',
+    after = { 'nvim-treesitter' },
+    config = true,
+  },
+  -- }}} treesitter
+
+  {
     'p00f/nvim-ts-rainbow',
     opt = true,
     after = 'nvim-treesitter',
@@ -226,13 +242,7 @@ local plugins = {
       require('Comment').setup()
     end,
   },
-  {
-    'mfussenegger/nvim-treehopper',
-    module = 'tsht',
-    config = function()
-      require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
-    end,
-  },
+
   -- {
   --   'ur4ltz/surround.nvim',
   --   event = { 'BufRead', 'BufNewFile' },
@@ -242,6 +252,7 @@ local plugins = {
   -- },
   {
     'kylechui/nvim-surround',
+    event = { 'BufRead', 'BufNewFile' },
     config = true,
   },
   {
@@ -271,11 +282,6 @@ local plugins = {
   {
     'monaqa/dial.nvim',
     keys = { '<C-a>', '<C-x>' },
-    config = true,
-  },
-  {
-    'ziontee113/syntax-tree-surfer',
-    after = { 'nvim-treesitter' },
     config = true,
   },
 
@@ -321,6 +327,7 @@ local plugins = {
     -- module = "nvim-autopairs",
   },
 
+  -- lsp {{{
   {
     'neovim/nvim-lspconfig',
     config = true,
@@ -374,9 +381,15 @@ local plugins = {
     module = 'schemastore',
     is_local = true,
   },
+  -- }}} lsp
 
   {
     'echasnovski/mini.nvim',
+    config = true,
+  },
+  {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf',
     config = true,
   },
 }

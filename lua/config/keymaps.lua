@@ -224,13 +224,6 @@ local function register_leader()
   wk.register(leader_visual, { prefix = '<Leader>', mode = 'v' })
 end
 
-function M.init()
-  register_basic()
-  register_next_prev()
-  register_yanky()
-  register_leader()
-end
-
 function M.register_gitsigns(bufnr)
   local whichkey = require('which-key')
   -- <Leader>g
@@ -272,6 +265,12 @@ function M.register_gitsigns(bufnr)
   }, { mode = { 'o', 'x' }, buffer = bufnr })
 end
 
-pcall(M.init)
+function M.setup()
+  vim.g.mapleader = ' '
+  register_basic()
+  register_next_prev()
+  register_yanky()
+  register_leader()
+end
 
 return M
