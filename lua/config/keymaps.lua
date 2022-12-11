@@ -77,6 +77,13 @@ local function register_basic()
   keymap('n', '<C-p>', function()
     require('plugins.telescope').project_files()
   end)
+
+  -- true-zen
+  keymap('n', '<leader>zn', ':TZNarrow<CR>', {})
+  keymap('v', '<leader>zn', ":'<,'>TZNarrow<CR>", {})
+  keymap('n', '<leader>zf', ':TZFocus<CR>', {})
+  keymap('n', '<leader>zm', ':TZMinimalist<CR>', {})
+  keymap('n', '<leader>za', ':TZAtaraxis<CR>', {})
 end
 
 local function register_next_prev()
@@ -202,8 +209,6 @@ local function register_leader()
     },
     z = {
       name = 'zen',
-      z = { '<cmd>ZenMode<CR>', 'ZenMode' },
-      r = { "<cmd>lua require('zen-mode').reset()<cr>", 'Reset ZenMode' },
       t = { '<cmd>Twilight<CR>', 'Twilight' },
     },
     ['\\'] = {

@@ -66,8 +66,8 @@ local plugins = {
     config = true,
   },
   {
-    'folke/zen-mode.nvim',
-    cmd = { 'ZenMode' },
+    'Pocco81/true-zen.nvim',
+    cmd = { 'TZNarrow', 'TZFocus', 'TZMinimalist', 'TZAtaraxis' },
     config = true,
   },
   {
