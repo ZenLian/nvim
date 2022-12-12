@@ -57,8 +57,14 @@ local plugins = {
     event = 'BufRead',
     config = true,
   },
+  -- {
+  --   'NvChad/nvim-colorizer.lua',
+  --   config = true,
+  -- },
+  -- #123344
   {
-    'NvChad/nvim-colorizer.lua',
+    'uga-rosa/ccc.nvim',
+    event = { 'BufRead', 'BufNewFile' },
     config = true,
   },
   {
