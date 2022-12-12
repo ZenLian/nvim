@@ -41,12 +41,11 @@ local config = function()
     -- Source menu
     item.menu = ({
       nvim_lsp = '[LSP]',
-      -- nvim_lua = "[Lua]",
-      luasnip = '[Snip]',
-      buffer = '[Buff]',
-      path = '[Path]',
-      calc = '[Calc]',
-      dictionary = '[Dict]',
+      luasnip = '[SNIP]',
+      buffer = '[BUFF]',
+      path = '[PATH]',
+      calc = '[CALC]',
+      dictionary = '[DICT]',
       cmdline = '[CMD]',
       cmdline_history = '[HIST]',
     })[entry.source.name]
@@ -63,6 +62,7 @@ local config = function()
         if cmp.visible() then
           cmp.select_prev_item()
         else
+          -- cmp.complete()
           fallback()
         end
       end, { 'i', 'c' }),
@@ -70,18 +70,30 @@ local config = function()
         if cmp.visible() then
           cmp.select_next_item()
         else
+          -- cmp.complete()
           fallback()
         end
       end, { 'i', 'c' }),
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-d>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.mapping.scroll_docs(-4)
+        else
+          fallback()
+        end
+      end),
+      ['<C-u>'] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+          cmp.mapping.scroll_docs(4)
+        else
+          fallback()
+        end
+      end),
       ['<C-e>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.confirm {
             select = true,
           }
-        -- cmp.select_next_item()
         elseif require('luasnip').expand_or_jumpable() then
           require('luasnip').expand_or_jump()
         -- elseif has_words_before() then
@@ -116,7 +128,7 @@ local config = function()
     },
     snippet = {
       expand = function(args)
-        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        require('luasnip').lsp_expand(args.body)
       end,
     },
     sources = cmp.config.sources({

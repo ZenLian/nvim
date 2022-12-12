@@ -235,6 +235,8 @@ local plugins = {
     opt = true,
     after = 'nvim-treesitter',
   },
+
+  -- editing {{{
   {
     'numToStr/Comment.nvim',
     event = { 'BufRead', 'BufNewFile' },
@@ -242,7 +244,6 @@ local plugins = {
       require('Comment').setup()
     end,
   },
-
   -- {
   --   'ur4ltz/surround.nvim',
   --   event = { 'BufRead', 'BufNewFile' },
@@ -284,6 +285,7 @@ local plugins = {
     keys = { '<C-a>', '<C-x>' },
     config = true,
   },
+  -- }}}
 
   {
     'lewis6991/gitsigns.nvim',
@@ -300,7 +302,7 @@ local plugins = {
     event = { 'InsertEnter', 'CmdlineEnter' },
     module = 'cmp',
     requires = {
-      { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+      { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
@@ -315,9 +317,8 @@ local plugins = {
   },
   {
     'L3MON4D3/LuaSnip',
-    -- module = 'luasnip',
     after = 'nvim-cmp',
-    requires = 'rafamadriz/friendly-snippets',
+    requires = { 'rafamadriz/friendly-snippets', after = 'nvim-cmp' },
     config = true,
   },
   {
@@ -394,4 +395,8 @@ local plugins = {
   },
 }
 
-require('util.packer').setup { plugins = plugins }
+return {
+  setup = function()
+    require('util.packer').setup { plugins = plugins }
+  end,
+}

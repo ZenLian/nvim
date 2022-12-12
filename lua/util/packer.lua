@@ -74,8 +74,8 @@ local preprocess = function(plugin)
   end
   local ok, pkg = pcall(require, 'plugins.' .. name)
   if not ok then
-      util.error('cannot load config' , name)
-      return plugin
+    util.error('missing config: ' .. name, 'packer')
+    return plugin
   end
   -- NOTE: config can not use 'upvalue'(module's local variables, etc.)
   plugin.config = pkg.config

@@ -1,7 +1,5 @@
 local M = {}
-local util = require('util')
 
-local TITLE = 'Diagnostics'
 M.enable = true
 
 M.signs = {
@@ -13,6 +11,7 @@ M.signs = {
 }
 
 function M.setup()
+  -- signs
   for severity, icon in pairs(M.signs) do
     local hl = 'DiagnosticSign' .. severity
     vim.fn.sign_define(hl, {
@@ -21,6 +20,10 @@ function M.setup()
       numhl = '',
     })
   end
+  -- config
+  vim.diagnostic.config {
+    severity_sort = true,
+  }
 end
 
 function M.toggle(value)

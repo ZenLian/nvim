@@ -31,8 +31,8 @@ function M.setup()
 
   require('config.options').setup()
   require('config.keymaps').setup()
-  require('config.autocmds')
-  require('config.plugins')
+  require('config.autocmds').setup()
+  require('plugins').setup()
 end
 
 return M

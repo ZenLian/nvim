@@ -1,7 +1,7 @@
 local fn = vim.fn
 local util = require('util')
 
-util.augroup {
+local groups = {
   ['vimrc.lastedit'] = {
     -- https://github.com/ethanholz/nvim-lastplace
     desc = 'Back to where you leave',
@@ -101,6 +101,8 @@ util.augroup {
   },
 }
 
--- markdown spell on
--- vim.cmd([[autocmd FileType markdown setlocal spell]])
---
+return {
+  setup = function()
+    util.augroup(groups)
+  end,
+}
