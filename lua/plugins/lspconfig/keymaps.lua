@@ -17,6 +17,7 @@ local leader = {
     a = { vim.lsp.buf.code_action, 'Code action' },
     r = { vim.lsp.buf.rename, 'Rename' },
     d = { vim.diagnostic.open_float, 'Line Diagnostics' },
+    D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Workspace Diagnostics' },
   },
 }
 

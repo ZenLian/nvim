@@ -138,4 +138,9 @@ M.augroup = function(groups) -- {name=autocmds}
   end
 end
 
+function M.keymap(mode, lhs, rhs, opts)
+  opts = M.tbl_merge({ noremap = true, silent = true }, opts)
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
 return M

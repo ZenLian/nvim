@@ -1,11 +1,7 @@
 local util = require('util')
+local keymap = util.keymap
 local _, wk = pcall(require, 'which-key')
 local M = {}
-
-local function keymap(mode, lhs, rhs, opts)
-  opts = util.tbl_merge({ noremap = true, silent = true }, opts)
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
 
 local function register_basic()
   -- Save
@@ -97,6 +93,7 @@ local function register_next_prev()
     B = { '<cmd>lua require("bufferline").go_to_buffer(1, true)<cr>', 'First buffer' },
     d = 'Next diagnostic',
     e = 'Next error',
+    c = { ':cnext<cr>', 'Next quickfix' },
     t = { ':tabn<cr>', 'Next tab page' },
   }
 
@@ -107,6 +104,7 @@ local function register_next_prev()
     B = { '<cmd>lua require("bufferline").go_to_buffer(-1, true)<cr>', 'Last buffer' },
     d = 'Previous diagnostic',
     e = 'Previous error',
+    c = { ':cprev<cr>', 'Previous quickfix' },
     t = { ':tabp<cr>', 'Previous tab page' },
   }
   wk.register(next, { prefix = ']' })
@@ -204,7 +202,6 @@ local function register_leader()
     },
     x = {
       name = 'trouble',
-      x = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Diagnostics' },
       t = { '<cmd>TodoTrouble<cr>', 'Todos' },
     },
     z = {

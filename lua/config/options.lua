@@ -168,7 +168,7 @@ local options = {
 
   complete = '.,w,b,k',
   grepformat = '%f:%l:%c:%m',
-  grepprg = 'rg --hidden --vimgrep --smart-case --',
+  grepprg = 'rg --hidden --vimgrep --smart-case --no-heading --',
   startofline = false,
   diffopt = 'filler,iwhite,internal,algorithm:patience',
   completeopt = 'menuone,preview,noinsert',
