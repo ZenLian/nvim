@@ -124,11 +124,13 @@ M.config = function()
     hl = { fg = 'yellow' },
     on_click = {
       callback = function()
-        vim.ui.input({ prompt = 'Change filetype: ', default = vim.bo.filetype }, function(input)
-          if input and input ~= '' then
-            vim.bo.filetype = input
-          end
-        end)
+        require('telescope.builtin').filetypes(require('telescope.themes').get_dropdown {
+          mappings = {
+            i = {
+              ['<esc>'] = require('telescope.actions').close,
+            },
+          },
+        })
       end,
       name = 'heirline_filetype',
     },
@@ -506,7 +508,6 @@ M.config = function()
     condition = function()
       return vim.tbl_contains({ 'neo-tree', 'drex' }, vim.bo.filetype)
     end,
-    hl = { bg = 'dark' },
     SquareMode,
     {
       provider = '  ',

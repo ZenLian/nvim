@@ -8,6 +8,13 @@ local config = function()
         winblend = 3,
         -- winhighlight = 'FloatBorder:Blue',
       },
+      get_config = function(opts)
+        if opts.kind == 'center' then
+          return {
+            relative = 'editor',
+          }
+        end
+      end,
     },
     select = {
       enable = true,

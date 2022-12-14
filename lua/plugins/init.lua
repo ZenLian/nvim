@@ -324,7 +324,7 @@ local plugins = {
   {
     'L3MON4D3/LuaSnip',
     after = 'nvim-cmp',
-    requires = { 'rafamadriz/friendly-snippets', after = 'nvim-cmp' },
+    requires = { 'rafamadriz/friendly-snippets' },
     config = true,
   },
   {
@@ -394,11 +394,19 @@ local plugins = {
     'echasnovski/mini.nvim',
     config = true,
   },
+
+  --- always trying something new {{{
   {
     'kevinhwang91/nvim-bqf',
     ft = 'qf',
     config = true,
   },
+  {
+    'cbochs/grapple.nvim',
+    module = 'grapple',
+    config = true,
+  },
+  --- }}}
 }
 
 return {

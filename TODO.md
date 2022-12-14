@@ -1,14 +1,13 @@
 # TODO
 
+- feat: grapple status on statusline
 - feat: more custom textobjects
-- feat: custom foldtext
 - fix: outdated README
 - feat: simulate vim-unimpaired
 - feat: github action with vim-startuptime check
-- fix: persisted.nvim work with other plugins(neotree, aerial, etc.)
+- pro
 - plugins
-  - nvim-bqf
-  - ccc.nvim: colorizer alternative
+  - projections.nvim: workspace, project and sessions management
   - noice.nvim: new ui
   - nvim-navic: breadcrumbs
   - nvim-spectre: find/replace ui

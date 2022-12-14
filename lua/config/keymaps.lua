@@ -172,6 +172,14 @@ local function register_leader()
       s = { '<cmd>Telescope git_status<CR>', 'Status' },
       d = { '<cmd>DiffviewOpen<cr>', 'DiffView' },
     },
+    m = {
+      name = 'mark(grapple)',
+      m = { '<cmd>lua require("grapple").popup_tags()<cr>', 'Popup tags' },
+      ['/'] = { '<cmd>lua require("grapple").toggle()<cr>', 'Toggle tag' },
+      n = { '<cmd>lua require("plugins.grapple").input_tag()<cr>', 'Named tag' },
+      ['['] = { '<cmd>lua require("grapple").cycle_backward()<cr>', 'Named tag' },
+      [']'] = { '<cmd>lua require("grapple").cycle_forward()<cr>', 'Named tag' },
+    },
     o = {
       name = 'open',
       g = { '<cmd>Glow<CR>', 'Glow' }, -- markdown preview

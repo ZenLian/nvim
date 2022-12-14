@@ -36,23 +36,24 @@ M.config = function()
           ['<C-j>'] = 'move_selection_next',
         },
       },
+      history = {
+        path = vim.fn.stdpath('data') .. '/databases/telescope_history.sqlite3',
+        limit = 100,
+      },
       prompt_prefix = ' ',
       selection_caret = ' ',
+      -- border = false,
+      -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
       sorting_strategy = 'ascending',
       layout_strategy = 'bottom_pane',
       layout_config = {
         prompt_position = 'top',
         height = 25,
       },
-      -- border = false,
-      -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-      history = {
-        path = vim.fn.stdpath('data') .. '/databases/telescope_history.sqlite3',
-        limit = 100,
-      },
     },
     pickers = {
       builtin = dropdown,
+      filetypes = dropdown,
       find_files = dropdown,
       git_files = dropdown,
       oldfiles = dropdown,
@@ -75,7 +76,6 @@ M.config = function()
           },
         },
       },
-      themes = dropdown,
     },
   }
 
