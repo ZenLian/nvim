@@ -177,8 +177,8 @@ local function register_leader()
       m = { '<cmd>lua require("grapple").popup_tags()<cr>', 'Popup tags' },
       ['/'] = { '<cmd>lua require("grapple").toggle()<cr>', 'Toggle tag' },
       n = { '<cmd>lua require("plugins.grapple").input_tag()<cr>', 'Named tag' },
-      ['['] = { '<cmd>lua require("grapple").cycle_backward()<cr>', 'Named tag' },
-      [']'] = { '<cmd>lua require("grapple").cycle_forward()<cr>', 'Named tag' },
+      ['['] = { '<cmd>lua require("grapple").cycle_backward()<cr>', 'Previous tagged file' },
+      [']'] = { '<cmd>lua require("grapple").cycle_forward()<cr>', 'Next tagged file' },
     },
     o = {
       name = 'open',

@@ -23,6 +23,7 @@ function M.setup(on_attach)
       null_ls.builtins.formatting.beautysh,
     },
     on_attach = on_attach,
+    border = 'single',
   }
 end
 

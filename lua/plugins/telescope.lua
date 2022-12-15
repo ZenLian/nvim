@@ -14,6 +14,11 @@ M.config = function()
     theme = 'dropdown',
     previewer = false,
     height = 25,
+    mappings = {
+      i = {
+        ['<esc>'] = require('telescope.actions').close,
+      },
+    },
   }
 
   telescope.setup {

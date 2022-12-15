@@ -44,7 +44,7 @@ M.config = function()
       condition = function()
         return vim.bo.modified
       end,
-      provider = '[+]',
+      provider = '[]',
       hl = { fg = 'green' },
     },
     {
@@ -63,11 +63,26 @@ M.config = function()
       self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
     end,
     provider = function(self)
-      return self.icon and (self.icon .. ' ')
+      return self.icon
     end,
     hl = function(self)
       return { fg = self.icon_color }
     end,
+  }
+
+  local FileTag = {
+    init = function(self)
+      self.key = require('grapple').key()
+    end,
+    provider = function(self)
+      return self.key == nil and ' ' or ' '
+    end,
+    on_click = {
+      callback = function()
+        require('grapple').toggle()
+      end,
+      name = 'heirline_filetag',
+    },
   }
 
   local FileName = {
@@ -81,7 +96,6 @@ M.config = function()
       self.relative_filename = vim.fn.fnamemodify(self.filename, ':.')
       self.tail_filename = vim.fn.fnamemodify(self.filename, ':t')
     end,
-    FileIcon,
     -- filename
     {
       flexible = true,
@@ -101,6 +115,7 @@ M.config = function()
       },
     },
     FileFlags,
+    FileTag,
   }
 
   local WorkDir = {
@@ -118,19 +133,19 @@ M.config = function()
   }
 
   local FileType = {
+    hl = { fg = 'yellow' },
     provider = function()
       return vim.bo.filetype
     end,
-    hl = { fg = 'yellow' },
+  }
+  local FileTypeClickable = {
+    FileIcon,
+    FileType,
     on_click = {
       callback = function()
-        require('telescope.builtin').filetypes(require('telescope.themes').get_dropdown {
-          mappings = {
-            i = {
-              ['<esc>'] = require('telescope.actions').close,
-            },
-          },
-        })
+        vim.schedule(function()
+          require('telescope.builtin').filetypes()
+        end)
       end,
       name = 'heirline_filetype',
     },
@@ -166,13 +181,16 @@ M.config = function()
     {
       FileEncoding,
       FileFormat,
-      FileType,
+      FileTypeClickable,
     },
     {
       FileEncoding,
-      FileType,
+      FileIcon,
+      FileTypeClickable,
     },
-    FileType,
+    {
+      FileTypeClickable,
+    },
     Empty,
   }
 
@@ -205,6 +223,9 @@ M.config = function()
   }
 
   local NullLsInfo = {
+    condition = function(self)
+      return #self.sources > 0
+    end,
     on_click = {
       callback = function()
         vim.schedule(function()
@@ -215,11 +236,11 @@ M.config = function()
     },
     flexible = true,
 
-    {
-      provider = function(self)
-        return string.format('null-ls(%s) ', table.concat(self.sources, '|'))
-      end,
-    },
+    -- {
+    --   provider = function(self)
+    --     return string.format('N(%s) ', table.concat(self.sources, '|'))
+    --   end,
+    -- },
     {
       provider = function()
         return 'null-ls '
@@ -244,14 +265,21 @@ M.config = function()
     update = { 'LspAttach', 'LspDetach' },
     init = function(self)
       self.clients = {}
-      self.sources = nil
+      self.sources = {}
       for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
         if client.name ~= 'null-ls' then
           self.clients[#self.clients + 1] = client.name
         else -- null-ls sources
-          self.sources = vim.tbl_map(function(source)
-            return source.name
+          local sources = {}
+          vim.tbl_map(function(source)
+            -- filter repeat source name
+            if not sources[source.name] then
+              sources[source.name] = source
+            end
           end, require('null-ls.sources').get_available(vim.bo.filetype))
+          for source, _ in pairs(sources) do
+            table.insert(self.sources, source)
+          end
         end
       end
     end,
@@ -266,7 +294,7 @@ M.config = function()
         end,
         name = 'heirline_lspinstall',
       },
-      provider = '[',
+      provider = '[',
     },
     NullLsInfo,
     LspInfo,
@@ -297,7 +325,7 @@ M.config = function()
 
     hl = { fg = 'yellow' },
 
-    { provider = '🔨[' },
+    { provider = '[' },
     {
       provider = function(self)
         local severity = 'Error'
@@ -370,7 +398,7 @@ M.config = function()
 
     { -- git branch name
       provider = function(self)
-        return ' ' .. self.status_dict.head
+        return '' .. self.status_dict.head
       end,
       on_click = {
         callback = function()
@@ -445,8 +473,8 @@ M.config = function()
 
   local DefaultStatusline = {
     ViMode,
-    { flexible = 20, { Space, Git }, Empty },
-    { flexible = 100, { Space, FileName } },
+    { flexible = 100, { Space, FileName }, Empty },
+    { flexible = 20, { Space, Git } },
     Trim,
     Align,
 
@@ -534,7 +562,7 @@ M.config = function()
     end,
     static = {},
     {
-      provider = '█ 🔨 ',
+      provider = '█  ',
       hl = { fg = 'red' },
     },
     {
@@ -583,7 +611,6 @@ M.config = function()
     Space,
     SquareMode,
   }
-
 
   -- stylua: ignore
   local SpecialStatusline = {
