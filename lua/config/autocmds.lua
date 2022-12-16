@@ -51,6 +51,7 @@ local groups = {
         'null-ls-info',
         'checkhealth',
         'drex',
+        'Neogit*',
       },
       command = [[nnoremap <buffer><silent> q :close<CR>]],
     },
@@ -92,12 +93,22 @@ local groups = {
   --   },
   -- },
   ['vimrc.markdown'] = {
-    desc = 'markdown file',
-    event = { 'FileType' },
-    pattern = { 'markdown' },
-    callback = function()
-      vim.wo.spell = true
-    end,
+    {
+      desc = 'Entering markdown',
+      event = { 'BufWinEnter' },
+      pattern = { '*.md' },
+      callback = function()
+        vim.wo.spell = true
+      end,
+    },
+    {
+      desc = 'Leaving markdown',
+      event = { 'BufWinLeave' },
+      pattern = { '*.md' },
+      callback = function()
+        vim.wo.spell = false
+      end,
+    },
   },
 }
 

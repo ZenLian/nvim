@@ -1,4 +1,11 @@
-local config = function()
+local M = {
+  packer = {
+    run = ':TSUpdate',
+    event = { 'BufRead', 'BufNewFile' },
+  },
+}
+
+M.packer.config = function()
   require('nvim-treesitter.configs').setup {
     -- ensure_installed = {
     --   'bash',
@@ -98,6 +105,4 @@ local config = function()
   }
 end
 
-return {
-  config = config,
-}
+return M

@@ -1,4 +1,11 @@
-local config = function()
+local M = {
+  packer = {
+    opt = true,
+    event = { 'BufWinEnter' },
+  },
+}
+
+M.packer.config = function()
   require('todo-comments').setup {
     highlight = {
       before = '',
@@ -8,6 +15,4 @@ local config = function()
   }
 end
 
-return {
-  config = config,
-}
+return M

@@ -1,6 +1,10 @@
-local M = {}
+local M = {
+  packer = {
+    cmd = { 'Drex', 'DrexDrawerOpen', 'DrexDrawerToggle' },
+  },
+}
 
-function M.config()
+function M.packer.config()
   local elements = require('drex.elements')
   local utils = require('drex.utils')
   local files = require('drex.actions.files')

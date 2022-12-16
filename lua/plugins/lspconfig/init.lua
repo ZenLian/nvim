@@ -1,4 +1,10 @@
-local config = function()
+local M = {
+  packer = {
+    event = 'BufReadPre',
+  },
+}
+
+M.packer.config = function()
   local function setup_lspconfig()
     require('lspconfig.ui.windows').default_options.border = 'single'
   end
@@ -52,4 +58,4 @@ local config = function()
   -- }
 end
 
-return { config = config }
+return M

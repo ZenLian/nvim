@@ -1,4 +1,12 @@
-local config = function()
+local M = {
+  packer = {
+    module = 'toggleterm',
+    cmd = 'ToggleTerm',
+    keys = { [[<C-\>]] },
+  },
+}
+
+M.packer.config = function()
   require('toggleterm').setup {
     open_mapping = [[<c-\>]],
     -- hide_numbers = true, -- hide the number column in toggleterm buffers
@@ -33,6 +41,4 @@ local config = function()
   })
 end
 
-return {
-  config = config,
-}
+return M

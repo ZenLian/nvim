@@ -1,4 +1,8 @@
-local config = function()
+local M = {
+  packer = {},
+}
+
+M.packer.config = function()
   require('leap').setup {
     special_keys = {
       repeat_search = '<enter>',
@@ -14,4 +18,4 @@ local config = function()
   require('leap').add_default_mappings()
 end
 
-return { config = config }
+return M

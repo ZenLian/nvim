@@ -1,4 +1,23 @@
-local config = function()
+local M = {
+  packer = {
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    module = 'cmp',
+    requires = {
+      { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
+      { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-emoji' },
+      { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
+      { 'dmitmel/cmp-cmdline-history', after = 'nvim-cmp' },
+      { 'uga-rosa/cmp-dictionary', module = 'cmp_dictionary' },
+    },
+  },
+}
+
+M.packer.config = function()
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
   end
@@ -189,4 +208,4 @@ local config = function()
   }
 end
 
-return { config = config }
+return M

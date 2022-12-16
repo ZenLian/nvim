@@ -1,6 +1,4 @@
-local M = {}
-
-function M.config()
+local config = function()
   local ccc = require('ccc')
   ccc.setup {
     highlighter = {
@@ -9,4 +7,9 @@ function M.config()
   }
 end
 
-return M
+return {
+  packer = {
+    event = { 'BufRead', 'BufNewFile' },
+    config = config,
+  },
+}

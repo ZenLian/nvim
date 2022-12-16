@@ -1,4 +1,10 @@
-local config = function()
+local M = {
+  packer = {
+    after = { 'leap.nvim' },
+  },
+}
+
+M.packer.config = function()
   require('flit').setup {
     keys = { f = 'f', F = 'F', t = 't', T = 'T' },
     -- A string like "nv", "nvo", "o", etc.
@@ -10,4 +16,4 @@ local config = function()
   }
 end
 
-return { config = config }
+return M

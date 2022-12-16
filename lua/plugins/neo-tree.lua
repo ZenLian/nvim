@@ -1,4 +1,11 @@
-local config = function()
+local M = {
+  packer = {
+    branch = 'v2.x',
+    cmd = { 'Neotree' },
+  },
+}
+
+M.packer.config = function()
   local function getTelescopeOpts(state, path)
     return {
       cwd = path,
@@ -24,7 +31,10 @@ local config = function()
   require('neo-tree').setup {
     default_component_configs = {
       icon = {
-        folder_empty = '',
+        folder_closed = '',
+        folder_open = '',
+        folder_empty = 'ﰊ',
+        -- folder_empty = '',
         -- default = '',
       },
       modified = {
@@ -103,15 +113,18 @@ local config = function()
             require('neo-tree.sources.filesystem.commands').refresh(state)
           end)
         end,
-        navigation_back = function(state)
+        backward = function(state)
           local node = state.tree:get_node()
-          if node.type == 'directory' and node:is_expanded() then
-            require('neo-tree.sources.filesystem').toggle_directory(state, node)
-          else
-            require('neo-tree.ui.renderer').focus_node(state, node:get_parent_id())
+          if node.type == 'message' then
+            return
           end
+          if node.type ~= 'directory' or not node:is_expanded() then
+            node = state.tree:get_node(node:get_parent_id())
+            require('neo-tree.ui.renderer').focus_node(state, node:get_id())
+          end
+          require('neo-tree.sources.filesystem').toggle_directory(state, node)
         end,
-        navigation_forward = function(state)
+        forward = function(state)
           local node = state.tree:get_node()
           if node.type == 'message' then
             return
@@ -139,8 +152,8 @@ local config = function()
         mappings = {
           -- navigation with hjkl
           -- https://github.com/nvim-neo-tree/neo-tree.nvim/wiki/Tips#navigation-with-hjkl
-          ['h'] = 'navigation_back',
-          ['l'] = 'navigation_forward',
+          ['h'] = 'backward',
+          ['l'] = 'forward',
           ['C'] = '',
           ['<tab>'] = 'toggle_current',
           ['D'] = 'trash',
@@ -154,4 +167,5 @@ local config = function()
     },
   }
 end
-return { config = config }
+
+return M

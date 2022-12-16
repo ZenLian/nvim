@@ -1,6 +1,10 @@
-local M = {}
+local M = {
+  packer = {
+    as = 'catppuccin',
+  },
+}
 
-M.config = function()
+M.packer.config = function()
   -- vim.g.catppuccin_flavour = 'latte'
   vim.g.catppuccin_flavour = 'mocha'
   -- vim.g.catppuccin_flavour = 'macchiato'
@@ -143,4 +147,5 @@ M.config = function()
     },
   }
 end
+
 return M

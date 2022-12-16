@@ -1,4 +1,8 @@
-local config = function()
+local M = {
+  packer = {},
+}
+
+M.packer.config = function()
   local spec = require('mini.ai').gen_spec
   require('mini.ai').setup {
     custom_textobjects = {
@@ -46,4 +50,4 @@ local config = function()
   -- require('mini.bufremove').setup {}
 end
 
-return { config = config }
+return M

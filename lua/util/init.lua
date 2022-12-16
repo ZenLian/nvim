@@ -143,4 +143,49 @@ function M.keymap(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+local function do_keymaps(keys, opts)
+  -- first is rhs, a final keymap
+  if keys[1] then
+    local rhs = keys[1]
+    keys[1] = nil
+    if keys[2] then
+      keys.desc = keys[2]
+      keys[2] = nil
+    end
+    M.keymap(opts.modes, opts.lhs, rhs, keys)
+    return
+  end
+  for key, value in pairs(keys) do
+    do_keymaps(value, { lhs = opts.lhs .. key, modes = opts.modes })
+  end
+end
+
+-- keymaps:
+-- {
+--   n = {
+--     ['<leader>z'] = {
+--       a = { '<cmd>whatever<cr>', 'desc', nowait = true}
+--       b = { function() do_some_thing end, desc = 'desc', nowait = true}
+--     }
+--   },
+--   -- for multi mode
+--   ['nv'] = { ... }
+--   -- for `:map'
+--   [''] = { ... },
+-- }
+function M.keymaps(keymaps)
+  for mode, keys in pairs(keymaps) do
+    -- TODO: string -> table{string}
+    local modes = {}
+    if mode == '' then
+      modes = { '' }
+    else
+      for i = 1, #mode do
+        table.insert(modes, mode:sub(i, i))
+      end
+    end
+    do_keymaps(keys, { lhs = '', modes = modes })
+  end
+end
+
 return M

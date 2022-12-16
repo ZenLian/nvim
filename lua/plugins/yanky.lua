@@ -25,4 +25,9 @@ local config = function()
   }
 end
 
-return { config = config }
+return {
+  packer = {
+    requires = { 'kkharji/sqlite.lua' },
+    config = config,
+  },
+}

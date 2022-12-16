@@ -31,5 +31,7 @@ local config = function()
 end
 
 return {
-  config = config,
+  packer = {
+    config = config,
+  },
 }

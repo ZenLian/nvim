@@ -44,46 +44,28 @@ function M.loaded(plugin)
   return packer_plugins[plugin] and packer_plugins[plugin].loaded
 end
 
-local function get_name(plugin)
-  local parts = vim.split(plugin[1], '/')
-  local name = parts[#parts]:lower()
-  name = name:gsub('%.n?vim$', '')
-  name = name:gsub('^n?vim%-', '')
-  name = name:gsub('%-n?vim$', '')
-  name = name:gsub('%.lua$', '')
-  name = name:gsub('%.', '_')
-  return name
-end
+local function preprocess(plugin)
+  -- disabled plugin
+  if plugin.disable then
+    return nil
+  end
 
-local preprocess = function(plugin)
   -- local plugin
   if plugin.is_local then
     plugin[1] = util.join_path(cfg.packer.local_dir, plugin[1])
     plugin.is_local = nil
   end
 
-  -- seperated config
-  local t = type(plugin.config)
-  local name
-  if t == 'string' then
-    name = plugin.config
-  elseif plugin.config == true then
-    name = plugin.as or get_name(plugin)
-  else
-    return plugin
+  -- plugin's keymaps
+  if plugin.keymaps then
+    util.keymaps(plugin.keymaps)
+    plugin.keymaps = nil
   end
-  local ok, pkg = pcall(require, 'plugins.' .. name)
-  if not ok then
-    util.error('missing config: ' .. name, 'packer')
-    return plugin
-  end
-  -- NOTE: config can not use 'upvalue'(module's local variables, etc.)
-  plugin.config = pkg.config
 
   return plugin
 end
 
-function M.setup(opts)
+function M.setup(plugins)
   local bootstrap = M.bootstrap()
 
   vim.cmd([[packadd packer.nvim]])
@@ -91,9 +73,26 @@ function M.setup(opts)
   packer.startup {
     function(use)
       use { 'wbthomason/packer.nvim', opt = true }
-      for _, plugin in ipairs(opts.plugins) do
+      for uid, plugin in pairs(plugins) do
+        local t = type(plugin)
+        if t == 'string' then
+          -- seperated config
+          local ok, pkg = pcall(require, 'plugins.' .. plugin)
+          if not ok then
+            util.error('missing config file for plugin ' .. uid, 'plugins')
+          elseif not pkg.packer then
+            util.error('missing field "packer" for plugin ' .. uid, 'plugins')
+          else
+            plugin = pkg.packer
+          end
+        elseif t ~= 'table' then
+          util.error(string.format('cannot accept type "%s" for plugin "%s"', t, uid), 'plugins')
+        end
+        plugin[1] = uid
         plugin = preprocess(plugin)
-        use(plugin)
+        if plugin then
+          use(plugin)
+        end
       end
     end,
     config = packer_config,

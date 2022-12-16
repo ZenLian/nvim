@@ -25,5 +25,10 @@ local config = function()
 end
 
 return {
-  config = config,
+  packer = {
+    tag = 'v2.*',
+    requires = 'kyazdani42/nvim-web-devicons',
+    after = 'catppuccin',
+    config = config,
+  },
 }

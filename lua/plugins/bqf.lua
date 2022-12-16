@@ -1,6 +1,10 @@
-local M = {}
+local M = {
+  packer = {
+    ft = 'qf',
+  },
+}
 
-function M.config()
+function M.packer.config()
   local bqf = require('bqf')
   bqf.setup {
     preview = {

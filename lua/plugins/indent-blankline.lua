@@ -21,5 +21,8 @@ local config = function()
 end
 
 return {
-  config = config,
+  packer = {
+    event = 'BufRead',
+    config = config,
+  },
 }

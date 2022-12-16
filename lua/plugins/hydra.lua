@@ -1,4 +1,8 @@
-local M = {}
+local M = {
+  packer = {
+    after = 'which-key.nvim',
+  },
+}
 
 function M.basic_widgets()
   local hydra = require('hydra')
@@ -346,7 +350,7 @@ function M.telescope_widget()
   }
 end
 
-function M.config()
+function M.packer.config()
   require('plugins.hydra').basic_widgets()
   require('plugins.hydra').options()
   require('plugins.hydra').git_widget()

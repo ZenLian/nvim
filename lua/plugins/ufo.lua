@@ -1,6 +1,11 @@
-local M = {}
+local M = {
+  packer = {
+    requires = { 'kevinhwang91/promise-async', module = 'promise' },
+    event = 'BufWinEnter',
+  },
+}
 
-function M.config()
+function M.packer.config()
   local ufo = require('ufo')
 
   vim.o.foldenable = true

@@ -1,4 +1,11 @@
-local config = function()
+local M = {
+  packer = {
+    module = 'aerial',
+    cmd = 'AerialToggle',
+  },
+}
+
+M.packer.config = function()
   require('aerial').setup {
     -- Priority list of preferred backends for aerial.
     -- This can be a filetype map (see :help aerial-filetype-map)
@@ -231,4 +238,4 @@ local config = function()
   }
 end
 
-return { config = config }
+return M

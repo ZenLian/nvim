@@ -1,6 +1,12 @@
-local M = {}
+local M = {
+  packer = {
+    cmd = 'Telescope',
+    module = 'telescope',
+    requires = 'nvim-lua/plenary.nvim',
+  },
+}
 
-M.config = function()
+M.packer.config = function()
   local telescope = require('telescope')
 
   local file_browser_actions = function(action)
@@ -87,6 +93,18 @@ M.config = function()
   telescope.load_extension('notify')
   telescope.load_extension('projects')
 end
+
+M.packer.keymaps = {
+  n = {
+    ['<leader>'] = {
+      g = {
+        B = { '<cmd>Telescope git_branches<CR>', 'Branches' },
+        C = { '<cmd>Telescope git_commits<CR>', 'Commits' },
+        s = { '<cmd>Telescope git_status<CR>', 'Status' },
+      },
+    },
+  },
+}
 
 M.project_files = function()
   local builtin = require('telescope.builtin')

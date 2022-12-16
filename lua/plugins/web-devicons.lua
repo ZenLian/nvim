@@ -1,6 +1,4 @@
-local M = {}
-
-function M.config()
+local function config()
   local palette = require('catppuccin.palettes').get_palette()
   require('nvim-web-devicons').setup {
     color_icons = true,
@@ -30,4 +28,9 @@ function M.config()
   require('nvim-web-devicons').set_default_icon('', palette.text)
 end
 
-return M
+return {
+  packer = {
+    module = 'nvim-web-devicons',
+    config = config,
+  },
+}

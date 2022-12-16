@@ -1,6 +1,10 @@
-local M = {}
+local M = {
+  packer = {
+    cmd = { 'TZNarrow', 'TZFocus', 'TZMinimalist', 'TZAtaraxis' },
+  },
+}
 
-function M.config()
+function M.packer.config()
   local zen = require('true-zen')
   zen.setup {
     modes = { -- configurations per mode
@@ -81,5 +85,18 @@ function M.config()
     },
   }
 end
+
+M.packer.keymaps = {
+  ['nv'] = {
+    ['<leader>zn'] = { ':TZNarrow<CR>' },
+  },
+  ['n'] = {
+    ['<leader>z'] = {
+      f = { ':TZFocus<CR>' },
+      m = { ':TZMinimalist<CR>' },
+      a = { ':TZAtaraxis<CR>' },
+    },
+  },
+}
 
 return M

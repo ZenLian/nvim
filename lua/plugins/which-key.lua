@@ -1,5 +1,10 @@
-local config = function()
-  require('which-key').setup {
+local M = {
+  packer = {},
+}
+
+M.packer.config = function()
+  local wk = require('which-key')
+  wk.setup {
     plugins = {
       marks = true,
       registers = true,
@@ -26,8 +31,11 @@ local config = function()
     },
     show_help = false,
   }
+
+  wk.register({
+    g = { name = 'git', {} },
+    z = { name = 'zen', {} },
+  }, { prefix = '<Leader>' })
 end
 
-return {
-  config = config,
-}
+return M

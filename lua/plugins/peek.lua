@@ -1,4 +1,12 @@
-local config = function()
+local M = {
+  packer = {
+    ft = { 'markdown' },
+    -- cmd = { 'PeekOpen', 'PeekClose', 'PeekToggle' },
+    run = { 'deno task --quiet build:fast' },
+  },
+}
+
+M.packer.config = function()
   local peek = require('peek')
   peek.setup()
   vim.api.nvim_create_user_command('PeekOpen', peek.open, {})
@@ -12,4 +20,4 @@ local config = function()
   end, {})
 end
 
-return { config = config }
+return M

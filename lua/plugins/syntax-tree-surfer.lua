@@ -1,4 +1,10 @@
-local config = function()
+local M = {
+  packer = {
+    after = { 'nvim-treesitter' },
+  },
+}
+
+M.packer.config = function()
   require('syntax-tree-surfer').setup {}
   -- Syntax Tree Surfer
   local opts = { noremap = true, silent = true }
@@ -45,4 +51,4 @@ local config = function()
   vim.keymap.set('x', 'L', '<cmd>STSSelectChildNode<cr>', opts)
 end
 
-return { config = config }
+return M

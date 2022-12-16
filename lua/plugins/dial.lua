@@ -1,4 +1,10 @@
-local config = function()
+local M = {
+  packer = {
+    keys = { '<C-a>', '<C-x>' },
+  },
+}
+
+M.packer.config = function()
   local augend = require('dial.augend')
   require('dial.config').augends:register_group {
     default = {
@@ -41,4 +47,4 @@ local config = function()
   vim.keymap.set('v', 'g<C-x>', require('dial.map').dec_gvisual(), { noremap = true })
 end
 
-return { config = config }
+return M

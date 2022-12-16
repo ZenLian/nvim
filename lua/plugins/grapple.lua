@@ -1,8 +1,11 @@
-local M = {}
-
-function M.config()
-  require('grapple').setup {}
-end
+local M = {
+  packer = {
+    module = 'grapple',
+    config = function()
+      require('grapple').setup {}
+    end,
+  },
+}
 
 -- use vim.ui.input to input tag name
 function M.input_tag()

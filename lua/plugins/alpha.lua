@@ -71,5 +71,8 @@ local config = function()
 end
 
 return {
-  config = config,
+  packer = {
+    event = 'BufWinEnter',
+    config = config,
+  },
 }

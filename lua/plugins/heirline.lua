@@ -1,6 +1,10 @@
-local M = {}
+local M = {
+  packer = {
+    event = 'VimEnter',
+  },
+}
 
-M.config = function()
+M.packer.config = function()
   local conditions = require('heirline.conditions')
   local utils = require('heirline.utils')
 
@@ -71,11 +75,8 @@ M.config = function()
   }
 
   local FileTag = {
-    init = function(self)
-      self.key = require('grapple').key()
-    end,
-    provider = function(self)
-      return self.key == nil and ' ' or ' '
+    provider = function()
+      return require('grapple').key() == nil and ' ' or ' '
     end,
     on_click = {
       callback = function()
@@ -277,9 +278,7 @@ M.config = function()
               sources[source.name] = source
             end
           end, require('null-ls.sources').get_available(vim.bo.filetype))
-          for source, _ in pairs(sources) do
-            table.insert(self.sources, source)
-          end
+          self.sources = vim.tbl_keys(sources)
         end
       end
     end,

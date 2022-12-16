@@ -1,4 +1,10 @@
-local config = function()
+local M = {
+  packer = {
+    cmd = 'Neogit',
+  },
+}
+
+M.packer.config = function()
   require('neogit').setup {
     disable_commit_confirmation = true,
     -- kind = 'floating',
@@ -21,6 +27,10 @@ local config = function()
   }
 end
 
-return {
-  config = config,
+M.packer.keymaps = {
+  n = {
+    ['<leader>gg'] = { '<cmd>Neogit<CR>', 'Neogit' },
+  },
 }
+
+return M

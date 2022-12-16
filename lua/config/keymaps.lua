@@ -73,13 +73,6 @@ local function register_basic()
   keymap('n', '<C-p>', function()
     require('plugins.telescope').project_files()
   end)
-
-  -- true-zen
-  keymap('n', '<leader>zn', ':TZNarrow<CR>', {})
-  keymap('v', '<leader>zn', ":'<,'>TZNarrow<CR>", {})
-  keymap('n', '<leader>zf', ':TZFocus<CR>', {})
-  keymap('n', '<leader>zm', ':TZMinimalist<CR>', {})
-  keymap('n', '<leader>za', ':TZAtaraxis<CR>', {})
 end
 
 local function register_next_prev()
@@ -159,17 +152,13 @@ local function register_leader()
     D = { '<cmd>Drex<CR>', 'Open drex buffer' },
     e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
     g = {
-      name = 'git',
-      g = { '<cmd>Neogit<CR>', 'Neogit' },
+      -- name = 'git',
       l = {
         function()
           util.float_terminal('lazygit')
         end,
         'LazyGit',
       },
-      B = { '<cmd>Telescope git_branches<CR>', 'Branches' },
-      C = { '<cmd>Telescope git_commits<CR>', 'Commits' },
-      s = { '<cmd>Telescope git_status<CR>', 'Status' },
       d = { '<cmd>DiffviewOpen<cr>', 'DiffView' },
     },
     m = {
@@ -211,10 +200,6 @@ local function register_leader()
     x = {
       name = 'trouble',
       t = { '<cmd>TodoTrouble<cr>', 'Todos' },
-    },
-    z = {
-      name = 'zen',
-      t = { '<cmd>Twilight<CR>', 'Twilight' },
     },
     ['\\'] = {
       name = 'terminal',
