@@ -62,6 +62,12 @@ local function preprocess(plugin)
     plugin.keymaps = nil
   end
 
+  -- call init functions
+  if plugin.init then
+    plugin.init()
+    plugin.init = nil
+  end
+
   return plugin
 end
 

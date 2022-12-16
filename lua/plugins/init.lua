@@ -24,6 +24,8 @@ local plugins = {
   ['kyazdani42/nvim-web-devicons'] = 'web-devicons',
   ---}}} requirements
 
+  ['lewis6991/impatient.nvim'] = {},
+
   -- {{{ ui
   ['catppuccin/nvim'] = 'catppuccin',
   ['rebelot/heirline.nvim'] = 'heirline',
@@ -90,13 +92,6 @@ local plugins = {
   --   'dstein64/vim-startuptime',
   --   cmd = 'StartupTime',
   -- },
-  ['lewis6991/impatient.nvim'] = {},
-
-  ['ellisonleao/glow.nvim'] = {
-    ft = { 'markdown' },
-    cmd = 'Glow',
-  },
-  ['toppair/peek.nvim'] = 'peek',
 
   --- treesitter {{{
   ['nvim-treesitter/nvim-treesitter'] = 'treesitter',
@@ -197,6 +192,14 @@ local plugins = {
     is_local = true,
   },
   -- }}} lsp
+
+  -- language specific {{{
+  -- markdown {{{
+  ['ellisonleao/glow.nvim'] = 'glow',
+  ['toppair/peek.nvim'] = 'peek',
+  -- }}}
+  --
+  -- }}}
 
   ['echasnovski/mini.nvim'] = 'mini',
 

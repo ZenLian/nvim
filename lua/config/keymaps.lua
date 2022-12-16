@@ -169,11 +169,6 @@ local function register_leader()
       ['['] = { '<cmd>lua require("grapple").cycle_backward()<cr>', 'Previous tagged file' },
       [']'] = { '<cmd>lua require("grapple").cycle_forward()<cr>', 'Next tagged file' },
     },
-    o = {
-      name = 'open',
-      g = { '<cmd>Glow<CR>', 'Glow' }, -- markdown preview
-      p = { '<cmd>PeekToggle<CR>', 'Live preview' },
-    },
     p = {
       name = 'package management',
       p = { '<cmd>PackerStatus<CR>', 'Packer Status' },
