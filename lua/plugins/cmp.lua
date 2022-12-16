@@ -7,7 +7,7 @@ local M = {
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
-      -- { 'hrsh7th/cmp-emoji' },
+      { 'hrsh7th/cmp-emoji', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-calc', after = 'nvim-cmp' },
@@ -68,6 +68,7 @@ M.packer.config = function()
       cmdline = '[CMD]',
       cmdline_history = '[HIST]',
       nvim_lsp_document_symbol = '[SYM]',
+      emoji = '[EMJ]',
     })[entry.source.name]
     return item
   end
@@ -177,6 +178,7 @@ M.packer.config = function()
           -- end,
         },
       },
+      { name = 'emoji' },
     }, {
       { name = 'path' },
       -- { name = 'cmdline' },
