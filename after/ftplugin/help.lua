@@ -3,3 +3,5 @@ if vim.fn.winnr('$') > 2 then
 else
   vim.cmd([[wincmd L]])
 end
+
+vim.keymap.set({ 'n' }, 'gd', '<C-]>')

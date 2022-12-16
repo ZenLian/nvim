@@ -1,10 +1,20 @@
 snippet conf "plugin config module"
-	local M = {}
+	local M = {
+		packer = {
+			event = '${1}',
+		},
+	}
 
-	function M.config()
-		local ${1} = require('${1:`fnamemodify(bufname(), ':t:r')`}')
-		$0
+	function M.packer.config()
+		local ${2} = require('${2:`fnamemodify(bufname(), ':t:r')`}')
+		${2}.setup{${3}}
 	end
+
+	M.packer.keymaps = {
+		n = {
+			['<leader>a'] = { '<cmd>lua require("${2}").${4}<cr>', '${5}' }
+		}
+	}
 
 	return M
 

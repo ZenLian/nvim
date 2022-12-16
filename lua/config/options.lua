@@ -151,7 +151,7 @@ local options = {
   autoindent = true,
   smartindent = true,
   tabstop = 4,
-  shiftwidth = 4,
+  shiftwidth = 0,
   softtabstop = -1,
 
   -- text

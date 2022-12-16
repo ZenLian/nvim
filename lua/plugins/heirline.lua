@@ -611,6 +611,41 @@ M.packer.config = function()
     SquareMode,
   }
 
+  local LuapadStatusline = {
+    condition = function()
+      return conditions.buffer_matches {
+        bufname = { '.*%d_Luapad%.lua$' },
+      }
+    end,
+    SquareMode,
+    {
+      provider = '  ',
+      hl = function(self)
+        return { fg = self:mode_color() }
+      end,
+    },
+    {
+      provider = 'LUAPAD',
+      hl = { fg = 'green' },
+    },
+    {
+      init = function(self)
+        self.status = require('luapad.statusline').status()
+      end,
+      provider = function(self)
+        return string.format('[%s]', self.status)
+      end,
+      hl = function(self)
+        return { fg = self.status == 'ok' and 'green' or 'red' }
+      end,
+    },
+    Align,
+    Ruler,
+    Space,
+    ScrollBar,
+  }
+
+
   -- stylua: ignore
   local SpecialStatusline = {
     condition = function()
@@ -682,6 +717,7 @@ M.packer.config = function()
     ExplorerStatusline,
     QuickfixStatusline,
     TerminalStatusline,
+    LuapadStatusline,
     SpecialStatusline,
     DefaultStatusline,
   }
