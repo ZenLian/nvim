@@ -114,6 +114,9 @@ M.packer.config = function()
       -- LeapLabelSelected = { fg = colors.base, bg = colors.red },
       LeapBackdrop = { fg = colors.surface1, bg = colors.base },
 
+      TSNodeUnmatched = { fg = colors.surface1, bg = colors.base },
+      TSNodeKey = { fg = colors.base, bg = colors.green },
+
       NeoTreeNormalNC = { link = 'NeoTreeNormal' },
 
       DrexMarked = { fg = colors.base, bg = colors.red },

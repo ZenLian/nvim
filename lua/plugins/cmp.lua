@@ -6,7 +6,7 @@ local M = {
       { 'saadparwaiz1/cmp_luasnip', after = 'LuaSnip' },
       { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' },
-      -- { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
+      { 'hrsh7th/cmp-nvim-lsp-document-symbol', after = 'nvim-cmp' },
       -- { 'hrsh7th/cmp-emoji' },
       { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
       { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
@@ -61,12 +61,13 @@ M.packer.config = function()
     item.menu = ({
       nvim_lsp = '[LSP]',
       luasnip = '[SNIP]',
-      buffer = '[BUFF]',
+      buffer = '[BUF]',
       path = '[PATH]',
       calc = '[CALC]',
       dictionary = '[DICT]',
       cmdline = '[CMD]',
       cmdline_history = '[HIST]',
+      nvim_lsp_document_symbol = '[SYM]',
     })[entry.source.name]
     return item
   end
@@ -155,13 +156,41 @@ M.packer.config = function()
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       -- { name = 'nvim_lsp_signature_help' },
-      { name = 'buffer' },
+      {
+        name = 'buffer',
+        option = {
+          -- all buffers smaller than 1MB
+          get_bufnrs = function()
+            local bufnrs = vim.tbl_filter(function(buf)
+              local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
+              return fsize < 1024 * 1024
+            end, vim.api.nvim_list_bufs())
+            return bufnrs
+          end,
+          -- visible buffer
+          -- get_bufnrs = function()
+          --   local bufs = {}
+          --   for _, win in ipairs(vim.api.nvim_list_wins()) do
+          --     bufs[vim.api.nvim_win_get_buf(win)] = true
+          --   end
+          --   return vim.tbl_keys(bufs)
+          -- end,
+        },
+      },
     }, {
       { name = 'path' },
       -- { name = 'cmdline' },
       { name = 'calc' },
       { name = 'dictionary', keyword_length = 2, max_item_count = 10 },
     }),
+    sorting = {
+      comparators = {
+        --> https://github.com/hrsh7th/cmp-buffer#locality-bonus-comparator-distance-based-sorting
+        function(...)
+          return require('cmp_buffer'):compare_locality(...)
+        end,
+      },
+    },
     completion = {
       completeopt = 'menu,menuone,noinsert',
     },
@@ -175,13 +204,15 @@ M.packer.config = function()
     },
   }
 
-  cmp.setup.cmdline('/', {
-    sources = {
-      { name = 'buffer' },
-      { name = 'cmdline_history' },
-      { name = 'nvim_lsp_document_symbol' },
-    },
-  })
+  for _, cmd_type in ipairs { '/', '?' } do
+    cmp.setup.cmdline(cmd_type, {
+      sources = cmp.config.sources {
+        { name = 'nvim_lsp_document_symbol' },
+        { name = 'buffer' },
+        { name = 'cmdline_history', max_item_count = 5 },
+      },
+    })
+  end
 
   cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
