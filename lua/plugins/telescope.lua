@@ -82,8 +82,10 @@ M.packer.config = function()
         mappings = {
           n = {
             ['a'] = file_browser_actions('create'),
-            ['l'] = file_browser_actions('select_default'),
+            ['l'] = require('telescope.actions').select_default,
             ['h'] = file_browser_actions('goto_parent_dir'),
+            ['H'] = file_browser_actions('toggle_hidden'),
+            ['/'] = file_browser_actions('toggle_all'),
           },
         },
       },

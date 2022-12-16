@@ -627,7 +627,12 @@ M.packer.config = function()
       end,
     },
     {
-      provider = 'LUAPAD',
+      provider = function()
+        local filename = vim.api.nvim_buf_get_name(0)
+        filename = vim.fn.fnamemodify(filename, ':t')
+        local nr = filename:gsub('_Luapad%.lua$', '')
+        return 'LUAPAD#' .. nr .. ' '
+      end,
       hl = { fg = 'green' },
     },
     {

@@ -4,10 +4,11 @@ local function config()
     color_icons = true,
     default = true,
     override = {
-      -- md = {
-      --   icon = '',
-      --   name = 'Md',
-      -- },
+      md = {
+        icon = '',
+        color = '#519aba',
+        name = 'Md',
+      },
       c = {
         icon = 'ﭰ',
         color = '#599eff',

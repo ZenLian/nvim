@@ -21,7 +21,7 @@ local plugins = {
   ['nvim-lua/plenary.nvim'] = { module = 'plenary' },
   ['MunifTanjim/nui.nvim'] = { module = 'nui' },
   ['kkharji/sqlite.lua'] = { module = 'sqlite' },
-  ['kyazdani42/nvim-web-devicons'] = 'web-devicons',
+  ['nvim-tree/nvim-web-devicons'] = 'web-devicons',
   ---}}} requirements
 
   ['lewis6991/impatient.nvim'] = {},
