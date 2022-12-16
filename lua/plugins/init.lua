@@ -165,6 +165,7 @@ local plugins = {
   ['hrsh7th/nvim-cmp'] = 'cmp',
   ['L3MON4D3/LuaSnip'] = 'luasnip',
   ['windwp/nvim-autopairs'] = 'autopairs',
+  ['echasnovski/mini.nvim'] = 'mini',
 
   -- lsp {{{
   ['neovim/nvim-lspconfig'] = 'lspconfig',
@@ -197,11 +198,10 @@ local plugins = {
   -- markdown {{{
   ['ellisonleao/glow.nvim'] = 'glow',
   ['toppair/peek.nvim'] = 'peek',
+  ['AckslD/nvim-FeMaco.lua'] = 'femaco',
   -- }}}
   --
   -- }}}
-
-  ['echasnovski/mini.nvim'] = 'mini',
 
   --- always trying something new {{{
   ['kevinhwang91/nvim-bqf'] = 'bqf',

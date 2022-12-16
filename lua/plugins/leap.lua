@@ -4,6 +4,14 @@ local M = {
 
 M.packer.config = function()
   require('leap').setup {
+    highlight_unlabeled_phase_one_targets = false,
+    case_sensitive = false,
+    equivalence_classes = {
+      ' \t\r\n',
+      '"\'`',
+      ',([{<',
+      '.>}])',
+    },
     special_keys = {
       repeat_search = '<enter>',
       next_phase_one_target = '<enter>',

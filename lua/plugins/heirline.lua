@@ -62,9 +62,11 @@ M.packer.config = function()
 
   local FileIcon = {
     init = function(self)
-      local filename = self.filename or vim.api.nvim_buf_get_name(0)
-      local extension = vim.fn.fnamemodify(filename, ':e')
-      self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+      -- local filename = self.filename or vim.api.nvim_buf_get_name(0)
+      -- local extension = vim.fn.fnamemodify(filename, ':e')
+      -- self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+      self.icon, self.icon_color =
+        require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
     end,
     provider = function(self)
       return self.icon
