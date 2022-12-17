@@ -65,19 +65,26 @@ local plugins = {
   },
   -- }}} telescope
 
-  ['gbprod/yanky.nvim'] = 'yanky',
+  -- {{{ file management
   ['nvim-neo-tree/neo-tree.nvim'] = 'neo-tree',
   ['theblob42/drex.nvim'] = 'drex',
   ['ahmedkhalf/project.nvim'] = {
     config = require('project_nvim').setup {},
   },
+  --}}}
+
+  -- {{{ git tools
+  ['lewis6991/gitsigns.nvim'] = 'gitsigns',
+  ['TimUntersberger/neogit'] = 'neogit',
   ['sindrets/diffview.nvim'] = {
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },
     module = 'diffview',
   },
+  -- }}}
+
+  ['gbprod/yanky.nvim'] = 'yanky',
   ['akinsho/toggleterm.nvim'] = 'toggleterm',
   ['folke/todo-comments.nvim'] = 'todo-comments',
-  ['TimUntersberger/neogit'] = 'neogit',
   ['folke/which-key.nvim'] = 'which-key',
   ['anuvyklack/hydra.nvim'] = 'hydra',
   -- {
@@ -157,7 +164,6 @@ local plugins = {
   ['monaqa/dial.nvim'] = 'dial',
   -- }}}
 
-  ['lewis6991/gitsigns.nvim'] = 'gitsigns',
   ['gpanders/editorconfig.nvim'] = {
     event = { 'BufRead', 'BufNewFile' },
   },

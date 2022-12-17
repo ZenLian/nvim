@@ -128,7 +128,7 @@ M.packer.config = function()
       YankyPut = { link = 'IncSearch' },
       YankyYanked = { link = 'YankyPut' },
 
-      UfoFoldedBg = { bg = colors.surface1 },
+      UfoFoldedBg = { bg = colors.surface0 },
 
       HydraRed = { fg = colors.red, style = { 'bold' } },
       HydraBlue = { fg = colors.blue, style = { 'bold' } },
