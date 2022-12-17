@@ -108,14 +108,18 @@ M.packer.config = function()
       -- TelescopePreviewTitle = { fg = c.blue },
       TelescopeMatching = { fg = colors.blue },
 
+      -->leap.nvim {{{
       -- LeapMatch = { fg = colors.base, bg = colors.red },
       LeapLabelPrimary = { fg = colors.base, bg = colors.green },
       LeapLabelSecondary = { fg = colors.base, bg = colors.blue },
       -- LeapLabelSelected = { fg = colors.base, bg = colors.red },
       LeapBackdrop = { fg = colors.surface2, bg = colors.base },
+      -- }}}
 
-      TSNodeUnmatched = { fg = colors.surface2, bg = colors.base },
+      -->nvim-treehopper {{{
+      TSNodeUnmatched = { fg = colors.surface2, bg = colors.base, style = {} },
       TSNodeKey = { fg = colors.base, bg = colors.green },
+      -- }}}
 
       NeoTreeNormalNC = { link = 'NeoTreeNormal' },
 

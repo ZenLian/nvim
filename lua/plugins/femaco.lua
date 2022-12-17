@@ -5,7 +5,13 @@ local M = {
 }
 
 M.packer.config = function()
-  require('femaco').setup()
+  require('femaco').setup {
+    post_open_float = function(winnr)
+      vim.wo.signcolumn = 'no'
+      -- esc to close
+      vim.keymap.set('n', '<esc>', '<cmd>q<cr>', { buffer = true, noremap = true, silent = true })
+    end,
+  }
 end
 
 M.packer.init = function()

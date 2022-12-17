@@ -9,7 +9,6 @@
 - ripgrep
 - fd
 - sqlite3
-- [deno](https://deno.land/)(optional, for [peek.nvim](https://github.com/toppair/peek.nvim))
 
 ## 🔌 Plugins
 
@@ -113,7 +112,7 @@ Treesitter
 - Use `/`/`?` to search words for cross line movement, then `n`/`N` to choose.
 - with leap.nvim, you can jump to anywhere in vision:
   - Normal mode: `s`/`S` followed by 2 chars
-  - Visual mode: `x`/`S` followed by 2 chars
+  - Visual mode: `x`/`X` followed by 2 chars
   - `r` motion on remote textobject(e.g. `yarp` to "yank a remote paragraph")
 
 tips:
@@ -132,12 +131,12 @@ textobjects:
 - `q`: quote, alias for `'`, `"` or ```
 - `t`: tag, e.g. `<h1></h1>`
 - `f`: function
-- `a`: parameter(argument)
+- `a`: argument/parameter
 - `c`: class
 - `g`: git hunk
 - `j`/`k`: next/last textobjects(never used!)
 - customs
-  - `e`: whole buffer
+  - [x] `e`: whole buffer
   - [ ] `u`: url
   - [ ] `/`: comment
   - [ ] `i`: indent
@@ -312,22 +311,30 @@ Inside neogit:
 - `p` pull
 - `P` Push
 
-### Sessions
+### 🛠️ Languages
 
-> - [ ] neovim-session-manager alternative
+#### ⚙️ LSP
 
-start with `<Leader>w`("workspace"):
+- `gd`: goto definition
+- `gr`: goto references
+- `gR`: list references in Trouble
 
-- `<Leader>ww` list sessions
-  - `<CR>` to source
-  - `<C-d>` to delete
-- `<Leader>ws` save session
-- `<Leader>wt` toggle
+- `<Leader>lf`: format
+- `<Leader>la`: code action
+- `<Leader>lr`: lsp rename
 
-### ⬇️ Markdown
+- `<Leader>ld`: show line diagnostics
+- `<Leader>lD`: list diagnostics in Trouble
 
-- [ ] `<Leader>op` toggle live preview(peek)
-- [ ] `<Leader>og` open glow preview
+- `[d`/`]d`: previous/next diagnostic
+- `[e`/`]e`: previous/next diagnostic error
+
+#### ⬇️ Markdown
+
+- `<Leader>lp`: preview(glow)
+- `<Leader>lP`: live preview(peek)
+- `<Leader>li`: edit code block(nvim-FeMaCo)
+  - same as `i_<C-l>`
 
 ## ❤️ Credits
 

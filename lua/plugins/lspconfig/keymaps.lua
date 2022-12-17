@@ -38,20 +38,21 @@ local leader_visual = {
 
 local g = {
   name = '+goto',
-  r = { '<cmd>Telescope lsp_references<cr>', 'References' },
+  r = { '<cmd>Telescope lsp_references<cr>', 'Goto References' },
   R = { '<cmd>Trouble lsp_references<cr>', 'Trouble References' },
   d = { '<Cmd>Telescope lsp_definitions <CR>', 'Goto Definition' },
   -- D = { "<Cmd>lua vim.lsp.buf.declaration()<CR>", "Goto Declaration" },
-  D = { 'Peek Definition' }, -- by treesitter
-  -- s = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature Help' },
-  I = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto Implementation' },
-  t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
+  -- D = { 'Peek Definition' }, -- by treesitter
+  -- S = { '<cmd>lua vim.lsp.buf.signature_help()<CR>', 'Signature Help' },
+  -- I = { '<cmd>lua vim.lsp.buf.implementation()<CR>', 'Goto Implementation' },
+  -- t = { '<cmd>lua vim.lsp.buf.type_definition()<CR>', 'Goto Type Definition' },
 }
 
 local misc = {
   ['<A-n>'] = {
     function()
       require('illuminate').next_reference { wrap = true }
+      require()
     end,
     'Next reference',
   },
