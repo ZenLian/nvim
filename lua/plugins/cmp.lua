@@ -152,7 +152,7 @@ M.packer.config = function()
         require('luasnip').lsp_expand(args.body)
       end,
     },
-    sources = cmp.config.sources({
+    sources = cmp.config.sources {
       -- { name = 'nvim_lua' },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
@@ -179,12 +179,10 @@ M.packer.config = function()
         },
       },
       { name = 'emoji' },
-    }, {
+      { name = 'dictionary', keyword_length = 2, max_item_count = 5 },
       { name = 'path' },
-      -- { name = 'cmdline' },
       { name = 'calc' },
-      { name = 'dictionary', keyword_length = 2, max_item_count = 10 },
-    }),
+    },
     sorting = {
       comparators = {
         --> https://github.com/hrsh7th/cmp-buffer#locality-bonus-comparator-distance-based-sorting
@@ -227,11 +225,15 @@ M.packer.config = function()
 
   require('cmp_dictionary').setup {
     dic = {
-      ['*'] = { '~/.config/nvim/spell/english.dict', '/usr/share/dict/words' },
+      ['*'] = {
+        vim.fn.stdpath('config') .. '/spell/english.dict',
+        vim.fn.stdpath('config') .. '/spell/en.utf-8.add',
+        '/usr/share/dict/words',
+      },
     },
     -- The following are default values.
     -- exact = 2,
-    -- first_case_insensitive = false,
+    first_case_insensitive = true,
     -- document = false,
     -- document_command = "wn %s -over",
     async = true,
