@@ -193,10 +193,10 @@ local plugins = {
       }
     end,
   },
-  ['SchemaStore.nvim'] = {
-    -- 'b0o/schemastore.nvim',
+  ['b0o/SchemaStore.nvim'] = {
+    -- as = 'SchemaStore.nvim',
     module = 'schemastore',
-    is_local = true,
+    local_pkg = 'SchemaStore.nvim',
   },
   -- }}} lsp
 

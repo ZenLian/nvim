@@ -51,9 +51,13 @@ local function preprocess(plugin)
   end
 
   -- local plugin
-  if plugin.is_local then
-    plugin[1] = util.join_path(cfg.packer.local_dir, plugin[1])
-    plugin.is_local = nil
+  if plugin.local_pkg then
+    local name = plugin.as or plugin[1]
+    if type(plugin.local_pkg) == 'string' then
+      name = plugin.local_pkg
+    end
+    plugin[1] = util.join_path(cfg.packer.local_dir, name)
+    plugin.local_pkg = nil
   end
 
   -- plugin's keymaps
