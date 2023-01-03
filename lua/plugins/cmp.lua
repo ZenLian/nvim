@@ -152,37 +152,40 @@ M.packer.config = function()
         require('luasnip').lsp_expand(args.body)
       end,
     },
-    sources = cmp.config.sources {
-      -- { name = 'nvim_lua' },
-      { name = 'nvim_lsp' },
-      { name = 'luasnip' },
+    sources = cmp.config.sources(
+      {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'path' },
+        { name = 'calc' },
+      },
       -- { name = 'nvim_lsp_signature_help' },
       {
-        name = 'buffer',
-        option = {
-          -- all buffers smaller than 1MB
-          get_bufnrs = function()
-            local bufnrs = vim.tbl_filter(function(buf)
-              local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
-              return fsize < 1024 * 1024
-            end, vim.api.nvim_list_bufs())
-            return bufnrs
-          end,
-          -- visible buffer
-          -- get_bufnrs = function()
-          --   local bufs = {}
-          --   for _, win in ipairs(vim.api.nvim_list_wins()) do
-          --     bufs[vim.api.nvim_win_get_buf(win)] = true
-          --   end
-          --   return vim.tbl_keys(bufs)
-          -- end,
+        {
+          name = 'buffer',
+          option = {
+            -- all buffers smaller than 1MB
+            get_bufnrs = function()
+              local bufnrs = vim.tbl_filter(function(buf)
+                local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
+                return fsize < 1024 * 1024
+              end, vim.api.nvim_list_bufs())
+              return bufnrs
+            end,
+            -- visible buffer
+            -- get_bufnrs = function()
+            --   local bufs = {}
+            --   for _, win in ipairs(vim.api.nvim_list_wins()) do
+            --     bufs[vim.api.nvim_win_get_buf(win)] = true
+            --   end
+            --   return vim.tbl_keys(bufs)
+            -- end,
+          },
         },
-      },
-      { name = 'emoji' },
-      { name = 'dictionary', keyword_length = 2, max_item_count = 5 },
-      { name = 'path' },
-      { name = 'calc' },
-    },
+        { name = 'emoji' },
+        { name = 'dictionary', keyword_length = 2, max_item_count = 5 },
+      }
+    ),
     sorting = {
       comparators = {
         --> https://github.com/hrsh7th/cmp-buffer#locality-bonus-comparator-distance-based-sorting

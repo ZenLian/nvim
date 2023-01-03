@@ -2,28 +2,30 @@ local M = {}
 
 function M.setup(on_attach)
   local null_ls = require('null-ls')
+  local builtins = null_ls.builtins
   null_ls.setup {
     sources = {
       -- lua
-      null_ls.builtins.diagnostics.luacheck.with {
+      builtins.diagnostics.luacheck.with {
         diagnostics_format = '#{m} (#{s})',
       },
-      null_ls.builtins.formatting.stylua,
-      null_ls.builtins.diagnostics.eslint_d,
-      null_ls.builtins.code_actions.eslint_d,
-      null_ls.builtins.formatting.prettierd,
+      builtins.formatting.stylua,
+      builtins.diagnostics.eslint_d,
+      builtins.code_actions.eslint_d,
+      builtins.formatting.prettierd,
       -- markdown
-      null_ls.builtins.diagnostics.markdownlint.with {
+      builtins.diagnostics.markdownlint.with {
         diagnostics_format = '[#{c}] #{m} (#{s})',
       },
-      null_ls.builtins.formatting.markdownlint,
+      builtins.formatting.markdownlint,
       -- shell
-      null_ls.builtins.diagnostics.shellcheck,
-      null_ls.builtins.code_actions.shellcheck,
-      null_ls.builtins.formatting.beautysh,
+      builtins.diagnostics.shellcheck,
+      builtins.code_actions.shellcheck,
+      builtins.formatting.beautysh,
     },
     on_attach = on_attach,
     border = 'single',
+    root_dir = require('null-ls.utils').root_pattern('.null-ls-root', 'Makefile', '.git', '.luarc.json', '.luacheckrc'),
   }
 end
 

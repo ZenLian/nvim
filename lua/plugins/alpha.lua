@@ -65,6 +65,11 @@ local config = function()
           vim.o.showtabline = 2
         end,
       })
+      -- keys to disable
+      local keys = { 'v', 'V', '<C-v>', 'd', 'D', 'i', 'I', 'C' }
+      vim.tbl_map(function(key)
+        vim.keymap.set('n', key, '', { buffer = true })
+      end, keys)
     end,
   })
   -- vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
