@@ -7,7 +7,8 @@ function M.setup(on_attach)
     sources = {
       -- lua
       builtins.diagnostics.luacheck.with {
-        diagnostics_format = '#{m} (#{s})',
+        -- TODO: only for neodev environment
+        extra_args = { '--globals', 'vim' },
       },
       builtins.formatting.stylua,
       builtins.diagnostics.eslint_d,
@@ -23,6 +24,7 @@ function M.setup(on_attach)
       builtins.code_actions.shellcheck,
       builtins.formatting.beautysh,
     },
+    diagnostics_format = '#{m} (#{s})',
     on_attach = on_attach,
     border = 'single',
     root_dir = require('null-ls.utils').root_pattern('.null-ls-root', 'Makefile', '.git', '.luarc.json', '.luacheckrc'),

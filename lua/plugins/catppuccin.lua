@@ -128,6 +128,9 @@ M.packer.config = function()
 
       NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
       NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
+      NeogitNotificationInfo = { fg = colors.blue },
+      NeogitNotificationWarning = { fg = colors.yellow },
+      NeogitNotificationError = { fg = colors.red },
 
       YankyPut = { link = 'IncSearch' },
       YankyYanked = { link = 'YankyPut' },
