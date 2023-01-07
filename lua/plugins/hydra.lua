@@ -214,19 +214,24 @@ function M.git_widget()
       },
       on_enter = function()
         local gitsigns = require('gitsigns')
-        vim.cmd('mkview')
-        vim.cmd('silent! %foldopen!')
-        vim.bo.modifiable = false
+        -- mkview
+        -- vim.cmd('mkview')
+        -- vim.cmd('silent! %foldopen!')
+
+        -- vim.bo.modifiable = false
         -- gitsigns.toggle_signs(true)
         gitsigns.toggle_linehl(true)
-        -- gitsigns.toggle_deleted(true)
+        gitsigns.toggle_deleted(true)
       end,
       on_exit = function()
         local gitsigns = require('gitsigns')
-        local cursor_pos = vim.api.nvim_win_get_cursor(0)
-        vim.cmd('loadview')
-        vim.api.nvim_win_set_cursor(0, cursor_pos)
-        vim.cmd('normal zv')
+        -- loadview
+        -- vim.cmd('loadview')
+        -- local cursor_pos = vim.api.nvim_win_get_cursor(0)
+        -- vim.api.nvim_win_set_cursor(0, cursor_pos)
+        -- vim.cmd('normal zv')
+
+        -- vim.bo.modifiable = true
         -- gitsigns.toggle_signs(false)
         gitsigns.toggle_linehl(false)
         gitsigns.toggle_deleted(false)
@@ -283,7 +288,7 @@ function M.git_widget()
       { 'b', cmd('lua require("gitsigns").blame_line()'), { desc = 'blame' } },
       {
         'B',
-        cmd('require("gitsigns").blame_line { full = true }'),
+        cmd('lua require("gitsigns").blame_line { full = true }'),
         { desc = 'blame show full' },
       },
       { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },

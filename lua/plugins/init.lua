@@ -126,12 +126,7 @@ local plugins = {
   },
 
   -- editing {{{
-  ['numToStr/Comment.nvim'] = {
-    event = { 'BufRead', 'BufNewFile' },
-    config = function()
-      require('Comment').setup()
-    end,
-  },
+  ['numToStr/Comment.nvim'] = 'comment',
   -- {
   --   'ur4ltz/surround.nvim',
   --   event = { 'BufRead', 'BufNewFile' },
