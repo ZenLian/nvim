@@ -211,7 +211,7 @@ M.packer.config = function()
     cmp.setup.cmdline(cmd_type, {
       sources = cmp.config.sources {
         { name = 'nvim_lsp_document_symbol' },
-        { name = 'buffer' },
+        { name = 'buffer', max_item_count = 5 },
         { name = 'cmdline_history', max_item_count = 5 },
       },
     })
@@ -219,10 +219,10 @@ M.packer.config = function()
 
   cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
-      { name = 'cmdline' },
+      { name = 'cmdline', max_item_count = 5 },
       { name = 'cmdline_history', max_item_count = 5 },
     }, {
-      { name = 'path' },
+      { name = 'path', max_item_count = 5 },
     }),
   })
 

@@ -54,7 +54,7 @@ local function register_basic()
   keymap({ 'n', 'v', 'o' }, 'N', "'nN'[v:searchforward]", { expr = true })
 
   -- plugins
-  keymap('n', '<C-e>', '<cmd>Neotree<CR>')
+  keymap('n', '<C-e>', '<cmd>Neotree float reveal<CR>')
   -- keymap('n', '<C-d>', '<cmd>DrexDrawerOpen<CR>')
   keymap('n', '<C-f>', '<cmd>Telescope current_buffer_fuzzy_find<CR>')
 
@@ -150,7 +150,7 @@ local function register_leader()
     },
     d = { '<cmd>DrexDrawerToggle<CR>', 'Toggle drex' },
     D = { '<cmd>Drex<CR>', 'Open drex buffer' },
-    e = { '<cmd>Neotree toggle=true<CR>', 'Toggle neotree' },
+    e = { '<cmd>Neotree float toggle reveal<CR>', 'Toggle neotree' },
     g = {
       -- name = 'git',
       l = {

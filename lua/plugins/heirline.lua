@@ -78,7 +78,7 @@ M.packer.config = function()
 
   local FileTag = {
     provider = function()
-      return require('grapple').key() == nil and ' ' or ' '
+      return require('grapple').key() == nil and ' 󰨙' or ' 󰔡'
     end,
     on_click = {
       callback = function()
@@ -99,6 +99,7 @@ M.packer.config = function()
       self.relative_filename = vim.fn.fnamemodify(self.filename, ':.')
       self.tail_filename = vim.fn.fnamemodify(self.filename, ':t')
     end,
+    FileIcon,
     -- filename
     {
       flexible = true,
@@ -142,7 +143,6 @@ M.packer.config = function()
     end,
   }
   local FileTypeClickable = {
-    FileIcon,
     FileType,
     on_click = {
       callback = function()
@@ -188,7 +188,6 @@ M.packer.config = function()
     },
     {
       FileEncoding,
-      FileIcon,
       FileTypeClickable,
     },
     {

@@ -94,7 +94,7 @@ M.packer.keymaps = {
     ['<leader>z'] = {
       f = { ':TZFocus<CR>' },
       m = { ':TZMinimalist<CR>' },
-      a = { ':TZAtaraxis<CR>' },
+      z = { ':TZAtaraxis<CR>' },
     },
   },
 }
