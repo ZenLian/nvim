@@ -1,10 +1,9 @@
-local M = {
-  packer = {
-    event = 'VimEnter',
-  },
+local spec = {
+  'rebelot/heirline.nvim',
+  event = 'VeryLazy',
 }
 
-M.packer.config = function()
+spec.config = function()
   local conditions = require('heirline.conditions')
   local utils = require('heirline.utils')
 
@@ -731,4 +730,4 @@ M.packer.config = function()
   require('heirline').setup(StatusLines)
 end
 
-return M
+return { spec }

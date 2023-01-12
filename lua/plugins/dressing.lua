@@ -1,4 +1,9 @@
-local config = function()
+local spec = {
+  'stevearc/dressing.nvim',
+  event = 'VeryLazy',
+}
+
+spec.config = function()
   require('dressing').setup {
     input = {
       enable = true,
@@ -30,8 +35,4 @@ local config = function()
   }
 end
 
-return {
-  packer = {
-    config = config,
-  },
-}
+return { spec }

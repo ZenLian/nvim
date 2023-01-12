@@ -1,4 +1,12 @@
-local config = function()
+local spec = {
+  'akinsho/bufferline.nvim',
+  version = '*',
+  dependencies = { 'nvim-web-devicons' },
+  event = 'VeryLazy',
+  -- after = 'catppuccin',
+}
+
+spec.config = function()
   require('bufferline').setup {
     options = {
       -- separator_style = 'slant',
@@ -24,11 +32,4 @@ local config = function()
   }
 end
 
-return {
-  packer = {
-    tag = 'v2.*',
-    requires = 'kyazdani42/nvim-web-devicons',
-    after = 'catppuccin',
-    config = config,
-  },
-}
+return { spec }

@@ -1,4 +1,9 @@
-local config = function()
+local spec = {
+  'goolord/alpha-nvim',
+  event = 'BufWinEnter',
+}
+
+spec.config = function()
   local alpha = require('alpha')
   local dashboard = require('alpha.themes.dashboard')
   local WIDTH = 30
@@ -75,9 +80,4 @@ local config = function()
   -- vim.cmd([[autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2]])
 end
 
-return {
-  packer = {
-    event = 'BufWinEnter',
-    config = config,
-  },
-}
+return { spec }

@@ -1,9 +1,14 @@
-local config = function()
+local spec = {
+  'rcarriga/nvim-notify',
+  -- event = 'VimEnter',
+}
+
+spec.config = function()
   local notify = require('notify')
 
   notify.setup {
     stages = 'slide',
-    timeout = 2000,
+    timeout = 8000,
   }
 
   vim.notify = notify
@@ -20,9 +25,4 @@ local config = function()
   end
 end
 
-return {
-  packer = {
-    event = 'VimEnter',
-    config = config,
-  },
-}
+return { spec }

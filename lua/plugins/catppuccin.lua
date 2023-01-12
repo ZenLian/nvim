@@ -1,11 +1,12 @@
-local M = {
-  packer = {
-    as = 'catppuccin',
-    local_pkg = 'catppuccin.nvim',
-  },
+local spec = {
+  'catppuccin/nvim',
+  lazy = false,
+  priority = 1000,
+  name = 'catppuccin',
+  -- local_pkg = 'catppuccin.nvim',
 }
 
-M.packer.config = function()
+spec.config = function()
   -- vim.g.catppuccin_flavour = 'latte'
   vim.g.catppuccin_flavour = 'mocha'
   -- vim.g.catppuccin_flavour = 'macchiato'
@@ -165,4 +166,4 @@ M.packer.config = function()
   }
 end
 
-return M
+return { spec }

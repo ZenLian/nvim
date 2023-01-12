@@ -1,8 +1,6 @@
-local M = {
-  packer = {},
-}
+local spec = {}
 
-M.packer.config = function()
+spec.config = function()
   local wk = require('which-key')
   wk.setup {
     plugins = {
@@ -38,4 +36,4 @@ M.packer.config = function()
   }, { prefix = '<Leader>' })
 end
 
-return M
+return { spec }

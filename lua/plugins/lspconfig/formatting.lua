@@ -1,5 +1,5 @@
 local M = {}
-local config = require('config').config
+local config = require('config')
 local util = require('util')
 
 local TITLE = 'lsp.formatting'

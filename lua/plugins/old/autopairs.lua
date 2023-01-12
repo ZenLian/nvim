@@ -1,15 +1,14 @@
-local M = {
-  packer = {
-    after = 'nvim-cmp',
-    -- module = "nvim-autopairs",
-  },
+local spec = {
+  'windwp/nvim-autopairs',
+  -- after = 'nvim-cmp',
+  -- module = "nvim-autopairs",
 }
 
-M.packer.config = function()
+spec.config = function()
   require('nvim-autopairs').setup()
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local cmp = require('cmp')
   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
 end
 
-return M
+return { spec }

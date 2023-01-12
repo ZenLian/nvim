@@ -1,39 +1,26 @@
 -- vim:foldmethod=marker:foldmarker={{{,}}}:
 
--- additional options
---
--- disable: boolean
---   disable this plugin
---
--- is_local: boolean
---   local plugin
---
--- config = boolean | string | function
---   'name': load config from 'plugins/name.lua'
---   true: auto parse plugin name
---   function: same as packer
---
--- keymaps = table
---   keymap table
---
+require('config').setup()
+
 local plugins = {
   --{{{ requirements
-  ['nvim-lua/plenary.nvim'] = { module = 'plenary' },
-  ['MunifTanjim/nui.nvim'] = { module = 'nui' },
-  ['kkharji/sqlite.lua'] = { module = 'sqlite' },
-  ['nvim-tree/nvim-web-devicons'] = 'web-devicons',
+  -- ['nvim-lua/plenary.nvim'] = { module = 'plenary' },
+  -- ['MunifTanjim/nui.nvim'] = { module = 'nui' },
+  -- ['kkharji/sqlite.lua'] = { module = 'sqlite' },
+  -- ['nvim-tree/nvim-web-devicons'] = 'web-devicons',
   ---}}} requirements
 
-  ['lewis6991/impatient.nvim'] = {},
+  -- TODO: maybe dont need it anymore with lazy.nvim
+  -- ['lewis6991/impatient.nvim'] = {},
 
   -- {{{ ui
-  ['catppuccin/nvim'] = 'catppuccin',
-  ['rebelot/heirline.nvim'] = 'heirline',
-  ['akinsho/bufferline.nvim'] = 'bufferline',
-  ['goolord/alpha-nvim'] = 'alpha',
-  ['rcarriga/nvim-notify'] = 'notify',
-  ['stevearc/dressing.nvim'] = 'dressing',
-  ['lukas-reineke/indent-blankline.nvim'] = 'indent-blankline',
+  -- ['catppuccin/nvim'] = 'catppuccin',
+  -- ['rebelot/heirline.nvim'] = 'heirline',
+  -- ['akinsho/bufferline.nvim'] = 'bufferline',
+  -- ['goolord/alpha-nvim'] = 'alpha',
+  -- ['rcarriga/nvim-notify'] = 'notify',
+  -- ['stevearc/dressing.nvim'] = 'dressing',
+  -- ['lukas-reineke/indent-blankline.nvim'] = 'indent-blankline',
   ['uga-rosa/ccc.nvim'] = 'ccc',
   ['RRethy/vim-illuminate'] = 'illuminate',
   ['Pocco81/true-zen.nvim'] = 'true-zen',
@@ -69,7 +56,9 @@ local plugins = {
   ['nvim-neo-tree/neo-tree.nvim'] = 'neo-tree',
   ['theblob42/drex.nvim'] = 'drex',
   ['ahmedkhalf/project.nvim'] = {
-    config = require('project_nvim').setup {},
+    config = function()
+      require('project_nvim').setup {}
+    end,
   },
   --}}}
 
@@ -101,29 +90,29 @@ local plugins = {
   -- },
 
   --- treesitter {{{
-  ['nvim-treesitter/nvim-treesitter'] = 'treesitter',
-  ['nvim-treesitter/nvim-treesitter-textobjects'] = {
-    after = 'nvim-treesitter',
-  },
-  ['nvim-treesitter/playground'] = {
-    cmd = 'TSPlaygroundToggle',
-  },
-  ['lewis6991/nvim-treesitter-context'] = {
-    after = 'nvim-treesitter',
-  },
-  ['mfussenegger/nvim-treehopper'] = {
-    module = 'tsht',
-    config = function()
-      require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
-    end,
-  },
-  ['ziontee113/syntax-tree-surfer'] = 'syntax-tree-surfer',
+  -- ['nvim-treesitter/nvim-treesitter'] = 'treesitter',
+  -- ['nvim-treesitter/nvim-treesitter-textobjects'] = {
+  --   after = 'nvim-treesitter',
+  -- },
+  -- ['nvim-treesitter/playground'] = {
+  --   cmd = 'TSPlaygroundToggle',
+  -- },
+  -- ['lewis6991/nvim-treesitter-context'] = {
+  --   after = 'nvim-treesitter',
+  -- },
+  -- ['mfussenegger/nvim-treehopper'] = {
+  --   module = 'tsht',
+  --   config = function()
+  --     require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
+  --   end,
+  -- },
+  -- ['ziontee113/syntax-tree-surfer'] = 'syntax-tree-surfer',
   -- }}} treesitter
 
-  ['mrjones2014/nvim-ts-rainbow'] = {
-    opt = true,
-    after = 'nvim-treesitter',
-  },
+  -- ['mrjones2014/nvim-ts-rainbow'] = {
+  --   opt = true,
+  --   after = 'nvim-treesitter',
+  -- },
 
   -- editing {{{
   ['numToStr/Comment.nvim'] = 'comment',
@@ -212,7 +201,11 @@ local plugins = {
 }
 
 return {
-  setup = function()
-    require('util.packer').setup(plugins)
-  end,
+  'nvim-lua/plenary.nvim',
+  'MunifTanjim/nui.nvim',
+  'kkharji/sqlite.lua',
+  {
+    'mrjones2014/nvim-ts-rainbow',
+    dependencies = 'nvim-treesitter',
+  },
 }

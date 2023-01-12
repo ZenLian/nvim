@@ -1,2 +1,2 @@
-require('config').setup()
+require('config.lazy')
 -- require('minit')

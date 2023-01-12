@@ -258,9 +258,9 @@ end
 function M.setup()
   vim.g.mapleader = ' '
   register_basic()
-  register_next_prev()
-  register_yanky()
-  register_leader()
+  -- register_next_prev()
+  -- register_yanky()
+  -- register_leader()
 end
 
 return M

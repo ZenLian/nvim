@@ -1,6 +1,6 @@
 local M = {}
 
-local config = require('config').config
+local config = require('config')
 local cache_dir = config.dirs.cache
 
 -- Better quickfix ui

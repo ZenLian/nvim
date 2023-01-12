@@ -1,12 +1,8 @@
-local M = {
-  packer = {
-    run = ':TSUpdate',
-    event = { 'BufRead', 'BufNewFile' },
-  },
-}
-
-M.packer.config = function()
-  require('nvim-treesitter.configs').setup {
+local spec = {
+  'nvim-treesitter/nvim-treesitter',
+  build = ':TSUpdate',
+  event = { 'BufReadPost', 'BufNewFile' },
+  opts = {
     ensure_installed = {
       'bash',
       'c',
@@ -102,7 +98,32 @@ M.packer.config = function()
       -- colors = {}, -- table of hex strings
       -- termcolors = {} -- table of colour name strings
     },
-  }
-end
+  },
+  config = function(_, opts)
+    require('nvim-treesitter.configs').setup(opts)
+  end,
+}
 
-return M
+return {
+  spec,
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = 'nvim-treesitter',
+  },
+  {
+    'nvim-treesitter/playground',
+    cmd = 'TSPlaygroundToggle',
+    dependencies = 'nvim-treesitter',
+  },
+  {
+    'lewis6991/nvim-treesitter-context',
+    dependencies = 'nvim-treesitter',
+  },
+  {
+    'mfussenegger/nvim-treehopper',
+    -- module = 'tsht',
+    config = function()
+      require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
+    end,
+  },
+}

@@ -2,7 +2,7 @@ local M = {}
 
 local util = require('util')
 
-M.config = {
+local options = {
   provider = {
     -- :h g:python3_host_prog
     python3 = '~/.miniconda3/envs/py3-nvim/bin/python3',
@@ -24,15 +24,28 @@ M.config = {
   },
 }
 
-function M.setup()
-  -- speedup
-  -- require('impatient').enable_profile()
-  pcall(require, 'impatient')
+M._setup = false
 
-  require('config.options').setup()
-  require('config.keymaps').setup()
+function M.setup(opts)
+  M._setup = true
+  options = vim.tbl_deep_extend('force', options, opts or {})
+
+  -- pcall(require, 'impatient')
+
+  -- later vim.notify
+  require('util').lazy_notify()
+
   require('config.autocmds').setup()
-  require('plugins').setup()
+  require('config.keymaps').setup()
+  require('config.options').setup()
 end
 
-return M
+return setmetatable(M, {
+  __index = function(_, key)
+    if not M._setup then
+      M.setup()
+    end
+    ---@diagnostic disable-next-line: need-check-nil
+    return options[key]
+  end,
+})

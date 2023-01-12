@@ -1,6 +1,7 @@
-local config = function()
-  -- vim.opt.listchars:append('space:⋅')
-  require('indent_blankline').setup {
+local spec = {
+  'lukas-reineke/indent-blankline.nvim',
+  event = 'BufReadPre',
+  opts = {
     show_current_context = true,
     -- show_current_context_start = true,
     show_trailing_blankline_indent = false,
@@ -17,12 +18,7 @@ local config = function()
       'aerial',
       'markdown',
     },
-  }
-end
-
-return {
-  packer = {
-    event = 'BufRead',
-    config = config,
   },
 }
+
+return { spec }
