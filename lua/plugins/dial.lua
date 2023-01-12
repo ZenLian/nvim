@@ -1,10 +1,9 @@
-local M = {
-  packer = {
-    keys = { '<C-a>', '<C-x>' },
-  },
+local spec = {
+  'monaqa/dial.nvim',
+  keys = { '<C-a>', '<C-x>' },
 }
 
-M.packer.config = function()
+spec.config = function()
   local augend = require('dial.augend')
   require('dial.config').augends:register_group {
     default = {
@@ -39,6 +38,7 @@ M.packer.config = function()
     -- },
   }
   -- dial.nvim
+  -- TODO: move out
   vim.keymap.set('n', '<C-a>', require('dial.map').inc_normal(), { noremap = true })
   vim.keymap.set('n', '<C-x>', require('dial.map').dec_normal(), { noremap = true })
   vim.keymap.set('v', '<C-a>', require('dial.map').inc_visual(), { noremap = true })
@@ -47,4 +47,4 @@ M.packer.config = function()
   vim.keymap.set('v', 'g<C-x>', require('dial.map').dec_gvisual(), { noremap = true })
 end
 
-return M
+return { spec }

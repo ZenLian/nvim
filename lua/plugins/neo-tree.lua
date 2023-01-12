@@ -1,11 +1,10 @@
-local M = {
-  packer = {
-    branch = 'v2.x',
-    cmd = { 'Neotree' },
-  },
+local spec = {
+  'nvim-neo-tree/neo-tree.nvim',
+  version = '*',
+  cmd = { 'Neotree' },
 }
 
-M.packer.config = function()
+spec.config = function()
   local function getTelescopeOpts(state, path)
     return {
       cwd = path,
@@ -171,4 +170,4 @@ M.packer.config = function()
   }
 end
 
-return M
+return { spec }

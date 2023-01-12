@@ -1,18 +1,37 @@
-local M = {
-  packer = {
-    event = 'BufReadPre',
+local PREFIX = ...
+
+local spec = {
+  'neovim/nvim-lspconfig',
+  event = 'BufReadPre',
+  dependencies = {
+    { 'folke/neodev.nvim', config = true },
+    {
+      'williamboman/mason.nvim',
+      opts = {
+        github = {
+          download_url_template = 'https://kgithub.com/%s/releases/download/%s/%s',
+        },
+        ui = {
+          border = 'single',
+        },
+      },
+    },
+    'williamboman/mason-lspconfig.nvim',
+    'jose-elias-alvarez/null-ls.nvim',
+    'jayp0521/mason-null-ls.nvim',
+    -- 'hrsh7th/cmp-nvim-lsp',
   },
 }
 
-M.packer.config = function()
+spec.config = function()
   local function setup_lspconfig()
     require('lspconfig.ui.windows').default_options.border = 'single'
   end
 
   local function on_attach(client, bufnr)
-    require('plugins.lspconfig.formatting').on_attach(client, bufnr)
-    require('plugins.lspconfig.keymaps').on_attach(client, bufnr)
-    require('plugins.lspconfig.signature').on_attach(client, bufnr)
+    require(PREFIX .. '.formatting').on_attach(client, bufnr)
+    require(PREFIX .. '.keymaps').on_attach(client, bufnr)
+    -- require(PREFIX..'.signature').on_attach(client, bufnr)
   end
 
   -- local function on_server_ready(server)
@@ -30,16 +49,9 @@ M.packer.config = function()
   --   lspconfig[server].setup(opts)
   -- end
 
-  require('plugins.lspconfig.diagnostic').setup()
-  require('mason').setup {
-    github = {
-      download_url_template = 'https://kgithub.com/%s/releases/download/%s/%s',
-    },
-    ui = {
-      border = 'single',
-    },
-  }
-  require('plugins.lspconfig.null-ls').setup(on_attach)
+  require(PREFIX .. '.diagnostic').setup()
+  -- require('mason').setup { }
+  require(PREFIX .. '.null-ls').setup(on_attach)
   require('mason-lspconfig').setup {
     ensure_installed = {},
     automatic_installation = true,
@@ -50,7 +62,7 @@ M.packer.config = function()
   require('neodev').setup {}
 
   setup_lspconfig()
-  require('plugins.lspconfig.servers').setup(on_attach)
+  require(PREFIX .. '.servers').setup(on_attach)
   -- require('mason-lspconfig').setup_handlers {
   --   function(server)
   --     on_server_ready(server)
@@ -58,4 +70,4 @@ M.packer.config = function()
   -- }
 end
 
-return M
+return { spec }

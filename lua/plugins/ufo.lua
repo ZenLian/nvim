@@ -1,11 +1,10 @@
-local M = {
-  packer = {
-    requires = { 'kevinhwang91/promise-async', module = 'promise' },
-    event = 'BufWinEnter',
-  },
+local spec = {
+  'kevinhwang91/nvim-ufo',
+  dependencies = { 'kevinhwang91/promise-async' }, --, module = 'promise' },
+  event = 'BufWinEnter',
 }
 
-function M.packer.config()
+spec.config = function()
   local ufo = require('ufo')
 
   vim.o.foldenable = true
@@ -62,4 +61,4 @@ function M.packer.config()
   }
 end
 
-return M
+return { spec }

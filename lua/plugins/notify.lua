@@ -1,6 +1,6 @@
 local spec = {
   'rcarriga/nvim-notify',
-  -- event = 'VimEnter',
+  event = 'VeryLazy',
 }
 
 spec.config = function()

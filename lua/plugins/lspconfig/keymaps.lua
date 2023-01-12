@@ -1,30 +1,30 @@
 local M = {}
 
-local wk = require('which-key')
+local util = require('util')
 
 local leader = {
   s = {
-    d = { '<cmd>Telescope diagnostics<cr>', 'Search Diagnostics' },
+    { 'd', '<cmd>Telescope diagnostics<cr>', 'Search Diagnostics' },
   },
   l = {
-    name = 'language',
-    f = {
+    {
+      'f',
       function()
         require('plugins.lspconfig.formatting').format()
       end,
       'File format',
     },
-    a = { vim.lsp.buf.code_action, 'Code action' },
-    r = { vim.lsp.buf.rename, 'Rename' },
-    d = { vim.diagnostic.open_float, 'Line Diagnostics' },
-    D = { '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Workspace Diagnostics' },
+    { 'a', vim.lsp.buf.code_action, 'Code action' },
+    { 'r', vim.lsp.buf.rename, 'Rename' },
+    { 'd', vim.diagnostic.open_float, 'Line Diagnostics' },
+    { 'D', '<cmd>TroubleToggle workspace_diagnostics<cr>', 'Workspace Diagnostics' },
   },
 }
 
 local leader_visual = {
   l = {
-    name = 'language',
-    f = {
+    {
+      'f',
       function()
         require('plugins.lspconfig.formatting').format {
           range = {},
@@ -32,12 +32,11 @@ local leader_visual = {
       end,
       'Range Format',
     },
-    a = { vim.lsp.buf.range_code_action, 'Code action' },
+    { 'a', vim.lsp.buf.range_code_action, 'Code action' },
   },
 }
 
 local g = {
-  name = '+goto',
   r = { '<cmd>Telescope lsp_references<cr>', 'Goto References' },
   R = { '<cmd>Trouble lsp_references<cr>', 'Trouble References' },
   d = { '<Cmd>Telescope lsp_definitions <CR>', 'Goto Definition' },
@@ -52,7 +51,6 @@ local misc = {
   ['<A-n>'] = {
     function()
       require('illuminate').next_reference { wrap = true }
-      require()
     end,
     'Next reference',
   },
@@ -75,11 +73,19 @@ function M.on_attach(_, bufnr)
   map('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
   map('n', '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>')
   map('n', ']e', '<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>')
+  -- util.keymaps({
+  --   n = {
+  --     { '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>' },
+  --     { ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>' },
+  --     { '[e', '<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>' },
+  --     { ']e', '<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>' },
+  --   },
+  -- }, { buffer = bufnr })
 
-  wk.register(leader, { buffer = bufnr, prefix = '<Leader>' })
-  wk.register(leader_visual, { buffer = bufnr, prefix = '<Leader>', mode = 'v' })
-  wk.register(g, { buffer = bufnr, prefix = 'g' })
-  wk.register(misc, { buffer = bufnr })
+  -- util.keymaps({ ['n'] = { ['<Leader>'] = leader } }, { buffer = bufnr })
+  -- util.keymaps({ ['v'] = { ['<Leader>'] = leader_visual } }, { buffer = bufnr })
+  -- util.keymaps({ ['n'] = { g = g } }, { buffer = bufnr })
+  -- util.keymaps({ ['n'] = misc }, { buffer = bufnr })
 end
 
 return M

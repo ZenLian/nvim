@@ -152,11 +152,12 @@ local function do_keymaps(keys, opts)
       keys.desc = keys[2]
       keys[2] = nil
     end
+    keys = vim.tbl_deep_extend('force', keys, opts.opts or {})
     M.keymap(opts.modes, opts.lhs, rhs, keys)
     return
   end
   for key, value in pairs(keys) do
-    do_keymaps(value, { lhs = opts.lhs .. key, modes = opts.modes })
+    do_keymaps(value, { lhs = opts.lhs .. key, modes = opts.modes, opts = opts.opts })
   end
 end
 
@@ -173,9 +174,10 @@ end
 --   -- for `:map'
 --   [''] = { ... },
 -- }
-function M.keymaps(keymaps)
+function M.keymaps(keymaps, opts)
+  local options = { nowait = true, silent = true }
+  options = vim.tbl_deep_extend('force', options, opts or {})
   for mode, keys in pairs(keymaps) do
-    -- TODO: string -> table{string}
     local modes = {}
     if mode == '' then
       modes = { '' }
@@ -184,7 +186,7 @@ function M.keymaps(keymaps)
         table.insert(modes, mode:sub(i, i))
       end
     end
-    do_keymaps(keys, { lhs = '', modes = modes })
+    do_keymaps(keys, { lhs = '', modes = modes, opts = options })
   end
 end
 

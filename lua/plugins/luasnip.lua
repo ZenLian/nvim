@@ -1,11 +1,9 @@
-local M = {
-  packer = {
-    after = 'nvim-cmp',
-    requires = { 'rafamadriz/friendly-snippets' },
-  },
+local spec = {
+  'L3MON4D3/LuaSnip',
+  dependencies = { 'rafamadriz/friendly-snippets' },
 }
 
-M.packer.config = function()
+spec.config = function()
   require('luasnip').setup {
     history = true,
     updateevents = 'TextChanged,TextChangedI',
@@ -14,4 +12,4 @@ M.packer.config = function()
   require('luasnip.loaders.from_snipmate').lazy_load()
 end
 
-return M
+return spec

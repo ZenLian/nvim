@@ -1,10 +1,34 @@
-local M = {
-  packer = {
-    cmd = { 'Drex', 'DrexDrawerOpen', 'DrexDrawerToggle' },
-  },
+local spec = {
+  'theblob42/drex.nvim',
+  cmd = { 'Drex', 'DrexDrawerOpen', 'DrexDrawerToggle' },
 }
 
-function M.packer.config()
+-- open multiple files, or a single file, if the clipboard is empty
+function open_multiple(mode)
+  local entries = require('drex.clipboard').get_clipboard_entries()
+  local utils = require('drex.utils')
+
+  local items = {}
+  if mode == 'visual' then
+    local startRow, endRow = utils.get_visual_selection()
+    for row = startRow, endRow, 1 do
+      table.insert(items, utils.get_element(vim.fn.getline(row)))
+    end
+  elseif #entries == 0 then
+    items = { utils.get_element(vim.api.nvim_get_current_line()) }
+  else
+    items = entries
+  end
+
+  -- open multiple files
+  vim.tbl_map(function(element)
+    if not utils.is_directory(element) then
+      vim.cmd('e ' .. element)
+    end
+  end, items)
+end
+
+spec.config = function()
   local elements = require('drex.elements')
   local utils = require('drex.utils')
   local files = require('drex.actions.files')
@@ -59,7 +83,7 @@ function M.packer.config()
           { desc = 'Open file or Toggle directory' },
         },
         ['<C-o>'] = {
-          '<cmd>lua require("plugins.drex").open_multiple()<cr>',
+          function() open_multiple() end,
           { desc = 'open elements' },
         },
         ['<TAB>'] = {
@@ -178,11 +202,13 @@ function M.packer.config()
       },
       ['v'] = {
         ['<CR>'] = {
-          '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
+          -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
+          function() open_multiple("visual") end,
           { desc = 'open files' },
         },
         ['<C-o>'] = {
-          '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
+           -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
+          function() open_multiple("visual") end,
           { desc = 'open files' },
         },
       },
@@ -222,34 +248,10 @@ function M.packer.config()
   })
 end
 
--- open multiple files, or a single file, if the clipboard is empty
-function M.open_multiple(mode)
-  local entries = require('drex.clipboard').get_clipboard_entries()
-  local utils = require('drex.utils')
-
-  local items = {}
-  if mode == 'visual' then
-    local startRow, endRow = utils.get_visual_selection()
-    for row = startRow, endRow, 1 do
-      table.insert(items, utils.get_element(vim.fn.getline(row)))
-    end
-  elseif #entries == 0 then
-    items = { utils.get_element(vim.api.nvim_get_current_line()) }
-  else
-    items = entries
-  end
-
-  -- open multiple files
-  vim.tbl_map(function(element)
-    if not utils.is_directory(element) then
-      vim.cmd('e ' .. element)
-    end
-  end, items)
-end
 
 -- Auto expand sub-directories if their only child is a single directory for quicker navigation
 -- > https://github.com/TheBlob42/drex.nvim/wiki/Custom-Actions#auto-expand
-function M.expand()
+function expand()
   local elements = require('drex.elements')
   local utils = require('drex.utils')
   -- local start = vim.api.nvim_win_get_cursor(0) -- OPTIONAL
@@ -283,7 +285,7 @@ function M.expand()
 end
 
 -- wrapper of collapse_directory without warning when collapsing root path!
-function M.collapse()
+function collapse()
   local utils = require('drex.utils')
   local buffer = vim.api.nvim_get_current_buf() -- defaults to current buffer
   local line = vim.api.nvim_get_current_line()
@@ -300,7 +302,7 @@ function M.collapse()
 end
 
 -- wrapper action to use "clipboard" if clipboard is not empty
-function M.flexible_action(action)
+function flexible_action(action)
   local entries = require('drex.clipboard').get_clipboard_entries()
 
   local mode = 'clipboard'
@@ -311,4 +313,4 @@ function M.flexible_action(action)
   action(mode)
 end
 
-return M
+return { spec }

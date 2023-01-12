@@ -1,7 +1,7 @@
 local spec = {
   'windwp/nvim-autopairs',
-  -- after = 'nvim-cmp',
-  -- module = "nvim-autopairs",
+  event = { 'InsertEnter' },
+  dependencies = 'nvim-cmp',
 }
 
 spec.config = function()

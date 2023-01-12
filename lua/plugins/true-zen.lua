@@ -1,12 +1,13 @@
-local M = {
-  packer = {
-    cmd = { 'TZNarrow', 'TZFocus', 'TZMinimalist', 'TZAtaraxis' },
+local zen_spec = {
+  'Pocco81/true-zen.nvim',
+  cmd = { 'TZNarrow', 'TZFocus', 'TZMinimalist', 'TZAtaraxis' },
+  keys = {
+    { '<leader>zn', ':TZNarrow<CR>', mode = { 'n', 'v' } },
+    { '<leader>zf', ':TZFocus<CR>' },
+    { '<leader>zm', ':TZMinimalist<CR>' },
+    { '<leader>zz', ':TZAtaraxis<CR>' },
   },
-}
-
-function M.packer.config()
-  local zen = require('true-zen')
-  zen.setup {
+  opts = {
     modes = { -- configurations per mode
       ataraxis = {
         shade = 'dark', -- if `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
@@ -80,23 +81,16 @@ function M.packer.config()
         enabled = false,
         font = '+3',
       },
-      twilight = false, -- enable twilight (ataraxis)
+      twilight = true, -- enable twilight (ataraxis)
       lualine = false, -- hide nvim-lualine (ataraxis)
-    },
-  }
-end
-
-M.packer.keymaps = {
-  ['nv'] = {
-    ['<leader>zn'] = { ':TZNarrow<CR>' },
-  },
-  ['n'] = {
-    ['<leader>z'] = {
-      f = { ':TZFocus<CR>' },
-      m = { ':TZMinimalist<CR>' },
-      z = { ':TZAtaraxis<CR>' },
     },
   },
 }
 
-return M
+local twilight_spec = {
+  'folke/twilight.nvim',
+  cmd = { 'Twilight' },
+  keys = { { '<leader>zt', '<cmd>Twilight<CR>' } },
+}
+
+return { zen_spec, twilight_spec }

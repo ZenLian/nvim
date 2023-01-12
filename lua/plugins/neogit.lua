@@ -1,11 +1,10 @@
-local M = {
-  packer = {
-    cmd = 'Neogit',
+local spec = {
+  'TimUntersberger/neogit',
+  cmd = 'Neogit',
+  keys = {
+    { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Neogit' },
   },
-}
-
-M.packer.config = function()
-  require('neogit').setup {
+  opts = {
     disable_commit_confirmation = true,
     -- kind = 'floating',
     signs = {
@@ -24,13 +23,7 @@ M.packer.config = function()
     integrations = {
       diffview = true,
     },
-  }
-end
-
-M.packer.keymaps = {
-  n = {
-    ['<leader>gg'] = { '<cmd>Neogit<CR>', 'Neogit' },
   },
 }
 
-return M
+return { spec }

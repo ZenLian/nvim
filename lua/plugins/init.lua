@@ -21,22 +21,22 @@ local plugins = {
   -- ['rcarriga/nvim-notify'] = 'notify',
   -- ['stevearc/dressing.nvim'] = 'dressing',
   -- ['lukas-reineke/indent-blankline.nvim'] = 'indent-blankline',
-  ['uga-rosa/ccc.nvim'] = 'ccc',
+  -- ['uga-rosa/ccc.nvim'] = 'ccc',
   ['RRethy/vim-illuminate'] = 'illuminate',
-  ['Pocco81/true-zen.nvim'] = 'true-zen',
-  ['folke/twilight.nvim'] = 'twilight',
-  ['kevinhwang91/nvim-ufo'] = 'ufo',
+  -- ['Pocco81/true-zen.nvim'] = 'true-zen',
+  -- ['folke/twilight.nvim'] = 'twilight',
+  -- ['kevinhwang91/nvim-ufo'] = 'ufo',
   -- }}} ui
 
   -- {{{ telescope
-  ['nvim-telescope/telescope.nvim'] = 'telescope',
-  ['nvim-telescope/telescope-fzf-native.nvim'] = {
-    run = 'make',
-    after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension('fzf')
-    end,
-  },
+  -- ['nvim-telescope/telescope.nvim'] = 'telescope',
+  --['nvim-telescope/telescope-fzf-native.nvim'] = {
+  --  run = 'make',
+  --  after = 'telescope.nvim',
+  --  config = function()
+  --    require('telescope').load_extension('fzf')
+  --  end,
+  --},
   ['nvim-telescope/telescope-frecency.nvim'] = {
     requires = { 'kkharji/sqlite.lua' },
     after = 'telescope.nvim',
@@ -53,18 +53,18 @@ local plugins = {
   -- }}} telescope
 
   -- {{{ file management
-  ['nvim-neo-tree/neo-tree.nvim'] = 'neo-tree',
-  ['theblob42/drex.nvim'] = 'drex',
-  ['ahmedkhalf/project.nvim'] = {
-    config = function()
-      require('project_nvim').setup {}
-    end,
-  },
+  --['nvim-neo-tree/neo-tree.nvim'] = 'neo-tree',
+  --['theblob42/drex.nvim'] = 'drex',
+  -- ['ahmedkhalf/project.nvim'] = {
+  --   config = function()
+  --     require('project_nvim').setup {}
+  --   end,
+  -- },
   --}}}
 
   -- {{{ git tools
-  ['lewis6991/gitsigns.nvim'] = 'gitsigns',
-  ['TimUntersberger/neogit'] = 'neogit',
+  -- ['lewis6991/gitsigns.nvim'] = 'gitsigns',
+  -- ['TimUntersberger/neogit'] = 'neogit',
   ['sindrets/diffview.nvim'] = {
     cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },
     module = 'diffview',
@@ -115,7 +115,7 @@ local plugins = {
   -- },
 
   -- editing {{{
-  ['numToStr/Comment.nvim'] = 'comment',
+  --['numToStr/Comment.nvim'] = 'comment',
   -- {
   --   'ur4ltz/surround.nvim',
   --   event = { 'BufRead', 'BufNewFile' },
@@ -123,14 +123,14 @@ local plugins = {
   --     require('surround').setup { mappings_style = 'surround' }
   --   end,
   -- },
-  ['kylechui/nvim-surround'] = {
-    event = { 'BufRead', 'BufNewFile' },
-    config = function()
-      require('nvim-surround').setup {}
-    end,
-  },
-  ['ggandor/leap.nvim'] = 'leap',
-  ['ggandor/flit.nvim'] = 'flit',
+  -- ['kylechui/nvim-surround'] = {
+  --   event = { 'BufRead', 'BufNewFile' },
+  --   config = function()
+  --     require('nvim-surround').setup {}
+  --   end,
+  -- },
+  -- ['ggandor/leap.nvim'] = 'leap',
+  -- ['ggandor/flit.nvim'] = 'flit',
   -- TODO: conflicts with yanky
   -- {
   --   'ggandor/leap-spooky.nvim',
@@ -145,26 +145,26 @@ local plugins = {
       require('tabout').setup {}
     end,
   },
-  ['monaqa/dial.nvim'] = 'dial',
+  -- ['monaqa/dial.nvim'] = 'dial',
   -- }}}
 
-  ['gpanders/editorconfig.nvim'] = {
-    event = { 'BufRead', 'BufNewFile' },
-  },
+  -- ['gpanders/editorconfig.nvim'] = {
+  --   event = { 'BufRead', 'BufNewFile' },
+  -- },
 
-  ['hrsh7th/nvim-cmp'] = 'cmp',
-  ['L3MON4D3/LuaSnip'] = 'luasnip',
-  ['windwp/nvim-autopairs'] = 'autopairs',
+  -- ['hrsh7th/nvim-cmp'] = 'cmp',
+  -- ['L3MON4D3/LuaSnip'] = 'luasnip',
+  -- ['windwp/nvim-autopairs'] = 'autopairs',
   ['echasnovski/mini.nvim'] = 'mini',
 
   -- lsp {{{
-  ['neovim/nvim-lspconfig'] = 'lspconfig',
-  ['williamboman/mason.nvim'] = { module = 'mason' },
-  ['williamboman/mason-lspconfig.nvim'] = { module = 'mason-lspconfig' },
+  -- ['neovim/nvim-lspconfig'] = 'lspconfig',
+  -- ['williamboman/mason.nvim'] = { module = 'mason' },
+  -- ['williamboman/mason-lspconfig.nvim'] = { module = 'mason-lspconfig' },
   ['ray-x/lsp_signature.nvim'] = { module = 'lsp_signature' },
-  ['folke/neodev.nvim'] = { module = 'neodev' },
-  ['jose-elias-alvarez/null-ls.nvim'] = { module = 'null-ls' },
-  ['jayp0521/mason-null-ls.nvim'] = { module = 'mason-null-ls' },
+  -- ['folke/neodev.nvim'] = { module = 'neodev' },
+  -- ['jose-elias-alvarez/null-ls.nvim'] = { module = 'null-ls' },
+  -- ['jayp0521/mason-null-ls.nvim'] = { module = 'mason-null-ls' },
 
   ['stevearc/aerial.nvim'] = 'aerial',
   ['folke/trouble.nvim'] = {
@@ -196,7 +196,7 @@ local plugins = {
   --- always trying something new {{{
   ['kevinhwang91/nvim-bqf'] = 'bqf',
   ['cbochs/grapple.nvim'] = 'grapple',
-  ['rafcamlet/nvim-luapad'] = 'luapad',
+  -- ['rafcamlet/nvim-luapad'] = 'luapad',
   --- }}}
 }
 
@@ -207,5 +207,18 @@ return {
   {
     'mrjones2014/nvim-ts-rainbow',
     dependencies = 'nvim-treesitter',
+  },
+  {
+    'kylechui/nvim-surround',
+    event = { 'BufRead', 'BufNewFile' },
+    config = true,
+  },
+  {
+    'gpanders/editorconfig.nvim',
+    event = { 'BufRead', 'BufNewFile' },
+  },
+  {
+    'ahmedkhalf/project.nvim',
+    config = true,
   },
 }
