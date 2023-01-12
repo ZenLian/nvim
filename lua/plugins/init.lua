@@ -120,7 +120,7 @@ local plugins = {
   ['ziontee113/syntax-tree-surfer'] = 'syntax-tree-surfer',
   -- }}} treesitter
 
-  ['p00f/nvim-ts-rainbow'] = {
+  ['mrjones2014/nvim-ts-rainbow'] = {
     opt = true,
     after = 'nvim-treesitter',
   },

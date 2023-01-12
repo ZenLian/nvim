@@ -33,7 +33,7 @@ M.packer.config = function()
       icon = {
         folder_closed = '',
         folder_open = '',
-        folder_empty = 'ﰊ',
+        -- folder_empty = 'ﰊ',
         -- folder_empty = '',
         -- default = '',
       },
@@ -55,6 +55,9 @@ M.packer.config = function()
           conflict = 'C',
         },
       },
+    },
+    source_selector = {
+      winbar = true,
     },
     window = {
       width = 30,
