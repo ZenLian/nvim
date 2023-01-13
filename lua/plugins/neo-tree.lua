@@ -2,6 +2,10 @@ local spec = {
   'nvim-neo-tree/neo-tree.nvim',
   version = '*',
   cmd = { 'Neotree' },
+  keys = {
+    { '<C-e>', '<cmd>Neotree float toggle reveal<CR>', desc = 'toggle Neotree' },
+    -- { '<Leader>e', '<cmd>Neotree float toggle reveal<CR>', desc = 'Toggle neotree' },
+  },
 }
 
 spec.config = function()

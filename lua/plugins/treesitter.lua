@@ -121,7 +121,10 @@ return {
   },
   {
     'mfussenegger/nvim-treehopper',
-    -- module = 'tsht',
+    keys = {
+      { 'm', ':lua require("tsht").nodes()<CR>', mode = 'x' },
+      { 'm', ':<C-U>lua require("tsht").nodes()<CR>', mode = 'o' },
+    },
     config = function()
       require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
     end,

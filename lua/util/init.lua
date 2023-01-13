@@ -161,32 +161,50 @@ local function do_keymaps(keys, opts)
   end
 end
 
--- keymaps:
--- {
---   n = {
---     ['<leader>z'] = {
---       a = { '<cmd>whatever<cr>', 'desc', nowait = true}
---       b = { function() do_some_thing end, desc = 'desc', nowait = true}
---     }
+-- keymaps(keys, opts)
+--
+-- keymaps({
+--   ['<leader>'] = {
+--     a = {
+--       function()
+--         return ''
+--       end,
+--       desc = 'map for a',
+--       expr = true,
+--       mode = 'n', -- override opts.mode
+--     },
+--     b = '<cmd><cr>',
 --   },
---   -- for multi mode
---   ['nv'] = { ... }
---   -- for `:map'
---   [''] = { ... },
--- }
+-- }, { mode = { 'n', 'x' } })
 function M.keymaps(keymaps, opts)
-  local options = { nowait = true, silent = true }
-  options = vim.tbl_deep_extend('force', options, opts or {})
-  for mode, keys in pairs(keymaps) do
-    local modes = {}
-    if mode == '' then
-      modes = { '' }
-    else
-      for i = 1, #mode do
-        table.insert(modes, mode:sub(i, i))
-      end
+  local defaults = { mode = 'n', prefix = '', silent = true } -- ,nowait = true }
+  opts = vim.tbl_deep_extend('force', defaults, opts or {})
+
+  -- keymaps[1] is rhs, end of recursive
+  if keymaps[1] ~= nil then
+    -- keymaps[1]: rhs
+    local rhs = keymaps[1]
+    keymaps[1] = nil
+    -- other keys merge into opts
+    opts = vim.tbl_deep_extend('force', opts, keymaps)
+    -- extract mode/prefix
+    local mode = opts.mode
+    opts.mode = nil
+    local lhs = opts.prefix
+    opts.prefix = nil
+    -- set keymap
+    -- vim.notify(string.format('mode: %s\nlhs: %s\nrhs: %s\nopts: %s', mode, lhs, vim.inspect(rhs), vim.inspect(opts)))
+    vim.keymap.set(mode, lhs, rhs, opts)
+    return
+  end
+  -- handle keymaps recursively
+  local prefix = opts.prefix
+  for key, maps in pairs(keymaps) do
+    opts.prefix = prefix .. key
+    if type(maps) ~= 'table' then
+      maps = { maps }
     end
-    do_keymaps(keys, { lhs = '', modes = modes, opts = options })
+    M.keymaps(maps, opts)
   end
 end
 

@@ -1,10 +1,9 @@
-local M = {
-  packer = {
-    after = 'which-key.nvim',
-  },
+local spec = {
+  'anuvyklack/hydra.nvim',
+  event = 'VeryLazy',
 }
 
-function M.basic_widgets()
+local function scroll_widget()
   local hydra = require('hydra')
 
   hydra {
@@ -18,7 +17,10 @@ function M.basic_widgets()
       { 'L', 'zL', { desc = 'half screen ←/→' } },
     },
   }
+end
 
+local function window_widget()
+  local hydra = require('hydra')
   hydra {
     name = 'Resize window',
     mode = 'n',
@@ -45,7 +47,7 @@ function M.basic_widgets()
   }
 end
 
-function M.options()
+local function option_menu()
   local hydra = require('hydra')
   local hint = [[
     ^^                  Options
@@ -188,7 +190,7 @@ function M.options()
   }
 end
 
-function M.git_widget()
+local function git_widget()
   local Hydra = require('hydra')
   local cmd = require('hydra.keymap-util').cmd
 
@@ -298,7 +300,7 @@ function M.git_widget()
   }
 end
 
-function M.telescope_widget()
+local function telescope_widget()
   local Hydra = require('hydra')
   local cmd = require('hydra.keymap-util').cmd
 
@@ -355,11 +357,12 @@ function M.telescope_widget()
   }
 end
 
-function M.packer.config()
-  require('plugins.hydra').basic_widgets()
-  require('plugins.hydra').options()
-  require('plugins.hydra').git_widget()
-  require('plugins.hydra').telescope_widget()
+spec.config = function()
+  scroll_widget()
+  -- window_widget()
+  option_menu()
+  git_widget()
+  -- telescope_widget()
 end
 
-return M
+return { spec }

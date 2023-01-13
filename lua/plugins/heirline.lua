@@ -1,6 +1,6 @@
 local spec = {
   'rebelot/heirline.nvim',
-  event = 'VeryLazy',
+  event = 'UIEnter',
 }
 
 spec.config = function()
@@ -118,7 +118,7 @@ spec.config = function()
       },
     },
     FileFlags,
-    FileTag,
+    -- FileTag,
   }
 
   local WorkDir = {
@@ -727,7 +727,9 @@ spec.config = function()
     DefaultStatusline,
   }
 
-  require('heirline').setup(StatusLines)
+  require('heirline').setup {
+    statusline = StatusLines,
+  }
 end
 
 return { spec }

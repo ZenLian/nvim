@@ -1,6 +1,6 @@
 local spec = {
   'lewis6991/gitsigns.nvim',
-  event = { 'BufRead', 'BufNewFile' },
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = {
     current_line_blame = false,
     current_line_blame_opts = { delay = 500, virtual_text_pos = 'eol' },

@@ -1,6 +1,10 @@
 local spec = {
   'theblob42/drex.nvim',
   cmd = { 'Drex', 'DrexDrawerOpen', 'DrexDrawerToggle' },
+  keys = {
+    { '<Leader>d', '<cmd>DrexDrawerToggle<CR>', desc = 'Toggle drex drawer' },
+    { '<Leader>D', '<cmd>Drex<CR>', desc = 'Open drex buffer' },
+  },
 }
 
 -- open multiple files, or a single file, if the clipboard is empty
@@ -83,7 +87,9 @@ spec.config = function()
           { desc = 'Open file or Toggle directory' },
         },
         ['<C-o>'] = {
-          function() open_multiple() end,
+          function()
+            open_multiple()
+          end,
           { desc = 'open elements' },
         },
         ['<TAB>'] = {
@@ -203,12 +209,16 @@ spec.config = function()
       ['v'] = {
         ['<CR>'] = {
           -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
-          function() open_multiple("visual") end,
+          function()
+            open_multiple('visual')
+          end,
           { desc = 'open files' },
         },
         ['<C-o>'] = {
-           -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
-          function() open_multiple("visual") end,
+          -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
+          function()
+            open_multiple('visual')
+          end,
           { desc = 'open files' },
         },
       },
@@ -247,7 +257,6 @@ spec.config = function()
     end,
   })
 end
-
 
 -- Auto expand sub-directories if their only child is a single directory for quicker navigation
 -- > https://github.com/TheBlob42/drex.nvim/wiki/Custom-Actions#auto-expand

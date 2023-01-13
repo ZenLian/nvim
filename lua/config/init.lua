@@ -36,7 +36,7 @@ function M.setup(opts)
   require('util').lazy_notify()
 
   require('config.autocmds').setup()
-  require('config.keymaps').setup()
+  require('config.keymaps')
   require('config.options').setup()
 end
 

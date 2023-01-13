@@ -212,10 +212,11 @@ function M.setup()
   for name, value in pairs(options) do
     vim.o[name] = value
   end
+  -- TODO: lazy.nvim did this for me
   -- disable builtin plugins
-  for _, plugin in ipairs(builtin_plugins) do
-    vim.g['loaded_' .. plugin] = 1
-  end
+  -- for _, plugin in ipairs(builtin_plugins) do
+  --   vim.g['loaded_' .. plugin] = 1
+  -- end
   -- virtual env provider
   if vim.fn.glob(config.provider.python3) ~= '' then
     vim.g.python3_host_prog = config.provider.python3

@@ -21,6 +21,12 @@ local spec = {
     'jayp0521/mason-null-ls.nvim',
     -- 'hrsh7th/cmp-nvim-lsp',
   },
+  keys = {
+    { '<Leader>pl', '<cmd>LspInfo<CR>', desc = 'Lsp Info' },
+    { '<Leader>pL', '<cmd>LspInstall<CR>', desc = 'Install lsp server' },
+    { '<Leader>pn', '<cmd>NullLsInfo<CR>', desc = 'Null-ls Info' },
+    { '<Leader>pN', '<cmd>NullLsInstall<CR>', desc = 'Install null-ls source' },
+  },
 }
 
 spec.config = function()

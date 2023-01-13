@@ -65,17 +65,17 @@ local plugins = {
   -- {{{ git tools
   -- ['lewis6991/gitsigns.nvim'] = 'gitsigns',
   -- ['TimUntersberger/neogit'] = 'neogit',
-  ['sindrets/diffview.nvim'] = {
-    cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },
-    module = 'diffview',
-  },
+  -- ['sindrets/diffview.nvim'] = {
+  --   cmd = { 'DiffviewOpen', 'DiffviewClose', 'DiffviewToggleFiles', 'DiffviewFocusFiles', 'DiffviewFileHistory' },
+  --   module = 'diffview',
+  -- },
   -- }}}
 
   ['gbprod/yanky.nvim'] = 'yanky',
   ['akinsho/toggleterm.nvim'] = 'toggleterm',
   ['folke/todo-comments.nvim'] = 'todo-comments',
-  ['folke/which-key.nvim'] = 'which-key',
-  ['anuvyklack/hydra.nvim'] = 'hydra',
+  -- ['folke/which-key.nvim'] = 'which-key',
+  -- ['anuvyklack/hydra.nvim'] = 'hydra',
   -- {
   --   'jiaoshijie/undotree',
   --   module = 'undotree',
@@ -215,7 +215,7 @@ return {
   },
   {
     'gpanders/editorconfig.nvim',
-    event = { 'BufRead', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufNewFile' },
   },
   {
     'ahmedkhalf/project.nvim',

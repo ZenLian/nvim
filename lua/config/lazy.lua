@@ -19,15 +19,16 @@ require('lazy').setup {
     lazy = true, -- every plugin is lazy-loaded by default
     version = '*', -- try installing the latest stable version for plugins that support semver
   },
-  install = { colorscheme = { 'tokyonight', 'habamax' } },
+  install = { colorscheme = { 'catppuccin', 'habamax' } },
   checker = { enabled = true }, -- automatically check for plugin updates
+  change_detection = { enabled = true, notify = false },
   performance = {
     rtp = {
       -- disable some rtp plugins
       disabled_plugins = {
         'gzip',
         'matchit',
-        'matchparen',
+        -- 'matchparen',
         'netrwPlugin',
         'tarPlugin',
         'tohtml',
@@ -35,5 +36,8 @@ require('lazy').setup {
         'zipPlugin',
       },
     },
+  },
+  ui = {
+    border = 'single',
   },
 }

@@ -2,16 +2,16 @@ local zen_spec = {
   'Pocco81/true-zen.nvim',
   cmd = { 'TZNarrow', 'TZFocus', 'TZMinimalist', 'TZAtaraxis' },
   keys = {
-    { '<leader>zn', ':TZNarrow<CR>', mode = { 'n', 'v' } },
-    { '<leader>zf', ':TZFocus<CR>' },
-    { '<leader>zm', ':TZMinimalist<CR>' },
-    { '<leader>zz', ':TZAtaraxis<CR>' },
+    { '<leader>zn', ':TZNarrow<CR>', desc = 'TZNarrow', mode = { 'n', 'v' } },
+    { '<leader>zf', ':TZFocus<CR>', desc = 'TZFocus' },
+    { '<leader>zm', ':TZMinimalist<CR>', desc = 'TZMinimalist' },
+    { '<leader>zz', ':TZAtaraxis<CR>', desc = 'TZAtaraxis' },
   },
   opts = {
     modes = { -- configurations per mode
       ataraxis = {
         shade = 'dark', -- if `dark` then dim the padding windows, otherwise if it's `light` it'll brighten said windows
-        backdrop = 0.1, -- percentage by which padding windows should be dimmed/brightened. Must be a number between 0 and 1. Set to 0 to keep the same background color
+        backdrop = 0.2, -- percentage by which padding windows should be dimmed/brightened. Must be a number between 0 and 1. Set to 0 to keep the same background color
         minimum_writing_area = { -- minimum size of main window
           width = 80,
           height = 50,
@@ -76,12 +76,12 @@ local zen_spec = {
       },
     },
     integrations = {
-      tmux = false, -- hide tmux status bar in (minimalist, ataraxis)
+      tmux = true, -- hide tmux status bar in (minimalist, ataraxis)
       kitty = { -- increment font size in Kitty. Note: you must set `allow_remote_control socket-only` and `listen_on unix:/tmp/kitty` in your personal config (ataraxis)
         enabled = false,
         font = '+3',
       },
-      twilight = true, -- enable twilight (ataraxis)
+      twilight = false, -- enable twilight (ataraxis)
       lualine = false, -- hide nvim-lualine (ataraxis)
     },
   },
