@@ -37,13 +37,13 @@ local plugins = {
   --    require('telescope').load_extension('fzf')
   --  end,
   --},
-  ['nvim-telescope/telescope-frecency.nvim'] = {
-    requires = { 'kkharji/sqlite.lua' },
-    after = 'telescope.nvim',
-  },
-  ['nvim-telescope/telescope-symbols.nvim'] = {
-    after = 'telescope.nvim',
-  },
+  -- ['nvim-telescope/telescope-frecency.nvim'] = {
+  --   requires = { 'kkharji/sqlite.lua' },
+  --   after = 'telescope.nvim',
+  -- },
+  -- ['nvim-telescope/telescope-symbols.nvim'] = {
+  --   after = 'telescope.nvim',
+  -- },
   ['nvim-telescope/telescope-file-browser.nvim'] = {
     after = 'telescope.nvim',
     config = function()
@@ -216,9 +216,5 @@ return {
   {
     'gpanders/editorconfig.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
-  },
-  {
-    'ahmedkhalf/project.nvim',
-    config = true,
   },
 }

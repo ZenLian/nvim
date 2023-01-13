@@ -4,6 +4,8 @@ local spec = {
   dependencies = {
     'plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    { 'nvim-telescope/telescope-frecency.nvim', dependencies = { 'sqlite.lua' } },
+    { 'nvim-telescope/telescope-symbols.nvim' },
   },
   opts = function()
     local file_browser_actions = function(action)
@@ -65,6 +67,7 @@ local spec = {
         find_files = dropdown,
         git_files = dropdown,
         oldfiles = dropdown,
+        symbols = dropdown,
       },
       extensions = {
         frecency = {
@@ -96,7 +99,8 @@ spec.config = function(_, opts)
 
   telescope.setup(opts)
   telescope.load_extension('fzf')
-  --telescope.load_extension('notify')
+  telescope.load_extension('notify')
+  telescope.load_extension('frecency')
   --telescope.load_extension('projects')
 end
 

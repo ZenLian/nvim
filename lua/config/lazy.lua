@@ -20,8 +20,18 @@ require('lazy').setup {
     version = '*', -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { 'catppuccin', 'habamax' } },
-  checker = { enabled = true }, -- automatically check for plugin updates
+  -- automatically check for plugin updates
+  checker = {
+    enabled = true,
+    notify = false,
+  },
   change_detection = { enabled = true, notify = false },
+  dev = {
+    -- directory where you store your local plugin projects
+    path = '~/projects',
+    ---@type string[] plugins that match these patterns will use your local versions instead of being fetched from GitHub
+    patterns = { 'ZenLian' },
+  },
   performance = {
     rtp = {
       -- disable some rtp plugins

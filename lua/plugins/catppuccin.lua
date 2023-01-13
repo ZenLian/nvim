@@ -2,8 +2,8 @@ local spec = {
   'catppuccin/nvim',
   lazy = false,
   priority = 1000,
-  name = 'catppuccin',
-  -- local_pkg = 'catppuccin.nvim',
+  name = 'catppuccin.nvim',
+  dev = true,
 }
 
 spec.config = function()
@@ -12,7 +12,7 @@ spec.config = function()
   -- vim.g.catppuccin_flavour = 'macchiato'
   local catppuccin = require('catppuccin')
 
-  local colors = require('catppuccin.palettes').get_palette()
+  local C = require('catppuccin.palettes').get_palette()
 
   catppuccin.setup {
     -- compile = {
@@ -76,74 +76,74 @@ spec.config = function()
       -- bufferline = true,
     },
     custom_highlights = {
-      MatchParen = { fg = colors.mantle, bg = colors.blue },
-      NormalFloat = { fg = colors.text, bg = colors.mantle },
-      FloatBorder = { fg = colors.blue, bg = colors.mantle },
+      MatchParen = { fg = C.mantle, bg = C.blue },
+      NormalFloat = { fg = C.text, bg = C.mantle },
+      FloatBorder = { fg = C.blue, bg = C.mantle },
 
-      Pmenu = { fg = colors.text, bg = colors.surface0 },
-      PmenuSel = { fg = colors.surface0, bg = colors.blue },
-      CmpItemAbbr = { fg = colors.text },
-      CmpItemAbbrMatch = { fg = colors.blue, style = { 'bold' } },
-      CmpItemAbbrMatchFuzzy = { fg = colors.blue, style = { 'bold' } },
+      Pmenu = { fg = C.text, bg = C.surface0 },
+      PmenuSel = { fg = C.surface0, bg = C.blue },
+      CmpItemAbbr = { fg = C.text },
+      CmpItemAbbrMatch = { fg = C.blue, style = { 'bold' } },
+      CmpItemAbbrMatchFuzzy = { fg = C.blue, style = { 'bold' } },
 
-      DiagnosticHint = { fg = colors.blue, style = { 'italic' } },
-      DiagnosticSignHint = { fg = colors.blue },
-      DiagnosticFloatingHint = { fg = colors.blue },
+      DiagnosticHint = { fg = C.blue, style = { 'italic' } },
+      DiagnosticSignHint = { fg = C.blue },
+      DiagnosticFloatingHint = { fg = C.blue },
 
       LspInfoBorder = { link = 'FloatBorder' },
-      LspInfoTitle = { fg = colors.blue },
-      LspInfoList = { fg = colors.green },
-      LspInfoFiletype = { fg = colors.yellow },
+      LspInfoTitle = { fg = C.blue },
+      LspInfoList = { fg = C.green },
+      LspInfoFiletype = { fg = C.yellow },
       LspInfoTip = { link = 'Comment' },
 
       NullLsInfoBorder = { link = 'FloatBorder' },
 
-      TelescopeNormal = { fg = colors.text, bg = colors.mantle },
-      TelescopePromptNormal = { fg = colors.text, bg = colors.surface0 },
-      TelescopePromptBorder = { fg = colors.surface0, bg = colors.surface0 },
-      TelescopePromptTitle = { fg = colors.blue },
-      TelescopeSelection = { fg = colors.text, bg = colors.surface1 },
-      TelescopeResultsBorder = { fg = colors.mantle, bg = colors.mantle },
+      TelescopeNormal = { fg = C.text, bg = C.mantle },
+      TelescopePromptNormal = { fg = C.text, bg = C.surface0 },
+      TelescopePromptBorder = { fg = C.surface0, bg = C.surface0 },
+      TelescopePromptTitle = { fg = C.blue },
+      TelescopeSelection = { fg = C.text, bg = C.surface1 },
+      TelescopeResultsBorder = { fg = C.mantle, bg = C.mantle },
       -- TelescopeResultsTitle = { fg = c.blue },
-      TelescopePreviewNormal = { fg = colors.text, bg = colors.mantle },
-      TelescopePreviewBorder = { fg = colors.blue, bg = colors.mantle },
+      TelescopePreviewNormal = { fg = C.text, bg = C.mantle },
+      TelescopePreviewBorder = { fg = C.blue, bg = C.mantle },
       -- TelescopePreviewTitle = { fg = c.blue },
-      TelescopeMatching = { fg = colors.blue },
+      TelescopeMatching = { fg = C.blue },
 
       -->leap.nvim {{{
-      -- LeapMatch = { fg = colors.base, bg = colors.red },
-      LeapLabelPrimary = { fg = colors.base, bg = colors.green },
-      LeapLabelSecondary = { fg = colors.base, bg = colors.blue },
-      -- LeapLabelSelected = { fg = colors.base, bg = colors.red },
-      LeapBackdrop = { fg = colors.surface2, bg = colors.base },
+      -- LeapMatch = { fg = C.base, bg = C.red },
+      LeapLabelPrimary = { fg = C.base, bg = C.green },
+      LeapLabelSecondary = { fg = C.base, bg = C.blue },
+      -- LeapLabelSelected = { fg = C.base, bg = C.red },
+      LeapBackdrop = { fg = C.surface2, bg = C.base },
       -- }}}
 
       -->nvim-treehopper {{{
-      TSNodeUnmatched = { fg = colors.surface2, bg = colors.base, style = {} },
-      TSNodeKey = { fg = colors.base, bg = colors.green },
+      TSNodeUnmatched = { fg = C.surface2, bg = C.base, style = {} },
+      TSNodeKey = { fg = C.base, bg = C.green },
       -- }}}
 
       NeoTreeNormalNC = { link = 'NeoTreeNormal' },
 
-      DrexMarked = { fg = colors.base, bg = colors.red },
+      DrexMarked = { fg = C.base, bg = C.red },
       DrexSelected = { link = 'Substitute' },
 
-      NeogitHunkHeader = { bg = colors.base, fg = colors.blue },
-      NeogitHunkHeaderHighlight = { bg = colors.blue, fg = colors.base },
-      -- NeogitNotificationInfo = { fg = colors.green },
-      -- NeogitNotificationWarning = { fg = colors.yellow },
-      -- NeogitNotificationError = { fg = colors.red },
+      NeogitHunkHeader = { bg = C.base, fg = C.blue },
+      NeogitHunkHeaderHighlight = { bg = C.blue, fg = C.base },
+      -- NeogitNotificationInfo = { fg = C.green },
+      -- NeogitNotificationWarning = { fg = C.yellow },
+      -- NeogitNotificationError = { fg = C.red },
 
       YankyPut = { link = 'IncSearch' },
       YankyYanked = { link = 'YankyPut' },
 
-      UfoFoldedBg = { bg = colors.surface0 },
+      UfoFoldedBg = { bg = C.surface0 },
 
-      HydraRed = { fg = colors.red, style = { 'bold' } },
-      HydraBlue = { fg = colors.blue, style = { 'bold' } },
-      HydraAmaranth = { fg = colors.mauve, style = { 'bold' } },
-      HydraPink = { fg = colors.pink, style = { 'bold' } },
-      HydraTeal = { fg = colors.teal, style = { 'bold' } },
+      HydraRed = { fg = C.red, style = { 'bold' } },
+      HydraBlue = { fg = C.blue, style = { 'bold' } },
+      HydraAmaranth = { fg = C.mauve, style = { 'bold' } },
+      HydraPink = { fg = C.pink, style = { 'bold' } },
+      HydraTeal = { fg = C.teal, style = { 'bold' } },
 
       BqfPreviewFloat = { link = 'NormalFloat' },
       BqfPreviewBorder = { link = 'TelescopePreviewBorder' },
@@ -152,6 +152,7 @@ spec.config = function()
 
   vim.cmd([[colorscheme catppuccin]])
 
+  -- TODO: move to somewhere else
   -- set winheighlight
   local util = require('util')
   util.augroup {
