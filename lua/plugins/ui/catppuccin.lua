@@ -147,6 +147,8 @@ spec.config = function()
 
       BqfPreviewFloat = { link = 'NormalFloat' },
       BqfPreviewBorder = { link = 'TelescopePreviewBorder' },
+
+      MiniIndentscopeSymbol = { fg = C.text },
     },
   }
 

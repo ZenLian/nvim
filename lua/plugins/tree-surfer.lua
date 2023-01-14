@@ -54,7 +54,7 @@ spec.config = function()
   vim.keymap.set('x', '<A-d>', '<cmd>STSSwapPrevVisual<cr>', { silent = true, desc = 'Swap Next' })
 
   -- Visual Selection from Normal Mode
-  vim.keymap.set('n', 'vx', '<cmd>STSSelectMasterNode<cr>', { silent = true, desc = 'Select Parent Node' })
+  vim.keymap.set('n', 'vp', '<cmd>STSSelectMasterNode<cr>', { silent = true, desc = 'Select Parent Node' })
   vim.keymap.set('n', 'vn', '<cmd>STSSelectCurrentNode<cr>', { silent = true, desc = 'Select Current Node' })
 
   -- Select Nodes in Visual Mode

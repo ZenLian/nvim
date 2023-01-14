@@ -7,11 +7,6 @@ local options = {
     -- :h g:python3_host_prog
     python3 = '~/.miniconda3/envs/py3-nvim/bin/python3',
   },
-  -- packer
-  packer = {
-    local_dir = '~/projects',
-    git_src = 'default', -- one of 'default'/'ssh'/'gitclone'/'kgithub'
-  },
   dirs = {
     config = vim.fn.stdpath('config'),
     -- home = vim.env.HOME
@@ -22,6 +17,7 @@ local options = {
   format_priority = { -- default to 0 for not configured servers
     ['null-ls'] = 1,
   },
+  animation = false,
 }
 
 M._setup = false
