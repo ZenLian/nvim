@@ -37,9 +37,13 @@ local spec = {
       ['['] = { name = '+previous' },
       [']'] = { name = '+next' },
       ['<leader>'] = {
-        ['b'] = { name = '+buffer' },
+        ['b'] = {
+          name = '+buffer',
+          ['s'] = { name = '+sort' },
+        },
         ['f'] = { name = '+file' },
         ['c'] = { name = '+code' },
+        ['l'] = { name = '+language' },
         ['g'] = {
           name = '+git',
           ['h'] = { name = '+hunks' },

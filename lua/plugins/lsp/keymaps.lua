@@ -41,7 +41,7 @@ function M.on_attach(_, bufnr)
     ['<Leader>c'] = {
       ['f'] = {
         function()
-          require('plugins.lspconfig.formatting').format()
+          require('plugins.lsp.formatting').format()
         end,
         desc = 'File format',
       },
@@ -57,7 +57,7 @@ function M.on_attach(_, bufnr)
   util.keymaps({
     ['<Leader>lf'] = {
       function()
-        require('plugins.lspconfig.formatting').format {
+        require('plugins.lsp.formatting').format {
           range = {},
         }
       end,

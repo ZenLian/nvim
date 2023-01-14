@@ -2,6 +2,10 @@ local spec = {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPost', 'BufNewFile' },
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    'nvim-treesitter/nvim-treesitter-context',
+  },
   opts = {
     ensure_installed = {
       'bash',
@@ -107,24 +111,17 @@ local spec = {
 return {
   spec,
   {
-    'nvim-treesitter/nvim-treesitter-textobjects',
-    dependencies = 'nvim-treesitter',
-  },
-  {
     'nvim-treesitter/playground',
     cmd = 'TSPlaygroundToggle',
     dependencies = 'nvim-treesitter',
   },
   {
-    'lewis6991/nvim-treesitter-context',
-    dependencies = 'nvim-treesitter',
-  },
-  {
     'mfussenegger/nvim-treehopper',
     keys = {
-      { 'm', ':lua require("tsht").nodes()<CR>', mode = 'x' },
-      { 'm', ':<C-U>lua require("tsht").nodes()<CR>', mode = 'o' },
+      { 'm', ':lua require("tsht").nodes()<CR>', desc = 'Select ts node', mode = 'x' },
+      { 'm', ':<C-U>lua require("tsht").nodes()<CR>', desc = 'Select ts node', mode = 'o' },
     },
+    dependencies = 'nvim-treesitter',
     config = function()
       require('tsht').config.hint_keys = { 'j', 'k', 'l', 'f', 'd', 's', 'w', 'e', 'i', 'm' }
     end,

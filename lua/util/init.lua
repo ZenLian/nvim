@@ -138,29 +138,6 @@ M.augroup = function(groups) -- {name=autocmds}
   end
 end
 
-function M.keymap(mode, lhs, rhs, opts)
-  opts = M.tbl_merge({ noremap = true, silent = true }, opts)
-  vim.keymap.set(mode, lhs, rhs, opts)
-end
-
-local function do_keymaps(keys, opts)
-  -- first is rhs, a final keymap
-  if keys[1] then
-    local rhs = keys[1]
-    keys[1] = nil
-    if keys[2] then
-      keys.desc = keys[2]
-      keys[2] = nil
-    end
-    keys = vim.tbl_deep_extend('force', keys, opts.opts or {})
-    M.keymap(opts.modes, opts.lhs, rhs, keys)
-    return
-  end
-  for key, value in pairs(keys) do
-    do_keymaps(value, { lhs = opts.lhs .. key, modes = opts.modes, opts = opts.opts })
-  end
-end
-
 -- keymaps(keys, opts)
 --
 -- keymaps({
@@ -208,7 +185,7 @@ function M.keymaps(keymaps, opts)
   end
 end
 
--->https://kgithub.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/init.lua
+-->https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/init.lua
 -- delay notifications till vim.notify was replaced or after 500ms
 function M.lazy_notify()
   local notifs = {}

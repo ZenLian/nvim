@@ -7,8 +7,10 @@ local spec = {
   },
 }
 
+local helper = {}
+
 -- open multiple files, or a single file, if the clipboard is empty
-function open_multiple(mode)
+function helper.open_multiple(mode)
   local entries = require('drex.clipboard').get_clipboard_entries()
   local utils = require('drex.utils')
 
@@ -30,6 +32,70 @@ function open_multiple(mode)
       vim.cmd('e ' .. element)
     end
   end, items)
+end
+
+-- Auto expand sub-directories if their only child is a single directory for quicker navigation
+-- > https://github.com/TheBlob42/drex.nvim/wiki/Custom-Actions#auto-expand
+function helper.expand()
+  local elements = require('drex.elements')
+  local utils = require('drex.utils')
+  -- local start = vim.api.nvim_win_get_cursor(0) -- OPTIONAL
+
+  while true do
+    elements.expand_element()
+
+    local row = vim.api.nvim_win_get_cursor(0)[1]
+    local lines = vim.api.nvim_buf_get_lines(0, row - 1, row + 2, false)
+
+    -- special case for files
+    if lines[1] and not utils.is_directory(lines[1]) then
+      return
+    end
+
+    -- check if a given line is a child element of the expanded element
+    local is_child = function(l)
+      if not l then
+        return false
+      end
+      return vim.startswith(utils.get_element(l), utils.get_element(lines[1]) .. utils.path_separator)
+    end
+
+    if is_child(lines[2]) and utils.is_directory(lines[2]) and not is_child(lines[3]) then
+      vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
+    else
+      -- vim.api.nvim_win_set_cursor(0, start) -- OPTIONAL
+      return
+    end
+  end
+end
+
+-- wrapper of collapse_directory without warning when collapsing root path!
+function helper.collapse()
+  local utils = require('drex.utils')
+  local buffer = vim.api.nvim_get_current_buf() -- defaults to current buffer
+  local line = vim.api.nvim_get_current_line()
+  local path
+  if utils.is_open_directory(line) then
+    path = utils.get_element(line) .. utils.path_separator
+  else
+    path = utils.get_path(line)
+  end
+  if path == utils.get_root_path(buffer) then
+    return
+  end
+  require('drex.elements').collapse_directory()
+end
+
+-- wrapper action to use "clipboard" if clipboard is not empty
+function helper.flexible_action(action)
+  local entries = require('drex.clipboard').get_clipboard_entries()
+
+  local mode = 'clipboard'
+  if vim.tbl_isempty(entries) then
+    mode = 'line'
+  end
+
+  action(mode)
 end
 
 spec.config = function()
@@ -67,11 +133,15 @@ spec.config = function()
           { desc = 'edit clipboard' },
         },
         ['h'] = {
-          '<cmd>lua require("plugins.drex").collapse()<cr>',
+          function()
+            helper.collapse()
+          end,
           { desc = 'collapse element' },
         },
         ['l'] = {
-          '<cmd>lua require("plugins.drex").expand()<cr>',
+          function()
+            helper.expand()
+          end,
           { desc = 'expand element' },
         },
         ['<CR>'] = {
@@ -88,7 +158,7 @@ spec.config = function()
         },
         ['<C-o>'] = {
           function()
-            open_multiple()
+            helper.open_multiple()
           end,
           { desc = 'open elements' },
         },
@@ -136,13 +206,13 @@ spec.config = function()
         },
         ['d'] = {
           function()
-            require('plugins.drex').flexible_action(require('drex.actions.files').delete)
+            helper.flexible_action(require('drex.actions.files').delete)
           end,
           { desc = 'delete elements' },
         },
         ['r'] = {
           function()
-            require('plugins.drex').flexible_action(require('drex.actions.files').multi_rename)
+            helper.flexible_action(require('drex.actions.files').multi_rename)
           end,
           { desc = 'rename elements' },
         },
@@ -208,16 +278,14 @@ spec.config = function()
       },
       ['v'] = {
         ['<CR>'] = {
-          -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
           function()
-            open_multiple('visual')
+            helper.open_multiple('visual')
           end,
           { desc = 'open files' },
         },
         ['<C-o>'] = {
-          -- '<cmd>lua require("plugins.drex").open_multiple("visual")<cr>',
           function()
-            open_multiple('visual')
+            helper.open_multiple('visual')
           end,
           { desc = 'open files' },
         },
@@ -256,70 +324,6 @@ spec.config = function()
       end
     end,
   })
-end
-
--- Auto expand sub-directories if their only child is a single directory for quicker navigation
--- > https://github.com/TheBlob42/drex.nvim/wiki/Custom-Actions#auto-expand
-function expand()
-  local elements = require('drex.elements')
-  local utils = require('drex.utils')
-  -- local start = vim.api.nvim_win_get_cursor(0) -- OPTIONAL
-
-  while true do
-    elements.expand_element()
-
-    local row = vim.api.nvim_win_get_cursor(0)[1]
-    local lines = vim.api.nvim_buf_get_lines(0, row - 1, row + 2, false)
-
-    -- special case for files
-    if lines[1] and not utils.is_directory(lines[1]) then
-      return
-    end
-
-    -- check if a given line is a child element of the expanded element
-    local is_child = function(l)
-      if not l then
-        return false
-      end
-      return vim.startswith(utils.get_element(l), utils.get_element(lines[1]) .. utils.path_separator)
-    end
-
-    if is_child(lines[2]) and utils.is_directory(lines[2]) and not is_child(lines[3]) then
-      vim.api.nvim_win_set_cursor(0, { row + 1, 0 })
-    else
-      -- vim.api.nvim_win_set_cursor(0, start) -- OPTIONAL
-      return
-    end
-  end
-end
-
--- wrapper of collapse_directory without warning when collapsing root path!
-function collapse()
-  local utils = require('drex.utils')
-  local buffer = vim.api.nvim_get_current_buf() -- defaults to current buffer
-  local line = vim.api.nvim_get_current_line()
-  local path
-  if utils.is_open_directory(line) then
-    path = utils.get_element(line) .. utils.path_separator
-  else
-    path = utils.get_path(line)
-  end
-  if path == utils.get_root_path(buffer) then
-    return
-  end
-  require('drex.elements').collapse_directory()
-end
-
--- wrapper action to use "clipboard" if clipboard is not empty
-function flexible_action(action)
-  local entries = require('drex.clipboard').get_clipboard_entries()
-
-  local mode = 'clipboard'
-  if vim.tbl_isempty(entries) then
-    mode = 'line'
-  end
-
-  action(mode)
 end
 
 return { spec }

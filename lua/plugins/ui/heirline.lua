@@ -304,7 +304,7 @@ spec.config = function()
     condition = conditions.has_diagnostics,
 
     static = {
-      signs = require('plugins.lspconfig.diagnostic').signs,
+      signs = require('plugins.lsp.diagnostic').signs,
     },
 
     init = function(self)

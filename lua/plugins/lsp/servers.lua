@@ -30,7 +30,7 @@ function M.setup(on_attach)
 
   local defaults = {
     on_attach = on_attach,
-    capabilities = require('plugins.lspconfig.completion').capabilities,
+    capabilities = require('plugins.lsp.completion').capabilities,
   }
   for server, opts in pairs(M.servers) do
     opts = require('util').tbl_merge(defaults, opts)

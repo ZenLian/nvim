@@ -186,8 +186,8 @@ local plugins = {
 
   -- language specific {{{
   -- markdown {{{
-  ['ellisonleao/glow.nvim'] = 'glow',
-  ['toppair/peek.nvim'] = 'peek',
+  -- ['ellisonleao/glow.nvim'] = 'glow',
+  -- ['toppair/peek.nvim'] = 'peek',
   ['AckslD/nvim-FeMaco.lua'] = 'femaco',
   -- }}}
   --

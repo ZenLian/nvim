@@ -66,8 +66,13 @@ local spec = {
         filetypes = dropdown,
         find_files = dropdown,
         git_files = dropdown,
-        oldfiles = dropdown,
+        -- oldfiles = dropdown,
         symbols = dropdown,
+        mappings = {
+          i = {
+            ['<esc>'] = require('telescope.actions').close,
+          },
+        },
       },
       extensions = {
         frecency = {
@@ -101,7 +106,7 @@ spec.config = function(_, opts)
   telescope.load_extension('fzf')
   telescope.load_extension('notify')
   telescope.load_extension('frecency')
-  --telescope.load_extension('projects')
+  telescope.load_extension('projects')
 end
 
 local function project_files()
@@ -120,31 +125,31 @@ local function project_files()
   end
 end
 
-local function cmd(scope)
+local function ts(scope)
   return ('<cmd>Telescope %s<cr>'):format(scope or '')
 end
 
 spec.keys = {
   { '<C-p>', project_files, desc = 'Project files' },
-  { '<C-f>', cmd('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
+  { '<C-f>', ts('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
 
-  { '<Leader>f<space>', cmd(''), desc = 'Telescope' },
-  { '<Leader><SPACE>', cmd('resume'), desc = 'Resume' },
+  { '<Leader>f<space>', ts('builtin include_extensions=true'), desc = 'Telescope' },
+  { '<Leader><SPACE>', ts('resume'), desc = 'Telescope Resume' },
 
   -- { '<Leader>ff', cmd('find_files'), desc = 'Find files' },
-  { '<Leader>ff', cmd('frecency'), desc = 'Frecency files' },
-  { '<Leader>fr', cmd('oldfiles'), desc = 'Recent files' },
-  { '<Leader>fb', cmd('buffers'), desc = 'Buffers' },
+  { '<Leader>ff', ts('frecency workspace=CWD theme=dropdown previewer=false'), desc = 'Frecency files' },
+  { '<Leader>fr', ts('oldfiles'), desc = 'Recent files' },
+  { '<Leader>fb', ts('buffers'), desc = 'Buffers' },
 
-  { '<Leader>fg', cmd('live_grep'), desc = 'Live grep' },
-  { '<Leader>fw', cmd('grep_string'), desc = 'Grep current word' },
-  { '<Leader>f/', cmd('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
+  { '<Leader>fg', ts('live_grep'), desc = 'Live grep' },
+  { '<Leader>fw', ts('grep_string'), desc = 'Grep current word' },
+  { '<Leader>f/', ts('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
 
-  { '<Leader>fp', cmd('projects'), desc = 'Projects' },
-  { '<Leader>fe', cmd('file_browser'), desc = 'File explorer' },
-  { '<Leader>fn', cmd('notify'), desc = 'Notifications' },
-  { '<Leader>fh', cmd('help_tags'), desc = 'Helps' },
-  { '<Leader>f;', cmd('symbols'), desc = 'Symbols' },
+  { '<Leader>fp', ts('projects'), desc = 'Projects' },
+  { '<Leader>fe', ts('file_browser'), desc = 'File explorer' },
+  { '<Leader>fn', ts('notify'), desc = 'Notifications' },
+  { '<Leader>fh', ts('help_tags'), desc = 'Helps' },
+  { '<Leader>f;', ts('symbols'), desc = 'Symbols' },
 
   {
     '<leader>gB',

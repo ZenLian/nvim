@@ -44,7 +44,7 @@ spec.config = function()
   --   -- setup lsp servers
   --   local lspconfig = require('lspconfig')
   --   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  --   local servers = require('plugins.lspconfig.servers')
+  --   local servers = require('plugins.lsp.servers')
   --   -- custom config in lspconfig/servers.lua
   --   local opts = servers[server] or {}
   --   local defaults = {

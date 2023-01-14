@@ -14,10 +14,13 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   spec = {
     { import = 'plugins' },
+    { import = 'plugins.ui' },
+    { import = 'plugins.editor' },
+    { import = 'plugins.markdown' },
   },
   defaults = {
     lazy = true, -- every plugin is lazy-loaded by default
-    version = '*', -- try installing the latest stable version for plugins that support semver
+    -- version = '*', -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { 'catppuccin', 'habamax' } },
   -- automatically check for plugin updates

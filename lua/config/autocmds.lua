@@ -12,6 +12,7 @@ local groups = {
         return
       end
       -- we're not at beginning
+      --
       if fn.line('.') > 1 then
         return
       end

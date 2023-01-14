@@ -6,6 +6,7 @@ local spec = {
 spec.config = function()
   local alpha = require('alpha')
   local dashboard = require('alpha.themes.dashboard')
+  local util = require('util')
   local WIDTH = 30
 
   -- header

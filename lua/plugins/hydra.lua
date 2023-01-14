@@ -72,10 +72,10 @@ local function option_menu()
         position = 'middle',
         funcs = {
           ['dgn'] = function()
-            return require('plugins.lspconfig.diagnostic').enable and '[x]' or '[ ]'
+            return require('plugins.lsp.diagnostic').enable and '[x]' or '[ ]'
           end,
           ['fmt'] = function()
-            return require('plugins.lspconfig.formatting').format_on_save and '[x]' or '[ ]'
+            return require('plugins.lsp.formatting').format_on_save and '[x]' or '[ ]'
           end,
           ['blame'] = function()
             return require('gitsigns.config').config.current_line_blame and '[x]' or '[ ]'
@@ -166,14 +166,14 @@ local function option_menu()
       {
         'd',
         function()
-          require('plugins.lspconfig.diagnostic').toggle()
+          require('plugins.lsp.diagnostic').toggle()
         end,
         { desc = 'diagnostics' },
       },
       {
         'f',
         function()
-          require('plugins.lspconfig.formatting').toggle()
+          require('plugins.lsp.formatting').toggle()
         end,
         { exit = true, desc = 'format on save' },
       },
