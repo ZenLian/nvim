@@ -1,7 +1,14 @@
 local spec = {
   'kylechui/nvim-surround',
   event = { 'BufRead', 'BufNewFile' },
-  config = true,
+  opts = {
+    aliases = {
+      ['b'] = { ')', '}', ']', '>' },
+      ['q'] = { '"', "'", '`' },
+      ['s'] = { '}', ']', ')', '>', '"', "'", '`' },
+    },
+  },
+  -- config = true,
 }
 
 return { spec }

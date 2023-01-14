@@ -82,6 +82,9 @@ spec.config = function(_, opts)
     }
   end
   opts.custom_textobjects = {
+    -- surround
+    ['s'] = { { '%b()', '%b[]', '%b{}', '%b""', "%b''", '%b``' }, '^.().*().$' },
+
     -- treesitter
     a = gen_spec.treesitter { a = '@parameter.outer', i = '@parameter.inner' },
     f = gen_spec.treesitter { a = '@function.outer', i = '@function.inner' },

@@ -115,7 +115,7 @@ spec.config = function()
       LeapLabelPrimary = { fg = C.base, bg = C.green },
       LeapLabelSecondary = { fg = C.base, bg = C.blue },
       -- LeapLabelSelected = { fg = C.base, bg = C.red },
-      -- LeapBackdrop = { fg = C.surface2, bg = C.base },
+      LeapBackdrop = { fg = C.surface1, bg = C.base },
       -- }}}
 
       -->nvim-treehopper {{{
