@@ -16,7 +16,9 @@ require('lazy').setup {
     { import = 'plugins' },
     { import = 'plugins.ui' },
     { import = 'plugins.editor' },
+    { import = 'plugins.coding' },
     { import = 'plugins.markdown' },
+    { import = 'plugins.util' },
   },
   defaults = {
     lazy = true, -- every plugin is lazy-loaded by default
