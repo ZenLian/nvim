@@ -50,4 +50,15 @@ local plugins = {
   --- }}}
 }
 
-return {}
+-- try some new things here
+return {
+  {
+    'echasnovski/mini.nvim',
+    lazy = false,
+    enabled = false,
+    config = function()
+      -- require('mini.pairs').setup()
+      -- require('mini.animate').setup()
+    end,
+  },
+}
