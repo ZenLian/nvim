@@ -2,7 +2,7 @@ local spec = {
   'akinsho/bufferline.nvim',
   version = '*',
   dependencies = { 'nvim-web-devicons' },
-  event = 'UIEnter',
+  event = { 'BufReadPre', 'BufNewFile' },
   opts = function()
     return {
       options = {
@@ -31,8 +31,8 @@ local spec = {
   config = function(_, opts)
     local bufferline = require('bufferline')
     local util = require('util')
-    bufferline.setup(opts)
 
+    bufferline.setup(opts)
     util.keymaps {
       ['<S-h>'] = { '<cmd>lua require("bufferline").cycle(-1)<CR>', desc = 'Previous buffer' },
       ['<S-l>'] = { '<cmd>lua require("bufferline").cycle(1)<CR>', desc = 'Next buffer' },
