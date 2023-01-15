@@ -19,6 +19,10 @@ local spec = {
     'williamboman/mason-lspconfig.nvim',
     'jose-elias-alvarez/null-ls.nvim',
     'jayp0521/mason-null-ls.nvim',
+    {
+      'b0o/SchemaStore.nvim',
+      dev = true,
+    },
     -- 'hrsh7th/cmp-nvim-lsp',
   },
   keys = {
@@ -30,30 +34,13 @@ local spec = {
 }
 
 spec.config = function()
-  local function setup_lspconfig()
-    require('lspconfig.ui.windows').default_options.border = 'single'
-  end
+  require('lspconfig.ui.windows').default_options.border = 'single'
 
   local function on_attach(client, bufnr)
     require(PREFIX .. '.formatting').on_attach(client, bufnr)
     require(PREFIX .. '.keymaps').on_attach(client, bufnr)
     -- require(PREFIX..'.signature').on_attach(client, bufnr)
   end
-
-  -- local function on_server_ready(server)
-  --   -- setup lsp servers
-  --   local lspconfig = require('lspconfig')
-  --   local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  --   local servers = require('plugins.lsp.servers')
-  --   -- custom config in lspconfig/servers.lua
-  --   local opts = servers[server] or {}
-  --   local defaults = {
-  --     on_attach = on_attach,
-  --     capabilities = capabilities,
-  --   }
-  --   opts = vim.tbl_deep_extend('force', defaults, opts)
-  --   lspconfig[server].setup(opts)
-  -- end
 
   require(PREFIX .. '.diagnostic').setup()
   -- require('mason').setup { }
@@ -65,13 +52,23 @@ spec.config = function()
   require('mason-null-ls').setup {
     automatic_installation = true,
   }
-  require('neodev').setup {}
+  -- require('neodev').setup {}
 
-  setup_lspconfig()
   require(PREFIX .. '.servers').setup(on_attach)
   -- require('mason-lspconfig').setup_handlers {
   --   function(server)
-  --     on_server_ready(server)
+  --     -- setup lsp servers
+  --     local lspconfig = require('lspconfig')
+  --     local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  --     local servers = require('plugins.lsp.servers')
+  --     -- custom config in lspconfig/servers.lua
+  --     local opts = servers[server] or {}
+  --     local defaults = {
+  --       on_attach = on_attach,
+  --       capabilities = capabilities,
+  --     }
+  --     opts = vim.tbl_deep_extend('force', defaults, opts)
+  --     lspconfig[server].setup(opts)
   --   end,
   -- }
 end

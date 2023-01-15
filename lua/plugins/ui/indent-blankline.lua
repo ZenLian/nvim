@@ -1,7 +1,6 @@
 local spec = {
   'lukas-reineke/indent-blankline.nvim',
-  -- event = 'BufWinEnter',
-  event = 'BufReadPre',
+  event = { 'BufRead', 'BufNewFile' },
   -- enabled = false,
   opts = {
     -- show_current_context = true,
@@ -11,14 +10,10 @@ local spec = {
     use_treesitter = true,
     filetype_exclude = {
       'help',
-      'packer',
       'lsp-installer',
-      'NvimTree',
       'Trouble',
-      'undotree',
       'alpha',
       'aerial',
-      'markdown',
     },
   },
 }

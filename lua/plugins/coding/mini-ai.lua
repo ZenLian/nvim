@@ -1,6 +1,6 @@
 local spec = {
   'echasnovski/mini.ai',
-  event = 'BufWinEnter',
+  event = { 'BufRead', 'BufNewFile' },
   opts = {
     -- Module mappings. Use `''` (empty string) to disable one.
     mappings = {

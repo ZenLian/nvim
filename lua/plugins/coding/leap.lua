@@ -1,6 +1,6 @@
 local leap = {
   'ggandor/leap.nvim',
-  event = { 'BufWinEnter' },
+  event = { 'BufRead', 'BufNewFile' },
   dependencies = {
     'tpope/vim-repeat',
     'flit.nvim',

@@ -1,10 +1,24 @@
 local M = {}
 
+-- TODO: move somewhere else
+local schemas = {}
+local function get_schema(name)
+  if not schemas[name] then
+    schemas[name] = require('schemastore')[name].schemas()
+  end
+  return schemas[name]
+end
+
 M.servers = {
   sumneko_lua = {},
   -- ccls = {},
   clangd = {},
   jsonls = {
+    -- lazy-load schemastore when needed
+    on_new_config = function(new_config)
+      new_config.settings.json.schemas = new_config.settings.json.schemas or {}
+      vim.list_extend(new_config.settings.json.schemas, get_schema('json'))
+    end,
     settings = {
       json = {
         -- schemas = require('schemastore').json.schemas(),
@@ -13,6 +27,11 @@ M.servers = {
     },
   },
   yamlls = {
+    -- lazy-load schemastore when needed
+    on_new_config = function(new_config)
+      new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
+      vim.list_extend(new_config.settings.json.schemas, get_schema('yaml'))
+    end,
     settings = {
       yaml = {
         -- schemas = {
