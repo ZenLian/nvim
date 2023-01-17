@@ -24,7 +24,7 @@ local spec = {
       dev = true,
     },
     { 'ray-x/lsp_signature.nvim', enabled = false },
-    -- 'cmp-nvim-lsp',
+    'cmp-nvim-lsp',
   },
   keys = {
     { '<Leader>pl', '<cmd>LspInfo<CR>', desc = 'Lsp Info' },
@@ -54,23 +54,22 @@ spec.config = function()
     automatic_installation = true,
   }
 
-  require(PREFIX .. '.servers').setup(on_attach)
-  -- require('mason-lspconfig').setup_handlers {
-  --   function(server)
-  --     -- setup lsp servers
-  --     local lspconfig = require('lspconfig')
-  --     local capabilities = require('cmp_nvim_lsp').default_capabilities()
-  --     local servers = require('plugins.lsp.servers')
-  --     -- custom config in lspconfig/servers.lua
-  --     local opts = servers[server] or {}
-  --     local defaults = {
-  --       on_attach = on_attach,
-  --       capabilities = capabilities,
-  --     }
-  --     opts = vim.tbl_deep_extend('force', defaults, opts)
-  --     lspconfig[server].setup(opts)
-  --   end,
-  -- }
+  -- require(PREFIX .. '.servers').setup(on_attach)
+  require('mason-lspconfig').setup_handlers {
+    function(server)
+      -- setup lsp servers
+      local lspconfig = require('lspconfig')
+      local servers = require('plugins.lsp.servers').servers
+      -- custom config in lspconfig/servers.lua
+      local opts = servers[server] or {}
+      local defaults = {
+        on_attach = on_attach,
+        capabilities = require('cmp_nvim_lsp').default_capabilities(),
+      }
+      opts = vim.tbl_deep_extend('force', defaults, opts)
+      lspconfig[server].setup(opts)
+    end,
+  }
 end
 
 return { spec }

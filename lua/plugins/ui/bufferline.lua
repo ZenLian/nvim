@@ -24,15 +24,24 @@ local spec = {
       },
       -- custom_filter = function(buf_number, buf_numbers)
       -- end
-      highlights = require('catppuccin.groups.integrations.bufferline').get(),
       -- themable = true,
     }
   end,
   config = function(_, opts)
     local bufferline = require('bufferline')
     local util = require('util')
+    local C = require('catppuccin.palettes').get_palette()
 
+    opts.highlights = require('catppuccin.groups.integrations.bufferline').get {
+      -- styles = { 'italic' },
+      custom = {
+        all = {
+          indicator_selected = { fg = C.blue, bg = C.base },
+        },
+      },
+    }
     bufferline.setup(opts)
+
     util.keymaps {
       ['<S-h>'] = { '<cmd>lua require("bufferline").cycle(-1)<CR>', desc = 'Previous buffer' },
       ['<S-l>'] = { '<cmd>lua require("bufferline").cycle(1)<CR>', desc = 'Next buffer' },

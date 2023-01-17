@@ -223,6 +223,10 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
+M.has_plugin = function(name)
+  return require('lazy.core.config').plugins[name] ~= nil
+end
+
 local PREFIX = ...
 
 return setmetatable(M, {

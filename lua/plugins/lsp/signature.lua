@@ -1,3 +1,4 @@
+-- TODO: WIP
 local util = require('util')
 
 -- module definition
@@ -36,17 +37,6 @@ M.on_attach = function(client, bufnr)
     callback = H.auto_signature,
     -- callback = vim.lsp.buf.signature_help,
   })
-end
-
-M.show = function()
-  if H.winnr then
-    return
-  end
-  return
-end
-
-M.hide = function()
-  return
 end
 
 -- handler for "textDocument/signatureHelp"

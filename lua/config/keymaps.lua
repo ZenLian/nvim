@@ -23,25 +23,48 @@ util.keymaps {
 
   -- Clear search with <esc>
   ['<esc>'] = '<cmd>noh<cr>',
+
+  -- ciw
+  ['<C-c>'] = { '<cmd>normal! ciw<cr>a', desc = 'Edit word' },
 }
--- TODO:
--- Close buffer
--- keymap('', 'Q', '<cmd>lua require("mini.bufremove").delete()<CR>')
+
+-- buffers
+if not util.has_plugin('bufferline.nvim') then
+  util.keymaps {
+    ['<S-h>'] = { '<cmd>bprevious<cr>', desc = 'Previous buffer' },
+    ['<S-l>'] = { '<cmd>bnext<cr>', desc = 'Next buffer' },
+    ['[b'] = { '<cmd>bprevious<cr>', desc = 'Previous buffer' },
+    [']b'] = { '<cmd>bnext<cr>', desc = 'Next buffer' },
+    ['[B'] = { '<cmd>bfirst<cr>', desc = 'First buffer' },
+    [']B'] = { '<cmd>blast<cr>', desc = 'Last buffer' },
+    ['<Leader>b'] = {
+      b = { '<cmd>e #<CR>', desc = 'Cycle Last buffer' },
+    },
+  }
+end
+if not util.has_plugin('mini.bufremove') then
+  util.keymaps {
+    ['Q'] = { '<cmd>bd<cr>', desc = 'Delete buffer' },
+    ['<Leader>bd'] = { '<cmd>bd<cr>', desc = 'Delete buffer' },
+  }
+end
 
 -- Move lines
 -- https://vim.fandom.com/wiki/Moving_lines_up_or_down#Mappings_to_move_lines
-util.keymaps({
-  ['<A-j>'] = ':m .+1<CR>==',
-  ['<A-k>'] = ':m .-2<CR>==',
-}, { mode = 'n' })
-util.keymaps({
-  ['<A-j>'] = ":m '>+1<CR>gv=gv",
-  ['<A-k>'] = ":m '<-2<CR>gv=gv",
-}, { mode = 'v' })
-util.keymaps({
-  ['<A-j>'] = '<Esc>:m .+1<CR>==gi',
-  ['<A-k>'] = '<Esc>:m .-2<CR>==gi',
-}, { mode = 'i' })
+if not util.has_plugin('mini.move') then
+  util.keymaps({
+    ['<A-j>'] = ':m .+1<CR>==',
+    ['<A-k>'] = ':m .-2<CR>==',
+  }, { mode = 'n' })
+  util.keymaps({
+    ['<A-j>'] = ":m '>+1<CR>gv=gv",
+    ['<A-k>'] = ":m '<-2<CR>gv=gv",
+  }, { mode = 'v' })
+  util.keymaps({
+    ['<A-j>'] = '<Esc>:m .+1<CR>==gi',
+    ['<A-k>'] = '<Esc>:m .-2<CR>==gi',
+  }, { mode = 'i' })
+end
 
 -- Better indent
 util.keymaps({

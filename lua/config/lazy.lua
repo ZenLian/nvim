@@ -27,7 +27,7 @@ require('lazy').setup {
   install = { colorscheme = { 'catppuccin', 'habamax' } },
   -- automatically check for plugin updates
   checker = {
-    enabled = true,
+    enabled = false,
     notify = false,
   },
   change_detection = { enabled = true, notify = false },

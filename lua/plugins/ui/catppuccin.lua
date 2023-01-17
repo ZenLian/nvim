@@ -73,7 +73,6 @@ spec.config = function()
         enabled = true,
         colored_indent_levels = false,
       },
-      -- bufferline = true,
     },
     custom_highlights = {
       MatchParen = { fg = C.mantle, bg = C.blue },

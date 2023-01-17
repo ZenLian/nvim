@@ -98,7 +98,8 @@ spec.config = function()
       self.relative_filename = vim.fn.fnamemodify(self.filename, ':.')
       self.tail_filename = vim.fn.fnamemodify(self.filename, ':t')
     end,
-    FileIcon,
+    -- FileIcon,
+    -- Space,
     -- filename
     {
       flexible = true,
