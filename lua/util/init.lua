@@ -119,7 +119,7 @@ end
 -- }
 M.augroup = function(groups) -- {name=autocmds}
   for name, autocmds in pairs(groups) do
-    local group = vim.api.nvim_create_augroup(name, { clear = true })
+    local group = vim.api.nvim_create_augroup(name, { clear = false })
     local create_autocmd = vim.api.nvim_create_autocmd
     -- {autocmd, autocmd, ...}
     if autocmds.event == nil then
@@ -223,4 +223,12 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
-return M
+local PREFIX = ...
+
+return setmetatable(M, {
+  __index = function(_, key)
+    local module = require(PREFIX .. '.' .. key)
+    rawset(M, key, module)
+    return module
+  end,
+})

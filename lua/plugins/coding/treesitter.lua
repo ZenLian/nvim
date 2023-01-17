@@ -4,7 +4,7 @@ local spec = {
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    'nvim-treesitter/nvim-treesitter-context',
+    { 'nvim-treesitter/nvim-treesitter-context', config = true },
   },
   opts = {
     ensure_installed = {

@@ -23,7 +23,8 @@ local spec = {
       'b0o/SchemaStore.nvim',
       dev = true,
     },
-    -- 'hrsh7th/cmp-nvim-lsp',
+    { 'ray-x/lsp_signature.nvim', enabled = false },
+    -- 'cmp-nvim-lsp',
   },
   keys = {
     { '<Leader>pl', '<cmd>LspInfo<CR>', desc = 'Lsp Info' },
@@ -33,17 +34,17 @@ local spec = {
   },
 }
 
+local function on_attach(client, bufnr)
+  require(PREFIX .. '.formatting').on_attach(client, bufnr)
+  require(PREFIX .. '.keymaps').on_attach(client, bufnr)
+  require(PREFIX .. '.signature').on_attach(client, bufnr)
+end
+
 spec.config = function()
   require('lspconfig.ui.windows').default_options.border = 'single'
-
-  local function on_attach(client, bufnr)
-    require(PREFIX .. '.formatting').on_attach(client, bufnr)
-    require(PREFIX .. '.keymaps').on_attach(client, bufnr)
-    -- require(PREFIX..'.signature').on_attach(client, bufnr)
-  end
-
   require(PREFIX .. '.diagnostic').setup()
-  -- require('mason').setup { }
+
+  require('mason').setup()
   require(PREFIX .. '.null-ls').setup(on_attach)
   require('mason-lspconfig').setup {
     ensure_installed = {},
@@ -52,7 +53,6 @@ spec.config = function()
   require('mason-null-ls').setup {
     automatic_installation = true,
   }
-  -- require('neodev').setup {}
 
   require(PREFIX .. '.servers').setup(on_attach)
   -- require('mason-lspconfig').setup_handlers {
