@@ -75,7 +75,7 @@ spec.config = function()
       },
     },
     custom_highlights = {
-      MatchParen = { fg = C.mantle, bg = C.blue },
+      -- MatchParen = { fg = C.mantle, bg = C.blue },
       NormalFloat = { fg = C.text, bg = C.mantle },
       FloatBorder = { fg = C.blue, bg = C.mantle },
 

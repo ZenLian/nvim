@@ -185,38 +185,11 @@ local options = {
   concealcursor = 'niv',
 }
 
-local builtin_plugins = {
-  '2html_plugin',
-  'getscript',
-  'getscriptPlugin',
-  'gzip',
-  'logipat',
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
-  'matchit',
-  -- 'matchparen', -- Highlight matching parens
-  'tar',
-  'tarPlugin',
-  'rrhelper',
-  'spellfile_plugin',
-  'vimball',
-  'vimballPlugin',
-  'zip',
-  'zipPlugin',
-}
-
 function M.setup()
   -- load_options
   for name, value in pairs(options) do
     vim.o[name] = value
   end
-  -- TODO: lazy.nvim did this for me
-  -- disable builtin plugins
-  -- for _, plugin in ipairs(builtin_plugins) do
-  --   vim.g['loaded_' .. plugin] = 1
-  -- end
   -- virtual env provider
   if vim.fn.glob(config.provider.python3) ~= '' then
     vim.g.python3_host_prog = config.provider.python3

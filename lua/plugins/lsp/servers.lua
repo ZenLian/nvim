@@ -34,7 +34,7 @@ M.servers = {
     -- lazy-load schemastore when needed
     on_new_config = function(new_config)
       new_config.settings.yaml.schemas = new_config.settings.yaml.schemas or {}
-      vim.list_extend(new_config.settings.json.schemas, get_schema('yaml'))
+      vim.list_extend(new_config.settings.yaml.schemas, get_schema('yaml'))
     end,
     settings = {
       yaml = {

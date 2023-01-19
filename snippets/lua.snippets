@@ -1,23 +1,3 @@
-snippet conf "plugin config module"
-	local M = {
-		packer = {
-			event = '${1}',
-		},
-	}
-
-	function M.packer.config()
-		local ${2} = require('${2:`fnamemodify(bufname(), ':t:r')`}')
-		${2}.setup{${3}}
-	end
-
-	M.packer.keymaps = {
-		n = {
-			['<leader>a'] = { '<cmd>lua require("${2}").${4}<cr>', '${5}' }
-		}
-	}
-
-	return M
-
 snippet spec "plugin specification"
 	
 	local spec = {
@@ -30,5 +10,5 @@ snippet spec "plugin specification"
 
 	return { spec }
 
-snippet require "Require simple module"
+snippet rq "Require simple module"
 	local ${1} = require("${1}")${0}
