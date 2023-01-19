@@ -70,19 +70,20 @@ local groups = {
     end,
   },
   -- NOTE: now handled by yanky.nvim
-  -- ['vimrc.highlightYank'] = {
-  --   {
-  --     desc = 'highlight on yank',
-  --     event = { 'TextYankPost' },
-  --     callback = function()
-  --       vim.highlight.on_yank {
-  --         timeout = 250,
-  --         on_visual = false,
-  --         higroup = 'Visual',
-  --       }
-  --     end,
-  --   },
-  -- },
+  ['vimrc.highlightYank'] = {
+    {
+      desc = 'highlight on yank',
+      event = { 'TextYankPost' },
+      callback = function()
+        vim.highlight.on_yank {
+          timeout = 200,
+          -- on_visual = false,
+          higroup = 'OnYank',
+          -- higroup = 'IncSearch',
+        }
+      end,
+    },
+  },
   ['vimrc.markdown'] = {
     {
       desc = 'Entering markdown',

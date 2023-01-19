@@ -78,6 +78,7 @@ spec.config = function()
       -- MatchParen = { fg = C.mantle, bg = C.blue },
       NormalFloat = { fg = C.text, bg = C.mantle },
       FloatBorder = { fg = C.blue, bg = C.mantle },
+      OnYank = { fg = C.base, bg = C.teal },
 
       Pmenu = { fg = C.text, bg = C.surface0 },
       PmenuSel = { fg = C.surface0, bg = C.blue },
@@ -133,7 +134,7 @@ spec.config = function()
       -- NeogitNotificationWarning = { fg = C.yellow },
       -- NeogitNotificationError = { fg = C.red },
 
-      YankyPut = { link = 'IncSearch' },
+      YankyPut = { link = 'OnYank' },
       YankyYanked = { link = 'YankyPut' },
 
       UfoFoldedBg = { bg = C.surface0 },
