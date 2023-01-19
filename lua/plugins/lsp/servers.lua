@@ -10,7 +10,11 @@ local function get_schema(name)
 end
 
 M.servers = {
-  sumneko_lua = {},
+  sumneko_lua = {
+    workspace = {
+      checkThirdParty = false,
+    },
+  },
   -- ccls = {},
   clangd = {},
   jsonls = {

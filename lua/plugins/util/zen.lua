@@ -90,7 +90,7 @@ local zen_spec = {
 local twilight_spec = {
   'folke/twilight.nvim',
   cmd = { 'Twilight' },
-  keys = { { '<leader>zt', '<cmd>Twilight<CR>' } },
+  keys = { { '<leader>zt', '<cmd>Twilight<CR>', desc = 'Twilight' } },
 }
 
 return { zen_spec, twilight_spec }

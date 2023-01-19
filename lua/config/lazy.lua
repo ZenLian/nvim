@@ -11,6 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require('lazy.view.config').keys.details = '<Tab>'
 require('lazy').setup {
   spec = {
     { import = 'plugins' },
@@ -54,5 +55,19 @@ require('lazy').setup {
   },
   ui = {
     border = 'single',
+  },
+  custom_keys = {
+    -- open a terminal for the plugin dir
+    ['<leader>t'] = function(plugin)
+      require('lazy.util').float_term(nil, {
+        cwd = plugin.dir,
+      })
+    end,
+    -- open lazygit log
+    ['<localleader>l'] = function(plugin)
+      require('lazy.util').float_term({ 'lazygit', 'log' }, {
+        cwd = plugin.dir,
+      })
+    end,
   },
 }

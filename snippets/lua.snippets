@@ -18,5 +18,17 @@ snippet conf "plugin config module"
 
 	return M
 
+snippet spec "plugin specification"
+	
+	local spec = {
+		'${1}',
+		event = '${2:VeryLazy}'
+		config = function(plugin, opts)
+			${3}
+		end
+	}
+
+	return { spec }
+
 snippet require "Require simple module"
 	local ${1} = require("${1}")${0}

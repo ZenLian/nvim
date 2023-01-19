@@ -72,4 +72,21 @@ return {
       -- require('mini.move').setup()
     end,
   },
+  {
+    'zenlian/winddown.nvim',
+    -- enabled = false,
+    dev = true,
+    lazy = false,
+    -- event = 'VeryLazy',
+    opts = {},
+    keys = {
+      {
+        '<Space>zr',
+        function()
+          require('winddown').reset()
+        end,
+        desc = 'Reset winddown',
+      },
+    },
+  },
 }

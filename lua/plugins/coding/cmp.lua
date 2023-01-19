@@ -1,3 +1,5 @@
+local C = require('config')
+
 local spec = {
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
@@ -24,37 +26,8 @@ spec.config = function()
   --   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
   -- end
 
-  local kind_icons = {
-    Text = '',
-    Method = '',
-    Function = '',
-    Constructor = '',
-    Field = 'ﰠ',
-    Variable = '',
-    Class = 'ﴯ',
-    Interface = '',
-    Module = '',
-    Property = 'ﰠ',
-    Unit = '',
-    -- Unit = "塞",
-    Value = '',
-    Enum = '',
-    Keyword = '',
-    Snippet = '',
-    Color = '',
-    File = '',
-    Reference = '',
-    Folder = '',
-    EnumMember = '',
-    Constant = '',
-    Struct = 'פּ',
-    Event = '',
-    Operator = '',
-    TypeParameter = '',
-  }
-
   local cmp_fmt = function(entry, item)
-    item.kind = string.format('%s', kind_icons[item.kind])
+    item.kind = string.format('%s', C.icons.cmp_kinds[item.kind])
     -- Source menu
     item.menu = ({
       nvim_lsp = '[LSP]',
@@ -81,33 +54,23 @@ spec.config = function()
         if cmp.visible() then
           cmp.select_prev_item()
         else
-          -- cmp.complete()
-          fallback()
+          cmp.complete()
+          -- fallback()
         end
       end, { 'i', 'c' }),
       ['<C-n>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
         else
-          -- cmp.complete()
-          fallback()
+          cmp.complete()
+          -- fallback()
         end
       end, { 'i', 'c' }),
-      ['<C-d>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.mapping.scroll_docs(-4)
-        else
-          fallback()
-        end
-      end),
-      ['<C-u>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.mapping.scroll_docs(4)
-        else
-          fallback()
-        end
-      end),
+      ['<C-d>'] = cmp.mapping.scroll_docs(4),
+      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       ['<C-e>'] = cmp.mapping(cmp.mapping.close(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.mapping(cmp.mapping.confirm(), { 'i', 'c' }),
+      ['<C-q>'] = cmp.mapping(cmp.mapping.abort(), { 'i', 'c' }),
       ['<Tab>'] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.confirm {
