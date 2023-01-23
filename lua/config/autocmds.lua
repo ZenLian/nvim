@@ -26,7 +26,10 @@ local groups = {
   ['vimrc.equalwin'] = {
     desc = 'Equalize window',
     event = 'VimResized',
-    command = [[wincmd =]],
+    -- command = [[wincmd =]],
+    callback = function()
+      vim.cmd('wincmd =')
+    end,
   },
   ['vimrc.smartclose'] = {
     {
@@ -101,6 +104,15 @@ local groups = {
         vim.wo.spell = false
       end,
     },
+  },
+  ['vimrc.theme'] = {
+    desc = 'Set winheighlight',
+    event = { 'FileType' },
+    pattern = {
+      'qf',
+      -- 'oil',
+    },
+    command = [[setlocal winhl=Normal:NormalFloat,NormalNC:NormalFloat]],
   },
 }
 

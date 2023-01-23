@@ -153,20 +153,6 @@ spec.config = function()
   }
 
   vim.cmd([[colorscheme catppuccin]])
-
-  -- TODO: move to somewhere else
-  -- set winheighlight
-  local util = require('util')
-  util.augroup {
-    ['vimrc.theme'] = {
-      desc = 'Set winheighlight',
-      event = { 'FileType' },
-      pattern = {
-        'qf',
-      },
-      command = [[setlocal winhl=Normal:NormalFloat,NormalNC:NormalFloat]],
-    },
-  }
 end
 
 return { spec }

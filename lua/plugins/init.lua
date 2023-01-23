@@ -26,7 +26,6 @@ local plugins = {
   },
 
   ['ray-x/lsp_signature.nvim'] = { module = 'lsp_signature' },
-  ['stevearc/aerial.nvim'] = 'aerial',
   ['folke/trouble.nvim'] = {
     requires = 'kyazdani42/nvim-web-devicons',
     cmd = 'Trouble',
