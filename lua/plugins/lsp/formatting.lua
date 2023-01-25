@@ -47,7 +47,7 @@ function M.format(opts)
     bufnr = 0,
     timeout_ms = TIMEOUT,
   }
-  opts = util.tbl_merge(defaults, opts)
+  opts = vim.tbl_deep_extend('force', defaults, opts or {})
   M.select_client(function(client)
     opts.id = client.id
     vim.lsp.buf.format(opts)

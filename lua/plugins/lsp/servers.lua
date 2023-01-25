@@ -56,7 +56,7 @@ function M.setup(on_attach)
     capabilities = require('plugins.lsp.completion').capabilities,
   }
   for server, opts in pairs(M.servers) do
-    opts = require('util').tbl_merge(defaults, opts)
+    opts = vim.tbl_deep_extend('force', defaults, opts or {})
     lspconfig[server].setup(opts)
   end
 end

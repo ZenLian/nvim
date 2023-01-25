@@ -1,6 +1,8 @@
 local M = {}
 
----@return boolean Whether at least one LSP client supports `capability`.
+--- Check whether at least one LSP client supports `capability`.
+---@param capability string
+---@return boolean
 M.has_capability = function(capability)
   -- param check
   if not capability then

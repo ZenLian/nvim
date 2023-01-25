@@ -137,9 +137,9 @@ textobjects:
 - `j`/`k`: next/last textobjects(never used!)
 - customs
   - [x] `e`: whole buffer
-  - [ ] `u`: url
-  - [ ] `/`: comment
-  - [ ] `i`: indent
+  - [x] `u`: url
+  - [x] `/`: comment
+  - [x] `i`: indent
 - not used: `rydhlzxvnm`
 
 treesitter nodes:

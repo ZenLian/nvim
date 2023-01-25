@@ -1,16 +1,7 @@
 local M = {}
 
-function M.dump(...)
-  print(vim.inspect(...))
-end
-_G.dump = M.dump
-
 function M.join_path(...)
   return table.concat({ ... }, '/')
-end
-
-function M.tbl_merge(defaults, opts)
-  return vim.tbl_deep_extend('force', defaults or {}, opts or {})
 end
 
 function M.foreach(list, callback)
@@ -36,8 +27,8 @@ function M.info(msg, name)
   vim.notify(msg, vim.log.levels.INFO, { title = name })
 end
 
--- Open float terminal with command
---- @param cmd: #String The name of shell command
+--- Open float terminal with command
+---@param cmd string The name of shell command
 function M.float_terminal(cmd)
   local buf = vim.api.nvim_create_buf(false, true)
   local vpad = 4
@@ -49,7 +40,7 @@ function M.float_terminal(cmd)
     row = vpad,
     col = hpad,
     style = 'minimal',
-    border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+    border = 'single',
   })
   vim.fn.termopen(cmd)
   local autocmd = {
@@ -61,24 +52,19 @@ function M.float_terminal(cmd)
   vim.cmd([[startinsert]])
 end
 
--- Toggle vim options
--- Parameters: ~
---     {name}  Option name
---     {opts}  Optional parameters
---             • scope: one of 'buf', 'win', 'global'
---             • silent: true to disable notification.
---
--- Return: ~
---     nil
--- @param name string
--- @param opts? table<string, any>
+--- Toggle vim options
+--- opts:
+---   • scope: one of 'buf', 'win', 'global'
+---   • silent: true to disable notification.
+---@param name string
+---@param opts table<string, any>
 function M.toggle(name, opts)
   local defaults = {
     scope = nil,
     value = nil,
     silent = false,
   }
-  opts = M.tbl_merge(defaults, opts)
+  opts = vim.tbl_deep_extend('force', defaults, opts or {})
 
   -- scope
   local scopes = { buf = 'bo', win = 'wo', global = 'o' }
@@ -108,16 +94,23 @@ function M.toggle(name, opts)
   end
 end
 
--- usage:
--- augroup {
---   group1 = autocmd,
---   group2 = {
---     autocmd1,
---     autocmd2,
---   },
---   ...
--- }
-M.augroup = function(groups) -- {name=autocmds}
+--- Usage:
+---   util.augroup {
+---     group1 = autocmd,
+---     group2 = {
+---       autocmd1,
+---       autocmd2,
+---     },
+---     ...
+---   }
+--- autocmd:
+---   {
+---     event = 'FileType',
+---     pattern = 'lua',
+---     callback = function() ... end,
+---   }
+---@param groups table
+M.augroup = function(groups)
   for name, autocmds in pairs(groups) do
     local group = vim.api.nvim_create_augroup(name, { clear = false })
     local create_autocmd = vim.api.nvim_create_autocmd
@@ -223,12 +216,14 @@ function M.lazy_notify()
   timer:start(500, 0, replay)
 end
 
+--- Check if plugin is installed
+---@param name string Plugin name
+---@return boolean
 M.has_plugin = function(name)
   return require('lazy.core.config').plugins[name] ~= nil
 end
 
 local PREFIX = ...
-
 return setmetatable(M, {
   __index = function(_, key)
     local module = require(PREFIX .. '.' .. key)
