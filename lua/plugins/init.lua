@@ -17,25 +17,6 @@ local plugins = {
 
   ['gbprod/yanky.nvim'] = 'yanky',
   ['akinsho/toggleterm.nvim'] = 'toggleterm',
-  ['folke/todo-comments.nvim'] = 'todo-comments',
-  ['abecodes/tabout.nvim'] = {
-    after = { 'nvim-cmp', 'nvim-treesitter' },
-    config = function()
-      require('tabout').setup {}
-    end,
-  },
-
-  ['ray-x/lsp_signature.nvim'] = { module = 'lsp_signature' },
-  ['folke/trouble.nvim'] = {
-    requires = 'kyazdani42/nvim-web-devicons',
-    cmd = 'Trouble',
-    module = 'trouble',
-    config = function()
-      require('trouble').setup {
-        autoclose = true,
-      }
-    end,
-  },
   -- }}} lsp
 
   --- always trying something new {{{
@@ -77,7 +58,9 @@ return {
     dev = true,
     lazy = false,
     -- event = 'VeryLazy',
-    opts = {},
+    opts = {
+      events = 'KeyPress',
+    },
     keys = {
       {
         '<Space>zr',

@@ -31,6 +31,7 @@ local spec = {
     { '<Leader>pL', '<cmd>LspInstall<CR>', desc = 'Install lsp server' },
     { '<Leader>pn', '<cmd>NullLsInfo<CR>', desc = 'Null-ls Info' },
     { '<Leader>pN', '<cmd>NullLsInstall<CR>', desc = 'Install null-ls source' },
+    { '<Leader>pm', '<cmd>Mason<CR>', desc = 'Mason' },
   },
 }
 
