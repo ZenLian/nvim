@@ -103,3 +103,5 @@ param
 fg
 bg
 colorscheme
+dotfiles
+chezmoi

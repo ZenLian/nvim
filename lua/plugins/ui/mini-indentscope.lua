@@ -6,13 +6,12 @@ local spec = {
       symbol = '│',
       draw = {
         delay = 100,
-        animation = require('mini.indentscope').gen_animation.none(),
       },
     }
-    -- local O = require('config')
-    -- if O.animation == false then
-    --   opts.draw.animation = require('mini.indentscope').gen_animation.none()
-    -- end
+    local O = require('config')
+    if O.animation == false then
+      opts.draw.animation = require('mini.indentscope').gen_animation.none()
+    end
     return opts
   end,
   config = function(_, opts)
