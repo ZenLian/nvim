@@ -83,20 +83,23 @@ util.keymaps({ ['Y'] = 'y$' }, { mode = 'n' })
 util.keymaps({ ['Y'] = '"+y' }, { mode = 'v', remap = true })
 -- Paste block
 util.keymaps {
-  ['[p'] = '<cmd>pu<cr>',
-  [']p'] = '<cmd>pu!<cr>',
+  ['[p'] = '<cmd>pu!<cr>',
+  [']p'] = '<cmd>pu<cr>',
 }
+util.keymaps({
+  ['<Leader>'] = {},
+}, { mode = { 'n', 'v' } })
 -- Safe paste
 -- keymap('v', 'p', '"_dp')
 
 -- Saner n/N, always search forward/backward
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-util.keymaps({
-  ['n'] = "'Nn'[v:searchforward]",
-  ['N'] = "'nN'[v:searchforward]",
-}, { mode = { 'n', 'v', 'o' }, expr = true })
+-- util.keymaps({
+--   ['n'] = "'Nn'[v:searchforward]",
+--   ['N'] = "'nN'[v:searchforward]",
+-- }, { mode = { 'n', 'v', 'o' }, expr = true })
 
--- '[' and ']'
+-- '[' and ']' impairs
 util.keymaps {
   [']'] = {
     c = { '<cmd>cnext<cr>', desc = 'Next quickfix' },
@@ -108,15 +111,26 @@ util.keymaps {
   },
 }
 
+-- goto
+util.keymaps {
+  ['g'] = {
+    ['h'] = { '^', desc = 'Goto line start', mode = { 'n', 'x' } },
+    ['l'] = { '$', desc = 'Goto line end', mode = { 'n', 'x' } },
+  },
+}
+
+-- Leader keymaps
 util.keymaps {
   ['<Leader>'] = {
     ['gl'] = {
       function()
-        util.float_terminal('lazygit')
+        util.float_terminal('gutui')
       end,
       desc = 'LazyGit',
     },
-    ['pp'] = { '<cmd>Lazy<cr>', desc = 'Plugins' },
+    [';;'] = { '<cmd>Lazy<cr>', desc = 'Plugins' },
+    ['p'] = { '"+p', desc = 'paste-after from clipboard', mode = { 'n', 'v' } },
+    ['P'] = { '"+P', desc = 'paste-before from clipboard', mode = { 'n', 'v' } },
   },
 }
 

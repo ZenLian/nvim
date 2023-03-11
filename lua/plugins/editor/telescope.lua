@@ -44,6 +44,7 @@ local spec = {
             ['<C-/>'] = 'which_key',
             ['<C-k>'] = 'move_selection_previous',
             ['<C-j>'] = 'move_selection_next',
+            ['<esc>'] = require('telescope.actions').close,
           },
         },
         history = {
@@ -68,11 +69,6 @@ local spec = {
         git_files = dropdown,
         oldfiles = dropdown,
         symbols = dropdown,
-        mappings = {
-          i = {
-            ['<esc>'] = require('telescope.actions').close,
-          },
-        },
       },
       extensions = {
         frecency = {
@@ -134,7 +130,7 @@ spec.keys = {
   { '<C-f>', ts('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
 
   { '<Leader>f<space>', ts('builtin include_extensions=true'), desc = 'Telescope' },
-  { '<Leader><SPACE>', ts('resume'), desc = 'Telescope Resume' },
+  { "<Leader>'", ts('resume'), desc = 'Telescope Resume' },
 
   -- { '<Leader>ff', cmd('find_files'), desc = 'Find files' },
   { '<Leader>ff', ts('frecency workspace=CWD theme=dropdown previewer=false'), desc = 'Frecency files' },

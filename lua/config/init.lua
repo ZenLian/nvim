@@ -17,7 +17,7 @@ local options = {
   format_priority = { -- default to 0 for not configured servers
     ['null-ls'] = 1,
   },
-  animation = true,
+  animation = false,
 
   icons = {
     cmp_kinds = {

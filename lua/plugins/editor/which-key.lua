@@ -48,7 +48,7 @@ local spec = {
           name = '+git',
           ['h'] = { name = '+hunks' },
         },
-        ['p'] = { name = '+package' },
+        [';'] = { name = '+package' },
         ['z'] = { name = '+zen' },
       },
     }

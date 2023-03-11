@@ -8,7 +8,7 @@ spec.config = function()
 
   notify.setup {
     stages = 'slide',
-    timeout = 8000,
+    timeout = 5000,
   }
 
   vim.notify = notify

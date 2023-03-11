@@ -9,7 +9,7 @@ local spec = {
       'williamboman/mason.nvim',
       opts = {
         github = {
-          download_url_template = 'https://kgithub.com/%s/releases/download/%s/%s',
+          -- download_url_template = 'https://kgithub.com/%s/releases/download/%s/%s',
         },
         ui = {
           border = 'single',
@@ -27,11 +27,11 @@ local spec = {
     'cmp-nvim-lsp',
   },
   keys = {
-    { '<Leader>pl', '<cmd>LspInfo<CR>', desc = 'Lsp Info' },
-    { '<Leader>pL', '<cmd>LspInstall<CR>', desc = 'Install lsp server' },
-    { '<Leader>pn', '<cmd>NullLsInfo<CR>', desc = 'Null-ls Info' },
-    { '<Leader>pN', '<cmd>NullLsInstall<CR>', desc = 'Install null-ls source' },
-    { '<Leader>pm', '<cmd>Mason<CR>', desc = 'Mason' },
+    { '<Leader>;l', '<cmd>LspInfo<CR>', desc = 'Lsp Info' },
+    { '<Leader>;L', '<cmd>LspInstall<CR>', desc = 'Install lsp server' },
+    { '<Leader>;n', '<cmd>NullLsInfo<CR>', desc = 'Null-ls Info' },
+    { '<Leader>;N', '<cmd>NullLsInstall<CR>', desc = 'Install null-ls source' },
+    { '<Leader>;m', '<cmd>Mason<CR>', desc = 'Mason' },
   },
 }
 
@@ -52,7 +52,7 @@ spec.config = function()
     automatic_installation = true,
   }
   require('mason-null-ls').setup {
-    automatic_installation = true,
+    automatic_installation = false,
   }
 
   -- require(PREFIX .. '.servers').setup(on_attach)

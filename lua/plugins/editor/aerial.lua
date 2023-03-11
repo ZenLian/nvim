@@ -2,7 +2,7 @@ local spec = {
   'stevearc/aerial.nvim',
   cmd = 'AerialToggle',
   keys = {
-    { '<Leader>;', '<cmd>AerialToggle<cr>', desc = 'Toggle outline' },
+    { '<Leader>a', '<cmd>AerialToggle<cr>', desc = 'Toggle outline' },
   },
   opts = {
     -- Priority list of preferred backends for aerial.
