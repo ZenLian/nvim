@@ -4,7 +4,7 @@ local spec = {
   version = '*',
   cmd = 'Neogen',
   keys = {
-    { '<Leader>nn', '<cmd>lua require("neogen").generate()<cr>' },
+    { '<Leader>N', '<cmd>lua require("neogen").generate()<cr>', desc = 'Generate doc' },
   },
   opts = {
     snippet_engine = 'luasnip',

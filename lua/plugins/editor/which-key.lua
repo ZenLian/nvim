@@ -50,6 +50,7 @@ local spec = {
         },
         [';'] = { name = '+package' },
         ['z'] = { name = '+zen' },
+        ['m'] = { name = '+mark file' },
       },
     }
   end,

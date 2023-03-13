@@ -4,7 +4,7 @@ local spec = {
   opts = {
     -- stages = 'slide',
     timeout = 5000,
-    max_width = 50,
+    max_width = 30,
     max_height = 8,
   },
 }
