@@ -5,6 +5,7 @@ local spec = {
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
     { 'nvim-treesitter/nvim-treesitter-context', config = true },
+    'HiPhish/nvim-ts-rainbow2',
   },
   opts = {
     ensure_installed = {
@@ -19,14 +20,12 @@ local spec = {
       'html',
       'javascript',
       'json',
-      -- 'json5',
       'jsonc',
       'latex',
       'lua',
       'markdown',
       'python',
-      'query',
-      'regex',
+      'rust',
       'scss',
       'toml',
       'typescript',
@@ -47,63 +46,22 @@ local spec = {
         -- scope_incremental = '',
       },
     },
-    -- textobjects = {
-    --   select = {
-    --     enable = true,
-    --     lookahead = true,
-    --     keymaps = {
-    --       ['af'] = '@function.outer',
-    --       ['if'] = '@function.inner',
-    --       ['ac'] = '@class.outer',
-    --       ['ic'] = '@class.inner',
-    --       ['aa'] = '@parameter.outer',
-    --       ['ia'] = '@parameter.inner',
-    --       ['ab'] = '@block.outer',
-    --       ['ib'] = '@block.inner',
-    --     },
-    --   },
-    --   move = {
-    --     enable = true,
-    --     set_jumps = true, -- whether to set jumps in the jumplist
-    --     goto_next_start = {
-    --       [']['] = '@function.outer',
-    --       [']c'] = '@class.outer',
-    --       [']a'] = '@parameter.inner',
-    --     },
-    --     goto_next_end = {
-    --       [']]'] = '@function.outer',
-    --       [']C'] = '@class.outer',
-    --     },
-    --     goto_previous_start = {
-    --       ['[['] = '@function.outer',
-    --       ['[c'] = '@class.outer',
-    --       ['[a'] = '@parameter.inner',
-    --     },
-    --     goto_previous_end = {
-    --       ['[]'] = '@function.outer',
-    --       ['[C'] = '@class.outer',
-    --     },
-    --   },
-    --   swap = {
-    --     enable = false,
-    --   },
-    --   lsp_interop = {
-    --     enable = true,
-    --     peek_definition_code = {
-    --       ['gD'] = '@function.outer',
-    --     },
-    --   },
-    -- },
-    rainbow = {
-      enable = true,
-      disable = { 'html' }, -- list of languages you want to disable the plugin for
-      extended_mode = false, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
-      max_file_lines = nil, -- Do not enable for files with more than n lines, int
-      -- colors = {}, -- table of hex strings
-      -- termcolors = {} -- table of colour name strings
-    },
   },
   config = function(_, opts)
+    local rainbow = require('ts-rainbow')
+    opts.rainbow = {
+      enable = true,
+      -- list of languages you want to disable the plugin for
+      disable = {},
+      -- Which query to use for finding delimiters
+      query = {
+        'rainbow-parens',
+        html = 'rainbow-tags',
+        latex = 'rainbow-blocks',
+      },
+      -- Highlight the entire buffer all at once
+      strategy = rainbow.strategy['local'],
+    }
     require('nvim-treesitter.configs').setup(opts)
   end,
 }
