@@ -59,8 +59,16 @@ local spec = {
         html = 'rainbow-tags',
         latex = 'rainbow-blocks',
       },
-      -- Highlight the entire buffer all at once
       strategy = rainbow.strategy['local'],
+      hlgroups = {
+        'TSRainbowYellow',
+        'TSRainbowCyan',
+        'TSRainbowOrange',
+        'TSRainbowViolet',
+        'TSRainbowBlue',
+        'TSRainbowGreen',
+        'TSRainbowRed',
+      },
     }
     require('nvim-treesitter.configs').setup(opts)
   end,

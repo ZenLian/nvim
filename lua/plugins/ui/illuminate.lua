@@ -34,6 +34,7 @@ local spec = {
       'aerial',
       'NeogitStatus',
       'NeogitPopup',
+      'lazy',
     },
     -- modes_denylist = { 'v', 'V' },
     -- modes_allowlist: modes to illuminate, this is overriden by modes_denylist
