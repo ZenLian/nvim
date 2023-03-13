@@ -1,7 +1,9 @@
-local config = function()
+local spec = {
+  'RRethy/vim-illuminate',
+  event = { 'BufRead', 'BufNewFile' },
   -- https://github.com/RRethy/vim-illuminate#configuration
   -- default configuration
-  require('illuminate').configure {
+  opts = {
     -- providers: provider used to get references in the buffer, ordered by priority
     providers = {
       'lsp',
@@ -38,11 +40,10 @@ local config = function()
     modes_allowlist = { 'n' },
     -- under_cursor: whether or not to illuminate under the cursor
     under_cursor = true,
-  }
-end
-
-return {
-  packer = {
-    config = config,
   },
+  config = function(_, opts)
+    require('illuminate').configure(opts)
+  end,
 }
+
+return { spec }

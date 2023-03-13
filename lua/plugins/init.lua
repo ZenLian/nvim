@@ -6,8 +6,6 @@ local plugins = {
   -- TODO: maybe dont need it anymore with lazy.nvim
   -- ['lewis6991/impatient.nvim'] = {},
 
-  ['RRethy/vim-illuminate'] = 'illuminate',
-
   ['nvim-telescope/telescope-file-browser.nvim'] = {
     after = 'telescope.nvim',
     config = function()
