@@ -1,5 +1,6 @@
 local spec = {
   'goolord/alpha-nvim',
+  cond = false,
   event = 'BufWinEnter',
 }
 

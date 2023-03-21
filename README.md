@@ -5,7 +5,6 @@
 ## 👀 Prerequisite
 
 - neovim v0.8+
-- fzf
 - ripgrep
 - fd
 - sqlite3
@@ -73,10 +72,10 @@ Treesitter
 | [nvim-treesitter-textobject](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) | textobject                                                            |
 | [nvim-treesitter-context](https://github.com/lewis6991/nvim-treesitter-context)              | fixed context header                                                  |
 | [nvim-treehopper](https://github.com/mfussenegger/nvim-treehopper)                           | fast range selection                                                  |
-| [nvim-ts-rainbow](https://github.com/p00f/nvim-ts-rainbow)                                   | rainbow brackets                                                      |
+| [nvim-ts-rainbow2](https://github.com/p00f/HiPhish/nvim-ts-rainbow2)                         | rainbow brackets                                                      |
 | [Comment.nvim](https://github.com/numToStr/Comment.nvim)                                     | fast comment/uncomment                                                |
 | [surround.nvim](https://github.com/ur4ltz/surround.nvim)                                     | fast surround brackets                                                |
-| [lightspeed.nvim](https://github.com/ggandor/lightspeed.nvim)                                | fast movement                                                         |
+| [leap.nvim](https://github.com/ggandor/lightspeed.nvim)                                      | fast movement                                                         |
 | [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                                       | visualized git signs                                                  |
 | [editorconfig.nvim](https://github.com/gpanders/editorconfig.nvim)                           | editorconfig                                                          |
 

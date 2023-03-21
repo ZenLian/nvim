@@ -23,6 +23,26 @@ local spec = {
     n_lines = 5000,
     search_method = 'cover_or_next',
   },
+  keys = {
+    {
+      'gx',
+      function()
+        require('mini.ai').select_textobject('a', 'u')
+        local foundURL = vim.fn.mode():find('v')
+        if not foundURL then
+          return
+          -- retrieve URL with the z-register as intermediary
+        end
+        -- https://github.com
+        vim.cmd.normal { '"zy', bang = true }
+        local url = vim.fn.getreg('z')
+        local opener = 'xdg-open'
+        local opencmd = string.format("%s '%s' >/dev/null 2>&1 &", opener, url)
+        os.execute(opencmd)
+      end,
+      desc = 'open URL',
+    },
+  },
 }
 
 spec.config = function(_, opts)
