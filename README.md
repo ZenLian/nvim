@@ -77,7 +77,6 @@ Treesitter
 | [surround.nvim](https://github.com/ur4ltz/surround.nvim)                                     | fast surround brackets                                                |
 | [leap.nvim](https://github.com/ggandor/lightspeed.nvim)                                      | fast movement                                                         |
 | [gitsigns](https://github.com/lewis6991/gitsigns.nvim)                                       | visualized git signs                                                  |
-| [editorconfig.nvim](https://github.com/gpanders/editorconfig.nvim)                           | editorconfig                                                          |
 
 ### 🔥 Completion
 

@@ -11,6 +11,13 @@ spec.config = function()
       augend.integer.alias.hex,
       augend.integer.alias.octal,
       augend.integer.alias.binary,
+      -- uppercase hex number (0x1A1A, 0xEEFE, etc.)
+      augend.integer.new {
+        radix = 16,
+        prefix = '0x',
+        natural = true,
+        case = 'upper',
+      },
       augend.date.alias['%Y/%m/%d'],
       augend.date.alias['%Y-%m-%d'],
       augend.date.alias['%m/%d'],
@@ -19,7 +26,6 @@ spec.config = function()
       augend.constant.alias.Alpha,
       augend.constant.alias.bool,
       augend.constant.alias.de_weekday_full,
-      -- uppercase hex number (0x1A1A, 0xEEFE, etc.)
       augend.constant.new {
         elements = { 'and', 'or' },
         word = true, -- if false, "sand" is incremented into "sor", "doctor" into "doctand", etc.
