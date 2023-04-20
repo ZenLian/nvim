@@ -95,6 +95,7 @@ local options = {
   quickfixtextfunc = '{info -> v:lua._G.qftf(info)}',
 
   -- windows
+  splitkeep = 'topline',
   splitbelow = true,
   splitright = true,
   winwidth = 30,
