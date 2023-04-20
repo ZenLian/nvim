@@ -64,8 +64,8 @@ require('lazy').setup {
       })
     end,
     -- open lazygit log
-    ['<localleader>l'] = function(plugin)
-      require('lazy.util').float_term({ 'lazygit', 'log' }, {
+    ['<leader>l'] = function(plugin)
+      require('lazy.util').float_term({ 'gitui' }, {
         cwd = plugin.dir,
       })
     end,

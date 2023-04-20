@@ -124,9 +124,9 @@ util.keymaps {
   ['<Leader>'] = {
     ['gl'] = {
       function()
-        util.float_terminal('gutui')
+        util.float_terminal('gitui')
       end,
-      desc = 'LazyGit',
+      desc = 'GitUI',
     },
     [';;'] = { '<cmd>Lazy<cr>', desc = 'Plugins' },
     ['p'] = { '"+p', desc = 'paste-after from clipboard', mode = { 'n', 'v' } },
@@ -134,7 +134,7 @@ util.keymaps {
   },
 }
 
--- TODO
+-- TODO:
 local function register_leader()
   local leader = {
     q = {
