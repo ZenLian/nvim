@@ -157,6 +157,15 @@ spec.config = function()
       BqfPreviewBorder = { link = 'TelescopePreviewBorder' },
 
       MiniIndentscopeSymbol = { fg = C.text },
+      MiniStarterCurrent = { link = 'CursorLine' },
+      MiniStarterHeader = { fg = C.blue },
+      MiniStarterFooter = { fg = C.overlay1 },
+      -- MiniStarterInactive = { link='Normal'},
+      -- MiniStarterItem = { link='Normal'},
+      MiniStarterItemBullet = { fg = C.overlay1 },
+      MiniStarterItemPrefix = { fg = C.blue },
+      MiniStarterSection = { fg = C.mauve },
+      MiniStarterQuery = { fg = C.blue },
     },
   }
 

@@ -5,7 +5,7 @@ vim.g.maplocalleader = '\\'
 
 util.keymaps {
   -- Save
-  ['<C-s>'] = '<cmd>w<CR>',
+  ['<C-s>'] = { '<cmd>w<CR>', mode = { 'n', 'v', 'i' }, desc = 'Save' },
   -- Quit
   ['<C-q>'] = '<cmd>qa<CR>',
 

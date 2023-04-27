@@ -487,13 +487,15 @@ spec.config = function()
   local AlphaStatusline = {
     condition = function()
       return conditions.buffer_matches {
-        filetype = { 'alpha', 'dashboard' },
+        filetype = { 'alpha', 'dashboard', 'starter' },
       }
     end,
     static = {
       version = string.format(' NVIM v%s.%s.%s ', vim.version().major, vim.version().minor, vim.version().patch),
     },
     ViMode,
+    Space,
+    FileType,
     Align,
     {
       provider = function(self)

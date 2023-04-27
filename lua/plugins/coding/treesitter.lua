@@ -16,7 +16,7 @@ local spec = {
       'css',
       'dockerfile',
       'go',
-      'help',
+      'vimdoc',
       'html',
       'javascript',
       'json',
