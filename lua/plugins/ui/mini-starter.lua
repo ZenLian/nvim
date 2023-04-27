@@ -15,6 +15,32 @@ local header = {
   '                                 ',
 }
 
+spec.init = function()
+  local util = require('util')
+  util.augroup {
+    ['plugins.starter'] = {
+      event = 'User',
+      pattern = 'MiniStarterOpened',
+      callback = function()
+        util.keymaps({
+          ['<C-j>'] = {
+            function()
+              require('mini.starter').update_current_item('next')
+            end,
+            desc = 'Next item',
+          },
+          ['<C-k>'] = {
+            function()
+              require('mini.starter').update_current_item('previous')
+            end,
+            desc = 'Previous item',
+          },
+        }, { buffer = true })
+      end,
+    },
+  }
+end
+
 spec.config = function(_, opts)
   local starter = require('mini.starter')
 
