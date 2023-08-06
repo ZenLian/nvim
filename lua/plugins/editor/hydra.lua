@@ -72,7 +72,7 @@ local function option_menu()
         position = 'middle',
         funcs = {
           ['dgn'] = function()
-            return require('plugins.lsp.diagnostic').enable and '[x]' or '[ ]'
+            return require('plugins.lsp.diagnostic').enabled and '[x]' or '[ ]'
           end,
           ['fmt'] = function()
             return require('plugins.lsp.formatting').format_on_save and '[x]' or '[ ]'
@@ -185,7 +185,7 @@ local function option_menu()
         { desc = 'git blame line' },
       },
       { '<Esc>', nil, { exit = true } },
-      { 'q', nil, { exit = true } },
+      { 'q',     nil, { exit = true } },
     },
   }
 end
@@ -270,14 +270,14 @@ local function git_widget()
         end,
         { expr = true, desc = 'prev hunk' },
       },
-      { 's', cmd('lua require("gitsigns").stage_hunk()'), { silent = true, desc = 'stage hunk' } },
-      { 'S', cmd('lua require("gitsigns").stage_buffer()'), { desc = 'stage buffer' } },
-      { 'u', cmd('lua require("gitsigns").undo_stage_hunk()'), { desc = 'unstage hunk' } },
+      { 's', cmd('lua require("gitsigns").stage_hunk()'),         { silent = true, desc = 'stage hunk' } },
+      { 'S', cmd('lua require("gitsigns").stage_buffer()'),       { desc = 'stage buffer' } },
+      { 'u', cmd('lua require("gitsigns").undo_stage_hunk()'),    { desc = 'unstage hunk' } },
       { 'U', cmd('lua require("gitsigns").reset_buffer_index()'), { desc = 'unstage file' } },
-      { 'r', cmd('lua require("gitsigns").reset_hunk()'), { desc = 'reset hunk' } },
-      { 'R', cmd('lua require("gitsigns").reset_buffer()'), { desc = 'reset buffer' } },
-      { 'p', cmd('lua require("gitsigns").preview_hunk()'), { desc = 'preview hunk' } },
-      { 'd', cmd('lua require("gitsigns").toggle_deleted()'), { nowait = true, desc = 'toggle deleted' } },
+      { 'r', cmd('lua require("gitsigns").reset_hunk()'),         { desc = 'reset hunk' } },
+      { 'R', cmd('lua require("gitsigns").reset_buffer()'),       { desc = 'reset buffer' } },
+      { 'p', cmd('lua require("gitsigns").preview_hunk()'),       { desc = 'preview hunk' } },
+      { 'd', cmd('lua require("gitsigns").toggle_deleted()'),     { nowait = true, desc = 'toggle deleted' } },
       {
         'D',
         function()
@@ -287,15 +287,15 @@ local function git_widget()
         end,
         { exit = true, desc = 'diff file' },
       },
-      { 'b', cmd('lua require("gitsigns").blame_line()'), { desc = 'blame' } },
+      { 'b',       cmd('lua require("gitsigns").blame_line()'), { desc = 'blame' } },
       {
         'B',
         cmd('lua require("gitsigns").blame_line { full = true }'),
         { desc = 'blame show full' },
       },
-      { '<Enter>', '<Cmd>Neogit<CR>', { exit = true, desc = 'Neogit' } },
-      { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
-      { '<ESC>', nil, { exit = true, nowait = true, desc = 'exit' } },
+      { '<Enter>', '<Cmd>Neogit<CR>',                           { exit = true, desc = 'Neogit' } },
+      { 'q',       nil,                                         { exit = true, nowait = true, desc = 'exit' } },
+      { '<ESC>',   nil,                                         { exit = true, nowait = true, desc = 'exit' } },
     },
   }
 end
@@ -333,26 +333,24 @@ local function telescope_widget()
     body = '<leader>f',
     heads = {
       -- files
-      { 'f', cmd('lua require("plugins.telescope").project_files()'), { desc = 'Find files' } },
-      { 'r', cmd('Telescope oldfiles'), { desc = 'Recent files' } },
-      { 'R', cmd('Telescope frecency'), { desc = 'Frecency files' } },
-      { 'b', cmd('Telescope buffers'), { desc = 'Buffers' } },
+      { 'f',       cmd('lua require("plugins.telescope").project_files()'), { desc = 'Find files' } },
+      { 'r',       cmd('Telescope oldfiles'),                               { desc = 'Recent files' } },
+      { 'R',       cmd('Telescope frecency'),                               { desc = 'Frecency files' } },
+      { 'b',       cmd('Telescope buffers'),                                { desc = 'Buffers' } },
       -- text
-      { 'g', cmd('Telescope live_grep'), { desc = 'Live grep' } },
-      { 'w', cmd('Telescope grep_string'), { desc = 'Grep current word' } },
-      { '/', cmd('Telescope current_buffer_fuzzy_find'), { desc = 'Search in buffer' } },
-
-      { 'c', cmd('YankyRingHistory'), { desc = 'Clipboard' } },
-      { 'p', cmd('Telescope projects'), { desc = 'Projects' } },
-      { 'e', cmd('Telescope file_browser'), { desc = 'File explorer' } },
-      { 'n', cmd('Telescope notify'), { desc = 'Notifications' } },
-      { 'h', cmd('Telescope help_tags'), { desc = 'Helps' } },
-      { ';', cmd('Telescope symbols'), { desc = 'Insert symbols' } },
-
-      { '<CR>', cmd('Telescope'), { desc = 'Telescope' } },
-      { '<SPACE>', cmd('Telescope resume'), { desc = 'Resume' } },
-      { 'q', nil, { exit = true, nowait = true, desc = 'exit' } },
-      { '<ESC>', nil, { exit = true, nowait = true, desc = 'exit' } },
+      { 'g',       cmd('Telescope live_grep'),                              { desc = 'Live grep' } },
+      { 'w',       cmd('Telescope grep_string'),                            { desc = 'Grep current word' } },
+      { '/',       cmd('Telescope current_buffer_fuzzy_find'),              { desc = 'Search in buffer' } },
+      { 'c',       cmd('YankyRingHistory'),                                 { desc = 'Clipboard' } },
+      { 'p',       cmd('Telescope projects'),                               { desc = 'Projects' } },
+      { 'e',       cmd('Telescope file_browser'),                           { desc = 'File explorer' } },
+      { 'n',       cmd('Telescope notify'),                                 { desc = 'Notifications' } },
+      { 'h',       cmd('Telescope help_tags'),                              { desc = 'Helps' } },
+      { ';',       cmd('Telescope symbols'),                                { desc = 'Insert symbols' } },
+      { '<CR>',    cmd('Telescope'),                                        { desc = 'Telescope' } },
+      { '<SPACE>', cmd('Telescope resume'),                                 { desc = 'Resume' } },
+      { 'q',       nil,                                                     { exit = true, nowait = true, desc = 'exit' } },
+      { '<ESC>',   nil,                                                     { exit = true, nowait = true, desc = 'exit' } },
     },
   }
 end

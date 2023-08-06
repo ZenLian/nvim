@@ -1,3 +1,5 @@
+local has_icon = require('config').icons.enabled
+
 local spec = {
   'akinsho/bufferline.nvim',
   version = '*',
@@ -10,13 +12,13 @@ local spec = {
         offsets = {
           {
             filetype = 'neo-tree',
-            text = '  Neo Tree',
+            text = has_icon and '  Neo Tree' or ' NeoTree',
             highlight = 'NeoTreeNormal',
             text_align = 'left',
           },
           {
             filetype = 'drex',
-            text = '  Drex',
+            text = has_icon and '  Drex' or ' Drex',
             highlight = 'NeoTreeNormal',
             text_align = 'left',
           },
@@ -40,6 +42,13 @@ local spec = {
         },
       },
     }
+
+    if not has_icon then
+      opts.options.buffer_close_icon = 'x'
+      opts.options.modified_icon = '+'
+      opts.options.close_icon = 'x'
+    end
+
     bufferline.setup(opts)
 
     util.keymaps {

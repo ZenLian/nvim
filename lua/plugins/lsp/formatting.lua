@@ -6,10 +6,10 @@ local TITLE = 'lsp.formatting'
 local FORMATTING_METHOD = 'textDocument/formatting'
 local TIMEOUT = 2000
 
-M.format_on_save = config.format_on_save
+M.format_on_save = config.lsp.format_on_save
 
 function M.priority(name)
-  return config.format_priority[name] or 0
+  return config.lsp.format_priority[name] or 0
 end
 
 function M.select_client(on_choice)
@@ -49,8 +49,10 @@ function M.format(opts)
   }
   opts = vim.tbl_deep_extend('force', defaults, opts or {})
   M.select_client(function(client)
-    opts.id = client.id
-    vim.lsp.buf.format(opts)
+    if client ~= nil then
+      opts.id = client.id
+      vim.lsp.buf.format(opts)
+    end
   end)
 end
 

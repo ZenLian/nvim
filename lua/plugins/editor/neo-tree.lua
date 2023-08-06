@@ -1,3 +1,5 @@
+local config = require("config")
+
 local spec = {
   'nvim-neo-tree/neo-tree.nvim',
   version = '*',
@@ -34,9 +36,9 @@ spec.config = function()
   require('neo-tree').setup {
     default_component_configs = {
       icon = {
-        folder_closed = '',
-        folder_open = '',
-        -- folder_empty = 'ﰊ',
+        folder_closed = config.icons.enabled and '' or '+',
+        folder_open = config.icons.enabled and '' or '-',
+        folder_empty = config.icons.enabled and 'ﰊ' or '·',
         -- folder_empty = '',
         -- default = '',
       },
@@ -46,10 +48,10 @@ spec.config = function()
       git_status = {
         symbols = {
           -- Change type
-          added = '', -- or "✚", but this is redundant info if you use git_status_colors on the name
-          modified = '', -- or "", but this is redundant info if you use git_status_colors on the name
-          deleted = 'D', -- this can only be used in the git_status source
-          renamed = '', -- this can only be used in the git_status source
+          added = '+',    -- or "✚", but this is redundant info if you use git_status_colors on the name
+          modified = '~', -- or "", but this is redundant info if you use git_status_colors on the name
+          deleted = 'D',  -- this can only be used in the git_status source
+          renamed = 'R',  -- this can only be used in the git_status source
           -- Status type
           untracked = '?',
           ignored = 'I',
@@ -61,6 +63,20 @@ spec.config = function()
     },
     source_selector = {
       winbar = true,
+      sources = {
+        {
+          source = "filesystem",
+          display_name = config.icons.enabled and " 󰉓 Files " or " Files ",
+        },
+        {
+          source = "buffers",
+          display_name = config.icons.enabled and " 󰈚 Buffers " or " Buffers ",
+        },
+        {
+          source = "git_status",
+          display_name = config.icons.enabled and " 󰊢 Git " or " Git ",
+        },
+      },
     },
     window = {
       width = 30,
@@ -153,7 +169,9 @@ spec.config = function()
       filtered_items = {
         hide_dotfiles = false,
       },
-      follow_current_file = true,
+      follow_current_file = {
+        enabled = true,
+      },
       window = {
         mappings = {
           -- navigation with hjkl

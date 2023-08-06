@@ -13,41 +13,18 @@ local options = {
     cache = util.join_path(vim.env.HOME, '.cache', 'nvim'),
     data = util.join_path(vim.fn.stdpath('data'), 'site'),
   },
-  format_on_save = true,
-  format_priority = { -- default to 0 for not configured servers
-    ['null-ls'] = 1,
+  lsp = {
+    diagnostic = true,
+    format_on_save = true,
+    format_priority = { -- default to 0 for not configured servers
+      ['null-ls'] = 1,
+    },
   },
+
   animation = false,
 
   icons = {
-    cmp_kinds = {
-      Text = '',
-      Method = '',
-      Function = '',
-      Constructor = '',
-      Field = 'ﰠ',
-      Variable = '',
-      Class = 'ﴯ',
-      Interface = '',
-      Module = '',
-      Property = 'ﰠ',
-      Unit = '',
-      -- Unit = "塞",
-      Value = '',
-      Enum = '',
-      Keyword = '',
-      Snippet = '',
-      Color = '',
-      File = '',
-      Reference = '',
-      Folder = '',
-      EnumMember = '',
-      Constant = '',
-      Struct = 'פּ',
-      Event = '',
-      Operator = '',
-      TypeParameter = '',
-    },
+    enabled = false,
   },
 }
 

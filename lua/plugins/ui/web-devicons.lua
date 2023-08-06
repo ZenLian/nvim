@@ -1,5 +1,8 @@
+local config = require("config")
+
 local spec = {
   'nvim-tree/nvim-web-devicons',
+  cond = config.icons.enabled,
 }
 
 spec.config = function()

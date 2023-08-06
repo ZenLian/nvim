@@ -27,7 +27,37 @@ spec.config = function()
   -- end
 
   local cmp_fmt = function(entry, item)
-    item.kind = string.format('%s', C.icons.cmp_kinds[item.kind])
+    if C.icons.enabled then
+      local cmp_kinds = {
+        Text = '',
+        Method = '',
+        Function = '',
+        Constructor = '',
+        Field = 'ﰠ',
+        Variable = '',
+        Class = 'ﴯ',
+        Interface = '',
+        Module = '',
+        Property = 'ﰠ',
+        Unit = '',
+        -- Unit = "塞",
+        Value = '',
+        Enum = '',
+        Keyword = '',
+        Snippet = '',
+        Color = '',
+        File = '',
+        Reference = '',
+        Folder = '',
+        EnumMember = '',
+        Constant = '',
+        Struct = 'פּ',
+        Event = '',
+        Operator = '',
+        TypeParameter = '',
+      }
+      item.kind = cmp_kinds[item.kind]
+    end
     -- Source menu
     item.menu = ({
       nvim_lsp = '[LSP]',
@@ -78,8 +108,8 @@ spec.config = function()
           }
         elseif require('luasnip').expand_or_jumpable() then
           require('luasnip').expand_or_jump()
-        -- elseif has_words_before() then
-        --   cmp.complete()
+          -- elseif has_words_before() then
+          --   cmp.complete()
         else
           fallback()
         end
@@ -172,7 +202,7 @@ spec.config = function()
     cmp.setup.cmdline(cmd_type, {
       sources = cmp.config.sources {
         { name = 'nvim_lsp_document_symbol' },
-        { name = 'buffer' }, -- max_item_count = 5 },
+        { name = 'buffer' },          -- max_item_count = 5 },
         { name = 'cmdline_history' }, -- max_item_count = 5 },
       },
     })
@@ -180,7 +210,7 @@ spec.config = function()
 
   cmp.setup.cmdline(':', {
     sources = cmp.config.sources({
-      { name = 'cmdline', max_item_count = 5 },
+      { name = 'cmdline',         max_item_count = 5 },
       { name = 'cmdline_history', max_item_count = 5 },
     }, {
       { name = 'path', max_item_count = 5 },

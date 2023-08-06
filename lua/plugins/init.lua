@@ -52,7 +52,7 @@ return {
   },
   {
     'zenlian/winddown.nvim',
-    -- enabled = false,
+    enabled = false,
     dev = true,
     lazy = false,
     -- event = 'VeryLazy',

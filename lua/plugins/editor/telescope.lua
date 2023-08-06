@@ -1,10 +1,12 @@
+local config = require("config")
+
 local spec = {
   'nvim-telescope/telescope.nvim',
   cmd = 'Telescope',
   dependencies = {
     'plenary.nvim',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    { 'nvim-telescope/telescope-frecency.nvim', dependencies = { 'sqlite.lua' } },
+    { 'nvim-telescope/telescope-frecency.nvim',   dependencies = { 'sqlite.lua' } },
     { 'nvim-telescope/telescope-symbols.nvim' },
   },
   opts = function()
@@ -51,8 +53,8 @@ local spec = {
           path = vim.fn.stdpath('data') .. '/databases/telescope_history.sqlite3',
           limit = 100,
         },
-        prompt_prefix = ' ',
-        selection_caret = ' ',
+        prompt_prefix = config.icons.enabled and ' ' or '> ',
+        selection_caret = config.icons.enabled and ' ' or '> ',
         -- border = false,
         -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
         sorting_strategy = 'ascending',
@@ -126,26 +128,23 @@ local function ts(scope)
 end
 
 spec.keys = {
-  { '<C-p>', project_files, desc = 'Project files' },
-  { '<C-f>', ts('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
-
-  { '<Leader>f<space>', ts('builtin include_extensions=true'), desc = 'Telescope' },
-  { "<Leader>'", ts('resume'), desc = 'Telescope Resume' },
+  { '<C-p>',            project_files,                                               desc = 'Project files' },
+  { '<C-f>',            ts('current_buffer_fuzzy_find'),                             desc = 'Find in current buffer' },
+  { '<Leader>f<space>', ts('builtin include_extensions=true'),                       desc = 'Telescope' },
+  { "<Leader>'",        ts('resume'),                                                desc = 'Telescope Resume' },
 
   -- { '<Leader>ff', cmd('find_files'), desc = 'Find files' },
-  { '<Leader>ff', ts('frecency workspace=CWD theme=dropdown previewer=false'), desc = 'Frecency files' },
-  { '<Leader>fr', ts('oldfiles'), desc = 'Recent files' },
-  { '<Leader>fb', ts('buffers'), desc = 'Buffers' },
-
-  { '<Leader>fg', ts('live_grep'), desc = 'Live grep' },
-  { '<Leader>fw', ts('grep_string'), desc = 'Grep current word' },
-  { '<Leader>f/', ts('current_buffer_fuzzy_find'), desc = 'Find in current buffer' },
-
-  { '<Leader>fp', ts('projects'), desc = 'Projects' },
-  { '<Leader>fe', ts('file_browser'), desc = 'File explorer' },
-  { '<Leader>fn', ts('notify'), desc = 'Notifications' },
-  { '<Leader>fh', ts('help_tags'), desc = 'Helps' },
-  { '<Leader>f;', ts('symbols'), desc = 'Symbols' },
+  { '<Leader>ff',       ts('frecency workspace=CWD theme=dropdown previewer=false'), desc = 'Frecency files' },
+  { '<Leader>fr',       ts('oldfiles'),                                              desc = 'Recent files' },
+  { '<Leader>fb',       ts('buffers'),                                               desc = 'Buffers' },
+  { '<Leader>fg',       ts('live_grep'),                                             desc = 'Live grep' },
+  { '<Leader>fw',       ts('grep_string'),                                           desc = 'Grep current word' },
+  { '<Leader>f/',       ts('current_buffer_fuzzy_find'),                             desc = 'Find in current buffer' },
+  { '<Leader>fp',       ts('projects'),                                              desc = 'Projects' },
+  { '<Leader>fe',       ts('file_browser'),                                          desc = 'File explorer' },
+  { '<Leader>fn',       ts('notify'),                                                desc = 'Notifications' },
+  { '<Leader>fh',       ts('help_tags'),                                             desc = 'Helps' },
+  { '<Leader>f;',       ts('symbols'),                                               desc = 'Symbols' },
 
   {
     '<leader>gB',

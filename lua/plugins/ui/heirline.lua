@@ -6,6 +6,7 @@ local spec = {
 spec.config = function()
   local conditions = require('heirline.conditions')
   local utils = require('heirline.utils')
+  local has_icon = require("config").icons.enabled
 
   local palette = require('catppuccin.palettes').get_palette()
   local colors = {
@@ -26,18 +27,31 @@ spec.config = function()
   local Empty = { provider = '' }
   local Trim = { provider = '%<' } -- this means that the statusline is cut here when there's not enough space
 
-  local ViMode = {
-    provider = '█ ',
-    hl = function(self)
-      return { fg = self:mode_color() }
-    end,
-    update = { 'ModeChanged' },
-  }
+  local ViMode
+  if has_icon then
+    ViMode = {
+      provider = '█ ',
+      hl = function(self)
+        return { fg = self:get_mode_color() }
+      end,
+      update = { 'ModeChanged' },
+    }
+  else
+    ViMode = {
+      provider = function(self)
+        return ' ' .. self:get_mode_name() .. ' '
+      end,
+      hl = function(self)
+        return { fg = 'bg', bg = self:get_mode_color() }
+      end,
+      update = { 'ModeChanged' },
+    }
+  end
 
   local SquareMode = {
     provider = '█',
     hl = function(self)
-      return { fg = self:mode_color() }
+      return { fg = self:get_mode_color() }
     end,
     update = { 'ModeChanged' },
   }
@@ -47,14 +61,14 @@ spec.config = function()
       condition = function()
         return vim.bo.modified
       end,
-      provider = '[]',
+      provider = has_icon and '[]' or '[+]',
       hl = { fg = 'green' },
     },
     {
       condition = function()
         return not vim.bo.modifiable or vim.bo.readonly
       end,
-      provider = ' ',
+      provider = has_icon and ' ' or ' RO',
       hl = { fg = 'red' },
     },
   }
@@ -65,7 +79,7 @@ spec.config = function()
       -- local extension = vim.fn.fnamemodify(filename, ':e')
       -- self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
       self.icon, self.icon_color =
-        require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
+          require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
     end,
     provider = function(self)
       return self.icon
@@ -131,7 +145,7 @@ spec.config = function()
       --   cwd = vim.fn.pathshorten(cwd)
       -- end
       local trail = cwd:sub(-1) == '/' and '' or '/'
-      return cwd .. trail
+      return ' ' .. cwd .. trail
     end,
     hl = { fg = 'blue' },
   }
@@ -219,7 +233,7 @@ spec.config = function()
       return self.sbar[i]
     end,
     hl = function(self)
-      return { fg = 'bg', bg = self:mode_color() }
+      return { fg = 'bg', bg = self:get_mode_color() }
     end,
     update = { 'CursorMoved', 'CursorMovedI', 'ModeChanged' },
   }
@@ -294,7 +308,7 @@ spec.config = function()
         end,
         name = 'heirline_lspinstall',
       },
-      provider = '[',
+      provider = has_icon and '[' or '[',
     },
     NullLsInfo,
     LspInfo,
@@ -325,7 +339,7 @@ spec.config = function()
 
     hl = { fg = 'yellow' },
 
-    { provider = '[' },
+    { provider = has_icon and '[' or '[' },
     {
       provider = function(self)
         local severity = 'Error'
@@ -398,7 +412,7 @@ spec.config = function()
 
     { -- git branch name
       provider = function(self)
-        return '' .. self.status_dict.head
+        return (has_icon and '' or '') .. self.status_dict.head
       end,
       on_click = {
         callback = function()
@@ -474,13 +488,13 @@ spec.config = function()
   local DefaultStatusline = {
     ViMode,
     { flexible = 100, { Space, FileName }, Empty },
-    { flexible = 20, { Space, Git } },
+    { flexible = 20,  { Space, Git } },
     Trim,
     Align,
 
     { flexible = 10, { LspBlock, Space }, Empty },
     { flexible = 30, { FileInfo, Space }, Empty },
-    { flexible = 40, { Ruler, Space }, Empty },
+    { flexible = 40, { Ruler, Space },    Empty },
     ScrollBar,
   }
 
@@ -538,11 +552,23 @@ spec.config = function()
     condition = function()
       return vim.tbl_contains({ 'neo-tree', 'drex' }, vim.bo.filetype)
     end,
-    SquareMode,
     {
-      provider = '  ',
+      condition = function() return has_icon end,
+      SquareMode,
+      {
+        provider = '  ',
+        hl = function(self)
+          return { fg = self:get_mode_color() }
+        end,
+      },
+    },
+    {
+      condition = function() return not has_icon end,
+      provider = function()
+        return string.format(" %s ", vim.bo.filetype)
+      end,
       hl = function(self)
-        return { fg = self:mode_color() }
+        return { fg = 'bg', bg = self:get_mode_color() }
       end,
     },
     DirectoryInfo,
@@ -564,11 +590,11 @@ spec.config = function()
     end,
     static = {},
     {
-      provider = '█  ',
-      hl = { fg = 'red' },
+      provider = has_icon and '█  ' or ' ',
+      hl = has_icon and { fg = 'red' } or { bg = 'red' }
     },
     {
-      provider = 'Quickfix',
+      provider = ' Quickfix',
       hl = { fg = 'magenta' },
     },
     Align,
@@ -586,9 +612,13 @@ spec.config = function()
     end,
 
     {
-      provider = '█ ',
+      provider = has_icon and '█ ' or ' ',
       hl = function(self)
-        return { fg = self:mode_color() }
+        if has_icon then
+          return { fg = self:get_mode_color() }
+        else
+          return { bg = self:get_mode_color() }
+        end
       end,
       update = { 'ModeChanged' },
     },
@@ -624,7 +654,7 @@ spec.config = function()
     {
       provider = '  ',
       hl = function(self)
-        return { fg = self:mode_color() }
+        return { fg = self:get_mode_color() }
       end,
     },
     {
@@ -664,7 +694,11 @@ spec.config = function()
       }
     end,
 
-    ViMode, Space, FileType, Align, SquareMode,
+    ViMode,
+    Space,
+    FileType,
+    Align,
+    SquareMode,
   }
 
   local StatusLines = {
@@ -714,9 +748,12 @@ spec.config = function()
         C = 'magenta',
         T = 'green',
       },
-      mode_color = function(self)
+      get_mode_name = function(self)
         local mode = conditions.is_active() and vim.fn.mode(1)
-        return self.mode_colors[self.mode_names[mode] or 'N']
+        return self.mode_names[mode] or 'N'
+      end,
+      get_mode_color = function(self)
+        return self.mode_colors[self:get_mode_name()]
       end,
     },
     hl = { fg = 'fg', bg = 'bg' },
