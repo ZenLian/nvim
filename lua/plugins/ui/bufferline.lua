@@ -44,7 +44,8 @@ local spec = {
     }
 
     if not has_icon then
-      opts.options.buffer_close_icon = 'x'
+      opts.options.show_buffer_close_icons = false
+      -- opts.options.buffer_close_icon = 'x'
       opts.options.modified_icon = '+'
       opts.options.close_icon = 'x'
     end
