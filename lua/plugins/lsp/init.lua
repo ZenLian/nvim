@@ -51,9 +51,6 @@ spec.config = function()
     ensure_installed = {},
     automatic_installation = true,
   }
-  require('mason-null-ls').setup {
-    automatic_installation = false,
-  }
 
   -- require(PREFIX .. '.servers').setup(on_attach)
   require('mason-lspconfig').setup_handlers {
