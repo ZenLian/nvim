@@ -10,7 +10,18 @@ local spec = {
 }
 
 spec.config = function(_, opts)
+  local C = require('config')
   local notify = require('notify')
+
+  if not C.icons.enabled then
+    opts.icons = {
+      DEBUG = 'D',
+      ERROR = 'E',
+      INFO = 'I',
+      TRACE = 'T',
+      WARN = 'W',
+    }
+  end
   notify.setup(opts)
 
   vim.notify = notify
