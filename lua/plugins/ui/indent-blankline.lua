@@ -3,19 +3,21 @@ local spec = {
   event = { 'BufRead', 'BufNewFile' },
   -- enabled = false,
   opts = {
-    -- show_current_context = true,
-    -- show_current_context_start = true,
-    show_trailing_blankline_indent = true,
-    space_char_blankline = ' ',
-    use_treesitter = true,
-    filetype_exclude = {
-      'help',
-      'lsp-installer',
-      'Trouble',
-      'alpha',
-      'aerial',
+    indent = {
+      char = '▏',
+    },
+    scope = {
+      show_start = false,
+      include = {
+        node_type = {
+          lua = { 'return_statement', 'table_constructor' },
+        },
+      },
     },
   },
+  config = function(_, opts)
+    require('ibl').setup(opts)
+  end,
 }
 
 return { spec }
