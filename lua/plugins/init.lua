@@ -3,16 +3,6 @@
 require('config').setup()
 
 local plugins = {
-  -- TODO: maybe dont need it anymore with lazy.nvim
-  -- ['lewis6991/impatient.nvim'] = {},
-
-  ['nvim-telescope/telescope-file-browser.nvim'] = {
-    after = 'telescope.nvim',
-    config = function()
-      require('telescope').load_extension('file_browser')
-    end,
-  },
-
   ['gbprod/yanky.nvim'] = 'yanky',
   ['akinsho/toggleterm.nvim'] = 'toggleterm',
   -- }}} lsp

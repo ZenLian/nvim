@@ -1,11 +1,11 @@
 local spec = {
-  'TimUntersberger/neogit',
+  'NeogitOrg/neogit',
   cmd = 'Neogit',
   keys = {
     { '<leader>gg', '<cmd>Neogit<CR>', desc = 'Neogit' },
   },
   opts = function()
-    local has_icon = require("config").icons.enabled
+    local has_icon = require('config').icons.enabled
     local opts = {
       disable_commit_confirmation = true,
       -- kind = 'floating',
