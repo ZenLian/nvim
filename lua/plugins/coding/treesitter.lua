@@ -1,11 +1,10 @@
-local spec = {
+local ts_spec = {
   'nvim-treesitter/nvim-treesitter',
   build = ':TSUpdate',
   event = { 'BufReadPost', 'BufNewFile' },
   dependencies = {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    { 'nvim-treesitter/nvim-treesitter-context', config = true },
-    'HiPhish/nvim-ts-rainbow2',
+    'nvim-treesitter/nvim-treesitter-context',
   },
   opts = {
     ensure_installed = {
@@ -48,34 +47,12 @@ local spec = {
     },
   },
   config = function(_, opts)
-    local rainbow = require('ts-rainbow')
-    opts.rainbow = {
-      enable = true,
-      -- list of languages you want to disable the plugin for
-      disable = {},
-      -- Which query to use for finding delimiters
-      query = {
-        'rainbow-parens',
-        html = 'rainbow-tags',
-        latex = 'rainbow-blocks',
-      },
-      strategy = rainbow.strategy['local'],
-      hlgroups = {
-        'TSRainbowYellow',
-        'TSRainbowCyan',
-        'TSRainbowOrange',
-        'TSRainbowViolet',
-        'TSRainbowBlue',
-        'TSRainbowGreen',
-        'TSRainbowRed',
-      },
-    }
     require('nvim-treesitter.configs').setup(opts)
   end,
 }
 
 return {
-  spec,
+  ts_spec,
   {
     'nvim-treesitter/playground',
     cmd = 'TSPlaygroundToggle',
