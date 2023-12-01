@@ -9,7 +9,6 @@ local plugins = {
 
   --- always trying something new {{{
   ['kevinhwang91/nvim-bqf'] = 'bqf',
-  ['cbochs/grapple.nvim'] = 'grapple',
   --- }}}
 }
 

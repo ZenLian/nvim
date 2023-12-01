@@ -2,4 +2,3 @@ plugin/packer_compiled.lua
 .vscode/
 .luarc.json
 *.add.spl
-lazy-lock.json

@@ -3,7 +3,9 @@ local spec = {
   -- event = 'VeryLazy',
   lazy = false,
   config = function()
-    require('project_nvim').setup()
+    require('project_nvim').setup {
+      silent_chdir = false,
+    }
   end,
 }
 

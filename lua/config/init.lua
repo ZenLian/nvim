@@ -5,7 +5,7 @@ local util = require('util')
 local options = {
   provider = {
     -- :h g:python3_host_prog
-    python3 = '~/.miniconda3/envs/py3-nvim/bin/python3',
+    python3 = '~/.asdf/shims/python3',
   },
   dirs = {
     config = vim.fn.stdpath('config'),
@@ -24,7 +24,7 @@ local options = {
   animation = false,
 
   icons = {
-    enabled = false,
+    enabled = true,
   },
 }
 
