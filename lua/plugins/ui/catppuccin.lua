@@ -126,6 +126,10 @@ spec.config = function()
       -- LeapBackdrop = { fg = C.surface1, bg = C.base },
       -- }}}
 
+      -->flash.nvim {{{
+      FlashLabel = { fg = C.base, bg = C.green },
+      -- }}}
+
       -->nvim-treehopper {{{
       TSNodeUnmatched = { fg = C.surface2, bg = C.base, style = {} },
       TSNodeKey = { fg = C.base, bg = C.green },
