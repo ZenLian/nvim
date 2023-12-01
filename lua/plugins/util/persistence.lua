@@ -15,14 +15,14 @@ local spec = {
       function()
         require('persistence').load { last = true }
       end,
-      desc = 'restore last session',
+      desc = 'restore LAST session',
     },
     {
       '<leader>qd',
       function()
         require('persistence').stop()
       end,
-      desc = 'restore session for CWD',
+      desc = 'STOP persistence',
     },
   },
 }

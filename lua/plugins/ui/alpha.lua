@@ -4,59 +4,86 @@ local spec = {
   event = 'BufWinEnter',
 }
 
+local function list_sessions()
+  local startify = require('alpha.themes.startify')
+  local items_number = 10
+  local num = 0
+  local sessions = {}
+  for _, sfile in ipairs(require('persistence').list()) do
+    if vim.fn.filereadable(sfile) ~= 0 then
+      num = num + 1
+      sessions[num] = sfile
+    end
+    if num >= items_number then
+      break
+    end
+  end
+  table.sort(sessions, function(a, b)
+    return vim.loop.fs_stat(a).mtime.sec > vim.loop.fs_stat(b).mtime.sec
+  end)
+
+  local items = {}
+  for i, sfile in ipairs(sessions) do
+    items[i] = startify.button(tostring(i - 1), sfile, '<cmd>silent! source ' .. vim.fn.fnameescape(sfile) .. ' <CR>')
+  end
+  return {
+    type = 'group',
+    val = items,
+    opts = {},
+  }
+end
+
 spec.config = function()
   local alpha = require('alpha')
-  local dashboard = require('alpha.themes.dashboard')
-  local util = require('util')
-  local WIDTH = 30
+  local startify = require('alpha.themes.startify')
 
   -- header
-  -- dashboard.section.header.val = {
-  --   '                                                     ',
-  --   '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
-  --   '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
-  --   '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
-  --   '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
-  --   '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
-  --   '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
-  --   '                                                     ',
-  -- }
-  dashboard.section.header.val = {
-    '                                    ',
-    '  ███╗   ██╗██╗   ██╗██╗███╗   ███╗ ',
-    '  ████╗  ██║██║   ██║██║████╗ ████║ ',
-    '  ██╔██╗ ██║██║   ██║██║██╔████╔██║ ',
-    '  ██║╚██╗██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
-    '  ██║ ╚████║ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
-    '  ╚═╝  ╚═══╝  ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
-    '                                    ',
+  startify.section.header.val = {
+    '                                                     ',
+    '  ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ',
+    '  ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ',
+    '  ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ',
+    '  ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ',
+    '  ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ',
+    '  ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ ',
+    '                                                     ',
   }
-  dashboard.section.header.opts.hl = 'Function'
+  startify.section.header.opts.hl = 'Function'
 
-  -- buttons
-  local function button(...)
-    local btn = dashboard.button(...)
-    -- btn.opts.hl = "Type"
-    -- btn.opts.hl_shortcut = "Function"
-    -- btn.opts.cursor = 0
-    btn.opts.width = WIDTH
-    return btn
-  end
-
-  dashboard.section.buttons.val = {
-    button('e', '   New', ':ene<CR>'),
-    button('f', '   Files', '<cmd>lua require("plugins.telescope").project_files()<CR>'),
-    button('r', '   Recent', ':Telescope oldfiles<CR>'),
-    button('p', '   Projects', '<cmd>Telescope projects<CR>'),
-    button('c', '   Configs', ':e $MYVIMRC | :cd %:p:h<CR>'),
-    button('q', '   Quit', ':qa<CR>'),
+  startify.section.top_buttons.val = {
+    startify.button('e', 'New file', '<cmd>ene <CR>'),
+    startify.button('f', 'File picker', '<cmd>Telescope find_files<CR>'),
+    startify.button('q', 'Quit', '<cmd>q <CR>'),
   }
+
+  startify.section.mru_cwd.val = {
+    { type = 'padding', val = 1 },
+    { type = 'text', val = 'Sessions', opts = { hl = 'SpecialComment' } },
+    { type = 'padding', val = 1 },
+    {
+      type = 'group',
+      val = function()
+        return { list_sessions() }
+      end,
+      opts = { shrink_margin = false },
+    },
+  }
+
+  startify.section.bottom_buttons.val = {}
 
   local fortune = require('alpha.fortune')
-  dashboard.section.footer.val = fortune(50)
-  dashboard.section.footer.opts.hl = 'String'
+  startify.section.footer.type = 'text'
+  startify.section.footer.val = fortune(120)
+  startify.section.footer.opts = {
+    -- position = 'center',
+    hl = 'Number',
+  }
+  -- startify.section.footer.opts.hl = 'String'
 
-  alpha.setup(dashboard.config)
+  -- local dashboard = require('alpha.themes.dashboard')
+  -- dashboard.section.footer.val = fortune(120)
+
+  alpha.setup(startify.config)
 
   local group = vim.api.nvim_create_augroup('plugins.alpha', { clear = true })
   vim.api.nvim_create_autocmd('User', {
