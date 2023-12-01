@@ -6,7 +6,7 @@ local spec = {
 spec.config = function()
   local conditions = require('heirline.conditions')
   local utils = require('heirline.utils')
-  local has_icon = require("config").icons.enabled
+  local has_icon = require('config').icons.enabled
 
   local palette = require('catppuccin.palettes').get_palette()
   local colors = {
@@ -79,7 +79,7 @@ spec.config = function()
       -- local extension = vim.fn.fnamemodify(filename, ':e')
       -- self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
       self.icon, self.icon_color =
-          require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
+        require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
     end,
     provider = function(self)
       return self.icon
@@ -91,7 +91,8 @@ spec.config = function()
 
   local FileTag = {
     provider = function()
-      return require('grapple').key() == nil and ' 󰨙' or ' 󰔡'
+      -- return require('grapple').key() == nil and ' 󰨙' or ' 󰔡'
+      return require('grapple').key() == nil and ' [tag:off] ' or ' [tag:on] '
     end,
     on_click = {
       callback = function()
@@ -133,7 +134,7 @@ spec.config = function()
       },
     },
     FileFlags,
-    -- FileTag,
+    FileTag,
   }
 
   local WorkDir = {
@@ -488,13 +489,13 @@ spec.config = function()
   local DefaultStatusline = {
     ViMode,
     { flexible = 100, { Space, FileName }, Empty },
-    { flexible = 20,  { Space, Git } },
+    { flexible = 20, { Space, Git } },
     Trim,
     Align,
 
     { flexible = 10, { LspBlock, Space }, Empty },
     { flexible = 30, { FileInfo, Space }, Empty },
-    { flexible = 40, { Ruler, Space },    Empty },
+    { flexible = 40, { Ruler, Space }, Empty },
     ScrollBar,
   }
 
@@ -553,7 +554,9 @@ spec.config = function()
       return vim.tbl_contains({ 'neo-tree', 'drex' }, vim.bo.filetype)
     end,
     {
-      condition = function() return has_icon end,
+      condition = function()
+        return has_icon
+      end,
       SquareMode,
       {
         provider = '  ',
@@ -563,9 +566,11 @@ spec.config = function()
       },
     },
     {
-      condition = function() return not has_icon end,
+      condition = function()
+        return not has_icon
+      end,
       provider = function()
-        return string.format(" %s ", vim.bo.filetype)
+        return string.format(' %s ', vim.bo.filetype)
       end,
       hl = function(self)
         return { fg = 'bg', bg = self:get_mode_color() }
@@ -591,7 +596,7 @@ spec.config = function()
     static = {},
     {
       provider = has_icon and '█  ' or ' ',
-      hl = has_icon and { fg = 'red' } or { bg = 'red' }
+      hl = has_icon and { fg = 'red' } or { bg = 'red' },
     },
     {
       provider = ' Quickfix',
