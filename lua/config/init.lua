@@ -37,7 +37,7 @@ function M.setup(opts)
   -- pcall(require, 'impatient')
 
   -- later vim.notify
-  require('util').lazy_notify()
+  -- require('util').lazy_notify()
 
   require('config.autocmds').setup()
   require('config.keymaps')

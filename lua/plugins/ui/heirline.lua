@@ -102,6 +102,16 @@ spec.config = function()
     },
   }
 
+  local ShowMode = {
+    provider = function()
+      return require('noice').api.status.mode.get()
+    end,
+    condition = function()
+      return require('noice').api.status.mode.has()
+    end,
+    hl = { fg = 'cyan' },
+  }
+
   local FileName = {
     init = function(self)
       self.filename = vim.api.nvim_buf_get_name(0)
@@ -135,6 +145,7 @@ spec.config = function()
     },
     FileFlags,
     FileTag,
+    ShowMode,
   }
 
   local WorkDir = {

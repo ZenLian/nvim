@@ -23,7 +23,6 @@ local spec = {
       'b0o/SchemaStore.nvim',
       dev = true,
     },
-    { 'ray-x/lsp_signature.nvim', enabled = false },
     'cmp-nvim-lsp',
   },
   keys = {
@@ -38,7 +37,7 @@ local spec = {
 local function on_attach(client, bufnr)
   require(PREFIX .. '.formatting').on_attach(client, bufnr)
   require(PREFIX .. '.keymaps').on_attach(client, bufnr)
-  require(PREFIX .. '.signature').on_attach(client, bufnr)
+  -- require(PREFIX .. '.signature').on_attach(client, bufnr)
 end
 
 spec.config = function()

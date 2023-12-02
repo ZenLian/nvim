@@ -1,6 +1,8 @@
 local spec = {
   'stevearc/dressing.nvim',
   event = 'VeryLazy',
+  -- use noice instead
+  cond = false,
 }
 
 spec.config = function()
