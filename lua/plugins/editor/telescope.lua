@@ -50,21 +50,21 @@ local spec = {
         selection_caret = config.icons.enabled and ' ' or '> ',
         -- border = false,
         -- borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
-        sorting_strategy = 'ascending',
-        layout_strategy = 'bottom_pane',
-        layout_config = {
-          prompt_position = 'top',
-          height = 25,
-        },
+        -- sorting_strategy = 'ascending',
+        -- layout_strategy = 'bottom_pane',
+        -- layout_config = {
+        --   prompt_position = 'top',
+        --   height = 25,
+        -- },
       },
-      pickers = {
-        builtin = dropdown,
-        filetypes = dropdown,
-        find_files = dropdown,
-        git_files = dropdown,
-        oldfiles = dropdown,
-        symbols = dropdown,
-      },
+      -- pickers = {
+      --   builtin = dropdown,
+      --   filetypes = dropdown,
+      --   find_files = dropdown,
+      --   git_files = dropdown,
+      --   oldfiles = dropdown,
+      --   symbols = dropdown,
+      -- },
       extensions = {
         frecency = {
           db_root = vim.fn.stdpath('data') .. '/databases',
@@ -117,7 +117,7 @@ spec.keys = {
   { "<Leader>'", ts('resume'), desc = 'Telescope Resume' },
 
   -- { '<Leader>ff', cmd('find_files'), desc = 'Find files' },
-  { '<Leader>ff', ts('frecency workspace=CWD theme=dropdown previewer=false'), desc = 'Frecency files' },
+  { '<Leader>ff', ts('frecency workspace=CWD previewer=false'), desc = 'Frecency files' },
   { '<Leader>fr', ts('oldfiles'), desc = 'Recent files' },
   { '<Leader>fb', ts('buffers'), desc = 'Buffers' },
   { '<Leader>fg', ts('live_grep'), desc = 'Live grep' },

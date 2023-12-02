@@ -106,17 +106,17 @@ spec.config = function()
 
       NullLsInfoBorder = { link = 'FloatBorder' },
 
-      TelescopeNormal = { fg = C.text, bg = C.mantle },
-      TelescopePromptNormal = { fg = C.text, bg = C.surface0 },
-      TelescopePromptBorder = { fg = C.surface0, bg = C.surface0 },
-      TelescopePromptTitle = { fg = C.blue },
-      TelescopeSelection = { fg = C.text, bg = C.surface1 },
-      TelescopeResultsBorder = { fg = C.mantle, bg = C.mantle },
-      -- TelescopeResultsTitle = { fg = c.blue },
-      TelescopePreviewNormal = { fg = C.text, bg = C.mantle },
-      TelescopePreviewBorder = { fg = C.blue, bg = C.mantle },
-      -- TelescopePreviewTitle = { fg = c.blue },
-      TelescopeMatching = { fg = C.blue },
+      -- TelescopeNormal = { fg = C.text, bg = C.mantle },
+      -- TelescopePromptNormal = { fg = C.text, bg = C.surface0 },
+      TelescopePromptBorder = { fg = C.blue, bg = C.base },
+      TelescopePromptTitle = { fg = C.blue, bg = C.base },
+      -- TelescopeSelection = { fg = C.text, bg = C.surface1 },
+      TelescopeResultsBorder = { fg = C.blue, bg = C.base },
+      TelescopeResultsTitle = { fg = C.blue, bg = C.base },
+      -- TelescopePreviewNormal = { fg = C.text, bg = C.mantle },
+      TelescopePreviewBorder = { fg = C.blue, bg = C.base },
+      TelescopePreviewTitle = { fg = C.blue, bg = C.base },
+      -- TelescopeMatching = { fg = C.blue },
 
       -->leap.nvim {{{
       -- LeapMatch = { fg = C.base, bg = C.red },

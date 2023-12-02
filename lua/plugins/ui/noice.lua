@@ -6,6 +6,14 @@ local spec = {
     -- 'rcarriga/nvim-notify',
   },
   opts = {
+    cmdline = {
+      opts = {
+        position = {
+          row = '90%',
+          col = '50%',
+        },
+      },
+    },
     notify = {
       enable = true,
       view = 'mini',
