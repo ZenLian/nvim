@@ -1,12 +1,7 @@
-local M = {
-  packer = {
-    ft = 'qf',
-  },
-}
-
-function M.packer.config()
-  local bqf = require('bqf')
-  bqf.setup {
+local spec = {
+  'kevinhwang91/nvim-bqf',
+  ft = 'qf',
+  opts = {
     preview = {
       border_chars = { '┃', '┃', '━', '━', '┏', '┓', '┗', '┛', '█' },
     },
@@ -15,7 +10,7 @@ function M.packer.config()
         extra_opts = { '--bind', 'ctrl-o:toggle-all', '--delimiter', '│' },
       },
     },
-  }
-end
+  },
+}
 
-return M
+return { spec }

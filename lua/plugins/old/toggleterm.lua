@@ -1,4 +1,5 @@
 local M = {
+  'akinsho/toggleterm.nvim',
   packer = {
     module = 'toggleterm',
     cmd = 'ToggleTerm',

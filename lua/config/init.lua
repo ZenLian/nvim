@@ -29,12 +29,9 @@ local options = {
 }
 
 M._setup = false
-
 function M.setup(opts)
   M._setup = true
   options = vim.tbl_deep_extend('force', options, opts or {})
-
-  -- pcall(require, 'impatient')
 
   -- later vim.notify
   -- require('util').lazy_notify()

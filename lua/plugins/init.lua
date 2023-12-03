@@ -1,19 +1,10 @@
--- vim:foldmethod=marker:foldmarker={{{,}}}:
-
 require('config').setup()
-
-local plugins = {
-  ['gbprod/yanky.nvim'] = 'yanky',
-  ['akinsho/toggleterm.nvim'] = 'toggleterm',
-  -- }}} lsp
-
-  --- always trying something new {{{
-  ['kevinhwang91/nvim-bqf'] = 'bqf',
-  --- }}}
-}
 
 -- try some new things here
 return {
+  'MunifTanjim/nui.nvim',
+  'nvim-lua/plenary.nvim',
+  'kkharji/sqlite.lua',
   {
     'echasnovski/mini.nvim',
     lazy = false,

@@ -1,5 +1,6 @@
-local config = function()
-  require('yanky').setup {
+local spec = {
+  'gbprod/yanky.nvim',
+  opts = {
     ring = {
       storage = 'sqlite',
     },
@@ -22,10 +23,9 @@ local config = function()
     preserve_cursor_position = {
       enabled = true,
     },
-  }
-end
+  },
+}
 
--- yanky.nvim
 local function register_yanky()
   keymap({ 'n', 'x' }, 'y', '<Plug>(YankyYank)')
   keymap({ 'n', 'x' }, 'p', '<Plug>(YankyPutAfter)')
@@ -46,9 +46,4 @@ local function register_yanky()
   keymap('n', '=P', '<Plug>(YankyPutBeforeFilter)')
 end
 
-return {
-  packer = {
-    requires = { 'kkharji/sqlite.lua' },
-    config = config,
-  },
-}
+return { spec }

@@ -54,7 +54,7 @@ require('lazy').setup {
     },
   },
   ui = {
-    border = 'single',
+    border = 'rounded',
   },
   custom_keys = {
     -- open a terminal for the plugin dir
