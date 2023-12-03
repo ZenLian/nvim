@@ -14,15 +14,19 @@ vim.opt.rtp:prepend(lazypath)
 -- require('lazy.view.config').keys.details = '<Tab>'
 require('lazy').setup {
   spec = {
+    { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
+    { import = 'lazyvim.plugins.extras.coding.yanky' },
+    { import = 'lazyvim.plugins.extras.editor.aerial' },
+    { import = 'lazyvim.plugins.extras.editor.navic' },
+    { import = 'lazyvim.plugins.extras.formatting.prettier' },
+    { import = 'lazyvim.plugins.extras.lang.clangd' },
+
     { import = 'plugins' },
-    { import = 'plugins.ui' },
-    { import = 'plugins.editor' },
-    { import = 'plugins.coding' },
-    { import = 'plugins.markdown' },
-    { import = 'plugins.util' },
+    { import = 'plugins.extras' },
   },
   defaults = {
     lazy = true, -- every plugin is lazy-loaded by default
+    version = false, -- always use the latest git commit
     -- version = '*', -- try installing the latest stable version for plugins that support semver
   },
   install = { colorscheme = { 'catppuccin', 'habamax' } },
