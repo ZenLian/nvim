@@ -27,7 +27,7 @@ local options = {
   -- bottom
   laststatus = 3, -- global statusline
   ruler = true,
-  cmdheight = 1,
+  cmdheight = 0,
   cmdwinheight = 5,
   showcmd = true,
   showmode = false,
