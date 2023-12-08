@@ -118,6 +118,21 @@ function M.root_dir(opts)
   }
 end
 
+function M.workdir(opts)
+  opts = vim.tbl_extend('force', {
+    color = '',
+  }, opts or {})
+
+  return {
+    provider = function()
+      local cwd = vim.fn.getcwd(0)
+      cwd = vim.fn.fnamemodify(cwd, ':~')
+      return ' ' .. cwd
+    end,
+    hl = { fg = opts.color },
+  }
+end
+
 function M.filetype(opts)
   opts = vim.tbl_extend('force', {
     icon_only = false,

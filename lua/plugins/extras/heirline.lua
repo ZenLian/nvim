@@ -51,10 +51,21 @@ return {
         components.mode('█'),
       }
 
+      local neotreeStatusline = {
+        condition = function()
+          return vim.tbl_contains({ 'neo-tree' }, vim.bo.filetype)
+        end,
+        components.mode('█ 󰝰 '),
+        components.workdir { color = 'pink' },
+        components.align,
+        components.mode('█'),
+      }
+
       local statusline = {
         hl = { fg = 'text', bg = 'base' },
         fallthrough = false,
         alphaStatusline,
+        neotreeStatusline,
         defaultStatusline,
       }
 
