@@ -17,8 +17,8 @@ return {
       local catppuccin = require('catppuccin')
       local C = require('catppuccin.palettes').get_palette(opts.flavour)
       opts.custom_highlights = {
-        Pmenu = { fg = C.text, bg = C.surface0 },
-        PmenuSel = { fg = C.surface0, bg = C.blue },
+        -- Pmenu = { fg = C.text, bg = C.surface0 },
+        -- PmenuSel = { fg = C.surface0, bg = C.blue },
         CmpItemAbbr = { fg = C.text },
         CmpItemAbbrMatch = { fg = C.blue, style = { 'bold' } },
         CmpItemAbbrMatchFuzzy = { fg = C.blue, style = { 'bold' } },
