@@ -20,9 +20,10 @@ require('lazy').setup {
     -- { import = 'lazyvim.plugins.extras.editor.navic' },
     { import = 'lazyvim.plugins.extras.formatting.prettier' },
     { import = 'lazyvim.plugins.extras.lang.clangd' },
-
+    -- custom
     { import = 'plugins' },
     { import = 'plugins.extras' },
+    { import = 'plugins.lang' },
   },
   defaults = {
     lazy = true, -- every plugin is lazy-loaded by default
