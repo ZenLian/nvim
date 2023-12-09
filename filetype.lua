@@ -3,7 +3,7 @@ vim.filetype.add {
     snippets = 'snippets',
   },
   filename = {
-    ['.clang-format'] = 'yaml',
+    -- ['.clang-format'] = 'yaml',
     ['grub'] = 'grub',
   },
 }

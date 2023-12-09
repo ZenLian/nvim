@@ -15,11 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup {
   spec = {
     { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
-    { import = 'lazyvim.plugins.extras.coding.yanky' },
-    { import = 'lazyvim.plugins.extras.editor.aerial' },
-    -- { import = 'lazyvim.plugins.extras.editor.navic' },
-    { import = 'lazyvim.plugins.extras.formatting.prettier' },
-    { import = 'lazyvim.plugins.extras.lang.clangd' },
     -- custom
     { import = 'plugins' },
     { import = 'plugins.extras' },
