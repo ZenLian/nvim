@@ -13,6 +13,7 @@ unmap({ 'n', 't' }, '<C-_>')
 
 map({ 'n', 'x' }, 'gh', '^', { desc = 'Start of line' })
 map({ 'n', 'x' }, 'gl', '$', { desc = 'End of line' })
+map({ 'n', 'x' }, 'gm', '%', { desc = 'Matching character' })
 
 map('n', '<C-c>', '<cmd>normal! ciw<cr>a', { desc = 'Edit word' })
 
