@@ -28,8 +28,9 @@ return {
 
         components.noice_command { color = 'mauve' },
         components.noice_mode { color = 'peach' },
-        components.lazy_status { color = 'maroon' },
-        components.git {},
+        components.lsp { color = 'maroon' },
+        -- components.lazy_status { color = 'maroon' },
+        components.git { color = 'rosewater' },
         components.ruler { color = 'subtext0' },
         components.mode('█'),
       }

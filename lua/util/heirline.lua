@@ -233,14 +233,18 @@ function M.fileflags()
   }
 end
 
-function M.git()
+function M.git(opts)
+  opts = vim.tbl_extend('force', {
+    color = '',
+  }, opts or {})
+
   return {
     condition = conditions.is_git_repo,
     init = function(self)
       self.status_dict = vim.b.gitsigns_status_dict
       self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
     end,
-    hl = { fg = 'yellow' },
+    hl = { fg = opts.color },
 
     {
       provider = function(self)
@@ -275,23 +279,23 @@ function M.git()
         {
           provider = function(self)
             local count = self.status_dict.added or 0
-            return count > 0 and (' ' .. count)
+            return count > 0 and ('+' .. count)
           end,
           hl = { fg = 'green' },
         },
         {
           provider = function(self)
             local count = self.status_dict.removed or 0
-            return count > 0 and (' ' .. count)
+            return count > 0 and ('-' .. count)
           end,
           hl = { fg = 'red' },
         },
         {
           provider = function(self)
             local count = self.status_dict.changed or 0
-            return count > 0 and (' ' .. count)
+            return count > 0 and ('~' .. count)
           end,
-          hl = { fg = 'blue' },
+          hl = { fg = 'yellow' },
         },
         {
           condition = function(self)
@@ -376,6 +380,24 @@ function M.nvim_version()
     provider = function(self)
       return self.version
     end,
+  }
+end
+
+function M.lsp(opts)
+  opts = vim.tbl_extend('force', {
+    color = '',
+  }, opts or {})
+
+  return {
+    condition = conditions.lsp_attached,
+    update = { 'LspAttach', 'LspDetach' },
+    provider = function()
+      local clients = LazyUtil.lsp.get_clients { bufnr = 0 }
+      if #clients > 0 then
+        return '󰒋 ' .. clients[1].name .. ' '
+      end
+    end,
+    hl = { fg = opts.color },
   }
 end
 
