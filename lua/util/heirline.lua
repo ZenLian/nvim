@@ -397,6 +397,14 @@ function M.lsp(opts)
         return '󰒋 ' .. clients[1].name .. ' '
       end
     end,
+    on_click = {
+      callback = function()
+        vim.schedule(function()
+          vim.cmd('LspInfo')
+        end)
+      end,
+      name = 'heirline_lspinfo',
+    },
     hl = { fg = opts.color },
   }
 end
