@@ -1,9 +1,9 @@
 " Better quickfix ui
 " -> https://github.com/kevinhwang91/nvim-bqf#rebuild-syntax-for-quickfix
 
-" if exists('b:current_syntax')
-"     finish
-" endif
+if exists('b:current_syntax')
+    finish
+endif
 
 syn match qfFileName /^[^│]*/ nextgroup=qfSeparatorLeft
 syn match qfSeparatorLeft /│/ contained nextgroup=qfLineNr
