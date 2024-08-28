@@ -24,22 +24,29 @@ return {
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       })
 
-      opts.sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'path' },
-      }, {
-        name = 'buffer',
-        option = {
-          -- all buffers smaller than 1MB
-          get_bufnrs = function()
-            local bufnrs = vim.tbl_filter(function(buf)
-              local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
-              return fsize < 1024 * 1024
-            end, vim.api.nvim_list_bufs())
-            return bufnrs
-          end,
-        },
-      })
+      for _, source in ipairs(opts.sources) do
+        if source.name == 'buffer' then
+          source.option = {
+            -- all buffers smaller than 1MB
+            get_bufnrs = function()
+              local bufnrs = vim.tbl_filter(function(buf)
+                local fsize = vim.fn.getfsize(vim.api.nvim_buf_get_name(buf))
+                return fsize < 1024 * 1024
+              end, vim.api.nvim_list_bufs())
+              return bufnrs
+            end,
+          }
+        end
+      end
+
+      -- opts.sources.opts.sources = cmp.config.sources({
+      --   { name = 'nvim_lsp' },
+      --   { name = 'path' },
+      -- }, {
+      --   {
+      --     name = 'buffer',
+      --   },
+      -- })
 
       -- opts.sorting = {
       --   comparators = {
