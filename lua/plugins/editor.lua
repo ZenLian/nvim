@@ -1,4 +1,5 @@
 return {
+  -- file explorer
   {
     'nvim-neo-tree/neo-tree.nvim',
     opts = {
@@ -48,31 +49,19 @@ return {
             ['h'] = 'backward',
             ['l'] = 'forward',
             ['<tab>'] = 'toggle_current',
-            ['z'] = '',
-            ['zz'] = 'close_all_nodes',
-            ['zr'] = 'expand_all_nodes',
-            ['w'] = '',
+            ['z'] = 'none',
+            ['zc'] = 'close_node',
+            ['zC'] = 'close_all_subnodes',
+            ['zM'] = 'close_all_nodes',
+            ['zR'] = 'expand_all_nodes',
+            ['w'] = 'none',
           },
         },
       },
     },
   },
-  {
-    'folke/flash.nvim',
-    opts = {
-      modes = {
-        search = {
-          enabled = false,
-        },
-      },
-    },
-  },
-  {
-    'RRethy/vim-illuminate',
-    opts = {
-      filetypes_denylist = {
-        'aerial',
-      },
-    },
-  },
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   TODO: add telescope-symbols
+  -- },
 }

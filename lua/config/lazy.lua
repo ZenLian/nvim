@@ -22,7 +22,7 @@ require('lazy').setup {
     -- import/override with your plugins
     { import = 'plugins' },
     { import = 'plugins.extras' },
-    { import = 'plugins.lang' },
+    -- { import = 'plugins.lang' },
   },
   defaults = {
     lazy = true, -- every plugin is lazy-loaded by default

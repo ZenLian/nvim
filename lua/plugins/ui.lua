@@ -1,6 +1,4 @@
 return {
-  -- disable indentscope
-  { 'echasnovski/mini.indentscope', enabled = false },
   {
     'lukas-reineke/indent-blankline.nvim',
     opts = {
@@ -16,7 +14,7 @@ return {
     },
   },
 
-  -- rainbow
+  -- [NEW] rainbow
   {
     'HiPhish/rainbow-delimiters.nvim',
     event = 'LazyFile',

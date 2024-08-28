@@ -20,6 +20,10 @@ map('n', '<C-c>', '<cmd>normal! ciw<cr>a', { desc = 'Edit word' })
 map('v', '<Tab>', '>gv', { desc = 'Indent right' })
 map('v', '<S-Tab>', '<gv', { desc = 'Indent left' })
 
+-- FIXME: invalid in terminal
+map('n', '<C-_>', 'gcc', { desc = 'Toggle comment line' })
+map('v', '<C-_>', 'gc', { desc = 'Toggle comment' })
+
 -- stylua: ignore start
 -- lazygit
 -- map("n", "<leader>gG", function() Util.terminal({ "lazygit" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false }) end, { desc = "Lazygit (root dir)" })
