@@ -39,15 +39,6 @@ return {
         end
       end
 
-      -- opts.sources.opts.sources = cmp.config.sources({
-      --   { name = 'nvim_lsp' },
-      --   { name = 'path' },
-      -- }, {
-      --   {
-      --     name = 'buffer',
-      --   },
-      -- })
-
       -- opts.sorting = {
       --   comparators = {
       --     --> https://github.com/hrsh7th/cmp-buffer#locality-bonus-comparator-distance-based-sorting

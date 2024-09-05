@@ -69,4 +69,3 @@ Neovim configuration powered by [LazyVim](https://github.com/LazyVim/LazyVim).
 
 查找/替换 `<space>sr`
 
-
