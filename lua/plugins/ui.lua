@@ -2,24 +2,17 @@ return {
   {
     "folke/noice.nvim",
     opts = {
-      messages = {
-        view = 'mini',
-        view_error = 'mini',
-        view_warn = 'mini',
-      },
-      notify = {
-        view = 'mini',
-      },
-      lsp = {
-        message = {
-          view = 'notify',
-        },
-      },
       views = {
         mini = {
           timeout = 3000,
         },
       },
+    },
+  },
+  {
+    'folke/snacks.nvim',
+    opts = {
+      notifier = { enabled = false },
     },
   },
   -- [NEW] rainbow
