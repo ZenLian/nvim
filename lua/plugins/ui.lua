@@ -1,23 +1,27 @@
 return {
   {
-    'rcarriga/nvim-notify',
-    enabled = false,
-  },
-  {
-    'lukas-reineke/indent-blankline.nvim',
+    "folke/noice.nvim",
     opts = {
-      scope = {
-        enabled = true,
-        show_start = false,
-        include = {
-          node_type = {
-            lua = { 'return_statement', 'table_constructor' },
-          },
+      messages = {
+        view = 'mini',
+        view_error = 'mini',
+        view_warn = 'mini',
+      },
+      notify = {
+        view = 'mini',
+      },
+      lsp = {
+        message = {
+          view = 'notify',
+        },
+      },
+      views = {
+        mini = {
+          timeout = 3000,
         },
       },
     },
   },
-
   -- [NEW] rainbow
   {
     'HiPhish/rainbow-delimiters.nvim',

@@ -119,6 +119,7 @@ local options = {
   concealcursor = 'niv',
 }
 
+vim.g.snacks_animate = false
 for name, value in pairs(options) do
   vim.opt[name] = value
 end

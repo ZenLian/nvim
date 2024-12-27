@@ -60,8 +60,4 @@ return {
       },
     },
   },
-  -- {
-  --   "nvim-telescope/telescope.nvim",
-  --   TODO: add telescope-symbols
-  -- },
 }
