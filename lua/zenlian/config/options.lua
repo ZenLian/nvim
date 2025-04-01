@@ -1,3 +1,10 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
+-- configurable options
+vim.g.autoformat = false
+vim.g.root_spec = {"lsp", {".git", "lua"}, "cwd"}
+
 local options = {
   -- gui
   termguicolors = true,

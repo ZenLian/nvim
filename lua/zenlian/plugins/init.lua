@@ -1,3 +1,6 @@
 require("zenlian.config").setup()
 
-return {}
+return {
+    {"folke/lazy.nvim", version="*"},
+    {"folke/snacks.nvim"}
+}
