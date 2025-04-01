@@ -1,5 +1,5 @@
 local conditions = require('heirline.conditions')
-local LazyUtil = require('lazyvim.util')
+local Util = require('zenlian.util')
 
 local M = {
   trim = {
@@ -88,8 +88,8 @@ function M.root_dir(opts)
     color = '',
   }, opts or {})
   local function get()
-    local cwd = LazyUtil.root.cwd()
-    local root = LazyUtil.root.get { normalize = true }
+    local cwd = Util.root.cwd()
+    local root = Util.root.get { normalize = true }
     local name = vim.fs.basename(root)
 
     if root == cwd then
@@ -141,7 +141,7 @@ function M.filetype(opts)
   return {
     init = function(self)
       self.icon, self.icon_color =
-        require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
+          require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
     end,
     provider = function(self)
       local result = self.icon
@@ -166,8 +166,8 @@ function M.filepath(opts)
     init = function(self)
       self.path = vim.fn.expand('%:p') --[[@as string]]
 
-      local root = LazyUtil.root.get { normalize = true }
-      local cwd = LazyUtil.root.cwd()
+      local root = Util.root.get { normalize = true }
+      local cwd = Util.root.cwd()
       if opts.relative == 'cwd' and self.path:find(cwd, 1, true) == 1 then
         self.path = self.path:sub(#cwd + 2)
       else
@@ -392,7 +392,7 @@ function M.lsp(opts)
     condition = conditions.lsp_attached,
     update = { 'LspAttach', 'LspDetach' },
     provider = function()
-      local clients = LazyUtil.lsp.get_clients { bufnr = 0 }
+      local clients = Util.lsp.get_clients { bufnr = 0 }
       if #clients > 0 then
         return '󰒋 ' .. clients[1].name .. ' '
       end

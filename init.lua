@@ -1,1 +1,1 @@
-require('zenlian.config.lazy')
+require('zenlian')
