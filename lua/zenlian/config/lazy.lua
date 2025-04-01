@@ -17,12 +17,7 @@ vim.opt.rtp:prepend(lazypath)
 -- require('lazy.view.config').keys.details = '<Tab>'
 require('lazy').setup {
   spec = {
-    -- add LazyVim and import its plugins
-    { 'LazyVim/LazyVim', import = 'lazyvim.plugins' },
-    -- import/override with your plugins
-    { import = 'plugins' },
-    { import = 'plugins.extras' },
-    -- { import = 'plugins.lang' },
+    { import = 'zenlian/plugins' },
   },
   defaults = {
     lazy = true, -- every plugin is lazy-loaded by default
