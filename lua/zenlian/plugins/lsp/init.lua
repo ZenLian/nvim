@@ -7,6 +7,9 @@ return {
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim", config = function() end },
     },
+    opts_extend = {
+      "ensure_installed",
+    },
     -- this is not actually opts of lspconfig, it's our own opts
     -- override by every lang
     opts = {
@@ -54,6 +57,7 @@ return {
       local function setup(server)
         local server_opts = opts.servers[server] or {}
         server_opts.on_attach = on_attach
+        server_opts.capabilities = require('blink.cmp').get_lsp_capabilities(server_opts.capabilities)
         require('lspconfig')[server].setup(server_opts)
       end
 
@@ -68,6 +72,7 @@ return {
     "williamboman/mason.nvim",
     cmd = "Mason",
     -- build = ":MasonUpdate",
+    opts_extend = { 'ensure_installed', },
     opts = {},
   }
 }

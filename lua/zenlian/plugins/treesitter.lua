@@ -22,6 +22,7 @@ return {
       { "+", desc = "Increment Selection", mode = "x" },
       { "-", desc = "Decrement Selection", mode = "x" },
     },
+    opts_extend = { "ensure_installed", },
     opts = {
       highlight = { enable = true },
       indent = { enable = true },
