@@ -18,8 +18,9 @@ return {
     end,
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
+      { "g+", desc = "Init Selection", mode = "n" },
+      { "+", desc = "Increment Selection", mode = "x" },
+      { "-", desc = "Decrement Selection", mode = "x" },
     },
     opts = {
       highlight = { enable = true },
@@ -54,10 +55,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = "<C-space>",
-          node_incremental = "<C-space>",
+          init_selection = "g+",
+          node_incremental = "+",
           scope_incremental = false,
-          node_decremental = "<bs>",
+          node_decremental = "-",
         },
       },
       textobjects = {
@@ -122,6 +123,7 @@ return {
       'HiPhish/rainbow-delimiters.nvim',
       enabled = true,
       event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+      -- event = "User ZLFile",
       init = function ()
           vim.g.rainbow_delimiters = {
               strategy = {

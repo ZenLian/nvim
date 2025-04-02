@@ -9,7 +9,7 @@ return {
         end,
         opts = {
             bigfile = { enabled = true },
-            quickfile = { enabled = true },
+            -- quickfile = { enabled = true },
             indent = { enabled = true },
         }
     }
