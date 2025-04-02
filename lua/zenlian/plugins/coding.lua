@@ -1,14 +1,16 @@
 -- better editing in files
 --
--- [flash.nvim]: go to anywhere
--- [mini.pairs]: auto pairs
--- [mini.ai]: better indent
--- [ts-comments.nvim]: comments
--- [grug-far.nvim]: search and replace
+-- [flash.nvim]:            go to anywhere
+-- [mini.pairs]:            auto pairs
+-- [mini.ai]:               text objects
+-- [mini.surround]:         surround
+-- [ts-comments.nvim]:      comments
+-- [grug-far.nvim]:         search and replace
 
 return {
     {
         "folke/flash.nvim",
+        tag = 'v2.1.0', -- 'main' branch will crash on ubuntu20.04
         event = 'VeryLazy',
         opts = {},
         keys = {
@@ -22,6 +24,7 @@ return {
 
     {
         "echasnovski/mini.pairs",
+        enabled = false,
         event = 'VeryLazy',
         opts = {
             modes = { insert = true, command = true, terminal = false },
@@ -43,6 +46,10 @@ return {
     {
         "echasnovski/mini.ai",
         event = "VeryLazy",
+        dependencies = {
+            "echasnovski/mini.extra",
+            opts = {},
+        },
         opts = function()
             local ai = require("mini.ai")
             return {
@@ -54,25 +61,41 @@ return {
                     }),
                     f = ai.gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }), -- function
                     c = ai.gen_spec.treesitter({ a = "@class.outer", i = "@class.inner" }),       -- class
-                    t = { "<([%p%w]-)%f[^<%w][^<>]->.-</%1>", "^<.->().*()</[^/]->$" },           -- tags
                     d = { "%f[%d]%d+" },                                                          -- digits
-                    e = {                                                                         -- Word with case
-                        { "%u[%l%d]+%f[^%l%d]", "%f[%S][%l%d]+%f[^%l%d]", "%f[%P][%l%d]+%f[^%l%d]", "^[%l%d]+%f[^%l%d]" },
-                        "^().*()$",
-                    },
-                    -- g = LazyVim.mini.ai_buffer,                                -- buffer
-                    u = ai.gen_spec.function_call(),                           -- u for "Usage"
-                    U = ai.gen_spec.function_call({ name_pattern = "[%w_]" }), -- without dot in function name
+                    g = MiniExtra.gen_ai_spec.buffer(),                                           -- whole buffer
+                    i = MiniExtra.gen_ai_spec.indent(),
                 },
             }
         end,
-        config = function(_, opts)
-            require("mini.ai").setup(opts)
-            -- LazyVim.on_load("which-key.nvim", function()
-            --     vim.schedule(function()
-            --         LazyVim.mini.ai_whichkey(opts)
-            --     end)
-            -- end)
+    },
+
+    {
+        "echasnovski/mini.surround",
+        opts = {
+          mappings = {
+            add = "gsa", -- Add surrounding in Normal and Visual modes
+            delete = "gsd", -- Delete surrounding
+            find = "gsf", -- Find surrounding (to the right)
+            find_left = "gsF", -- Find surrounding (to the left)
+            highlight = "gsh", -- Highlight surrounding
+            replace = "gsr", -- Replace surrounding
+            update_n_lines = "gsn", -- Update `n_lines`
+          },
+        },
+        -- Populate the keys based on the user's options
+        keys = function(plugin, keys)
+            local opts = plugin.opts
+            local mappings = {
+                { "gs", desc = "Surround", mode = { "n", "v" } },
+                { opts.mappings.add, desc = "Add Surrounding", mode = { "n", "v" } },
+                { opts.mappings.delete, desc = "Delete Surrounding" },
+                { opts.mappings.find, desc = "Find Right Surrounding" },
+                { opts.mappings.find_left, desc = "Find Left Surrounding" },
+                { opts.mappings.highlight, desc = "Highlight Surrounding" },
+                { opts.mappings.replace, desc = "Replace Surrounding" },
+                { opts.mappings.update_n_lines, desc = "Update `MiniSurround.config.n_lines`" },
+            }
+            return vim.list_extend(mappings, keys)
         end,
     },
 

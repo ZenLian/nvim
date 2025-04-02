@@ -4,18 +4,57 @@ Neovim configuration powered by [LazyVim](https://github.com/LazyVim/LazyVim).
 
 ![screenshot](https://raw.githubusercontent.com/ZenLian/imglib/main/202211050611008.png)
 
+## 插件列表
+
+### UI
+
+```c
+// int 
+```
+
+```lua
+-- df
+```
+
+- [x] [catppuccin](https://github.com/catppuccin/nvim): 主题
+- [x] bufferline
+- [ ] heirline
+
+### coding
+
+- [x] flash
+- [x] mini.pairs
+- [x] mini.ai
+- [x] mini.surround
+- [ ] ts-comments.nvim
+- [ ] grug-far.nvim
+
+### treesitter
+
+- [ ] incremental_selection/textobjects 的快捷键
+- [x] rainbow-delimiters.nvim
+
+### editor
+
+- [x] which-key.nvim
+- [ ] neotree 准备换成 yazi
+- [x] fzf.lua
+
 ## 代码编辑
 
 ### text-objects(mini.ai)
 
-- `d` 数字
-- `g` 全选
-- `t` tag
-- `i` 缩进
 - `o` 代码块（如 `if`、`for`）
 - `f` **f**unction
+- `a` **a**rgument
 - `c` **c**lass
-- `u` function 调用(**u**sage)
+- `u` **u**sage 函数调用
+- `d` 数字
+- `t` tag
+- `b` 括号 **b**rackets，即 `()[]{}`
+- `q` 引号 **q**uotes，即 <code>""''``</code>
+- `g` 全选
+- `i` 缩进
 
 ### mini-surround
 
@@ -68,4 +107,3 @@ Neovim configuration powered by [LazyVim](https://github.com/LazyVim/LazyVim).
 ### grug-far(==TODO==)
 
 查找/替换 `<space>sr`
-

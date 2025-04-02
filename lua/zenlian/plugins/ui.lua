@@ -1,11 +1,8 @@
 -- Description: UI plugins
 --
 -- [catppuccin/nvim]: theme
--- [which-key.nvim]: onscreen keymap hints
 -- [bufferline.nvim]: bufferline
 -- [heirline.nvim]: statusline
--- [rainbow-delimiters.nvim]: rainbow brackets
-
 return {
     {
         "catppuccin/nvim",
@@ -34,32 +31,6 @@ return {
     },
 
     {
-        "folke/which-key.nvim",
-        event = "VeryLazy",
-        opts = {
-            spec = {}
-        },
-        keys = {
-            {
-                '<leader>?',
-                function()
-                    require("which-key").show({
-                        global = false
-                    })
-                end,
-                desc = "Show local keymaps"
-            },
-            {
-                "<c-w><space>",
-                function()
-                    require("which-key").show({ keys = "<c-w>", loop = true })
-                end,
-                desc = "Window Hydra Mode (which-key)",
-            },
-        }
-    },
-
-    {
         "akinsho/bufferline.nvim",
         event = "VeryLazy",
         keys = {
@@ -82,12 +53,6 @@ return {
                 right_mouse_command = function(n) Snacks.bufdelete(n) end,
                 diagnostics = "nvim_lsp",
                 always_show_bufferline = false,
-                diagnostics_indicator = function(_, _, diag)
-                    local icons = LazyVim.config.icons.diagnostics
-                    local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-                        .. (diag.warning and icons.Warn .. diag.warning or "")
-                    return vim.trim(ret)
-                end,
                 offsets = {
                     {
                         filetype = "neo-tree",
@@ -99,23 +64,8 @@ return {
                         filetype = "snacks_layout_box",
                     },
                 },
-                ---@param opts bufferline.IconFetcherOpts
-                get_element_icon = function(opts)
-                    return LazyVim.config.icons.ft[opts.filetype]
-                end,
             },
         },
-        config = function(_, opts)
-            require("bufferline").setup(opts)
-            -- Fix bufferline when restoring a session
-            vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
-                callback = function()
-                    vim.schedule(function()
-                        pcall(nvim_bufferline)
-                    end)
-                end,
-            })
-        end,
     },
 
     {
@@ -188,24 +138,6 @@ return {
 
             require('heirline').setup {
                 statusline = statusline,
-            }
-        end,
-    },
-
-    -- [NEW] rainbow
-    {
-        'HiPhish/rainbow-delimiters.nvim',
-        event = 'VeryLazy',
-        config = function()
-            local rainbow = require('rainbow-delimiters')
-            require('rainbow-delimiters.setup').setup {
-                strategy = {
-                    [''] = rainbow.strategy['global'],
-                },
-                query = {
-                    [''] = 'rainbow-delimiters',
-                    html = 'rainbow-tags',
-                },
             }
         end,
     },
