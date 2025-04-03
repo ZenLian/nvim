@@ -9,6 +9,13 @@ M.trigger_event = function(event, pattern)
   end
 end
 
+M.on_user_event = function(event, callback)
+  vim.api.nvim_create_autocmd("User", {
+    pattern = event,
+    callback = callback
+  })
+end
+
 return setmetatable(M, {
   __index = function(_, key)
     local module = require(PREFIX .. '.' .. key)

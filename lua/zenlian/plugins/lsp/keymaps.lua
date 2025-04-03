@@ -8,6 +8,8 @@ M.on_attach = function(client, bufnr)
   map({
     { "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
     { "gr", vim.lsp.buf.references, desc = "Goto References", nowait = true },
+    { "[[", function() Snacks.words.jump(-1, true) end, desc = "Previous Word", },
+    { "]]", function() Snacks.words.jump(1, true) end, desc = "Next Word", },
   }, {buffer = bufnr})
 
   if lsp.has(client, 'signatureHelp') then

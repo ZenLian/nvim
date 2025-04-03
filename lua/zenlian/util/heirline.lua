@@ -392,7 +392,7 @@ function M.lsp(opts)
     condition = conditions.lsp_attached,
     update = { 'LspAttach', 'LspDetach' },
     provider = function()
-      local clients = Util.lsp.get_clients { bufnr = 0 }
+      local clients = vim.lsp.get_clients { bufnr = 0 }
       if #clients > 0 then
         return '󰒋 ' .. clients[1].name .. ' '
       end

@@ -9,10 +9,17 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
+      preset = "helix",
       spec = {
-        { '<leader>b', desc = 'Buffers' },
-        { '<leader>f', desc = 'Find' },
-        { '<leader>s', desc = 'Search' },
+        { '<leader>b', group = 'Buffers' },
+        { '<leader><tab>', group = 'Tabs' },
+        { '<leader>f', group = 'Find' },
+        { '<leader>s', group = 'Search' },
+        { '<leader>\\', group = 'Toggles' },
+      },
+      icons = {
+        breadcrumb = ">",
+        separator = "󰁔",
       }
     },
     keys = {
@@ -23,8 +30,18 @@ return {
             global = false
           })
         end,
-        desc = "Show local keymaps"
+        desc = "Local keymaps (which-key)"
       },
+      {
+        '<c-w><space>',
+        function ()
+          require("which-key").show({
+            keys = "<c-w>",
+            loop = true,
+          })
+        end,
+        desc = "Window Hydra Mode (which-key)"
+      }
     }
   },
 

@@ -114,11 +114,13 @@ map("n", "<leader>uI", function() vim.treesitter.inspect_tree() vim.api.nvim_inp
 map('n', '<C-c>', '<cmd>normal! ciw<cr>a', { desc = 'Edit word' })
 
 -- 'g' movement
-map({ 'n', 'x' }, 'gh', '^', { desc = 'Start of line' })
-map({ 'n', 'x' }, 'gl', '$', { desc = 'End of line' })
-map({ 'n', 'x' }, 'gm', '%', { desc = 'Matching character' })
+map({ 'n', 'x' }, 'gh', '^', { desc = 'Go to Start of line' })
+map({ 'n', 'x' }, 'gl', '$', { desc = 'Go to End of line' })
+map({ 'n', 'x' }, 'gm', '%', { desc = 'Go to Matching character' })
 
 -- comments like vscode
 -- FIXME: invalid in terminal
 map('n', '<C-_>', 'gcc', { desc = 'Toggle comment line' })
 map('v', '<C-_>', 'gc', { desc = 'Toggle comment' })
+
+

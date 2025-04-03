@@ -1,24 +1,22 @@
 # 😽 Neovim lua config
 
-Neovim configuration powered by [LazyVim](https://github.com/LazyVim/LazyVim).
+Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 ![screenshot](https://raw.githubusercontent.com/ZenLian/imglib/main/202211050611008.png)
+
+## TODO
+
+- [x] incremental_selection/textobjects 的快捷键
+- [ ] formatter
+- [ ] linter
 
 ## 插件列表
 
 ### UI
 
-```c
-// int 
-```
-
-```lua
--- df
-```
-
 - [x] [catppuccin](https://github.com/catppuccin/nvim): 主题
 - [x] bufferline
-- [ ] heirline
+- [x] heirline
 
 ### coding
 
@@ -31,7 +29,6 @@ Neovim configuration powered by [LazyVim](https://github.com/LazyVim/LazyVim).
 
 ### treesitter
 
-- [ ] incremental_selection/textobjects 的快捷键
 - [x] rainbow-delimiters.nvim
 
 ### editor

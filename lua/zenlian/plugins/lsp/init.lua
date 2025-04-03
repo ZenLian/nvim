@@ -73,6 +73,15 @@ return {
     cmd = "Mason",
     -- build = ":MasonUpdate",
     opts_extend = { 'ensure_installed', },
-    opts = {},
+    opts = {
+      ui = {
+        border = 'rounded',
+        icons = {
+          package_installed = "󰄬",
+          package_pending = "󰑓",
+          package_uninstalled = "●"
+        }
+      },
+    },
   }
 }

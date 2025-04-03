@@ -2,8 +2,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- global variables
-vim.g.default_colorscheme = 'catppuccin'
-vim.g.autoformat = false
+vim.g.zl_colorscheme = 'catppuccin'
+vim.g.zl_autoformat = false
 
 local options = {
   -- gui
