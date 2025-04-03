@@ -2,7 +2,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     event = {"BufReadPost", "BufNewFile", "BufWritePre"},
-    enabled = true,
     dependencies = {
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim", config = function() end },
@@ -16,38 +15,14 @@ return {
       -- @type string[]
       -- preinstalled lsp
       ensure_installed = {
-        "lua_ls",
+        -- "lua_ls",
       },
       servers = {
-        lua_ls = {
-          -- @type LazyKeySpec[]
-          -- extra keymaps
-          keys = {},
-          settings = {
-            Lua = {
-              workspace = {
-                checkThirdParty = false,
-              },
-              codeLens = {
-                enable = true,
-              },
-              completion = {
-                callSnippet = "Replace",
-              },
-              doc = {
-                privateName = { "^_" },
-              },
-              hint = {
-                enable = true,
-                setType = false,
-                paramType = true,
-                paramName = "Disable",
-                semicolon = "Disable",
-                arrayIndex = "Disable",
-              },
-            },
-          }
-        }
+        -- lua_ls = {
+        -- -- @type LazyKeySpec[]
+        -- -- extra keymaps
+        --   keys = {},
+        -- }
       }
     },
     config = function (_, opts)

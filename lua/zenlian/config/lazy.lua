@@ -27,6 +27,7 @@ local function setup()
   require('lazy').setup {
     spec = {
       { import = 'zenlian/plugins' },
+      { import = 'zenlian/plugins/lang' },
     },
     defaults = {
       lazy = true, -- every plugin is lazy-loaded by default
