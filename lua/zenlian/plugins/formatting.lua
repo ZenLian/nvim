@@ -23,13 +23,7 @@ return {
       },
       formatters_by_ft = {},
       format_on_save = function(bufnr)
-        if vim.b[bufnr].zl_autoformat == false then
-          return nil
-        end
-        if vim.b[bufnr].zl_autoformat == true then
-          return {}
-        end
-        if vim.g.zl_autoformat then
+        if require('zenlian.util.format').enabled(bufnr) then
           return {}
         else
           return nil
@@ -37,32 +31,7 @@ return {
       end,
     },
     init = function()
-      vim.g.zl_autoformat = true
-      require('zenlian.util').on_user_event('VeryLazy', function()
-        Snacks.toggle({
-          id = 'vim.g.zl_autoformat',
-          name = 'Format On Save (Global)',
-          get = function()
-            return vim.g.zl_autoformat
-          end,
-          set = function(state)
-            vim.g.zl_autoformat = state
-          end,
-        }):map('<leader>\\f')
-        Snacks.toggle({
-          id = 'vim.b.zl_autoformat',
-          name = 'Format On Save (Buffer)',
-          get = function()
-            if vim.b.zl_autoformat == nil then
-              return true
-            end
-            return vim.b.zl_autoformat
-          end,
-          set = function(state)
-            vim.b.zl_autoformat = state
-          end,
-        }):map('<leader>\\F')
-      end)
+      require('zenlian.util.format').init()
     end,
   },
 }

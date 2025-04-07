@@ -5,6 +5,7 @@ return {
       ensure_installed = { 'lua_ls' },
       servers = {
         lua_ls = {
+          -- custom keymaps
           keys = {},
           settings = {
             Lua = {
@@ -60,8 +61,8 @@ return {
     opts = {
       library = {
         { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-        { path = 'snacks.nvim', words = { 'Snacks' } },
-        { path = 'lazy.nvim', words = { 'LazyVim' } },
+        { path = 'snacks.nvim',        words = { 'Snacks' } },
+        { path = 'lazy.nvim',          words = { 'LazyVim' } },
       },
     },
   },

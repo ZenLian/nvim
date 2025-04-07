@@ -3,7 +3,7 @@ return {
     'saghen/blink.cmp',
     dependencies = { 'rafamadriz/friendly-snippets' },
     version = '*',
-    event = "InsertEnter",
+    event = 'InsertEnter',
     opts = {
       keymap = { preset = 'super-tab' },
       cmdline = {
@@ -26,7 +26,7 @@ return {
         menu = {
           auto_show = true,
           draw = {
-            treesitter = { "lsp" },
+            treesitter = { 'lsp' },
           },
         },
         documentation = {
@@ -42,8 +42,8 @@ return {
       },
       snippets = { preset = 'default' },
       signature = { enabled = true },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
+      fuzzy = { implementation = 'prefer_rust' },
     },
-    opts_extend = { "sources.default" },
-  }
+    opts_extend = { 'sources.default' },
+  },
 }
