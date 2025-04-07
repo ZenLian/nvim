@@ -183,4 +183,40 @@ return {
     },
     opts = {},
   },
+
+  {
+    'lewis6991/gitsigns.nvim',
+    event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
+    opts = {
+      on_attach = function(buffer)
+        local gitsigns = require('gitsigns')
+        local map = require('zenlian.util.keymap').set
+
+        map({
+          {
+            '[g',
+            function()
+              if vim.wo.diff then
+                vim.cmd.normal { '[g', bang = true }
+              else
+                gitsigns.nav_hunk('prev')
+              end
+            end,
+            desc = 'Previous Hunk',
+          },
+          {
+            ']g',
+            function()
+              if vim.wo.diff then
+                vim.cmd.normal { ']g', bang = true }
+              else
+                gitsigns.nav_hunk('next')
+              end
+            end,
+            desc = 'Next Hunk',
+          },
+        }, { buffer = buffer })
+      end,
+    },
+  },
 }
