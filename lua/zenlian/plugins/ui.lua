@@ -73,96 +73,68 @@ return {
     'rebelot/heirline.nvim',
     dependencies = { 'Zeioth/heirline-components.nvim' },
     event = 'UIEnter',
-    opts = function()
-      local C = require('catppuccin.palettes').get_palette()
-      return {
-        colors = C,
-      }
-    end,
     config = function(_, opts)
-      if false then
-        require('heirline').load_colors(opts.colors)
-        -- local conditions = require('heirline.conditions')
-        local components = require('zenlian.util').heirline
+      local heirline = require('heirline')
+      local conditions = require('heirline.conditions')
+      local lib = require('heirline-components.all')
+      local C = require('catppuccin.palettes').get_palette(opts.flavour)
 
-        local defaultStatusline = {
-          components.mode('█  '),
-          -- components.root_dir { cwd = true, color = 'pink' },
-          -- components.filetype { icon_only = true },
-          -- components.filepath { modified_color = 'green' },
-          components.fileflags {},
-          components.trim,
-          components.align,
+      lib.init.subscribe_to_events()
+      heirline.load_colors(lib.hl.get_colors())
 
-          -- components.noice_command { color = 'mauve' },
-          -- components.noice_mode { color = 'peach' },
-          components.lsp { color = 'maroon' },
-          -- components.lazy_status { color = 'maroon' },
-          -- components.git { color = 'rosewater' },
-          components.ruler { color = 'subtext0' },
-          components.mode(' █'),
-        }
-
-        -- local alphaStatusline = {
-        --     condition = function()
-        --         return conditions.buffer_matches {
-        --             filetype = { 'alpha', 'dashboard', 'starter' },
-        --         }
-        --     end,
-        --     components.mode('█  '),
-        --     {
-        --         provider = function()
-        --             return vim.bo.filetype
-        --         end,
-        --     },
-        --     components.align,
-        --     components.nvim_version(),
-        --     components.mode('█'),
-        -- }
-
-        -- local neotreeStatusline = {
-        --     condition = function()
-        --         return vim.tbl_contains({ 'neo-tree' }, vim.bo.filetype)
-        --     end,
-        --     components.mode('█ 󰝰 '),
-        --     components.workdir { color = 'pink' },
-        --     components.align,
-        --     components.mode('█'),
-        -- }
-
-        local statusline = {
-          hl = { fg = 'text', bg = 'base' },
-          fallthrough = false,
-          -- alphaStatusline,
-          -- neotreeStatusline,
-          defaultStatusline,
-        }
-        require('heirline').setup {
-          statusline = statusline,
-        }
-      else
-        local heirline = require('heirline')
-        local lib = require('heirline-components.all')
-
-        lib.init.subscribe_to_events()
-        heirline.load_colors(lib.hl.get_colors())
-
-        local statusline = {
-          hl = { fg = 'fg', bg = 'bg' },
-          lib.component.mode(),
-          lib.component.file_info { filename = { padding = { right = 1 } }, filetype = false },
-          lib.component.fill(),
-          lib.component.lsp(),
-          lib.component.nav {
-            scrollbar = false,
+      local winbar = {
+        init = function(self)
+          self.bufnr = vim.api.nvim_get_current_buf()
+        end,
+        fallthrough = false,
+        -- Winbar for inactive window
+        {
+          condition = function()
+            return not lib.condition.is_active()
+          end,
+          {
+            lib.component.neotree(),
+            lib.component.fill(),
+            lib.component.file_info { hl = { fg = C.subtext0 }, filename = {}, filetype = false },
+            lib.component.aerial(),
           },
-          lib.component.mode { surround = { separator = 'right' } },
-        }
+        },
+        -- Regular winbar
+        {
+          lib.component.neotree(),
+          lib.component.breadcrumbs(),
+          lib.component.fill(),
+          lib.component.file_info { filename = {}, filetype = false },
+          lib.component.aerial(),
+        },
+      }
 
-        heirline.setup {
-          statusline = statusline,
-        }
-      end
+      local statusline = {
+        lib.component.mode(),
+        lib.component.file_info { filename = {}, filetype = false },
+        lib.component.fill(),
+        lib.component.cmd_info(),
+        lib.component.lsp(),
+        lib.component.git_branch(),
+        lib.component.git_diff(),
+        lib.component.nav {
+          scrollbar = false,
+        },
+        lib.component.mode { surround = { separator = 'right' } },
+      }
+
+      heirline.setup {
+        winbar = winbar,
+        statusline = statusline,
+        opts = {
+          disable_winbar_cb = function(args)
+            return conditions.buffer_matches({
+              buftype = { 'nofile', 'help', 'quickfix', 'aerial', 'neo-tree' },
+              filetype = { 'neo-tree', '^git.*' },
+            }, args.buf)
+          end,
+        },
+      }
     end,
   },
 }
