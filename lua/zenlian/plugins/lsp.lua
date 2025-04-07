@@ -26,6 +26,9 @@ return {
       }
     },
     config = function (_, opts)
+      -- ui related
+      require('lspconfig.ui.windows').default_options.border = 'rounded'
+
       local function on_attach(client, bufnr)
         require('zenlian.plugins.lsp.keymaps').on_attach(client, bufnr)
       end

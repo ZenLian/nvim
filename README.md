@@ -8,6 +8,7 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 - [x] incremental_selection/textobjects 的快捷键
 - [ ] formatter
+  - [ ] toggle formatter
 - [ ] linter
 
 ## 插件列表
@@ -16,7 +17,7 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 
 - [x] [catppuccin](https://github.com/catppuccin/nvim): 主题
 - [x] bufferline
-- [x] heirline
+- [ ] heirline 替换 bufferline
 
 ### coding
 
