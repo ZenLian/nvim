@@ -7,8 +7,7 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 ## TODO
 
 - [x] incremental_selection/textobjects 的快捷键
-- [ ] formatter
-  - [ ] toggle formatter
+- [x] formatter
 - [ ] linter
 
 ## 插件列表
