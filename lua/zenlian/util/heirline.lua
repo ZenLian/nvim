@@ -93,11 +93,11 @@ function M.root_dir(opts)
     parent = true,
     other = true,
     icon = '󱉭',
-    color = '',
+    color = 'fg',
   }, opts or {})
   local function get()
-    local cwd = Util.root.cwd()
-    local root = Util.root.get { normalize = true }
+    local cwd = vim.uv.cwd() or ''
+    local root = Util.root() or ''
     local name = vim.fs.basename(root)
 
     if root == cwd then
@@ -174,8 +174,8 @@ function M.filepath(opts)
     init = function(self)
       self.path = vim.fn.expand('%:p') --[[@as string]]
 
-      local root = Util.root()
-      local cwd = vim.uv.cwd()
+      local root = Util.root() or ''
+      local cwd = vim.uv.cwd() or ''
       if opts.relative == 'cwd' and self.path:find(cwd, 1, true) == 1 then
         self.path = self.path:sub(#cwd + 2)
       elseif self.path:find(root, 1, true) == 1 then
@@ -183,7 +183,7 @@ function M.filepath(opts)
       end
 
       local parts = vim.split(self.path, '[\\/]')
-      if #parts > 3 then
+      if #parts > 5 then
         parts = { parts[1], '…', parts[#parts - 1], parts[#parts] }
       end
 
@@ -235,26 +235,15 @@ function M.fileflags()
       condition = function()
         return vim.bo.modified
       end,
-      provider = '[]',
+      provider = '●',
       hl = { fg = 'green' },
     },
   }
 end
 
-function M.file_info()
-  return {
-    init = function(self)
-      self.path = vim.fn.expand('%:p') --[[@as string]]
-    end,
-    provider = function(self)
-      return self.path
-    end,
-  }
-end
-
 function M.git(opts)
   opts = vim.tbl_extend('force', {
-    color = '',
+    color = 'purple',
   }, opts or {})
 
   return {
@@ -272,7 +261,7 @@ function M.git(opts)
       on_click = {
         callback = function()
           vim.schedule(function()
-            require('telescope.builtin').git_branches()
+            vim.cmd('FzfLua git_branches')
           end)
         end,
         name = 'heirline_gitbranch',
@@ -404,7 +393,7 @@ end
 
 function M.lsp(opts)
   opts = vim.tbl_extend('force', {
-    color = '',
+    color = 'cyan',
   }, opts or {})
 
   return {

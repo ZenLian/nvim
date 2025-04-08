@@ -69,7 +69,6 @@ return {
 
   {
     'rebelot/heirline.nvim',
-    dependencies = { 'Zeioth/heirline-components.nvim' },
     event = 'UIEnter',
     opts = function()
       local C = require('catppuccin.palettes').get_palette()
@@ -89,100 +88,41 @@ return {
       }
     end,
     config = function(_, opts)
-      if false then
-        local heirline = require('heirline')
-        local conditions = require('heirline.conditions')
-        local lib = require('heirline-components.all')
-        local C = require('catppuccin.palettes').get_palette()
+      local heirline = require('heirline')
+      local conditions = require('heirline.conditions')
+      local lib = require('zenlian.util.heirline')
 
-        lib.init.subscribe_to_events()
-        heirline.load_colors(lib.hl.get_colors())
+      lib.setup(opts)
 
-        local winbar = {
-          init = function(self)
-            self.bufnr = vim.api.nvim_get_current_buf()
+      local statusline = {
+        hl = { fg = 'fg', bg = 'bg' },
+        lib.mode(),
+        lib.space(),
+        lib.filepath { relative = 'root' },
+        lib.fileflags(),
+        lib.space(),
+        lib.git(),
+        lib.align(),
+
+        lib.lsp(),
+        lib.space(),
+        lib.ruler(),
+        lib.space(),
+        lib.mode(),
+      }
+
+      heirline.setup {
+        -- winbar = winbar,
+        statusline = statusline,
+        opts = {
+          disable_winbar_cb = function(args)
+            return conditions.buffer_matches({
+              buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
+              filetype = { 'neo-tree', '^git.*', 'fzf' },
+            }, args.buf)
           end,
-          fallthrough = false,
-          -- Winbar for inactive window
-          {
-            condition = function()
-              return not lib.condition.is_active()
-            end,
-            {
-              lib.component.neotree(),
-              lib.component.fill(),
-              lib.component.file_info { hl = { fg = C.subtext0 }, filename = {}, filetype = false },
-              lib.component.aerial(),
-            },
-          },
-          -- Regular winbar
-          {
-            lib.component.neotree(),
-            lib.component.breadcrumbs(),
-            lib.component.fill(),
-            lib.component.file_info { filename = {}, filetype = false },
-            lib.component.aerial(),
-          },
-        }
-
-        local statusline = {
-          hl = { fg = 'fg', bg = 'bg' },
-          lib.component.mode(),
-          lib.component.file_info { filename = {}, filetype = false },
-          lib.component.fill(),
-          lib.component.cmd_info(),
-          lib.component.lsp(),
-          lib.component.git_branch(),
-          lib.component.git_diff(),
-          lib.component.nav {
-            scrollbar = false,
-          },
-          lib.component.mode { surround = { separator = 'right' } },
-        }
-        heirline.setup {
-          -- winbar = winbar,
-          statusline = statusline,
-          opts = {
-            disable_winbar_cb = function(args)
-              return conditions.buffer_matches({
-                buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
-                filetype = { 'neo-tree', '^git.*', 'fzf' },
-              }, args.buf)
-            end,
-          },
-        }
-      else
-        local heirline = require('heirline')
-        local conditions = require('heirline.conditions')
-        local lib = require('zenlian.util.heirline')
-
-        lib.setup(opts)
-
-        local statusline = {
-          hl = { fg = 'fg', bg = 'bg' },
-          lib.mode(),
-          lib.space(),
-          lib.file_info(),
-          lib.align(),
-
-          lib.ruler(),
-          lib.space(),
-          lib.mode(),
-        }
-
-        heirline.setup {
-          -- winbar = winbar,
-          statusline = statusline,
-          opts = {
-            disable_winbar_cb = function(args)
-              return conditions.buffer_matches({
-                buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
-                filetype = { 'neo-tree', '^git.*', 'fzf' },
-              }, args.buf)
-            end,
-          },
-        }
-      end
+        },
+      }
     end,
   },
 }

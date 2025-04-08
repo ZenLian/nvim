@@ -37,14 +37,16 @@ M.on_user_event = function(event, callback)
   })
 end
 
---- get root directory based on
+--- get root directory of buffer based on:
 --- * lsp
+--- * root patterns
 --- @param bufnr? integer
 M.root = function(bufnr)
   bufnr = bufnr or vim.api.nvim_get_current_buf()
   if not vim.b[bufnr].zl_rootdir then
     local lsputil = require('zenlian.util.lsp')
-    vim.b[bufnr].zl_rootdir = lsputil.root(bufnr) or vim.fs.root(bufnr, { '.git', '.editorconfig' })
+    local root_pattern = { '.git', '.editorconfig' }
+    vim.b[bufnr].zl_rootdir = lsputil.root(bufnr) or vim.fs.root(bufnr, root_pattern)
   end
   return vim.b[bufnr].zl_rootdir
 end
