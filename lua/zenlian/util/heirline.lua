@@ -1,16 +1,23 @@
+local heirline = require('heirline')
 local conditions = require('heirline.conditions')
 local Util = require('zenlian.util')
 
 local M = {
-  trim = {
-    provider = '%<',
-  },
-  align = {
-    provider = '%=',
-  },
-  space = {
-    provider = ' ',
-  },
+  trim = function()
+    return {
+      provider = '%<',
+    }
+  end,
+  align = function()
+    return {
+      provider = '%=',
+    }
+  end,
+  space = function()
+    return {
+      provider = ' ',
+    }
+  end,
 }
 
 local mode_names = {
@@ -53,9 +60,9 @@ local mode_names = {
 local mode_colors = {
   N = 'blue',
   I = 'green',
-  V = 'mauve',
-  R = 'mauve',
-  C = 'peach',
+  V = 'purple',
+  R = 'red',
+  C = 'yellow',
   T = 'green',
 }
 
@@ -70,9 +77,10 @@ end
 
 function M.mode(provider)
   return {
-    provider = provider or '█',
+    -- provider = provider or '█',
+    provider = provider or ' ',
     hl = function()
-      return { fg = get_mode_color() }
+      return { bg = get_mode_color() }
     end,
     update = { 'ModeChanged' },
   }
@@ -141,7 +149,7 @@ function M.filetype(opts)
   return {
     init = function(self)
       self.icon, self.icon_color =
-          require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
+        require('nvim-web-devicons').get_icon_color_by_filetype(vim.bo.filetype, { default = true })
     end,
     provider = function(self)
       local result = self.icon
@@ -166,11 +174,11 @@ function M.filepath(opts)
     init = function(self)
       self.path = vim.fn.expand('%:p') --[[@as string]]
 
-      local root = Util.root.get { normalize = true }
-      local cwd = Util.root.cwd()
+      local root = Util.root()
+      local cwd = vim.uv.cwd()
       if opts.relative == 'cwd' and self.path:find(cwd, 1, true) == 1 then
         self.path = self.path:sub(#cwd + 2)
-      else
+      elseif self.path:find(root, 1, true) == 1 then
         self.path = self.path:sub(#root + 2)
       end
 
@@ -230,6 +238,17 @@ function M.fileflags()
       provider = '[]',
       hl = { fg = 'green' },
     },
+  }
+end
+
+function M.file_info()
+  return {
+    init = function(self)
+      self.path = vim.fn.expand('%:p') --[[@as string]]
+    end,
+    provider = function(self)
+      return self.path
+    end,
   }
 end
 
@@ -407,6 +426,11 @@ function M.lsp(opts)
     },
     hl = { fg = opts.color },
   }
+end
+
+function M.setup(opts)
+  opts = Util.tbl_extend({}, opts)
+  heirline.load_colors(opts.colors)
 end
 
 return M

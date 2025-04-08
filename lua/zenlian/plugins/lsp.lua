@@ -34,9 +34,11 @@ return {
 
       local function setup(server)
         local server_opts = opts.servers[server] or {}
+        local keys = vim.deepcopy(server_opts.keys)
+        server_opts.keys = nil
         -- setup on_attach callback
         server_opts.on_attach = function(client, bufnr)
-          require('zenlian.plugins.lsp.keymaps').on_attach(client, bufnr, server_opts.keys)
+          require('zenlian.plugins.lsp.keymaps').on_attach(client, bufnr, keys)
         end
         server_opts.capabilities = require('blink.cmp').get_lsp_capabilities(server_opts.capabilities)
         require('lspconfig')[server].setup(server_opts)

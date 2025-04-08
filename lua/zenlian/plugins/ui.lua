@@ -8,12 +8,11 @@ return {
     'catppuccin/nvim',
     lazy = true,
     name = 'catppuccin',
-    opts = {
-      flavour = 'mocha',
-      term_colors = true,
-    },
-    config = function(_, opts)
-      local catppuccin = require('catppuccin')
+    opts = function()
+      local opts = {
+        flavour = 'mocha',
+        term_colors = true,
+      }
       local C = require('catppuccin.palettes').get_palette(opts.flavour)
       opts.custom_highlights = {
         -- Pmenu = { fg = C.text, bg = C.surface0 },
@@ -26,8 +25,7 @@ return {
         -- flash.nvim
         FlashLabel = { fg = C.base, bg = C.green },
       }
-
-      catppuccin.setup(opts)
+      return opts
     end,
   },
 
@@ -73,68 +71,118 @@ return {
     'rebelot/heirline.nvim',
     dependencies = { 'Zeioth/heirline-components.nvim' },
     event = 'UIEnter',
+    opts = function()
+      local C = require('catppuccin.palettes').get_palette()
+      return {
+        colors = {
+          fg = C.text,
+          bg = C.base,
+          black = C.base,
+          red = C.red,
+          green = C.green,
+          yellow = C.yellow,
+          blue = C.blue,
+          purple = C.mauve,
+          cyan = C.sky,
+          white = C.text,
+        },
+      }
+    end,
     config = function(_, opts)
-      local heirline = require('heirline')
-      local conditions = require('heirline.conditions')
-      local lib = require('heirline-components.all')
-      local C = require('catppuccin.palettes').get_palette(opts.flavour)
+      if false then
+        local heirline = require('heirline')
+        local conditions = require('heirline.conditions')
+        local lib = require('heirline-components.all')
+        local C = require('catppuccin.palettes').get_palette()
 
-      lib.init.subscribe_to_events()
-      heirline.load_colors(lib.hl.get_colors())
+        lib.init.subscribe_to_events()
+        heirline.load_colors(lib.hl.get_colors())
 
-      local winbar = {
-        init = function(self)
-          self.bufnr = vim.api.nvim_get_current_buf()
-        end,
-        fallthrough = false,
-        -- Winbar for inactive window
-        {
-          condition = function()
-            return not lib.condition.is_active()
+        local winbar = {
+          init = function(self)
+            self.bufnr = vim.api.nvim_get_current_buf()
           end,
+          fallthrough = false,
+          -- Winbar for inactive window
+          {
+            condition = function()
+              return not lib.condition.is_active()
+            end,
+            {
+              lib.component.neotree(),
+              lib.component.fill(),
+              lib.component.file_info { hl = { fg = C.subtext0 }, filename = {}, filetype = false },
+              lib.component.aerial(),
+            },
+          },
+          -- Regular winbar
           {
             lib.component.neotree(),
+            lib.component.breadcrumbs(),
             lib.component.fill(),
-            lib.component.file_info { hl = { fg = C.subtext0 }, filename = {}, filetype = false },
+            lib.component.file_info { filename = {}, filetype = false },
             lib.component.aerial(),
           },
-        },
-        -- Regular winbar
-        {
-          lib.component.neotree(),
-          lib.component.breadcrumbs(),
-          lib.component.fill(),
+        }
+
+        local statusline = {
+          hl = { fg = 'fg', bg = 'bg' },
+          lib.component.mode(),
           lib.component.file_info { filename = {}, filetype = false },
-          lib.component.aerial(),
-        },
-      }
+          lib.component.fill(),
+          lib.component.cmd_info(),
+          lib.component.lsp(),
+          lib.component.git_branch(),
+          lib.component.git_diff(),
+          lib.component.nav {
+            scrollbar = false,
+          },
+          lib.component.mode { surround = { separator = 'right' } },
+        }
+        heirline.setup {
+          -- winbar = winbar,
+          statusline = statusline,
+          opts = {
+            disable_winbar_cb = function(args)
+              return conditions.buffer_matches({
+                buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
+                filetype = { 'neo-tree', '^git.*', 'fzf' },
+              }, args.buf)
+            end,
+          },
+        }
+      else
+        local heirline = require('heirline')
+        local conditions = require('heirline.conditions')
+        local lib = require('zenlian.util.heirline')
 
-      local statusline = {
-        lib.component.mode(),
-        lib.component.file_info { filename = {}, filetype = false },
-        lib.component.fill(),
-        lib.component.cmd_info(),
-        lib.component.lsp(),
-        lib.component.git_branch(),
-        lib.component.git_diff(),
-        lib.component.nav {
-          scrollbar = false,
-        },
-        lib.component.mode { surround = { separator = 'right' } },
-      }
+        lib.setup(opts)
 
-      heirline.setup {
-        winbar = winbar,
-        statusline = statusline,
-        opts = {
-          disable_winbar_cb = function(args)
-            return conditions.buffer_matches({
-              buftype = { 'nofile', 'help', 'quickfix', 'aerial', 'neo-tree' },
-              filetype = { 'neo-tree', '^git.*' },
-            }, args.buf)
-          end,
-        },
-      }
+        local statusline = {
+          hl = { fg = 'fg', bg = 'bg' },
+          lib.mode(),
+          lib.space(),
+          lib.file_info(),
+          lib.align(),
+
+          lib.ruler(),
+          lib.space(),
+          lib.mode(),
+        }
+
+        heirline.setup {
+          -- winbar = winbar,
+          statusline = statusline,
+          opts = {
+            disable_winbar_cb = function(args)
+              return conditions.buffer_matches({
+                buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
+                filetype = { 'neo-tree', '^git.*', 'fzf' },
+              }, args.buf)
+            end,
+          },
+        }
+      end
     end,
   },
 }

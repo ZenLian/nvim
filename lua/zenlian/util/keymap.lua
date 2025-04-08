@@ -6,9 +6,9 @@ local function resolve(spec)
   spec[1] = nil
   keymap.rhs = spec[2]
   spec[2] = nil
-  keymap.mode = spec.mode or "n"
+  keymap.mode = spec.mode or 'n'
   spec.mode = nil
-  keymap.opts = spec
+  keymap.opts = vim.deepcopy(spec)
   return keymap
 end
 
@@ -21,6 +21,7 @@ M.set = function(spec, opts)
   if spec == nil or #spec == 0 then
     return
   end
+  spec = vim.deepcopy(spec)
 
   local keymaps = {}
 
@@ -37,7 +38,6 @@ M.set = function(spec, opts)
     key_opts.silent = key_opts.silent ~= false
     vim.keymap.set(key.mode, key.lhs, key.rhs, key_opts)
   end
-
 end
 
 return M
