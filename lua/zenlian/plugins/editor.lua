@@ -5,6 +5,7 @@
 -- [fzf.lua]:                    fuzzy finder
 -- [aerial]                      symbol list
 -- [gitsigns]                    git integration
+-- [neogit]                      magit in neovim
 -- [harpoon]                     quick file switcher
 
 return {
@@ -252,6 +253,26 @@ return {
         end,
       }):map('<leader>\\g')
     end,
+  },
+
+  {
+    'NeogitOrg/neogit',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'sindrets/diffview.nvim',
+    },
+    cmd = 'Neogit',
+    keys = {
+      { '<leader>gg', '<cmd>Neogit<cr>', desc = 'Neogit' },
+    },
+    opts = {
+      disable_commit_confirmation = true,
+      signs = {
+        section = { '', '' },
+        item = { '', '' },
+        hunk = { '', '' },
+      },
+    },
   },
 
   {
