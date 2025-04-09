@@ -26,6 +26,15 @@ return {
       words = {
         enabled = true,
       },
+      zen = {
+        toggles = {
+          dim = false,
+          git_signs = false,
+          mini_diff_signs = false,
+          diagnostics = false,
+          inlay_hints = false,
+        },
+      },
       toggle = {
         color = {
           enabled = 'green',
@@ -34,6 +43,11 @@ return {
         wk_desc = {
           enabled = '',
           disabled = '',
+        },
+      },
+      styles = {
+        zen = {
+          backdrop = { transparent = false, blend = 75 },
         },
       },
     },

@@ -239,6 +239,19 @@ return {
         map({ 'o', 'x' }, 'ah', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
       end,
     },
+    config = function(_, opts)
+      require('gitsigns').setup(opts)
+      Snacks.toggle({
+        id = 'git_signs',
+        name = 'Git Signs',
+        get = function()
+          return require('gitsigns.config').config.signcolumn
+        end,
+        set = function(state)
+          require('gitsigns').toggle_signs(state)
+        end,
+      }):map('<leader>\\g')
+    end,
   },
 
   {
