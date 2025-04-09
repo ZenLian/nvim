@@ -3,18 +3,24 @@
 -- [which-key.nvim]:             keymap cheatsheet
 -- [neo-tree.nvim]:              file explorer
 -- [fzf.lua]:                    fuzzy finder
+-- [aerial]                      symbol list
+-- [gitsigns]                    git integration
+-- [harpoon]                     quick file switcher
 
 return {
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
+    opts_extend = { 'spec', 'icons.rules' },
     opts = {
       preset = 'helix',
       spec = {
         { '<leader><tab>', group = 'Tabs' },
         { '<leader>b', group = 'Buffers' },
         { '<leader>f', group = 'Find' },
-        { '<leader>l', group = 'Language' },
+        { '<leader>g', group = 'Git', icon = { icon = '󰘬', color = 'orange' } },
+        { '<leader>gh', group = 'Hunk' },
+        { '<leader>l', group = 'Language', icon = '󰅩' },
         { '<leader>s', group = 'Search' },
         { '<leader>\\', group = 'Toggles' },
       },
@@ -141,7 +147,9 @@ return {
   {
     'ibhagwan/fzf-lua',
     cmd = 'FzfLua',
-    opts = {},
+    opts = {
+      nbsp = '\xc2\xa0',
+    },
     keys = {
       -- resume
       { '<leader><space>', '<cmd>FzfLua resume<cr>', desc = 'Resume picker' },
@@ -195,33 +203,120 @@ return {
     opts = {
       on_attach = function(buffer)
         local gitsigns = require('gitsigns')
-        local map = require('zenlian.util.keymap').set
 
-        map({
-          {
-            '[g',
-            function()
-              if vim.wo.diff then
-                vim.cmd.normal { '[g', bang = true }
-              else
-                gitsigns.nav_hunk('prev')
-              end
-            end,
-            desc = 'Previous Hunk',
-          },
-          {
-            ']g',
-            function()
-              if vim.wo.diff then
-                vim.cmd.normal { ']g', bang = true }
-              else
-                gitsigns.nav_hunk('next')
-              end
-            end,
-            desc = 'Next Hunk',
-          },
-        }, { buffer = buffer })
+        local function map(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = buffer })
+        end
+
+        map('n', '[g', function()
+          if vim.wo.diff then
+            vim.cmd.normal { '[g', bang = true }
+          else
+            gitsigns.nav_hunk('prev')
+          end
+        end, 'Previous Hunk')
+        map('n', ']g', function()
+          if vim.wo.diff then
+            vim.cmd.normal { ']g', bang = true }
+          else
+            gitsigns.nav_hunk('next')
+          end
+        end, 'Next Hunk')
+        map({ 'n', 'v' }, '<leader>ghs', gitsigns.stage_hunk, '(Un)Stage Hunk')
+        map({ 'n', 'v' }, '<leader>ghr', gitsigns.reset_hunk, 'Reset Hunk')
+        map('n', '<leader>ghp', gitsigns.preview_hunk_inline, 'Stage Buffer')
+        map('n', '<leader>ghS', gitsigns.stage_buffer, 'Stage Buffer')
+        map('n', '<leader>ghR', gitsigns.reset_buffer, 'Reset Buffer')
+        map('n', '<leader>gb', function()
+          gitsigns.blame_line { full = true }
+        end, 'Blame Line')
+        map('n', '<leader>gB', gitsigns.blame, 'Blame Buffer')
+        map('n', '<leader>gd', gitsigns.diffthis, 'Diffthis')
+        map('n', '<leader>gD', function()
+          gitsigns.diffthis('~')
+        end, 'Diffthis~')
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
+        map({ 'o', 'x' }, 'ah', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
       end,
     },
+  },
+
+  {
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      {
+        'folke/which-key.nvim',
+        opts = {
+          icons = {
+            rules = {
+              { plugin = 'harpoon', icon = '󰒤', color = 'azure' },
+            },
+          },
+        },
+      },
+    },
+    opts = {
+      settings = {
+        save_on_toggle = true,
+      },
+    },
+    keys = function()
+      local keys = {
+        {
+          '<leader>H',
+          function()
+            local harpoon = require('harpoon')
+            harpoon:list():add()
+          end,
+          desc = 'Harpoon Add File',
+        },
+        {
+          '<leader>h',
+          function()
+            local harpoon = require('harpoon')
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+          end,
+          desc = 'Harpoon Quick Menu',
+        },
+      }
+      for i = 1, 5 do
+        table.insert(keys, {
+          '<leader>' .. i,
+          function()
+            local harpoon = require('harpoon')
+            harpoon:list():select(i)
+          end,
+          desc = 'Harpoon to File ' .. i,
+        })
+      end
+      return keys
+    end,
+    config = function(_, opts)
+      local harpoon = require('harpoon')
+      harpoon:setup(opts)
+
+      -- Highlight current file in the harpoon buffer list
+      local harpoon_extensions = require('harpoon.extensions')
+      harpoon:extend(harpoon_extensions.builtins.highlight_current_file())
+
+      -- add keymaps for opening files in splits & tabs.
+      harpoon:extend {
+        UI_CREATE = function(cx)
+          vim.keymap.set('n', '<C-v>', function()
+            harpoon.ui:select_menu_item { vsplit = true }
+          end, { buffer = cx.bufnr })
+
+          vim.keymap.set('n', '<C-x>', function()
+            harpoon.ui:select_menu_item { split = true }
+          end, { buffer = cx.bufnr })
+
+          vim.keymap.set('n', '<C-t>', function()
+            harpoon.ui:select_menu_item { tabedit = true }
+          end, { buffer = cx.bufnr })
+        end,
+      }
+    end,
   },
 }

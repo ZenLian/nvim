@@ -15,6 +15,8 @@ return {
         Snacks.toggle.dim():map('<leader>\\d')
         Snacks.toggle.zen():map('<leader>\\z')
         Snacks.toggle.words():map('<leader>\\W')
+
+        Snacks.toggle.diagnostics():map('<leader>\\x')
       end)
     end,
     opts = {
