@@ -209,16 +209,17 @@ return {
           vim.keymap.set(mode, lhs, rhs, { desc = desc, buffer = buffer })
         end
 
-        map('n', '[g', function()
+        -- same as vimdiff `:h jumpto-diffs`
+        map('n', '[c', function()
           if vim.wo.diff then
-            vim.cmd.normal { '[g', bang = true }
+            vim.cmd.normal { '[c', bang = true }
           else
             gitsigns.nav_hunk('prev')
           end
         end, 'Previous Hunk')
-        map('n', ']g', function()
+        map('n', ']c', function()
           if vim.wo.diff then
-            vim.cmd.normal { ']g', bang = true }
+            vim.cmd.normal { ']c', bang = true }
           else
             gitsigns.nav_hunk('next')
           end
@@ -232,10 +233,10 @@ return {
           gitsigns.blame_line { full = true }
         end, 'Blame Line')
         map('n', '<leader>gB', gitsigns.blame, 'Blame Buffer')
-        map('n', '<leader>gd', gitsigns.diffthis, 'Diffthis')
-        map('n', '<leader>gD', function()
-          gitsigns.diffthis('~')
-        end, 'Diffthis~')
+        -- map('n', '<leader>gd', gitsigns.diffthis, 'Diffthis')
+        -- map('n', '<leader>gD', function()
+        --   gitsigns.diffthis('~')
+        -- end, 'Diffthis~')
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
         map({ 'o', 'x' }, 'ah', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
       end,
@@ -253,6 +254,27 @@ return {
         end,
       }):map('<leader>\\g')
     end,
+  },
+
+  {
+    'sindrets/diffview.nvim',
+    keys = {
+      { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Open Diff View' },
+      { '<leader>gD', '<cmd>DiffviewClose<cr>', desc = 'Close Diff View' },
+    },
+    opts = {
+      keymaps = {
+        view = {
+          ['q'] = '<cmd>DiffviewClose<cr>',
+        },
+        file_panel = {
+          ['q'] = '<cmd>DiffviewClose<cr>',
+        },
+        file_history_panel = {
+          ['q'] = '<cmd>DiffviewClose<cr>',
+        },
+      },
+    },
   },
 
   {
