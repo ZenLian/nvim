@@ -147,7 +147,7 @@ return {
           'RainbowDelimiterYellow',
           'RainbowDelimiterBlue',
           'RainbowDelimiterOrange',
-          'RainbowDelimiterGreen',
+          -- 'RainbowDelimiterGreen',
           'RainbowDelimiterViolet',
           'RainbowDelimiterCyan',
         },

@@ -157,18 +157,32 @@ return {
         desc = 'Explorer Oil',
       },
     },
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {
-      keymaps = {
-        ['q'] = { 'actions.close', mode = 'n' },
-        ['<C-h>'] = false,
-        ['<C-l>'] = false,
-        ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
-        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
-        ['<C-t>'] = { 'actions.select', opts = { tab = true } },
-      },
-    },
+    opts = function()
+      local detail = false
+      ---@module 'oil'
+      ---@type oil.SetupOpts
+      return {
+        keymaps = {
+          ['q'] = { 'actions.close', mode = 'n' },
+          ['gd'] = {
+            desc = 'Toggle file detail view',
+            callback = function()
+              detail = not detail
+              if detail then
+                require('oil').set_columns { 'icon', 'permissions', 'size', 'mtime' }
+              else
+                require('oil').set_columns { 'icon' }
+              end
+            end,
+          },
+          ['<C-h>'] = false,
+          ['<C-l>'] = false,
+          ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
+          ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+          ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+        },
+      }
+    end,
   },
 
   -- [fzf.lua] fuzzy finder
