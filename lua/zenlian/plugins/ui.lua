@@ -111,15 +111,23 @@ return {
         lib.mode(),
       }
 
+      local winbar = {
+        hl = { fg = 'fg', bg = 'bg' },
+        fallthrough = false,
+        lib.oil(),
+      }
+
       heirline.setup {
-        -- winbar = winbar,
+        winbar = winbar,
         statusline = statusline,
         opts = {
           disable_winbar_cb = function(args)
-            return conditions.buffer_matches({
-              buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
-              filetype = { 'neo-tree', '^git.*', 'fzf' },
-            }, args.buf)
+            -- return conditions.buffer_matches({
+            --   buftype = { 'nofile', 'help', 'quickfix', 'aerial' },
+            --   filetype = { 'neo-tree', '^git.*', 'fzf' },
+            -- }, args.buf)
+            -- only show in some buffers
+            return not conditions.buffer_matches({ filetype = { 'oil' } }, args.buf)
           end,
         },
       }

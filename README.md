@@ -9,6 +9,7 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 - [x] incremental_selection/textobjects 的快捷键
 - [x] formatter
 - [ ] linter
+- [ ] nvim-possesion
 
 ## 插件列表
 

@@ -2,6 +2,7 @@
 --
 -- [which-key.nvim]:             keymap cheatsheet
 -- [neo-tree.nvim]:              file explorer
+-- [oil.nvim]                    file explorer in buffer
 -- [fzf.lua]:                    fuzzy finder
 -- [aerial]                      symbol list
 -- [gitsigns]                    git integration
@@ -70,12 +71,11 @@ return {
           -- require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
           require('neo-tree.command').execute {
             reveal = true,
-            position = 'float',
             toggle = true,
             dir = vim.uv.cwd(),
           }
         end,
-        desc = 'Explorer NeoTree (Root Dir)',
+        desc = 'Explorer NeoTree (CWD)',
       },
     },
     deactivate = function()
@@ -140,6 +140,33 @@ return {
             ['w'] = 'none',
           },
         },
+      },
+    },
+  },
+
+  {
+    'stevearc/oil.nvim',
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
+    -- Optional dependencies
+    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    keys = {
+      {
+        '<leader>E',
+        '<cmd>Oil<cr>',
+        desc = 'Explorer Oil',
+      },
+    },
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      keymaps = {
+        ['q'] = { 'actions.close', mode = 'n' },
+        ['<C-h>'] = false,
+        ['<C-l>'] = false,
+        ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
+        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+        ['<C-t>'] = { 'actions.select', opts = { tab = true } },
       },
     },
   },
