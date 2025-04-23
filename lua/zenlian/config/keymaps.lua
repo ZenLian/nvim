@@ -108,6 +108,22 @@ map('n', '<leader>z', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 -- new file
 map('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
 
+-- diagnostics
+local diagnostics_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go { severity = severity }
+  end
+end
+map('n', '<leader>ud', vim.diagnostic.open_float, { desc = 'Line Diagnostic' })
+map('n', ']d', diagnostics_goto(true), { desc = 'Next Diagnostic' })
+map('n', '[d', diagnostics_goto(false), { desc = 'False Diagnostic' })
+map('n', ']e', diagnostics_goto(true, 'ERROR'), { desc = 'Next Diagnostic' })
+map('n', '[e', diagnostics_goto(false, 'ERROR'), { desc = 'False Diagnostic' })
+map('n', ']w', diagnostics_goto(true, 'WARN'), { desc = 'Next Diagnostic' })
+map('n', '[w', diagnostics_goto(false, 'WARN'), { desc = 'False Diagnostic' })
+
 -- local lazyterm = function()
 --   Util.terminal(nil, { cwd = Util.root() })
 -- end

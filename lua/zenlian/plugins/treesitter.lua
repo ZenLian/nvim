@@ -112,6 +112,12 @@ return {
     end,
   },
 
+  {
+    'folke/ts-comments.nvim',
+    event = 'VeryLazy',
+    opts = {},
+  },
+
   -- Automatically add closing tags for HTML and JSX
   {
     'windwp/nvim-ts-autotag',
