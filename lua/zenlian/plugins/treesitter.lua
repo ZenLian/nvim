@@ -1,6 +1,4 @@
--- [nvim-treesitter]
--- [rainbow-delimiters.nvim]: rainbow brackets
---
+---@type LazyPluginSpec[]
 return {
   {
     'nvim-treesitter/nvim-treesitter',
