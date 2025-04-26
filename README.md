@@ -26,7 +26,7 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 - [x] mini.ai
 - [x] mini.surround
 - [ ] ts-comments.nvim
-- [ ] grug-far.nvim
+- [x] grug-far.nvim
 
 ### treesitter
 

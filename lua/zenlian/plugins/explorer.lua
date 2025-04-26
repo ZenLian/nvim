@@ -11,7 +11,7 @@ return {
     cmd = 'Neotree',
     keys = {
       {
-        '<leader>fe',
+        '<leader>e',
         function()
           -- require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
           require('neo-tree.command').execute {
@@ -146,14 +146,14 @@ return {
     keys = {
       -- 👇 in this section, choose your own keymappings!
       {
-        '<leader>e',
+        '<leader>-',
         mode = { 'n', 'v' },
         '<cmd>Yazi<cr>',
         desc = 'Explorer yazi(cfile)',
       },
       {
         -- Open in the current working directory
-        '<leader>fE',
+        '<leader>fe',
         '<cmd>Yazi cwd<cr>',
         desc = 'Explorer yazi(CWD)',
       },
