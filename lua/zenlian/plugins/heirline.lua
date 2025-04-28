@@ -67,7 +67,7 @@ return {
       local helpStatusline = {
         condition = function()
           return conditions.buffer_matches {
-            filetype = { 'fzf' },
+            filetype = { 'fzf', 'trouble' },
             buftype = { 'help', 'quickfix' },
           }
         end,

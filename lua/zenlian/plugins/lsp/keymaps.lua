@@ -9,8 +9,11 @@ M.on_attach = function(client, bufnr, keys)
   local lsp = Util.lsp
 
   map({
-    { 'gd', vim.lsp.buf.definition, desc = 'Goto Definition' },
-    { 'gr', vim.lsp.buf.references, desc = 'Goto References', nowait = true },
+    -- use trouble.nvim
+    -- { 'gd', vim.lsp.buf.definition, desc = 'Goto Definition' },
+    -- { 'gr', vim.lsp.buf.references, desc = 'Goto References', nowait = true },
+    { 'gd', '<cmd>Trouble lsp_definitions<cr>', desc = 'Goto Definition' },
+    { 'gr', '<cmd>Trouble lsp_references<cr>', desc = 'Goto References', nowait = true },
     {
       '[[',
       function()

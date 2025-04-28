@@ -15,6 +15,7 @@ return {
         { '<leader>l', group = 'Language', icon = '󰅩' },
         { '<leader>s', group = 'Search' },
         { '<leader>u', group = 'UI' },
+        { '<leader>x', group = 'Diagnostics' },
         { '<leader>\\', group = 'Toggles' },
       },
       icons = {

@@ -4,9 +4,17 @@ return {
   {
     'ibhagwan/fzf-lua',
     cmd = 'FzfLua',
-    opts = {
-      nbsp = '\xc2\xa0',
-    },
+    opts = function()
+      return {
+        nbsp = '\xc2\xa0',
+        actions = {
+          files = {
+            true, -- uncomment to inherit all the below in your custom config
+            ['ctrl-x'] = require('trouble.sources.fzf').actions.open,
+          },
+        },
+      }
+    end,
     keys = {
       -- resume
       { '<leader><space>', '<cmd>FzfLua resume<cr>', desc = 'Resume picker' },
