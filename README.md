@@ -25,7 +25,7 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 - [x] mini.pairs
 - [x] mini.ai
 - [x] mini.surround
-- [ ] ts-comments.nvim
+- [x] ts-comments.nvim
 - [x] grug-far.nvim
 
 ### treesitter
@@ -105,3 +105,13 @@ Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
 ### grug-far(==TODO==)
 
 查找/替换 `<space>sr`
+
+## git
+
+### diffview
+
+- `<leader>e` 聚焦文件列表
+- `<tab>`/`<S-tab>` 下/上一个文件
+- `]c`/`[c` 下/上一个diff
+- `]x`/`[x` 下/上一个冲突
+- `<leader>c` 解决冲突

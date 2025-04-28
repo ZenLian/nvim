@@ -50,6 +50,8 @@ end, { desc = 'Delete Other Buffers' })
 map('n', '<leader>bD', '<cmd>:bd<cr>', { desc = 'Delete Buffer and Window' })
 
 -- tabs
+map('n', ']<tab>', '<cmd>tabnext<cr>', { desc = 'Next Tab' })
+map('n', '[<tab>', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 map('n', '<leader><tab>l', '<cmd>tablast<cr>', { desc = 'Last Tab' })
 map('n', '<leader><tab>o', '<cmd>tabonly<cr>', { desc = 'Close Other Tabs' })
 map('n', '<leader><tab>f', '<cmd>tabfirst<cr>', { desc = 'First Tab' })

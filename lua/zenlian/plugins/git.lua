@@ -64,6 +64,7 @@ return {
       { '<leader>gd', '<cmd>DiffviewOpen<cr>', desc = 'Open Diff View' },
       { '<leader>gD', '<cmd>DiffviewClose<cr>', desc = 'Close Diff View' },
     },
+    ---@type DiffviewConfig
     opts = {
       keymaps = {
         view = {
@@ -74,6 +75,11 @@ return {
         },
         file_history_panel = {
           ['q'] = '<cmd>DiffviewClose<cr>',
+        },
+      },
+      view = {
+        merge_tool = {
+          layout = 'diff3_mixed',
         },
       },
     },

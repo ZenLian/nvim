@@ -146,14 +146,14 @@ return {
     keys = {
       -- 👇 in this section, choose your own keymappings!
       {
-        '<leader>-',
+        '<c-e>',
         mode = { 'n', 'v' },
         '<cmd>Yazi<cr>',
         desc = 'Explorer yazi(cfile)',
       },
       {
         -- Open in the current working directory
-        '<leader>fe',
+        '<leader>-',
         '<cmd>Yazi cwd<cr>',
         desc = 'Explorer yazi(CWD)',
       },
