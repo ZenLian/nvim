@@ -40,6 +40,8 @@ return {
         lib.space(),
         lib.lsp(),
         lib.space(),
+        lib.diagnostics(),
+        lib.space(),
         lib.ruler(),
         lib.space(),
         lib.mode(),

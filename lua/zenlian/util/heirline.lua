@@ -1,7 +1,8 @@
 local heirline = require('heirline')
 local conditions = require('heirline.conditions')
+local heir_utils = require('heirline.utils')
 local Util = require('zenlian.util')
-local utils = require('heirline.utils')
+local Config = require('zenlian.config')
 
 local M = {
   trim = function()
@@ -88,14 +89,14 @@ function M.mode(provider)
 end
 
 function M.root_dir(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     cwd = false,
     subdirectory = true,
     parent = true,
     other = true,
     icon = '󱉭',
     color = 'fg',
-  }, opts or {})
+  }, opts)
   local function get()
     local cwd = vim.uv.cwd() or ''
     local root = Util.root() or ''
@@ -128,9 +129,9 @@ function M.root_dir(opts)
 end
 
 function M.workdir(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     color = '',
-  }, opts or {})
+  }, opts)
 
   return {
     provider = function()
@@ -143,9 +144,9 @@ function M.workdir(opts)
 end
 
 function M.filetype(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     icon_only = false,
-  }, opts or {})
+  }, opts)
 
   return {
     init = function(self)
@@ -166,10 +167,10 @@ function M.filetype(opts)
 end
 
 function M.filepath(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     relative = 'cwd',
     modified_color = 'green',
-  }, opts or {})
+  }, opts)
 
   return {
     init = function(self)
@@ -240,9 +241,9 @@ function M.fileflags()
 end
 
 function M.git(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     color = 'purple',
-  }, opts or {})
+  }, opts)
 
   return {
     condition = conditions.is_git_repo,
@@ -337,7 +338,7 @@ local MacroRec = {
   end,
   provider = ' ',
   hl = { fg = 'orange', bold = true },
-  utils.surround({ '[', ']' }, nil, {
+  heir_utils.surround({ '[', ']' }, nil, {
     provider = function()
       return vim.fn.reg_recording()
     end,
@@ -367,42 +368,10 @@ function M.showcmd(opts)
   }
 end
 
-function M.noice_command(opts)
-  opts = vim.tbl_extend('force', {
-    color = '',
-  }, opts or {})
-
-  return {
-    provider = function()
-      return require('noice').api.status.command.get() .. ' '
-    end,
-    condition = function()
-      return package.loaded['noice'] and require('noice').api.status.command.has()
-    end,
-    hl = { fg = opts.color },
-  }
-end
-
-function M.noice_mode(opts)
-  opts = vim.tbl_extend('force', {
-    color = '',
-  }, opts or {})
-
-  return {
-    provider = function()
-      return require('noice').api.status.mode.get() .. ' '
-    end,
-    condition = function()
-      return package.loaded['noice'] and require('noice').api.status.mode.has()
-    end,
-    hl = { fg = opts.color },
-  }
-end
-
 function M.lazy_status(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     color = '',
-  }, opts or {})
+  }, opts)
 
   return {
     provider = function()
@@ -414,9 +383,9 @@ function M.lazy_status(opts)
 end
 
 function M.ruler(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     color = '',
-  }, opts or {})
+  }, opts)
 
   return {
     flexible = true,
@@ -442,9 +411,9 @@ function M.nvim_version()
 end
 
 function M.lsp(opts)
-  opts = vim.tbl_extend('force', {
+  opts = Util.tbl_extend({
     color = 'cyan',
-  }, opts or {})
+  }, opts)
 
   return {
     condition = conditions.lsp_attached,
@@ -464,6 +433,51 @@ function M.lsp(opts)
       name = 'heirline_lspinfo',
     },
     hl = { fg = opts.color },
+  }
+end
+
+function M.diagnostics(opts)
+  opts = Util.tbl_extend({}, opts)
+
+  return {
+    condition = conditions.has_diagnostics,
+    update = { 'DiagnosticChanged', 'BufEnter' },
+    static = {
+      error_icon = Config.icons.diagnostics.Error,
+      warn_icon = Config.icons.diagnostics.Warn,
+      info_icon = Config.icons.diagnostics.Info,
+      hint_icon = Config.icons.diagnostics.Hint,
+    },
+    init = function(self)
+      self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+      self.warns = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+      self.infos = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+      self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    end,
+    {
+      provider = function(self)
+        return self.errors > 0 and (self.error_icon .. ' ' .. self.errors .. ' ')
+      end,
+      hl = { fg = 'diag_error' },
+    },
+    {
+      provider = function(self)
+        return self.warns > 0 and (self.warn_icon .. ' ' .. self.warns .. ' ')
+      end,
+      hl = { fg = 'diag_warn' },
+    },
+    {
+      provider = function(self)
+        return self.infos > 0 and (self.info_icon .. ' ' .. self.infos .. ' ')
+      end,
+      hl = { fg = 'diag_info' },
+    },
+    {
+      provider = function(self)
+        return self.hints > 0 and (self.hint_icon .. ' ' .. self.hints .. ' ')
+      end,
+      hl = { fg = 'diag_hint' },
+    },
   }
 end
 
@@ -498,7 +512,14 @@ function M.oil(opts)
 end
 
 function M.setup(opts)
-  opts = Util.tbl_extend({}, opts)
+  opts = Util.tbl_extend({
+    colors = {
+      diag_warn = heir_utils.get_highlight('DiagnosticWarn').fg,
+      diag_error = heir_utils.get_highlight('DiagnosticError').fg,
+      diag_hint = heir_utils.get_highlight('DiagnosticHint').fg,
+      diag_info = heir_utils.get_highlight('DiagnosticInfo').fg,
+    },
+  }, opts)
   heirline.load_colors(opts.colors)
 end
 
