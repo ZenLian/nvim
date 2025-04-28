@@ -7,7 +7,7 @@ return {
     opts = {
       keymap = { preset = 'super-tab' },
       cmdline = {
-        enabled = true,
+        enabled = false,
         keymap = {
           ['<Tab>'] = { 'show', 'accept' },
         },
