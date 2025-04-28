@@ -1,4 +1,4 @@
-local func = require('vim.func')
+---@type LazyPluginSpec[]
 return {
   {
     'neovim/nvim-lspconfig',
@@ -12,7 +12,21 @@ return {
     },
     -- this is not actually opts of lspconfig, it's our own opts
     -- override by every lang
+    ---@type vim.diagnostic.Opts
     opts = {
+      diagnostics = {
+        underline = true,
+        update_in_insert = false,
+        severity_sort = true,
+        virtual_text = {
+          source = 'if_many',
+          spacing = 4,
+          prefix = '●',
+        },
+        signs = {
+          -- text = {},
+        },
+      },
       -- @type string[]
       -- preinstalled lsp
       ensure_installed = {
@@ -29,8 +43,19 @@ return {
       },
     },
     config = function(_, opts)
-      -- TODO: deprecated
-      require('lspconfig.ui.windows').default_options.border = 'rounded'
+      local icons = require('zenlian.config').icons.diagnostics
+      local signs = {
+        [vim.diagnostic.severity.ERROR] = icons.Error,
+        [vim.diagnostic.severity.WARN] = icons.Warn,
+        [vim.diagnostic.severity.INFO] = icons.Info,
+        [vim.diagnostic.severity.HINT] = icons.Hint,
+      }
+      opts.diagnostics.signs.text = signs
+      ---@param diagnostic vim.Diagnostic
+      opts.diagnostics.virtual_text.prefix = function(diagnostic)
+        return signs[diagnostic.severity]
+      end
+      vim.diagnostic.config(opts.diagnostics)
 
       local function setup(server)
         local server_opts = opts.servers[server] or {}
