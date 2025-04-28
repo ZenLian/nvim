@@ -179,14 +179,14 @@ function M.filepath(opts)
       local cwd = vim.uv.cwd() or ''
       if opts.relative == 'cwd' and self.path:find(cwd, 1, true) == 1 then
         self.path = self.path:sub(#cwd + 2)
-      elseif self.path:find(root, 1, true) == 1 then
+      elseif opts.relative == 'root' and self.path:find(root, 1, true) == 1 then
         self.path = self.path:sub(#root + 2)
       end
 
       local parts = vim.split(self.path, '[\\/]')
-      if #parts > 5 then
-        parts = { parts[1], '…', parts[#parts - 1], parts[#parts] }
-      end
+      -- if #parts > 5 then
+      --   parts = { parts[1], '…', parts[#parts - 1], parts[#parts] }
+      -- end
 
       self.basename = parts[#parts]
 
@@ -197,9 +197,6 @@ function M.filepath(opts)
         self.pathname = nil
       end
     end,
-    {
-      provider = ' ',
-    },
     {
       condition = function(self)
         return self.pathname ~= nil
@@ -467,6 +464,18 @@ function M.lsp(opts)
       name = 'heirline_lspinfo',
     },
     hl = { fg = opts.color },
+  }
+end
+
+function M.neotree(opts)
+  return {
+    condition = function()
+      return conditions.buffer_matches { filetype = { 'neo%-tree' } }
+    end,
+    provider = function()
+      local state = require('neo-tree.sources.manager').get_state('filesystem')
+      return state.path
+    end,
   }
 end
 

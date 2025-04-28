@@ -48,19 +48,54 @@ return {
       local neotreeStatusline = {
         condition = function()
           return conditions.buffer_matches {
-            filetype = { 'neo-tree', 'oil' },
+            filetype = { 'neo%-tree', 'oil' },
           }
         end,
         lib.mode(),
         lib.space(),
+        lib.neotree(),
         lib.oil(),
         lib.align(),
+
+        lib.ruler(),
+        lib.space(),
+        lib.mode(),
+      }
+
+      local helpStatusline = {
+        condition = function()
+          return conditions.buffer_matches {
+            filetype = { 'fzf' },
+            buftype = { 'help', 'quickfix' },
+          }
+        end,
+        lib.mode(),
+        lib.space(),
+        {
+          condition = function()
+            return conditions.buffer_matches {
+              buftype = { 'help' },
+            }
+          end,
+          provider = function()
+            return vim.fn.expand('%:t:r')
+          end,
+        },
+        {
+          provider = function()
+            return '[' .. vim.bo.filetype .. ']'
+          end,
+        },
+        lib.align(),
+        lib.ruler(),
+        lib.space(),
         lib.mode(),
       }
 
       local statuslines = {
         hl = { fg = 'fg', bg = 'bg' },
         fallthrough = false,
+        helpStatusline,
         neotreeStatusline,
         defaultStatusline,
       }
