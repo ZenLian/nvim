@@ -9,7 +9,7 @@ M.on_attach = function(client, bufnr, keys)
   local lsp = Util.lsp
 
   map({
-    -- use trouble.nvim
+    { '<leader>la', vim.lsp.buf.code_action, desc = 'Code Action' },
     -- { 'gd', vim.lsp.buf.definition, desc = 'Goto Definition' },
     -- { 'gr', vim.lsp.buf.references, desc = 'Goto References', nowait = true },
     { 'gd', '<cmd>Trouble lsp_definitions<cr>', desc = 'Goto Definition' },

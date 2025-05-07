@@ -3,6 +3,7 @@ return {
   {
     'folke/trouble.nvim',
     opts = {
+      --auto_refresh = false,
       focus = true,
       keys = {
         ['<tab>'] = 'fold_toggle',

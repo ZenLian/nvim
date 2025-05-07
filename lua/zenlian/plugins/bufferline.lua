@@ -1,35 +1,5 @@
--- Description: UI plugins
---
--- [catppuccin/nvim]: theme
--- [bufferline.nvim]: bufferline
--- [heirline.nvim]: statusline
 ---@type LazyPluginSpec[]
 return {
-  {
-    'catppuccin/nvim',
-    lazy = true,
-    name = 'catppuccin',
-    opts = function()
-      local opts = {
-        flavour = 'mocha',
-        term_colors = true,
-      }
-      local C = require('catppuccin.palettes').get_palette(opts.flavour)
-      opts.custom_highlights = {
-        -- Pmenu = { fg = C.text, bg = C.surface0 },
-        -- PmenuSel = { fg = C.surface0, bg = C.blue },
-        CmpItemAbbr = { fg = C.text },
-        CmpItemAbbrMatch = { fg = C.blue, style = { 'bold' } },
-        CmpItemAbbrMatchFuzzy = { fg = C.blue, style = { 'bold' } },
-        BlinkCmpLabelMatch = { fg = C.blue, style = { 'bold' } },
-
-        -- flash.nvim
-        FlashLabel = { fg = C.base, bg = C.green },
-      }
-      return opts
-    end,
-  },
-
   {
     'akinsho/bufferline.nvim',
     event = 'UIEnter',
@@ -66,18 +36,5 @@ return {
         },
       },
     },
-  },
-
-  {
-    'echasnovski/mini.icons',
-    enabled = false,
-    version = false,
-    opts = {},
-    init = function()
-      package.preload['nvim-web-devicons'] = function()
-        require('mini.icons').mock_nvim_web_devicons()
-        return package.loaded['nvim-web-devicons']
-      end
-    end,
   },
 }

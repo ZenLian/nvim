@@ -8,6 +8,12 @@ return {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       'MunifTanjim/nui.nvim',
     },
+    keys = {
+      { '<leader>nh', '<cmd>Noice history<cr>', desc = 'History' },
+      { '<leader>nf', '<cmd>Noice fzf<cr>', desc = 'Find(Fzf)' },
+      { '<leader>nd', '<cmd>Noice dismiss<cr>', desc = 'Dismiss' },
+      { '<leader>.', '<cmd>Noice dismiss<cr>', desc = 'Noice Dismiss' },
+    },
     opts = {
       -- -- you can enable a preset for easier configuration
       -- presets = {
@@ -27,6 +33,12 @@ return {
           ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
           ['vim.lsp.util.stylize_markdown'] = true,
           -- ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
+        },
+        signature = {
+          enabled = false,
+        },
+        hover = {
+          enabled = true,
         },
       },
     },

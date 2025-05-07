@@ -23,26 +23,30 @@ return {
         end,
         desc = 'Find Files (Root Dir)',
       },
-      { '<leader>fo', '<cmd>FzfLua oldfiles<cr>', desc = 'Old Files' },
-      { '<leader>fG', '<cmd>FzfLua git_files<cr>', desc = 'Git Files' },
+      { '<leader>fr', '<cmd>FzfLua oldfiles<cr>', desc = 'Recent Files' },
+      { '<leader>fg', '<cmd>FzfLua git_files<cr>', desc = 'Git Files' },
       { '<leader>fb', '<cmd>FzfLua buffers sort_mru=true sort_lastused=true<cr>', desc = 'Buffers' },
 
-      -- greps
-      { '<leader>fg', '<cmd>FzfLua live_grep<cr>', desc = 'Grep (CWD)' },
-      { '<leader>fw', '<cmd>FzfLua grep_cword<cr>', desc = 'Current Word (CWD)' },
-      { '<leader>fw', '<cmd>FzfLua grep_visual<cr>', mode = 'v', desc = 'Selection (CWD)' },
+      -- Search/Greps
+      { '<leader>sg', '<cmd>FzfLua live_grep<cr>', desc = 'Grep (CWD)' },
+      { '<leader>sw', '<cmd>FzfLua grep_cword<cr>', desc = 'Current Word (CWD)' },
+      { '<leader>sw', '<cmd>FzfLua grep_visual<cr>', mode = 'v', desc = 'Selection (CWD)' },
+      { '<leader>sb', '<cmd>FzfLua grep_curbuf<cr>', desc = 'Grep (Buffer)' },
 
       -- misc
-      { '<leader>s"', '<cmd>FzfLua registers<cr>', desc = 'Registers' },
-      { '<leader>sH', '<cmd>FzfLua highlights<cr>', desc = 'Highlights' },
-      { '<leader>sK', '<cmd>FzfLua keymaps<cr>', desc = 'Keymaps' },
-      { '<leader>sM', '<cmd>FzfLua manpages<cr>', desc = 'Manpages' },
-      { '<leader>sC', '<cmd>FzfLua colorschemes<cr>', desc = 'Colorschemes' },
+      { '<leader>f"', '<cmd>FzfLua registers<cr>', desc = 'Registers' },
+      { '<leader>fH', '<cmd>FzfLua highlights<cr>', desc = 'Highlights' },
+      { '<leader>fK', '<cmd>FzfLua keymaps<cr>', desc = 'Keymaps' },
+      { '<leader>fM', '<cmd>FzfLua manpages<cr>', desc = 'Manpages' },
+      { '<leader>fC', '<cmd>FzfLua colorschemes<cr>', desc = 'Colorschemes' },
     },
     opts = function()
       local Util = require('zenlian.util')
       local opts = {
         nbsp = '\xc2\xa0',
+        files = {
+          cmd = [[fd --color=never --hidden --type f --type l --exclude .git --exclude .cache]],
+        },
         keymap = {
           builtin = {
             true,

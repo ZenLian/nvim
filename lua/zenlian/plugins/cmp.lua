@@ -7,7 +7,7 @@ return {
     opts = {
       keymap = { preset = 'super-tab' },
       cmdline = {
-        enabled = false,
+        enabled = true,
         keymap = {
           ['<Tab>'] = { 'show', 'accept' },
         },
@@ -28,10 +28,13 @@ return {
           draw = {
             treesitter = { 'lsp' },
           },
+          -- TODO: use vim.o.winborder on neovim-v0.11+
+          -- border = 'rounded',
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
+          window = { border = 'rounded' },
         },
         ghost_text = {
           enabled = true,
@@ -41,7 +44,10 @@ return {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
       },
       snippets = { preset = 'default' },
-      signature = { enabled = true },
+      signature = {
+        enabled = true,
+        window = { border = 'rounded' },
+      },
       fuzzy = { implementation = 'prefer_rust' },
     },
     opts_extend = { 'sources.default' },
