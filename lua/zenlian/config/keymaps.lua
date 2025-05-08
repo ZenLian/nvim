@@ -63,7 +63,7 @@ map('n', '<leader><tab>[', '<cmd>tabprevious<cr>', { desc = 'Previous Tab' })
 -- Clear search and stop snippet on escape
 map({ 'i', 'n', 's' }, '<esc>', function()
   vim.cmd('noh')
-  -- LazyVim.cmp.actions.snippet_stop()
+  vim.snippet.stop()
   return '<esc>'
 end, { expr = true, desc = 'Escape and Clear hlsearch' })
 
