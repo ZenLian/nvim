@@ -45,7 +45,7 @@ return {
       local opts = {
         nbsp = '\xc2\xa0',
         files = {
-          cmd = [[fd --color=never --hidden --type f --type l --exclude .git --exclude .cache]],
+          cmd = [[fd --color=never --hidden --type f --type l --exclude .git --exclude .cache --exclude .svn]],
         },
         keymap = {
           builtin = {
