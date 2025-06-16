@@ -1,5 +1,5 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = '\\'
 
 -- global variables
 vim.g.zl_colorscheme = 'catppuccin'
@@ -16,6 +16,7 @@ local options = {
   hidden = true,
   fileformats = 'unix,mac,dos',
   encoding = 'utf-8',
+  fileencodings = 'ucs-bom,utf-8,cp936,default,latin1',
 
   -- ui
   -- left
