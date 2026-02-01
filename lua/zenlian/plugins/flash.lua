@@ -2,7 +2,6 @@
 return {
   {
     'folke/flash.nvim',
-    tag = 'v2.1.0', -- 'main' branch will crash on ubuntu20.04
     event = 'VeryLazy',
     opts = {},
     keys = {

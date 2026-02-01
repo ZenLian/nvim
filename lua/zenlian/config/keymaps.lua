@@ -14,7 +14,7 @@ map({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = tru
 
 -- Move to window using the <ctrl> hjkl keys
 Util.keymap.set {
-  { '<C-h>', '<C-w>h', desc = 'Go to Left Window', remap = true },
+  { '<C-h>', '<C-w>h', desc = 'Go to Left Window',  remap = true },
   { '<C-j>', '<C-w>j', desc = 'Go to Lower Window', remap = true },
   { '<C-k>', '<C-w>k', desc = 'Go to Upper Window', remap = true },
   { '<C-l>', '<C-w>l', desc = 'Go to Right Window', remap = true },
@@ -90,7 +90,8 @@ map('i', '.', '.<c-g>u')
 map('i', ';', ';<c-g>u')
 
 -- save file
-map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+map({ 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
+map({ 'x', 'n', 's' }, '<leader>w', '<cmd>w<cr>', { desc = 'Save File' })
 
 -- quit
 map('n', '<leader>q', '<cmd>qa!<cr>', { desc = 'Quit' })

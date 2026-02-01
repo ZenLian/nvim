@@ -9,11 +9,22 @@ M.on_attach = function(client, bufnr, keys)
   local lsp = Util.lsp
 
   map({
-    { '<leader>la', vim.lsp.buf.code_action, desc = 'Code Action' },
+    { '<leader>la', vim.lsp.buf.code_action,                desc = 'Code Action' },
     -- { 'gd', vim.lsp.buf.definition, desc = 'Goto Definition' },
     -- { 'gr', vim.lsp.buf.references, desc = 'Goto References', nowait = true },
-    { 'gd', '<cmd>Trouble lsp_definitions<cr>', desc = 'Goto Definition' },
-    { 'gr', '<cmd>Trouble lsp_references<cr>', desc = 'Goto References', nowait = true },
+    { 'gd',         '<cmd>Trouble lsp_definitions<cr>',     desc = 'Goto Definition' },
+    { 'grr',        '<cmd>Trouble lsp_references<cr>',      desc = 'Goto References',      nowait = true },
+    { 'gri',        '<cmd>Trouble lsp_implementations<cr>', desc = 'Goto Implementations', nowait = true },
+    {
+      'K',
+      function()
+        vim.lsp.buf.hover({
+          border = 'rounded'
+        })
+      end,
+      desc = 'Goto Implementations',
+      nowait = true
+    },
     {
       '[[',
       function()

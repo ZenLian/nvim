@@ -10,19 +10,19 @@ return {
     },
     keys = {
       { '<leader>nh', '<cmd>Noice history<cr>', desc = 'History' },
-      { '<leader>nf', '<cmd>Noice fzf<cr>', desc = 'Find(Fzf)' },
+      { '<leader>nf', '<cmd>Noice fzf<cr>',     desc = 'Find(Fzf)' },
       { '<leader>nd', '<cmd>Noice dismiss<cr>', desc = 'Dismiss' },
-      { '<leader>.', '<cmd>Noice dismiss<cr>', desc = 'Noice Dismiss' },
+      { '<leader>.',  '<cmd>Noice dismiss<cr>', desc = 'Noice Dismiss' },
     },
     opts = {
       -- -- you can enable a preset for easier configuration
-      -- presets = {
-      --   bottom_search = true, -- use a classic bottom cmdline for search
-      --   command_palette = true, -- position the cmdline and popupmenu together
-      --   long_message_to_split = true, -- long messages will be sent to a split
-      --   inc_rename = false, -- enables an input dialog for inc-rename.nvim
-      --   lsp_doc_border = false, -- add a border to hover docs and signature help
-      -- },
+      presets = {
+        --   bottom_search = true, -- use a classic bottom cmdline for search
+        --   command_palette = true, -- position the cmdline and popupmenu together
+        --   long_message_to_split = true, -- long messages will be sent to a split
+        --   inc_rename = false, -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true, -- add a border to hover docs and signature help
+      },
       cmdline = {
         enabled = true,
         view = 'cmdline',
@@ -38,7 +38,7 @@ return {
           enabled = false,
         },
         hover = {
-          enabled = true,
+          enabled = false,
         },
       },
     },

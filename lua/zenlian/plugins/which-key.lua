@@ -18,6 +18,7 @@ return {
         { '<leader>u', group = 'UI' },
         { '<leader>x', group = 'Diagnostics' },
         { '<leader>\\', group = 'Toggles' },
+        { 'gr', group = 'Lsp', icon = '󰅩' }
       },
       icons = {
         breadcrumb = '>',

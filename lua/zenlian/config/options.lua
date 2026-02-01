@@ -41,7 +41,7 @@ local options = {
   showmode = false,
   wildignorecase = true,
   wildignore = [[.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,]]
-    .. [[**/node_modules/**,**/bower_modules/**]],
+      .. [[**/node_modules/**,**/bower_modules/**]],
 
   -- windows
   splitkeep = 'screen',
@@ -54,6 +54,7 @@ local options = {
   previewheight = 12,
   -- pumblend = 0,
   -- winblend = 0,
+  winborder = "rounded",
 
   -- timeout
   timeout = true,
