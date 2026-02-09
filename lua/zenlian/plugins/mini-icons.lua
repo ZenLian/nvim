@@ -2,7 +2,7 @@
 return {
   {
     'echasnovski/mini.icons',
-    enabled = false,
+    enabled = true,
     version = false,
     opts = {},
     init = function()
