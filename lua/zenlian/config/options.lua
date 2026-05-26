@@ -2,7 +2,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = '\\'
 
 -- global variables
-vim.g.zl_colorscheme = 'catppuccin'
 vim.g.zl_autoformat = true
 
 local options = {

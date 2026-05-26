@@ -1,1 +1,1 @@
-require('zenlian')
+require('zenlian.config')
