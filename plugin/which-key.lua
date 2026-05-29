@@ -19,6 +19,9 @@ require('which-key').setup({
   icons = {
     breadcrumb = '>',
     separator = '󰁔',
+    rules = {
+      { plugin = 'harpoon', icon = '󰒤', color = 'azure' },
+    },
   },
 })
 
