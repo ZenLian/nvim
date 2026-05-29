@@ -1,4 +1,4 @@
-vim.pack.add({ 'https://github.com/echasnovski/mini.surround' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.surround' })
 
 require('mini.surround').setup({
   mappings = {
@@ -12,23 +12,3 @@ require('mini.surround').setup({
   },
 })
 
--- return {
---   {
---     'echasnovski/mini.surround',
---     -- Populate the keys based on the user's options
---     keys = function(plugin, keys)
---       local opts = plugin.opts
---       local mappings = {
---         { 'gs', desc = 'Surround', mode = { 'n', 'v' } },
---         { opts.mappings.add, desc = 'Add Surrounding', mode = { 'n', 'v' } },
---         { opts.mappings.delete, desc = 'Delete Surrounding' },
---         { opts.mappings.find, desc = 'Find Right Surrounding' },
---         { opts.mappings.find_left, desc = 'Find Left Surrounding' },
---         { opts.mappings.highlight, desc = 'Highlight Surrounding' },
---         { opts.mappings.replace, desc = 'Replace Surrounding' },
---         { opts.mappings.update_n_lines, desc = 'Update `MiniSurround.config.n_lines`' },
---       }
---       return vim.list_extend(mappings, keys)
---     end,
---   },
--- }

@@ -1,4 +1,4 @@
-vim.pack.add({ 'https://github.com/echasnovski/mini.pairs' })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.pairs' })
 -- event = 'InsertEnter'
 
 require('mini.pairs').setup({
