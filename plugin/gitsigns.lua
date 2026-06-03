@@ -1,7 +1,7 @@
 vim.pack.add({'https://github.com/lewis6991/gitsigns.nvim'})
 -- event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 
-opts = {
+local opts = {
   on_attach = function(buffer)
     local gitsigns = require('gitsigns')
 
@@ -39,17 +39,18 @@ opts = {
     -- end, 'Diffthis~')
     map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
     map({ 'o', 'x' }, 'ah', ':<C-U>Gitsigns select_hunk<CR>', 'Git Hunk')
+
+    Snacks.toggle({
+      id = 'git_signs',
+      name = 'Git Signs',
+      get = function()
+        return require('gitsigns.config').config.signcolumn
+      end,
+      set = function(state)
+        require('gitsigns').toggle_signs(state)
+      end,
+    }):map('<leader>\\g')
   end,
 }
 require('gitsigns').setup(opts)
 
-Snacks.toggle({
-  id = 'git_signs',
-  name = 'Git Signs',
-  get = function()
-    return require('gitsigns.config').config.signcolumn
-  end,
-  set = function(state)
-    require('gitsigns').toggle_signs(state)
-  end,
-}):map('<leader>\\g')

@@ -1,4 +1,9 @@
-vim.pack.add({ 'https://github.com/nvim-mini/mini.ai' })
+vim.pack.add({
+  'https://github.com/nvim-mini/mini.ai',
+  'https://github.com/nvim-mini/mini.extra'
+})
+
+require('mini.extra').setup()
 
 local ai = require('mini.ai')
 require('mini.ai').setup({
