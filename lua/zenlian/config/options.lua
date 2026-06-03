@@ -22,8 +22,13 @@ local options = {
   number = true,
   relativenumber = true,
   signcolumn = 'yes',
-  foldcolumn = '0',
+  ---- folding
+  foldcolumn = '1',
   foldenable = true,
+  foldmethod = 'expr',
+  foldexpr = 'v:lua.vim.treesitter.foldexpr()',
+  foldtext = 'v:lua.require("zenlian.util.fold").foldtext()',
+  foldlevel = 99,
   foldlevelstart = 99,
   -- inside
   cursorline = true,
@@ -106,7 +111,17 @@ local options = {
   breakat = [[\ \	;:,!?]],
   showbreak = '↳  ',
   display = 'lastline',
-  listchars = [[tab:→ ,nbsp:+,trail:·,extends:→,precedes:←]],
+  -- listchars = [[tab:→ ,nbsp:+,trail:·,extends:→,precedes:←]],
+  listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮",
+  fillchars = {
+    foldopen = "",
+    foldclose = "",
+    fold = " ",
+    foldsep = " ",
+    foldinner = " ",
+    diff = "╱",
+    eob = " ",
+  },
 
   complete = '.,w,b,k',
   grepformat = '%f:%l:%c:%m',

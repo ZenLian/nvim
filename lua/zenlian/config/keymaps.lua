@@ -112,20 +112,44 @@ map('n', '<leader>z', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 map('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
 
 -- diagnostics
-local diagnostics_goto = function(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-  severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go { severity = severity }
-  end
-end
-map('n', '<leader>ud', vim.diagnostic.open_float, { desc = 'Line Diagnostic' })
-map('n', ']d', diagnostics_goto(true), { desc = 'Next Diagnostic' })
-map('n', '[d', diagnostics_goto(false), { desc = 'False Diagnostic' })
-map('n', ']e', diagnostics_goto(true, 'ERROR'), { desc = 'Next Diagnostic' })
-map('n', '[e', diagnostics_goto(false, 'ERROR'), { desc = 'False Diagnostic' })
-map('n', ']w', diagnostics_goto(true, 'WARN'), { desc = 'Next Diagnostic' })
-map('n', '[w', diagnostics_goto(false, 'WARN'), { desc = 'False Diagnostic' })
+-- :h diagnostics-defaults
+map('n', '<c-w>d', vim.diagnostic.open_float, { desc = 'Show Diagnostic' })
+map('n', ']d',
+  function ()
+    vim.diagnostic.jump({ count=1 })
+  end,
+  { desc = 'Next Diagnostic' }
+)
+map('n', '[d',
+  function ()
+    vim.diagnostic.jump({ count=-1 })
+  end,
+  { desc = 'Previous Diagnostic' }
+)
+map('n', ']e',
+  function ()
+    vim.diagnostic.jump({ count=1, severity=vim.diagnostic.severity.ERROR })
+  end,
+  { desc = 'Next Error Diagnostic' }
+)
+map('n', '[e',
+  function ()
+    vim.diagnostic.jump({ count=-1, severity=vim.diagnostic.severity.ERROR })
+  end,
+  { desc = 'Previous Error Diagnostic' }
+)
+map('n', ']w',
+  function ()
+    vim.diagnostic.jump({ count=1, severity=vim.diagnostic.severity.WARN })
+  end,
+  { desc = 'Next Warning Diagnostic' }
+)
+map('n', '[w',
+  function ()
+    vim.diagnostic.jump({ count=-1, severity=vim.diagnostic.severity.WARN })
+  end,
+  { desc = 'Previous Warning Diagnostic' }
+)
 
 -- local lazyterm = function()
 --   Util.terminal(nil, { cwd = Util.root() })

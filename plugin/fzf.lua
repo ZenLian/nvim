@@ -72,3 +72,4 @@ vim.keymap.set('n', '<leader>fH', '<cmd>FzfLua highlights<cr>',{desc = 'Highligh
 vim.keymap.set('n', '<leader>fK', '<cmd>FzfLua keymaps<cr>',{desc = 'Keymaps' })
 vim.keymap.set('n', '<leader>fM', '<cmd>FzfLua manpages<cr>',{desc = 'Manpages' })
 vim.keymap.set('n', '<leader>fC', '<cmd>FzfLua colorschemes<cr>',{desc = 'Colorschemes' })
+

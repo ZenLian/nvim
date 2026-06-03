@@ -1,6 +1,6 @@
 vim.pack.add({'https://github.com/folke/snacks.nvim'})
 
-opts = {
+local opts = {
   bigfile = { enabled = true },
   -- quickfile = { enabled = true },
   indent = { enabled = true },
@@ -46,3 +46,6 @@ Snacks.toggle.zen():map('<leader>\\z')
 Snacks.toggle.words():map('<leader>\\W')
 
 Snacks.toggle.diagnostics():map('<leader>\\x')
+
+vim.keymap.set('n', '[[', function() Snacks.words.jump(-1, true) end, { desc = 'Previous Word' })
+vim.keymap.set('n', ']]', function() Snacks.words.jump(1, true) end, { desc = 'Next Word' })

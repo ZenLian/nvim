@@ -51,40 +51,35 @@ vim.lsp.enable({
   'lua_ls'
 })
 
--- vim.api.nvim_create_autocmd('LspAttach', {
---   group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
---   callback = function(args)
---     local client = vim.lsp.get_client_by_id(args.data.client_id)
---     local buf = args.buf
---
---     local map = require('zenlian.util').keymap.set
---
---     map({
---       {
---         'K',
---         function()
---           vim.lsp.buf.hover({
---             border = 'rounded'
---           })
---         end,
---         desc = 'Goto Implementations',
---         nowait = true
---       }
---       {
---         '[[',
---         function()
---           Snacks.words.jump(-1, true)
---         end,
---         desc = 'Previous Word',
---       },
---       {
---         ']]',
---         function()
---           Snacks.words.jump(1, true)
---         end,
---         desc = 'Next Word',
---       },
---     }, { buffer = buf })
---     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({border = 'rounded'}) end, )
---   end
--- })
+-- enable codelens
+-- vim.lsp.codelens.enable(true)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
+  callback = function(ev)
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    local buf = ev.buf
+
+    if client ~= nil then
+      if client:supports_method('textDocument/foldingRange') then
+        local win = vim.api.nvim_get_current_win()
+        vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+      end
+    end
+
+    local map = require('zenlian.util').keymap.set
+
+    map({
+      {
+        'K',
+        function()
+          vim.lsp.buf.hover({
+            border = 'rounded'
+          })
+        end,
+        desc = 'Goto Documentation',
+        nowait = true
+      }
+    }, { buffer = buf })
+  end
+})
