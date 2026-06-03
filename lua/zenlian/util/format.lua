@@ -51,8 +51,8 @@ function M.snacks_toggle(buf)
   }
 end
 
-function M.init()
-  util.on_user_event('VeryLazy', function()
+function M.setup()
+  util.on_vim_enter(function()
     M.snacks_toggle(true):map('<leader>\\F')
     M.snacks_toggle():map('<leader>\\f')
   end)

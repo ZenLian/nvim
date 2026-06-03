@@ -37,6 +37,15 @@ M.on_user_event = function(event, callback)
   })
 end
 
+M.on_vim_enter = function(callback)
+  vim.api.nvim_create_autocmd('VimEnter', {
+    once = true,
+    callback = function ()
+      vim.schedule(callback)
+    end
+  })
+end
+
 --- get root directory of buffer based on:
 --- * lsp
 --- * root patterns

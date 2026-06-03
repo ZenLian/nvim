@@ -6,7 +6,6 @@ local M = {}
 local Util = require('zenlian.util')
 
 local map = vim.keymap.set
-local unmap = vim.keymap.del
 
 -- better up/down
 map({ 'n', 'x' }, '<Down>', "v:count == 0 ? 'gj' : 'j'", { desc = 'Down', expr = true, silent = true })
