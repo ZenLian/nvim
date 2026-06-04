@@ -1,13 +1,13 @@
-vim.pack.add({
+vim.pack.add {
   {
     src = 'https://github.com/nvim-neo-tree/neo-tree.nvim',
-    version = vim.version.range('3')
+    version = vim.version.range('3'),
   },
   -- dependencies:
   -- plenary.nvim
   -- nui.nvim
   -- mini.icons
-})
+}
 
 require('neo-tree').setup {
   sources = { 'filesystem' },
@@ -72,15 +72,11 @@ require('neo-tree').setup {
   },
 }
 
-vim.keymap.set('n',
-  '<leader>e',
-  function()
-    -- require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
-    require('neo-tree.command').execute {
-      reveal = true,
-      toggle = true,
-      dir = vim.uv.cwd(),
-    }
-  end,
-  { desc = 'Explorer NeoTree (CWD)', }
-)
+vim.keymap.set('n', '<leader>e', function()
+  -- require("neo-tree.command").execute({ toggle = true, dir = LazyVim.root() })
+  require('neo-tree.command').execute {
+    reveal = true,
+    toggle = true,
+    dir = vim.uv.cwd(),
+  }
+end, { desc = 'Explorer NeoTree (CWD)' })

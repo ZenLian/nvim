@@ -1,17 +1,17 @@
-vim.pack.add({
+vim.pack.add {
   {
     src = 'https://github.com/ThePrimeagen/harpoon',
-    version = 'harpoon2'
-  }
-})
+    version = 'harpoon2',
+  },
+}
 
 -- Setup
 local harpoon = require('harpoon')
-harpoon:setup({
+harpoon:setup {
   settings = {
     save_on_toggle = true,
   },
-})
+}
 
 -- Highlight current file in the harpoon buffer list
 local harpoon_extensions = require('harpoon.extensions')
@@ -35,32 +35,17 @@ harpoon:extend {
 }
 
 -- add global keymaps
-vim.keymap.set(
-  'n',
-  '<leader>H',
-  function()
-    local harpoon = require('harpoon')
-    harpoon:list():add()
-  end,
-  {desc = 'Harpoon Add File'}
-)
-vim.keymap.set(
-  'n',
-  '<leader>h',
-  function()
-    local harpoon = require('harpoon')
-    harpoon.ui:toggle_quick_menu(harpoon:list())
-  end,
-  {desc = 'Harpoon Quick Menu'}
-)
+vim.keymap.set('n', '<leader>H', function()
+  local harpoon = require('harpoon')
+  harpoon:list():add()
+end, { desc = 'Harpoon Add File' })
+vim.keymap.set('n', '<leader>h', function()
+  local harpoon = require('harpoon')
+  harpoon.ui:toggle_quick_menu(harpoon:list())
+end, { desc = 'Harpoon Quick Menu' })
 for i = 1, 5 do
-  vim.keymap.set(
-    'n',
-    '<leader>' .. i,
-    function()
-      local harpoon = require('harpoon')
-      harpoon:list():select(i)
-    end,
-    {desc = 'Harpoon to File ' .. i}
-  )
+  vim.keymap.set('n', '<leader>' .. i, function()
+    local harpoon = require('harpoon')
+    harpoon:list():select(i)
+  end, { desc = 'Harpoon to File ' .. i })
 end

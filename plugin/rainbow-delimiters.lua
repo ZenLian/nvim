@@ -25,6 +25,6 @@ vim.g.rainbow_delimiters = {
   },
 }
 
-vim.pack.add({
-  "https://github.com/hiphish/rainbow-delimiters.nvim",
-})
+vim.pack.add {
+  'https://github.com/hiphish/rainbow-delimiters.nvim',
+}

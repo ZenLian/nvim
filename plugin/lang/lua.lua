@@ -1,10 +1,10 @@
-vim.pack.add({ 'https://github.com/folke/lazydev.nvim' })
+vim.pack.add { 'https://github.com/folke/lazydev.nvim' }
 
-require('lazydev').setup({
+require('lazydev').setup {
   library = {
     { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
-    { path = 'snacks.nvim',        words = { 'Snacks' } },
-    { path = 'lazy.nvim',          words = { 'LazyVim' } },
-    { path = 'mini.ai',            words = { 'MiniExtra' } },
+    { path = 'snacks.nvim', words = { 'Snacks' } },
+    { path = 'lazy.nvim', words = { 'LazyVim' } },
+    { path = 'mini.ai', words = { 'MiniExtra' } },
   },
-})
+}

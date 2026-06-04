@@ -1,12 +1,12 @@
-vim.pack.add({
+vim.pack.add {
   'https://github.com/saghen/blink.lib',
   'https://github.com/saghen/blink.cmp',
-  'https://github.com/rafamadriz/friendly-snippets'
-})
+  'https://github.com/rafamadriz/friendly-snippets',
+}
 
 local cmp = require('blink.cmp')
 cmp.build():pwait()
-cmp.setup({
+cmp.setup {
   cmdline = {
     enabled = true,
     keymap = {
@@ -32,5 +32,4 @@ cmp.setup({
     default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
   snippets = { preset = 'default' },
-})
-
+}

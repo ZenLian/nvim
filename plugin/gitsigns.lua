@@ -1,4 +1,4 @@
-vim.pack.add({'https://github.com/lewis6991/gitsigns.nvim'})
+vim.pack.add { 'https://github.com/lewis6991/gitsigns.nvim' }
 -- event = { 'BufReadPost', 'BufNewFile', 'BufWritePre' },
 
 local opts = {
@@ -53,4 +53,3 @@ local opts = {
   end,
 }
 require('gitsigns').setup(opts)
-

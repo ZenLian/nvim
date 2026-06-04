@@ -1,12 +1,12 @@
-vim.pack.add({
+vim.pack.add {
   'https://github.com/nvim-mini/mini.ai',
-  'https://github.com/nvim-mini/mini.extra'
-})
+  'https://github.com/nvim-mini/mini.extra',
+}
 
 require('mini.extra').setup()
 
 local ai = require('mini.ai')
-require('mini.ai').setup({
+require('mini.ai').setup {
   n_lines = 500,
   custom_textobjects = {
     o = ai.gen_spec.treesitter { -- code block
@@ -19,4 +19,4 @@ require('mini.ai').setup({
     g = MiniExtra.gen_ai_spec.buffer(), -- whole buffer
     i = MiniExtra.gen_ai_spec.indent(),
   },
-})
+}

@@ -1,4 +1,4 @@
-vim.pack.add({'https://github.com/folke/snacks.nvim'})
+vim.pack.add { 'https://github.com/folke/snacks.nvim' }
 
 local opts = {
   bigfile = { enabled = true },
@@ -47,5 +47,9 @@ Snacks.toggle.words():map('<leader>\\W')
 
 Snacks.toggle.diagnostics():map('<leader>\\x')
 
-vim.keymap.set('n', '[[', function() Snacks.words.jump(-1, true) end, { desc = 'Previous Word' })
-vim.keymap.set('n', ']]', function() Snacks.words.jump(1, true) end, { desc = 'Next Word' })
+vim.keymap.set('n', '[[', function()
+  Snacks.words.jump(-1, true)
+end, { desc = 'Previous Word' })
+vim.keymap.set('n', ']]', function()
+  Snacks.words.jump(1, true)
+end, { desc = 'Next Word' })

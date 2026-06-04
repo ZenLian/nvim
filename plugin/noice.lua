@@ -1,6 +1,6 @@
-vim.pack.add({'https://github.com/folke/noice.nvim'})
+vim.pack.add { 'https://github.com/folke/noice.nvim' }
 
-require('noice').setup({
+require('noice').setup {
   -- -- you can enable a preset for easier configuration
   presets = {
     --   bottom_search = true, -- use a classic bottom cmdline for search
@@ -27,9 +27,9 @@ require('noice').setup({
       enabled = false,
     },
   },
-})
+}
 
 vim.keymap.set('n', '<leader>nh', '<cmd>Noice history<cr>', { desc = 'History' })
-vim.keymap.set('n', '<leader>nf', '<cmd>Noice fzf<cr>',     { desc = 'Find(Fzf)' })
+vim.keymap.set('n', '<leader>nf', '<cmd>Noice fzf<cr>', { desc = 'Find(Fzf)' })
 vim.keymap.set('n', '<leader>nd', '<cmd>Noice dismiss<cr>', { desc = 'Dismiss' })
-vim.keymap.set('n', '<leader>.',  '<cmd>Noice dismiss<cr>', { desc = 'Noice Dismiss' })
+vim.keymap.set('n', '<leader>.', '<cmd>Noice dismiss<cr>', { desc = 'Noice Dismiss' })

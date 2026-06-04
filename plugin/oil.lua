@@ -1,8 +1,8 @@
-vim.pack.add({
-  'https://github.com/stevearc/oil.nvim'
-})
+vim.pack.add {
+  'https://github.com/stevearc/oil.nvim',
+}
 
-require('oil').setup({
+require('oil').setup {
   default_file_explorer = false,
   keymaps = {
     ['q'] = { 'actions.close', mode = 'n' },
@@ -24,7 +24,7 @@ require('oil').setup({
     ['<C-t>'] = { 'actions.select', opts = { tab = true } },
   },
   view_options = { show_hidden = true },
-  win_options = { signcolumn = "auto:2" },
-})
+  win_options = { signcolumn = 'auto:2' },
+}
 
-vim.keymap.set("n", "<leader>E", "<cmd>Oil<cr>", { desc = "Explorer Oil" })
+vim.keymap.set('n', '<leader>E', '<cmd>Oil<cr>', { desc = 'Explorer Oil' })

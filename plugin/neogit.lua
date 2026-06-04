@@ -1,9 +1,9 @@
-vim.pack.add({
+vim.pack.add {
   'https://github.com/sindrets/diffview.nvim',
-  'https://github.com/NeogitOrg/neogit'
-})
+  'https://github.com/NeogitOrg/neogit',
+}
 
-require('diffview').setup({
+require('diffview').setup {
   keymaps = {
     view = {
       ['q'] = '<cmd>DiffviewClose<cr>',
@@ -20,15 +20,15 @@ require('diffview').setup({
       layout = 'diff3_mixed',
     },
   },
-})
+}
 
-require('neogit').setup({
+require('neogit').setup {
   disable_commit_confirmation = true,
   signs = {
     section = { '', '' },
     item = { '', '' },
     hunk = { '', '' },
   },
-})
+}
 
 vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', { desc = 'Neogit' })

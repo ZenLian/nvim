@@ -1,11 +1,11 @@
-vim.pack.add({'https://github.com/rebelot/heirline.nvim'})
+vim.pack.add { 'https://github.com/rebelot/heirline.nvim' }
 
 local heirline = require('heirline')
 local conditions = require('heirline.conditions')
 local lib = require('zenlian.util.heirline')
 
 local C = require('catppuccin.palettes').get_palette()
-lib.setup({
+lib.setup {
   colors = {
     fg = C.text,
     bg = C.base,
@@ -18,7 +18,7 @@ lib.setup({
     cyan = C.sky,
     white = C.text,
   },
-})
+}
 
 local defaultStatusline = {
   lib.mode(),

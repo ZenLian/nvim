@@ -1,7 +1,7 @@
-vim.pack.add({ 'https://github.com/nvim-mini/mini.pairs' })
+vim.pack.add { 'https://github.com/nvim-mini/mini.pairs' }
 -- event = 'InsertEnter'
 
-require('mini.pairs').setup({
+require('mini.pairs').setup {
   modes = { insert = true, command = true, terminal = false },
   -- skip autopair when next character is one of these
   skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
@@ -12,4 +12,4 @@ require('mini.pairs').setup({
   skip_unbalanced = true,
   -- better deal with markdown code blocks
   markdown = true,
-})
+}
