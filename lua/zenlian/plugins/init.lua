@@ -21,6 +21,8 @@ require('zenlian.plugins.blink')
 require('zenlian.plugins.conform')
 -- others
 require('zenlian.plugins.neogen')
+-- AI
+require('zenlian.plugins.codecompanion')
 
 -- TUIs
 -- File Explorers
