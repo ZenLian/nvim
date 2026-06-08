@@ -1,7 +1,4 @@
-vim.pack.add {
-  'https://github.com/mason-org/mason.nvim',
-  'https://github.com/neovim/nvim-lspconfig',
-}
+vim.pack.add { 'https://github.com/mason-org/mason.nvim' }
 
 require('mason').setup {
   ui = {
@@ -15,34 +12,6 @@ require('mason').setup {
     },
   },
 }
-
---------------------------------------------------------------------------------
--- setup diagnostics
---------------------------------------------------------------------------------
-local icons = require('zenlian.config').icons.diagnostics
-local signs = {
-  [vim.diagnostic.severity.ERROR] = icons.Error,
-  [vim.diagnostic.severity.WARN] = icons.Warn,
-  [vim.diagnostic.severity.INFO] = icons.Info,
-  [vim.diagnostic.severity.HINT] = icons.Hint,
-}
-local diagnostics_opts = {
-  underline = true,
-  update_in_insert = false,
-  severity_sort = true,
-  virtual_text = {
-    source = 'if_many',
-    spacing = 4,
-    ---@param diagnostic vim.Diagnostic
-    prefix = function(diagnostic)
-      return signs[diagnostic.severity]
-    end,
-  },
-  signs = {
-    text = signs,
-  },
-}
-vim.diagnostic.config(diagnostics_opts)
 
 --------------------------------------------------------------------------------
 -- lsp config

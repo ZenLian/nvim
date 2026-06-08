@@ -10,6 +10,7 @@ require('which-key').setup {
     { '<leader>gh', group = 'Hunk' },
     { '<leader>l', group = 'Language', icon = '󰅩' },
     { '<leader>n', group = 'Noice' },
+    { '<leader>p', group = 'Plugins' },
     { '<leader>s', group = 'Search' },
     { '<leader>u', group = 'UI' },
     { '<leader>x', group = 'Diagnostics' },

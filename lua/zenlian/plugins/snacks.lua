@@ -1,6 +1,12 @@
 vim.pack.add { 'https://github.com/folke/snacks.nvim' }
 
-local opts = {
+-- @type
+require('snacks').setup {
+  notifier = {
+    enabled = true,
+    style = 'minimal',
+    top_down = false,
+  },
   bigfile = { enabled = true },
   -- quickfile = { enabled = true },
   indent = { enabled = true },
@@ -32,7 +38,6 @@ local opts = {
     },
   },
 }
-require('snacks').setup(opts)
 
 vim.g.snacks_animate = false
 

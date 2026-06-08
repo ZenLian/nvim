@@ -45,7 +45,7 @@ local options = {
   showmode = false,
   wildignorecase = true,
   wildignore = [[.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,]]
-      .. [[**/node_modules/**,**/bower_modules/**]],
+    .. [[**/node_modules/**,**/bower_modules/**]],
 
   -- windows
   splitkeep = 'screen',
@@ -58,7 +58,7 @@ local options = {
   previewheight = 12,
   -- pumblend = 0,
   -- winblend = 0,
-  winborder = "rounded",
+  winborder = 'rounded',
 
   -- timeout
   timeout = true,
@@ -112,15 +112,15 @@ local options = {
   showbreak = '↳  ',
   display = 'lastline',
   -- listchars = [[tab:→ ,nbsp:+,trail:·,extends:→,precedes:←]],
-  listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮",
+  listchars = 'tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮',
   fillchars = {
-    foldopen = "",
-    foldclose = "",
-    fold = " ",
-    foldsep = " ",
-    foldinner = " ",
-    diff = "╱",
-    eob = " ",
+    foldopen = '',
+    foldclose = '',
+    fold = ' ',
+    foldsep = ' ',
+    foldinner = ' ',
+    diff = '╱',
+    eob = ' ',
   },
 
   complete = '.,w,b,k',
@@ -144,4 +144,20 @@ local options = {
 
 for name, value in pairs(options) do
   vim.opt[name] = value
+end
+
+-- disable some builtin plugins
+local disabled_plugins = {
+  'gzip',
+  'matchit',
+  -- 'matchparen',
+  'netrwPlugin',
+  'tarPlugin',
+  'tar',
+  'tohtml',
+  'tutor',
+  'zipPlugin',
+}
+for _, name in ipairs(disabled_plugins) do
+  vim.g['loaded_' .. name] = 1
 end

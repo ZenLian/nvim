@@ -1,17 +1,29 @@
 # 😽 Neovim lua config
 
-Neovim configuration powered by [lazy.nvim](https://github.com/folke/lazy.nvim).
+Neovim configuration.
 
 ![screenshot](https://raw.githubusercontent.com/ZenLian/imglib/main/202211050611008.png)
 
 ## TODO
 
-- [x] incremental_selection/textobjects 的快捷键
-- [x] formatter
-- [ ] noice view, as simple as possible
-- [ ] snack.input
+- [ ] markdown 渲染 latex
+- [ ] `vim._core.ui2` 替代 `noice.nvim`
+- [ ] lsp progress
+- [ ] 内置 catppuccin 主题适配 或者 尝试 rose-pine
+- [x] 原生 comment 替代 ts-comments
 - [ ] linter
-- [ ] nvim-possesion
+
+## plugin manager
+
+use native `vim.pack`.
+
+running `vim.pack.update()` to open a buffer for managing plugins:
+
+- `[[` and `]]` to navigate between plugin sections.
+- `gO` to list all plugins.
+- `K` to show diff details.
+- `gra` to perform actions(update, skip or delete plugins)
+- confirm changes with `:w` and discard with `:q`
 
 ## 插件列表
 

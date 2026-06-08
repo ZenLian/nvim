@@ -13,7 +13,7 @@ map({ 'n', 'x' }, '<Up>', "v:count == 0 ? 'gk' : 'k'", { desc = 'Up', expr = tru
 
 -- Move to window using the <ctrl> hjkl keys
 Util.keymap.set {
-  { '<C-h>', '<C-w>h', desc = 'Go to Left Window',  remap = true },
+  { '<C-h>', '<C-w>h', desc = 'Go to Left Window', remap = true },
   { '<C-j>', '<C-w>j', desc = 'Go to Lower Window', remap = true },
   { '<C-k>', '<C-w>k', desc = 'Go to Upper Window', remap = true },
   { '<C-l>', '<C-w>l', desc = 'Go to Right Window', remap = true },
@@ -110,46 +110,6 @@ map('n', '<leader>z', '<cmd>Lazy<cr>', { desc = 'Lazy' })
 -- new file
 map('n', '<leader>fn', '<cmd>enew<cr>', { desc = 'New File' })
 
--- diagnostics
--- :h diagnostics-defaults
-map('n', '<c-w>d', vim.diagnostic.open_float, { desc = 'Show Diagnostic' })
-map('n', ']d',
-  function ()
-    vim.diagnostic.jump({ count=1 })
-  end,
-  { desc = 'Next Diagnostic' }
-)
-map('n', '[d',
-  function ()
-    vim.diagnostic.jump({ count=-1 })
-  end,
-  { desc = 'Previous Diagnostic' }
-)
-map('n', ']e',
-  function ()
-    vim.diagnostic.jump({ count=1, severity=vim.diagnostic.severity.ERROR })
-  end,
-  { desc = 'Next Error Diagnostic' }
-)
-map('n', '[e',
-  function ()
-    vim.diagnostic.jump({ count=-1, severity=vim.diagnostic.severity.ERROR })
-  end,
-  { desc = 'Previous Error Diagnostic' }
-)
-map('n', ']w',
-  function ()
-    vim.diagnostic.jump({ count=1, severity=vim.diagnostic.severity.WARN })
-  end,
-  { desc = 'Next Warning Diagnostic' }
-)
-map('n', '[w',
-  function ()
-    vim.diagnostic.jump({ count=-1, severity=vim.diagnostic.severity.WARN })
-  end,
-  { desc = 'Previous Warning Diagnostic' }
-)
-
 -- local lazyterm = function()
 --   Util.terminal(nil, { cwd = Util.root() })
 -- end
@@ -175,5 +135,12 @@ map({ 'n', 'x' }, 'gm', '%', { desc = 'Go to Matching character' })
 -- FIXME: invalid in terminal
 map('n', '<C-_>', 'gcc', { desc = 'Toggle comment line' })
 map('v', '<C-_>', 'gc', { desc = 'Toggle comment' })
+
+-- vim.pack
+map('n', '<leader>pp', vim.pack.update, { desc = 'Update Plugins' })
+map('n', '<leader>pd', vim.pack.del, { desc = 'Clean Up Plugins' })
+map('n', '<leader>pl', function()
+  vim.pack.update(nil, { target = 'lockfile' })
+end, { desc = 'Recover Plugins from lockfile' })
 
 return M

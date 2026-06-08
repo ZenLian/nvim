@@ -370,20 +370,6 @@ function M.showcmd(opts)
   }
 end
 
-function M.lazy_status(opts)
-  opts = Util.tbl_extend({
-    color = '',
-  }, opts)
-
-  return {
-    provider = function()
-      return require('lazy.status').updates() .. ' '
-    end,
-    condition = require('lazy.status').has_updates,
-    hl = { fg = opts.color },
-  }
-end
-
 function M.ruler(opts)
   opts = Util.tbl_extend({
     color = '',
@@ -440,15 +426,13 @@ end
 
 function M.diagnostics(opts)
   opts = Util.tbl_extend({}, opts)
+  local icons = require('zenlian.config.diagnostics').icons
 
   return {
     condition = conditions.has_diagnostics,
     update = { 'DiagnosticChanged', 'BufEnter' },
     static = {
-      error_icon = Config.icons.diagnostics.Error,
-      warn_icon = Config.icons.diagnostics.Warn,
-      info_icon = Config.icons.diagnostics.Info,
-      hint_icon = Config.icons.diagnostics.Hint,
+      icons = icons,
     },
     init = function(self)
       self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
@@ -458,25 +442,25 @@ function M.diagnostics(opts)
     end,
     {
       provider = function(self)
-        return self.errors > 0 and (self.error_icon .. ' ' .. self.errors .. ' ')
+        return self.errors > 0 and (self.icons.error .. ' ' .. self.errors .. ' ')
       end,
       hl = { fg = 'diag_error' },
     },
     {
       provider = function(self)
-        return self.warns > 0 and (self.warn_icon .. ' ' .. self.warns .. ' ')
+        return self.warns > 0 and (self.icons.warn .. ' ' .. self.warns .. ' ')
       end,
       hl = { fg = 'diag_warn' },
     },
     {
       provider = function(self)
-        return self.infos > 0 and (self.info_icon .. ' ' .. self.infos .. ' ')
+        return self.infos > 0 and (self.icons.info .. ' ' .. self.infos .. ' ')
       end,
       hl = { fg = 'diag_info' },
     },
     {
       provider = function(self)
-        return self.hints > 0 and (self.hint_icon .. ' ' .. self.hints .. ' ')
+        return self.hints > 0 and (self.icons.hint .. ' ' .. self.hints .. ' ')
       end,
       hl = { fg = 'diag_hint' },
     },
