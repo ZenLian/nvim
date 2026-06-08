@@ -43,13 +43,11 @@ vim.g.snacks_animate = false
 
 Snacks.toggle.option('wrap', { name = 'Word Wrap' }):map('<leader>\\w')
 Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>\\L')
-
 Snacks.toggle.line_number():map('<leader>\\l')
 Snacks.toggle.indent():map('<leader>\\i')
 Snacks.toggle.dim():map('<leader>\\d')
 Snacks.toggle.zen():map('<leader>\\z')
 Snacks.toggle.words():map('<leader>\\W')
-
 Snacks.toggle.diagnostics():map('<leader>\\x')
 
 vim.keymap.set('n', '[[', function()
@@ -58,3 +56,7 @@ end, { desc = 'Previous Word' })
 vim.keymap.set('n', ']]', function()
   Snacks.words.jump(1, true)
 end, { desc = 'Next Word' })
+
+vim.keymap.set('n', '<leader>nn', function()
+  Snacks.notifier.show_history()
+end, { desc = 'Notifier History' })

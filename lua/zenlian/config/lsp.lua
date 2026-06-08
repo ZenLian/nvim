@@ -2,6 +2,8 @@ vim.lsp.enable {
   'lua_ls',
   'ty', -- python
   'clangd',
+  'cmake',
+  'jsonls',
 }
 
 -- enable lsp features

@@ -11,6 +11,7 @@ Neovim configuration.
 - [x] lsp progress
 - [ ] 内置 catppuccin 主题适配 或者 尝试 rose-pine
 - [x] 原生 comment 替代 ts-comments
+- [ ] 原生 `an`/`in` 被 `mini.ai` 覆盖
 - [ ] linter
 
 ## plugin manager
