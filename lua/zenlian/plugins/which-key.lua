@@ -8,6 +8,8 @@ require('which-key').setup {
     { '<leader>f', group = 'Find(Files)' },
     { '<leader>g', group = 'Git', icon = { icon = '󰘬', color = 'orange' } },
     { '<leader>gh', group = 'Hunk' },
+    { '<leader>h', group = 'Harpoon', icon = '󱕓' },
+    { '<leader>ha', icon = '' },
     { '<leader>l', group = 'Language', icon = '󰅩' },
     { '<leader>n', group = 'Noice' },
     { '<leader>p', group = 'Plugins' },

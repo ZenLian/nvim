@@ -35,17 +35,14 @@ harpoon:extend {
 }
 
 -- add global keymaps
-vim.keymap.set('n', '<leader>H', function()
-  local harpoon = require('harpoon')
-  harpoon:list():add()
+vim.keymap.set('n', '<leader>ha', function()
+  require('harpoon'):list():add()
 end, { desc = 'Harpoon Add File' })
-vim.keymap.set('n', '<leader>h', function()
-  local harpoon = require('harpoon')
-  harpoon.ui:toggle_quick_menu(harpoon:list())
+vim.keymap.set('n', '<leader>hh', function()
+  require('harpoon').ui:toggle_quick_menu(harpoon:list(), { border = vim.o.winborder })
 end, { desc = 'Harpoon Quick Menu' })
 for i = 1, 5 do
-  vim.keymap.set('n', '<leader>' .. i, function()
-    local harpoon = require('harpoon')
-    harpoon:list():select(i)
+  vim.keymap.set('n', '<leader>h' .. i, function()
+    require('harpoon'):list():select(i)
   end, { desc = 'Harpoon to File ' .. i })
 end
