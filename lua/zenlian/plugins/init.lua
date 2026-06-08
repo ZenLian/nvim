@@ -14,7 +14,7 @@ require('zenlian.plugins.mini-pairs')
 require('zenlian.plugins.mini-surround')
 require('zenlian.plugins.rainbow-delimiters')
 
--- Coding
+-- Codings
 -- completion
 require('zenlian.plugins.blink')
 -- formatting
@@ -22,6 +22,7 @@ require('zenlian.plugins.conform')
 -- others
 require('zenlian.plugins.neogen')
 
+-- TUIs
 -- File Explorers
 require('zenlian.plugins.yazi')
 require('zenlian.plugins.neo-tree')
@@ -33,6 +34,10 @@ require('zenlian.plugins.diffview')
 require('zenlian.plugins.neogit')
 -- Fuzzy picker
 require('zenlian.plugins.fzf')
+-- Search/Replace
+require('zenlian.plugins.grug-far')
+-- quickfix
+require('zenlian.plugins.trouble')
 -- Utils
 require('zenlian.plugins.snacks')
 require('zenlian.plugins.which-key')
@@ -45,3 +50,6 @@ require('zenlian.plugins.markdown')
 -- UI
 require('zenlian.plugins.colorscheme')
 require('zenlian.plugins.heirline')
+
+-- not used
+-- trouble
