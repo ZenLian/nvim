@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+-- lsp progress for notify
 vim.api.nvim_create_autocmd('LspProgress', {
   ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
   callback = function(ev)

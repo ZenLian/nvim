@@ -6,9 +6,9 @@ Neovim configuration.
 
 ## TODO
 
-- [ ] markdown 渲染 latex
-- [ ] `vim._core.ui2` 替代 `noice.nvim`
-- [ ] lsp progress
+- [x] markdown 渲染 latex
+- [x] `vim._core.ui2` 替代 `noice.nvim`
+- [x] lsp progress
 - [ ] 内置 catppuccin 主题适配 或者 尝试 rose-pine
 - [x] 原生 comment 替代 ts-comments
 - [ ] linter

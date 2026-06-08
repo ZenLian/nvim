@@ -119,7 +119,7 @@ local options = {
     fold = ' ',
     foldsep = ' ',
     foldinner = ' ',
-    diff = '╱',
+    diff = ' ',
     eob = ' ',
   },
 

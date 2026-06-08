@@ -29,6 +29,7 @@ require('zenlian.plugins.oil')
 require('zenlian.plugins.harpoon')
 -- Git
 require('zenlian.plugins.gitsigns')
+require('zenlian.plugins.diffview')
 require('zenlian.plugins.neogit')
 -- Fuzzy picker
 require('zenlian.plugins.fzf')
