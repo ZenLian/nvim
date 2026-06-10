@@ -5,6 +5,7 @@ require('which-key').setup {
   spec = {
     { '<leader><tab>', group = 'Tabs' },
     { '<leader>b', group = 'Buffers' },
+    { '<leader>c', group = 'CodeCompanion', icon = { icon = '󱚦', color = 'red' } },
     { '<leader>f', group = 'Find(Files)' },
     { '<leader>g', group = 'Git', icon = { icon = '󰘬', color = 'orange' } },
     { '<leader>gh', group = 'Hunk' },

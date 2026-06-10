@@ -22,3 +22,7 @@ require('codecompanion').setup {
     language = 'chinese',
   },
 }
+
+vim.keymap.set('n', '<leader>cc', function()
+  require('codecompanion').toggle_chat()
+end, { desc = 'Toggle CodeCompanion Chat' })
